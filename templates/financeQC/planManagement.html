@@ -1,0 +1,94 @@
+<div ng-controller="planManagementCtrl" class="task airfare">
+	<md-card> 
+	    <md-divider></md-divider>
+	   </br>
+	    <div layout="row">
+			<md-input-container class="md-block ml-nomargin" flex-gt-sm>
+				<label>质检计划编号</label>
+				<input ng-model="name">
+			</md-input-container>
+			<md-input-container class="md-block ml-nomargin" flex-gt-sm>
+				<label>质检计划名称</label>
+				<input ng-model="name">
+			</md-input-container>
+			<md-input-container class="md-block ml-nomargin ml-marginlr-10" flex>
+				<label>计划状态</label>
+				<md-select ng-model="state" class="ml-marginlr-10">
+					<md-option value="valid">草稿</md-option>
+				</md-select>
+			</md-input-container>
+		</div>
+		<div layout='row'>
+			<md-input-container class="md-block ml-nomargin" flex="33">
+				<label>质检负责人</label>
+				<input ng-model="name">
+			</md-input-container>
+			<div layout="row">
+				<md-input-container class="md-block ml-marginlr-10" flex>
+		            <label>计划开始时间（开始）</label>
+		            <input ng-model="beginTime" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+				</md-input-container>
+				<span class="ml-lineheight-48 ml-marginlr-10">至</span>
+				<md-input-container class="md-block ml-marginlr-10" flex>
+		            <label>计划开始时间（结束）</label>
+		           <input ng-model="beginTime" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+				</md-input-container>
+			</div>
+			<div layout="row" style="margin-left: 110px;">
+				<md-input-container class="md-block ml-marginlr-10" flex>
+		            <label>要求完成时间（开始）</label>
+		            <input ng-model="beginTime" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+				</md-input-container>
+				<span class="ml-lineheight-48 ml-marginlr-10">至</span>
+				<md-input-container class="md-block ml-marginlr-10" flex>
+		            <label>要求完成时间（结束）</label>
+		           <input ng-model="beginTime" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+				</md-input-container>
+			</div>
+		</div>
+		<div class="ml-textalign-right ml-margintb-20">
+        	<md-button class="md-raised md-primary">查询</md-button>
+       </div>
+	</md-card>
+	<md-card>
+		<md-divider></md-divider>
+		<md-table-container>
+			<table md-table md-row-select multiple ng-model="selected" md-progress="promise">
+				<thead md-head md-order="query.order" md-on-reorder="getDesserts" class="ml-bgcolor-blue ml-textalign-center md-whiteframe-2dp">
+					<tr md-row>
+						<th md-column md-numeric>质检计划编号</th>
+						<th md-column md-numeric>质检计划名称</th>
+						<th md-column md-numeric>开始时间</th>
+						<th md-column md-numeric>要求完成时间</th>
+						<th md-column md-numeric>质检内容</th> 
+						<th md-column md-numeric>抽样类型</th>
+						<th md-column md-numeric>抽样值</th>
+						<th md-column md-numeric>质检负责人</th>
+						<th md-column md-numeric>计划状态</th>
+
+					</tr>
+				</thead>
+				<tbody md-body>
+					<tr md-row md-select="item" md-select-id="fee_apply_id" md-auto-select ng-repeat="item in xingyong.data.datalist">
+						<td md-cell>{{item.fee_apply_id}}</td>
+						<td md-cell>{{item.credit_user_name}}</td>
+						<td md-cell>{{item.credit_id}}</td>
+						<td md-cell>{{item.currency_name}}</td>
+						<td md-cell>{{item.credit_user_code}}</td>
+						<td md-cell>{{item.creation_date}}</td>
+						<td md-cell>{{item.s}}</td>
+						<td md-cell>{{item.order_status|order_status}}</td>
+						<td md-cell>{{item.order_type|applytype}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</md-table-container>
+		<md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '总条数：'}" md-limit="query.limit" md-limit-options="[5, 10, 15]" md-page="query.page" md-total="{{feeapplylist.data.page.totalRow}}" md-on-paginate="getDesserts" md-page-select></md-table-pagination>
+	</md-card>
+	<md-button aria-label="menu" class="md-fab ml-bottom-fab" ng-click="go('/financeQC/editPlanManagement','计划管理-编辑')">
+    	<md-tooltip md-direction="left">
+          	计划管理-编辑
+        </md-tooltip>
+        <md-icon class="iconfont">&#xe631;</md-icon>
+   </md-button>
+</div>

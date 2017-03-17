@@ -1,0 +1,48 @@
+{
+	"code": "0000",
+	"data": {
+		"datalist": [
+			{
+				"fee_sharing_code": "CA1608170154",
+				"currency_name": "人民币",
+				"sharing_date": "2016-08-17 00:00:00",
+				"reason_desc": "业务说明",
+				"sharing_amount": 32,
+				"order_status": "DRAFT",
+				"sharing_status": "审批中"
+			},
+			{
+				"fee_sharing_code": "CA1608170154",
+				"currency_name": "人民币",
+				"sharing_date": "2016-08-17 00:00:00",
+				"reason_desc": "业务说明",
+				"sharing_amount": 32,
+				"order_status": "DRAFT",
+				"sharing_status": "审批中"
+			},
+			{
+				"fee_sharing_code": "CA1608170154",
+				"currency_name": "人民币",
+				"sharing_date": "2016-08-17 00:00:00",
+				"reason_desc": "业务说明",
+				"sharing_amount": 32,
+				"order_status": "DRAFT",
+				"sharing_status": "审批中"
+			},
+			{
+				"fee_sharing_code": "CA1608170154",
+				"currency_name": "人民币",
+				"sharing_date": "2016-08-17 00:00:00",
+				"reason_desc": "业务说明",
+				"sharing_amount": 32,
+				"order_status": "DRAFT",
+				"sharing_status": "审批中"
+			}
+		],
+		"pageNumber": 1,
+		"page": 10,
+		"totalPage": 5,
+		"totalRow": 46
+	},
+	"msg": "请求成功"
+}

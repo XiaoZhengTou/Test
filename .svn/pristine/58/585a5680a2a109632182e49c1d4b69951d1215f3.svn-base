@@ -1,0 +1,28 @@
+<div ng-controller="typeCtrl">
+	
+	<md-card>
+		<div id="archive-container">
+			<ul id="ztree" class="ztree ml-float-left" ztree ng-model="archive">
+			</ul>
+			<div class="archive-detail">
+				<p><label>分类目录：</label><span ng-bind="archive.categories"></span></p>
+				<p><label>分类名称：</label><span ng-bind="archive.name"></span></p>
+				<p><label>描述：</label><span ng-bind="archive.description"></span></p>
+				<p><label>上级分类：</label><span ng-bind="archive.subHeadings"></span></p>
+				<p><label>可借阅：</label><span>{{archive.borrow_able == '1' ? '是' : archive.borrow_able == '0' ? '否' : ''}}</span></p>
+				<p><label>续借期限：</label><span>{{archive.borrow_limit ? (archive.borrow_limit + '天') : ''}}</span></p>
+				<p><label>状态：</label><span>{{archive.status == '1' ? '生效' : archive.status == '0' ? '失效' : ''}}</span></p>
+			</div>
+		</div>
+		
+	</md-card>
+	
+	
+	<div id="rMenu">
+		<ul>
+			<li id="m_add" ng-click="addTreeNode($event)">增加节点</li>
+			<li id="m_edit" ng-click="editTreeNode()">编辑节点</li>
+			<li id="m_del" ng-click="removeTreeNode($event)">删除节点</li>
+		</ul>
+	</div>
+</div>

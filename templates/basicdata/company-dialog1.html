@@ -1,0 +1,146 @@
+<md-dialog aria-label="新增核算组织" ng-cloak style="min-width: 50%" id="company-dialog1-detail">
+    <form name="addcompany" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 style="color: white">新增核算组织</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="padding-top: 0px;padding-bottom: 0px">
+
+                <div class="demo-tab" style="padding: 25px 25px 0 25px; text-align: center;">
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>入账单位编码(必填)</label>
+                        <input ng-model="company.company_code" type="text" required>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>入账单位名称</label>
+                        <input ng-model="company.company_name" type="text">
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm style="text-align: left;padding-top: 20px;padding-bottom: 20px;">
+                        <label>本位币</label>
+                        <md-select ng-model="company.currency_code">
+                            <md-option ng-repeat="currency1 in currencydata_form" value="{{currency1.currency_code}}">{{currency1.currency_name}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm style="text-align: left;padding-top: 20px;padding-bottom: 20px;">
+                        <label>对应OU</label>
+                        <md-select ng-model="company.external_org_id">
+                            <md-option ng-repeat="ou1 in ou_form" value="{{ou1.id}}">{{ou1.company_name}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm style="text-align: left;padding-top: 20px;padding-bottom: 20px;">
+                        <label>状态</label>
+                        <md-select ng-model="company.enable_flag">
+                            <md-option value="Y">有效</md-option>
+                            <md-option value="N">失效</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <!--<md-input-container class="md-block" flex-gt-sm>-->
+                        <!--<label>业务组织别名</label>-->
+                        <!--<input ng-model="company.alias_name" type="text">-->
+                    <!--</md-input-container>-->
+
+                    <!--<md-input-container class="md-block" flex-gt-sm>-->
+                        <!--<label>入账单位名称 </label>-->
+                        <!--<input ng-model="company.remark" type="text">-->
+                    <!--</md-input-container>-->
+
+                    <!--<md-input-container class="md-block" flex-gt-sm>-->
+                        <!--<label>对应管理组织ID</label>-->
+                        <!--<input ng-model="company.manage_org_id" type="text">-->
+                    <!--</md-input-container>-->
+
+                    <!--<md-input-container class="md-block" flex-gt-sm>-->
+                        <!--<label>对应管理组织代码</label>-->
+                        <!--<input ng-model="company.manage_org_code" type="text">-->
+                    <!--</md-input-container>-->
+
+                    <!--<md-input-container class="md-block" flex-gt-sm>-->
+                        <!--<label>对应管理组织名称</label>-->
+                        <!--<input ng-model="company.manage_org_name" type="text">-->
+                    <!--</md-input-container>-->
+
+                    <!--<md-input-container class="md-block" flex-gt-sm>-->
+                        <!--<label>对应管理组织主管</label>-->
+                        <!--<input ng-model="company.manage_org_person" type="text">-->
+                    <!--</md-input-container>-->
+
+                    <!--<md-input-container class="md-block" flex-gt-sm>-->
+                        <!--<label>外部组织ID</label>-->
+                        <!--<input ng-model="company.external_org_id" type="text">-->
+                    <!--</md-input-container>-->
+
+                    <!--<md-input-container class="md-block" flex-gt-sm>-->
+                        <!--<label>外部组织编码</label>-->
+                        <!--<input ng-model="company.external_org_code" type="text">-->
+                    <!--</md-input-container>-->
+
+                    <!--<md-input-container class="md-block" flex-gt-sm>-->
+                        <!--<label>外部组织名称</label>-->
+                        <!--<input ng-model="company.external_org_name" type="text">-->
+                    <!--</md-input-container>-->
+
+                    <!--<md-input-container class="md-block" flex-gt-sm>-->
+                        <!--<label>对应管理组织ID</label>-->
+                        <!--<input ng-model="company.manage_org_id" type="text">-->
+                    <!--</md-input-container>-->
+
+                    <!--<md-input-container class="md-block" flex-gt-sm>-->
+                        <!--<label>代理用户</label>-->
+                        <!--<input ng-model="company.proxy_user" type="text">-->
+                    <!--</md-input-container>-->
+
+                    <!--<md-input-container class="md-block" flex-gt-sm>-->
+                        <!--<label>本位币编码</label>-->
+                        <!--<input ng-model="company.currency_code" type="text">-->
+                    <!--</md-input-container>-->
+
+                    <!--<md-input-container class="md-block" flex-gt-sm>-->
+                        <!--<label>本位币名称</label>-->
+                        <!--<input ng-model="company.currency_name" type="text">-->
+                    <!--</md-input-container>-->
+
+                    <!--<md-input-container class="md-block" flex-gt-sm style="text-align: left;padding-top: 20px;padding-bottom: 20px;">-->
+                        <!--<label>对应OU</label>-->
+                        <!--<md-select ng-model="company.iso_flag">-->
+                            <!--<md-option value="Y">已使用</md-option>-->
+                            <!--<md-option value="N">未使用</md-option>-->
+                        <!--</md-select>-->
+                    <!--</md-input-container>-->
+
+                </div>
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <span flex></span>
+            <md-button class="md-primary md-raised" ng-click="answer()"  style="color: white;float: right"
+                       ng-disabled="addcompany.$invalid" disabled="disabled">确定</md-button>
+
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+
+<style>
+    #company-dialog1-detail .md-datepicker-input-container.md-datepicker-invalid {
+        border-bottom-color: rgb(224,224,224);
+    }
+    #company-dialog1-detail .md-datepicker-input-container{
+        width: 93.9%;
+        margin-left: -2px;
+    }
+    #company-dialog1-detail .md-datepicker-calendar-icon{
+        margin-bottom: -7px;
+    }
+</style>

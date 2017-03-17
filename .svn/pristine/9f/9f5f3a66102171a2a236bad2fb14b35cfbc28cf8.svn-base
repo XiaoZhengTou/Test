@@ -1,0 +1,71 @@
+<md-dialog aria-label="费用申请" style="min-width:700px;">
+	<form>
+		<md-dialog-content>
+			<div ng-cloak>
+				<!-- 默认表头开始 -->
+				<md-toolbar class="md-table-toolbar white" ng-hide="filter.show">
+				    <div class="md-toolbar-tools">
+				      <h2 class="md-title">费用申请</h2>
+				      <div flex></div>
+				      <md-button class="md-icon-button" ng-click="filter.show = true">
+				        <md-icon class="iconfont bigicon">&#xe606;</md-icon>
+				      </md-button>
+				      <md-button class="md-icon-button" ng-click="cancel()">
+						<md-icon class="iconfont">&#xe634;</md-icon>
+					  </md-button>
+				    </div>
+				</md-toolbar>
+				<!-- 默认表头结束 -->
+				<!-- 搜索表头开始 -->
+				<md-toolbar class="md-table-toolbar white" ng-show="filter.show">
+				    <div class="md-toolbar-tools">
+				    <md-icon class="iconfont bigicon ml-margin-right">&#xe606;</md-icon>
+				    <div flex layout="row" class="filterSearch">
+				    	<md-menu md-offset="0 -7">
+				          <span ng-click="$mdOpenMenu($event)">
+				            {{filter.value.name}}
+				            <i class="iconfont">&#xe60e;</i>
+				          </span>
+				          <md-menu-content width="4">
+				            <md-menu-item ng-repeat="x in filter.source">
+				              <md-button ng-click="filter.setFilter(x)"> <span md-menu-align-target>
+				              </span>{{x.name}}</md-button>
+				            </md-menu-item>
+				          </md-menu-content>
+				        </md-menu>
+				    	<input type="text" ng-model="searchText" ng-model-options="filter.options" placeholder="关键字……" flex>
+				    </div>
+				    <md-button class="md-icon-button" ng-click="removeFilter()">
+				        <md-icon class="iconfont">&#xe634;</md-icon>
+				    </md-button>
+				    </div>
+				</md-toolbar>
+				<!-- 搜索表头结束 -->
+				<md-table-container>
+					<table md-table ng-model="selected" md-progress="promise">
+						<thead md-head>
+							<tr md-row>
+								<th md-column>单号</th>
+								<th md-column md-numeric>申请人</th>
+								<th md-column md-numeric>币种</th>
+								<th md-column md-numeric>业务描述</th>
+							</tr>
+						</thead>
+						<tbody md-body style="overflow:auto;">
+							<tr md-row md-select="item" md-select-id="fee_apply_id" md-auto-select ng-repeat="item in feeapplyData.data.info" ng-click="answer(item)" class="selectRow">
+								<td md-cell>{{item.fee_apply_code}}</td>
+								<td md-cell>{{item.apply_name}}</td>
+								<td md-cell>{{item.currency_name}}</td>
+								<td md-cell>{{item.reason_desc}}</td>
+
+							</tr>
+						</tbody>
+					</table>
+				</md-table-container>
+				<!-- 表格导航开始 -->
+				<md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '，总条数：'}" md-limit="query.page_size" md-limit-options="[5, 10, 15]" md-page="query.page_number" md-total="{{total}}" md-on-paginate="getData" md-page-select></md-table-pagination>
+				<!-- 表格导航结束 -->
+			</div>
+		</md-dialog-content>
+	</form>
+</md-dialog>

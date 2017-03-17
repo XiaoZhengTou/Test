@@ -1,0 +1,248 @@
+<div ng-controller="taskManCtrl" class="task airfare">
+	<div ng-controller="taskSendHomeCtrl">
+		<md-card>
+			<div class="md-toolbar-tools">
+		      	<h3>
+		       		<span>任务池</span>
+		      	</h3> 
+		    </div> 
+			<div layout="row" class="ml-marginT-20">
+				<md-input-container class="md-block ml-marginlr-10" flex="30">
+		            <label>单据编号</label>
+		            <input>
+				</md-input-container>
+				<md-input-container class="md-block ml-marginlr-10" flex="30">
+		            <label>业务描述</label>
+		            <input>
+				</md-input-container>
+				<div flex="30" layout="row">
+					<md-input-container class="md-block ml-marginlr-10" flex>
+		            <label>金额（最低值）</label>
+		            <input>
+				</md-input-container>
+				<span class="ml-lineheight-48 ml-marginlr-10">至</span>
+				<md-input-container class="md-block ml-marginlr-10" flex>
+		            <label>金额（最高值）</label>
+		            <input>
+				</md-input-container>
+				</div>
+				<md-input-container class="md-block ml-marginlr-10" flex="10">
+		            <label>币种</label>
+		            <md-select ng-model="currency">
+						<md-option ng-repeat="x in currencys" value="{{x}}"> {{x}}</md-option>
+					</md-select>
+				</md-input-container>
+			</div>
+			<div layout="row">
+				<div class="ml-padding-right ml-marginlr-10" flex layout="row">
+					<md-input-container  class="md-block md-cyan-theme md-input-invalid ml-nomargin">
+						<label>申请日期（起）</label>
+						<input ng-model="applyBegin" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd"/>
+					</md-input-container>
+					<span class="ml-lineheight-48 ml-marginlr-10">至</span>
+					<md-input-container class="md-block md-cyan-theme md-input-invalid ml-nomargin">
+						<label>申请日期（止）</label>
+						<input ng-model="applyEnd" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd"/>
+					</md-input-container>
+				</div>
+				<div class="ml-padding-right ml-marginlr-10" flex layout="row">
+					<md-input-container  class="md-block md-cyan-theme md-input-invalid ml-nomargin">
+						<label>入池日期（起）</label>
+						<input ng-model="poolBegin" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd"/>
+					</md-input-container>
+					<span class="ml-lineheight-48 ml-marginlr-10">至</span>
+					<md-input-container class="md-block md-cyan-theme md-input-invalid ml-nomargin">
+						<label>入池日期（止）</label>
+						<input ng-model="poolEnd" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+					</md-input-container>
+				</div>
+				<div class="ml-padding-right ml-marginlr-10" flex layout="row">
+					<md-input-container  class="md-block md-cyan-theme md-input-invalid ml-nomargin">
+						<label>完成日期（起）</label>
+						<input ng-model="completeBegin" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd"/>
+					</md-input-container>
+					<span class="ml-lineheight-48 ml-marginlr-10">至</span>
+					<md-input-container class="md-block md-cyan-theme md-input-invalid ml-nomargin">
+						<label>完成日期（止）</label>
+						<input ng-model="completeEnd" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd"/>
+					</md-input-container>
+				</div>
+			</div>
+			<div layout="row">
+				<md-input-container class="md-block ml-marginlr-10" flex="30">
+		            <label>任务组</label>
+		            <md-select ng-model="states">
+						<md-option value="fu">总部大额支出复审组</md-option>
+						<md-option value="chu">总部运营费用初审组</md-option>
+					</md-select>
+				</md-input-container>
+				<md-input-container class="md-block ml-marginlr-10" flex="30">
+		            <label>组别</label>
+		            <md-select ng-model="state">
+						<md-option value="chu">初审组</md-option>
+						<md-option value="fu">复审组</md-option>
+					</md-select>
+				</md-input-container>
+			</div>
+			<div ng-if="packUpFlag" class="ml-marginT-20">
+				<div layout="row">
+					<md-input-container class="md-block ml-marginlr-10" flex>
+			            <label>当前处理人</label>
+			            <input type="text" />
+					</md-input-container>
+					<md-input-container class="md-block ml-marginlr-10" flex>
+			            <label>报账人</label>
+			            <md-select ng-model="state">
+							<md-option value="Mip">MIP通讯录</md-option>
+						</md-select>
+					</md-input-container>
+					<md-input-container class="md-block ml-marginlr-10" flex>
+			            <label>部门</label>
+			            <md-select ng-model="state">
+							<md-option value="xingzhengzuzhi">行政组织</md-option>
+						</md-select>
+					</md-input-container>
+				</div>
+				<div layout="row">
+					<md-input-container  class="md-block ml-marginlr-10" flex>
+						<label>预算科目</label>
+						<input />
+					</md-input-container>
+				<md-input-container class="md-block ml-marginlr-10" flex>
+		            <label>基础科目</label>
+		            <md-select ng-model="basi">
+						<md-option ng-repeat="x in basis" value="{{x}}">{{x}}</md-option>
+					</md-select>
+				</md-input-container>
+				<md-input-container class="md-block ml-marginlr-10" flex>
+		            <label>单据类型</label>
+		            <md-select ng-model="billsType">
+						<md-option ng-repeat="x in bills" value="{{x}}">{{x}}</md-option>
+					</md-select>
+				</md-input-container>
+				</div>
+				<div layout="row">
+					<md-input-container  class="md-block ml-marginlr-10" flex>
+						<label>来源系统</label>
+						<input />
+					</md-input-container>
+					<md-input-container class="md-block ml-marginlr-10" flex>
+			            <label>未派工时长</label>
+			            <md-select ng-model="timeLenght" ng-click="null">
+							<md-option ng-repeat="x in lenghts" value="{{x}}">{{x}}</md-option>
+						</md-select>
+					</md-input-container>
+					<md-input-container class="md-block ml-marginlr-10" flex>
+			            <label>紧急程度</label>
+			            <md-select ng-model="degree">
+							<md-option  value="jinji">紧急</md-option>
+							<md-option  value="yiban">一般</md-option>
+						</md-select>
+					</md-input-container>
+				</div>
+			</div>
+			<div class="ml-textalign-right">
+	        	<md-button class="md-raised md-primary" ng-click="packUp()" ng-if="packUpFlag">收起</md-button>
+	        	<md-button class="md-raised md-primary" ng-click="packUp()" ng-if="!packUpFlag">展开</md-button>
+	        	<md-button class="md-raised md-primary">查询</md-button>
+	       </div> 
+	    </md-card>
+		<md-card>
+			<md-tabs md-dynamic-height md-border-bottom>
+		        <md-tab label="待派工">
+			        <md-content class="md-padding">
+			        	<md-table-container>
+				        	<table md-table multiple class="ml-text-nowrap ml-text-center">
+					        	<thead md-head >
+							        <tr md-row>
+							          	<th md-column><md-checkbox></md-checkbox></th>
+							          	<th md-column>紧急度</th>
+							          	<th md-column>单据编号</th>
+							          	<th md-column>单据类型</th>
+							          	<th md-column>任务组</th>
+							          	<th md-column>组别</th>
+							          	<th md-column>处理人</th>
+							          	<th md-column>任务状态</th>
+							          	<th md-column>入池时间</th>
+							          	<th md-column>总耗时</th>
+							          	<th md-column>本节点耗时</th>
+							          	<th md-column>入账单位</th>
+							        </tr>
+						        </thead>
+						        <tbody md-body>
+							        <tr md-row >
+							          	<td md-cell><md-checkbox></md-checkbox></td>
+							          	<td md-cell>一般</td>
+							          	<td md-cell>EC20150101002</td>
+							          	<td md-cell>EC</td>
+							          	<td md-cell>总部五项费用组</td>
+							          	<td md-cell>初审组</td>
+							          	<td md-cell></td>
+							          	<td md-cell>待派工</td>
+							          	<td md-cell>2016-5-17 9:30</td>
+							          	<td md-cell>0.2</td>
+							          	<td md-cell>0.2</td>
+							          	<td md-cell>广东美的制冷设备有限公司-总部职能部</td>
+							        </tr>
+						        </tbody>
+					        </table>
+				        </md-table-container>
+				        <md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '总条数：'}" md-limit="viewData.data.pageSize" md-limit-options="[5, 10, 15]" md-page="viewData.data.pageNumber" md-total="{{viewData.data.totalRow}}" md-on-paginate="getData" md-page-select></md-table-pagination>
+			        	<div class="ml-textalign-right">
+				        	<md-button class="md-raised md-primary">退池</md-button>
+				        	<md-button class="md-raised md-primary">直接派工</md-button>
+				        	<md-button class="md-raised md-primary">智能派工</md-button>
+				        </div> 
+			        </md-content>
+		        </md-tab>
+		      	<md-tab label="已派工">
+			        <md-content class="md-padding">
+			        	<md-table-container>
+				        	<table md-table multiple class="ml-text-nowrap ml-text-center">
+					        	<thead md-head >
+							        <tr md-row>
+							          	<th md-column><md-checkbox></md-checkbox></th>
+							          	<th md-column>紧急度</th>
+							          	<th md-column>单据编号</th>
+							          	<th md-column>单据类型</th>
+							          	<th md-column>任务组</th>
+							          	<th md-column>组别</th>
+							          	<th md-column>处理人</th>
+							          	<th md-column>任务状态</th>
+							          	<th md-column>入池时间</th>
+							          	<th md-column>总耗时</th>
+							          	<th md-column>本节点耗时</th>
+							          	<th md-column>入账单位</th>
+							        </tr>
+						        </thead>
+						        <tbody md-body>
+							        <tr md-row >
+							          	<td md-cell><md-checkbox></md-checkbox></td>
+							          	<td md-cell>一般</td>
+							          	<td md-cell>EC20150101002</td>
+							          	<td md-cell>EC</td>
+							          	<td md-cell>总部五项费用组</td>
+							          	<td md-cell>初审组</td>
+							          	<td md-cell>李云龙</td>
+							          	<td md-cell>待派工</td>
+							          	<td md-cell>2016-5-17 9:30</td>
+							          	<td md-cell>0.2</td>
+							          	<td md-cell>0.2</td>
+							          	<td md-cell>广东美的制冷设备有限公司-总部职能部</td>
+							        </tr>
+						        </tbody>
+					        </table>
+				        </md-table-container>
+				         <md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '总条数：'}" md-limit="viewData.data.pageSize" md-limit-options="[5, 10, 15]" md-page="viewData.data.pageNumber" md-total="{{viewData.data.totalRow}}" md-on-paginate="getData" md-page-select></md-table-pagination>
+			        	<div class="ml-textalign-right">
+				        	<md-button class="md-raised md-primary">退池</md-button>
+				        	<md-button class="md-raised md-primary">收回</md-button>
+				        	<md-button class="md-raised md-primary">直接派工</md-button>
+				        	<md-button class="md-raised md-primary">智能派工</md-button>
+				        </div> 
+			        </md-content>
+		      	</md-tab>
+		   </md-tabs>
+		</md-card>	
+	</div>
+</div>

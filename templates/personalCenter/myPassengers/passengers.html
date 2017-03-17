@@ -1,0 +1,78 @@
+<div layout="column" ng-controller="personalCtrl" ng-cloak class="personalCenter">
+	<div ng-controller="passengersCtrl" class="passengers">
+		<md-card class="passengers-main ml-color-73 ml-fontsize-14">
+			<div layout="row">
+				<div class="blue-line ml-fontsize-15 ml-padding-20"><span></span>常用旅客信息</div>
+				<div class="addperson-btn">
+					<md-button ng-click="addPerson()" class="md-raised md-primary ml-nomargin"><i class="iconfont">&#xe631;</i>新增常用旅客信息</md-button>
+				</div>
+			</div>
+			<md-divider></md-divider>
+			<md-table-container>
+				<table md-table ng-model="selected" md-row-select multiple md-progress="promise">
+					<thead md-head md-order="query.order" md-on-reorder="getPassengers">
+						<tr md-row>
+							<th md-column>姓名</th>
+							<th md-column md-numeric>证件类型</th>
+							<th md-column md-numeric>证件号码</th>
+							<th md-column md-numeric>手机号</th>
+							<th md-column md-numeric>操作</th>
+						</tr>
+					</thead>
+					<tbody md-body>
+						<tr md-row md-select="passenger" md-select-id="name" md-auto-select ng-repeat="passenger in passengers">
+							<td md-cell>{{passenger.cnName}}</td>
+							<td md-cell>{{passenger.certType | getCertType}}</td>
+							<td md-cell>{{passenger.certNumber}}</td>
+							<td md-cell>{{passenger.mobile}}</td>
+							<td md-cell>
+								<div layout="row" class="ml-color-blue">
+									<md-button style="margin-left: auto" class="md-icon-button" ng-click="passengerBianji(passenger)">
+										<i class="iconfont ml-margin-auto">&#xe61f;</i>
+									</md-button>
+									<md-button class="md-icon-button ml-nomargin" ng-click="passengerRemoveItem(passenger)">
+										<i class="iconfont ml-margin-auto">&#xe633;</i>
+									</md-button>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</md-table-container>
+			<md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '，总条数：'}" md-limit="query.page_size" md-limit-options="[5, 10, 15]" md-page="query.page_number" md-total="{{total}}" md-on-paginate="getPassengers" md-page-select></md-table-pagination>
+			<!--<div class=" ml-paddinglr20 ">
+				<p layout="row">
+					<span flex="30" class="ml-color-21">姓名</span>
+					<span flex="70">{{passenger.cnName}}</span>
+				</p>
+				<p layout="row" class="ml-nomargin">
+					<span flex="30" class="ml-color-21">手机号</span>
+					<span flex="70">{{passenger.mobile}}</span>
+				</p>
+				<p layout="row">
+					<span flex="30" class="ml-color-21">{{passenger.certType | getCertType}}</span>
+					<span flex="70">{{passenger.certNumber}}</span>
+				</p>
+			</div>
+			<div layout="row" flex="100" class="ml-paddinglr20 bgcolor ml-fontsize-12">
+				<md-checkbox flex md-no-ink aria-label="Checkbox" class="zhengjian-lh ml-nomargin ml-color-21" ng-checked="passengerExists(passenger,passengerSelected)" ng-click="passengerToggle(passenger, passengerSelected)">
+					选择
+				</md-checkbox>
+				<div flex layout="row">
+					<md-button layout="row" class="md-icon-button" ng-click="passengerRemoveItem(passenger)">
+						<i class="iconfont ml-margin-auto">&#xe633;</i>
+					</md-button>
+					<md-button layout="row" class="md-icon-button" ng-click="passengerBianji(passenger)">
+						<i class="iconfont ml-margin-auto">&#xe61f;</i>
+					</md-button>
+				</div>
+			</div>-->
+		</md-card>
+		<!--<md-card layout-align="center center" class="ml-color-blue passengers-main">
+			<md-button class="md-icon-button" ng-click="addPerson()">
+				<i class="iconfont" style="font-size:2em;">&#xe61a;</i>
+			</md-button>
+			<p>新增常用旅客</p>
+		</md-card>-->
+	</div>
+</div>

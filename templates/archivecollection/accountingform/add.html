@@ -1,0 +1,89 @@
+<div ng-controller="addFormCtrl as ctrl" layout="column" ng-cloak class="md-inline-form">
+   <md-card>
+	    <md-card-content>
+	    	<h2 style="font-weight: normal;font-size: 17px;line-height: 1;margin: 0;margin-bottom:20px;border-left: 3px solid #42A5F5;margin-left: -16px;padding-left: 16px;">基本信息</h2>
+	    	<div layout="row">
+	      		<div layout="row" flex="50">
+					<md-input-container class="md-block ml-nomargin" flex="90">
+						<label>分类目录号</label>
+						<input id="catalogue" ng-model="archive.category_name">
+					</md-input-container>
+				</div>
+				<div layout="row" flex="50">
+					<md-input-container class="md-block ml-nomargin" flex="90">
+						<label>公司</label>
+						<md-select ng-model="archive.company_id">
+							<md-option ng-repeat="c in $root.companies" ng-value="c.company_id">{{c.company_name}}</md-option>
+						</md-select>
+					</md-input-container>
+				</div>
+	        </div>
+	        <div layout="row">
+	      		<div layout="row" flex="33">
+					<md-input-container class="md-block ml-nomargin" flex="90">
+						<label>附件页数</label>
+						<input ng-model="archive.attachments_number">
+					</md-input-container>
+				</div>
+				<div layout="row" flex="33">
+					<md-input-container class="md-block ml-nomargin" flex="90">
+						<label>著录状态</label>
+						<md-select ng-model="archive.status" disabled>
+							<md-option value="1">草稿</md-option>
+							<md-option value="2">已提交</md-option>
+							<md-option value="3">已作废</md-option>
+						</md-select>
+					</md-input-container>
+				</div>
+				<div layout="row" flex="33">
+					<md-input-container class="md-block ml-nomargin" flex="90">
+						<label>著录时间</label>
+						<input ng-model="archive.creation_date" disabled>
+					</md-input-container>
+				</div>
+	        </div>
+	        <div layout="row">
+	      		<md-input-container class="md-block ml-nomargin" flex>
+		          <label>描述</label>
+		          <textarea ng-model="archive.remark" md-maxlength="50" rows="1" md-select-on-focus></textarea>
+		        </md-input-container>
+	        </div>
+	        
+	        
+	        
+	        
+	        <h2 style="font-weight: normal;font-size: 17px;line-height: 1;margin:20px 0;border-left: 3px solid #42A5F5;margin-left: -16px;padding-left: 16px;">报表信息</h2>
+	    	
+	        <div layout="row">
+	      		<div layout="row" flex="50">
+					<md-input-container class="md-block ml-nomargin" flex="90">
+						<label>年度</label>
+						<md-select ng-model="archive.year_period">
+							<md-option ng-value="y" ng-repeat="y in years">{{y}}</md-option>
+						</md-select>
+					</md-input-container>
+				</div>
+				<div layout="row" flex="50">
+					<md-input-container class="md-block ml-nomargin" flex="90">
+						<label>月份</label>
+						<md-select ng-model="archive.month_period">
+							<md-option ng-value="m" ng-repeat="m in months">{{m}}</md-option>
+						</md-select>
+					</md-input-container>
+				</div>
+	        </div>
+	    </md-card-content>
+	    <md-card-actions layout="row" layout-align="center center">
+	      <md-button class="md-raised md-primary" ng-click="uploadAttachment()" ng-disabled="!archive.archives_id || archive.status == 2 || archive.status == 3">附件</md-button>
+	      <md-button class="md-raised md-primary" ng-click="save()" ng-disabled="archive.archives_id || archive.status == 2 || archive.status == 3">保存</md-button>
+	      <md-button class="md-raised md-primary" ng-disabled="!archive.archives_id || archive.status == 2 || archive.status == 3" ng-click="submit()">提交归档</md-button>
+	      <md-button class="md-raised md-primary" ng-disabled="!archive.archives_id || archive.status == 3" ng-click="invalid()">作废</md-button>
+	    </md-card-actions>
+    </md-card>
+   
+   
+   <div id="menuContent" class="menuContent" style="display:none; position: absolute;z-index: 3;">
+		<ul id="menuTree" model="archive.category_name" query="archive.classified_catalogue_id" catalogue="catalogue" target="target" menu-tree class="ztree" style="margin-top:0; width:300px;height:auto;"></ul>
+   </div>
+   
+</div>

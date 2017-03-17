@@ -1,0 +1,177 @@
+<div ng-controller="approveCtrlP">
+    <md-card class="md-padding" layout="column">
+        <div class="md-toolbar-tools com-pl-0" layout="row">
+            <span>单据申请</span>
+        </div>
+        <div layout="row">
+            <md-input-container class="md-block ml-nomargin" flex-gt-sm>
+                <label>日期</label>
+                <input ng-model="data.apportion_date " disabled>
+            </md-input-container>
+            <md-input-container class="md-block ml-nomargin" flex-gt-sm>
+                <label>类型</label>
+                <input ng-model="order_type" disabled>
+            </md-input-container>
+
+        </div>
+        <div layout="row">
+            <md-input-container class="md-block ml-nomargin" flex-gt-sm>
+                <label>入账单位</label>
+                <input ng-model="data.company_name" disabled>
+            </md-input-container>
+            <md-input-container class="md-block ml-nomargin" flex-gt-sm>
+                <label>导ERP类型</label>
+                <!--<input ng-model="data.imp_erp_type" disabled>	-->
+                	<md-select ng-model="data.imp" disabled>
+                		<md-option  ng-selected="data.imp_erp_type==x.id" ng-value="x" ng-repeat="x in add.jz">
+                			{{x.name}}
+                		</md-option>
+                	</md-select>
+                	
+            </md-input-container>
+        </div>
+        <div layout="row">
+			<md-input-container class="md-block" flex>
+				<label>业务描述</label>
+				<textarea ng-model="data.reason_desc" disabled></textarea>
+			</md-input-container>
+		</div>
+    </md-card>
+    <md-card>
+        <!-- 表格开始 -->
+        <md-toolbar class="md-table-toolbar md-default ">
+            <div class="md-toolbar-tools ">
+                <div layout="row" layout-align="center">
+                    <span class="toolbal-title">账务明细</span>
+                    <md-menu>
+						<md-button aria-label="Open user menu" ng-click="$mdOpenMenu()" aria-label="side navigation">
+							<md-icon md-svg-src="img/icons/three.svg"></md-icon>
+						</md-button>
+						<md-menu-content width="4">
+							<md-menu-item>
+								<md-button aria-label="side navigation">
+									<md-icon md-svg-src="img/icons/excel_in.svg"></md-icon>
+									<span class="ng-scope">Excel导入</span>
+								</md-button>
+							</md-menu-item>
+							<!--<md-menu-divider></md-menu-divider>-->
+							<md-menu-item>
+								<md-button aria-label="side navigation">
+									<md-icon md-svg-src="img/icons/excel_out.svg"></md-icon>
+									<span class="ng-scope">Excel导出</span>
+								</md-button>
+							</md-menu-item>
+						</md-menu-content>
+					</md-menu>
+                </div>
+            </div>
+        </md-toolbar>
+        <md-table-container>
+            <table md-table md-progress="promise ">
+                <thead md-head  md-on-reorder="getData ">
+                <tr md-row>
+                    <th md-column md-order-by="loan_info_code ">
+                        EA
+                    </th>
+                    <th md-column md-numeric>
+                        预算科目
+                    </th>
+                    <th md-column md-numeric md-order-by="apply_date ">
+                        预算单元
+                    </th>
+                    <th md-column md-numeric md-order-by="amount ">
+                        借贷类型
+                    </th>
+                    <th md-column md-numeric md-order-by="currency_name ">
+                        总金额
+                    </th>
+                </tr>
+                </thead>
+                <tbody md-body>
+                <tr md-row ng-repeat="x in data.emscaapportionls">
+                    <td md-cell>{{}}</td>
+                    <td md-cell>{{x.fee_type_name}}</td>
+                    <td md-cell>{{x.budget_node_desc}}</td>
+                    <td md-cell>{{x.debit_credit_type=='CR'?'贷':x.debit_credit_type=='DR'?'借':'贷'}}</td>
+                    <td md-cell>
+                    	{{x.budget_amount}}
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot md-foot>
+                <tr md-row>
+                    <td md-cell></td>
+                    <td md-cell></td>
+                    <td md-cell></td>
+                    <td md-cell>{{}}</td>
+                    <td md-cell>汇总金额：{{total}}</td>
+                    <td md-cell></td>
+                </tr>
+                </tfoot>
+            </table>
+        </md-table-container>
+
+        <!--账务明细 end-->
+    </md-card>
+    <md-card>
+        <md-table-container>
+            <div>
+                <div class="md-toolbar-tools" layout="row">
+                    <span>流程记录</span>
+                    <span flex></span>
+                </div>
+            </div>
+            <md-divider></md-divider>
+            <table md-table  multiple ng-model="selected" md-progress="promise">
+                <thead md-head md-order="query.order" md-on-reorder="getDesserts">
+                <tr md-row>
+                    <!--<th md-column md-numeric>单号</th>-->
+                    <th md-column >审批人</th>
+                    <th md-column >职位</th>
+                    <th md-column >审批时间</th>
+                    <th md-column >审批意见</th>
+                </tr>
+                </thead>
+                <tbody md-body>
+                <tr md-row md-select="item" md-select-id="fee_apply_id" md-auto-select
+                    ng-repeat="item in feeapplylist.data.datalist">
+                    <!--<td md-cell>{{item.fee_apply_id}}</td>-->
+                    <td md-cell>分记录数</td>
+                    <td md-cell>388/<span style="font-size: 0.8em;color:#A4A4A4;">(水电费水电费)</span></td>
+                    <td md-cell>防守打法</td>
+                    <td md-cell>复刻设法</td>
+
+                </tr>
+                </tbody>
+            </table>
+        </md-table-container>
+        <md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '总条数：'}" md-limit="query.limit"
+                             md-limit-options="[5, 10, 15]" md-page="query.page"
+                             md-total="{{feeapplylist.data.page.totalRow}}" md-on-paginate="getDesserts"
+                             md-page-select></md-table-pagination>
+    </md-card>
+    <md-card class="md-padding" layout="column" style="padding-top:30px;">
+        <div layout="row">
+            <md-input-container class="md-block ml-nomargin" flex-gt-sm>
+                <label>审批意见</label>
+                <md-select ng-model="approve.advices">
+                    <md-option ng-repeat="x in origindata.advices" ng-value="x" ng-selected="$first">
+                        {{x.name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        	<div layout="row">
+			<md-input-container class="md-block" flex>
+				<label>业务描述</label>
+				<textarea ng-model="approve.desc"></textarea>
+			</md-input-container>
+		</div>
+		<div layout="row">
+			<md-button class="md-raised md-primary" ng-click="onNext()">同意</md-button>
+			<md-button class="md-raised md-primary" ng-click="onNext()">驳回</md-button>
+			<md-button class="md-raised md-primary" ng-click="onNext()">沟通</md-button>
+			<md-button class="md-raised md-primary" ng-click="onNext()">转办</md-button>
+		</div>
+    </md-card>
+</div>

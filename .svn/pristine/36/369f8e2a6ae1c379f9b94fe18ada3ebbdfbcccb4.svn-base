@@ -1,0 +1,134 @@
+<div ng-controller="fkCtrl" class="jiehuankuan fukuan home" ng-cloak >
+<div ng-controller="fkHomeCtrl ">
+  	<!-- 筛选面板开始 -->
+  	<md-card class="ml-padding-pc ">
+  	<div class="basefilter ">
+	    <div layout="row ">
+	      <div flex class="ml-padding-right ">
+	        <md-input-container class="md-block md-cyan-theme md-input-invalid ">
+        		<label>业务描述</label>
+        		<input ng-model="query.query_param.sensitive_info" type="text ">
+      		</md-input-container>
+	      </div>
+	      <div flex class="ml-padding-right ">
+	        <md-input-container class="md-block md-cyan-theme md-input-invalid ">
+        		<label>流程状态</label>
+	            <md-select ng-model="query.query_param.order_status">
+	              <md-option ng-repeat="x in filter.orderStates" ng-value="x">
+	                {{x.name}}
+	              </md-option>
+	            </md-select>
+      		</md-input-container>
+	      </div>
+	      <div flex class="ml-padding-right ">
+	        <md-input-container class="md-block md-cyan-theme md-input-invalid ">
+        		<label>单号</label>
+        		<input ng-model="query.query_param.pay_info_code" type="text ">
+      		</md-input-container>
+	      </div>
+	      <div flex class="ml-padding-right ">
+	        <md-input-container class="md-block md-cyan-theme md-input-invalid ">
+        		<label>币种</label>
+	            <md-select ng-model="query.query_param.currency">
+	              <md-option ng-repeat="x in filter.currency" ng-value="x.id">
+	                {{x.name}}
+	              </md-option>
+	            </md-select>
+      		</md-input-container>
+	      </div>
+	    </div>
+	    <div layout="row ">
+	       <div flex class="ml-padding-right" layout="row">
+	          <md-input-container class="md-block md-cyan-theme md-input-invalid " flex>
+		        <label>金额范围（最小值）</label>
+		        <input ng-model="query.query_param.lower_amount" type="number">
+		     </md-input-container>
+		   </div>
+		   <div flex class="ml-padding-right" layout="row">
+	          <md-input-container class="md-block md-cyan-theme md-input-invalid " flex>
+		        <label>金额范围（最大值）</label>
+		        <input ng-model="query.query_param.higher_amount" type="number">
+		      </md-input-container>
+	      </div>
+	      <div flex class="ml-padding-right ">
+	          <md-input-container class="md-block md-cyan-theme md-input-invalid ">
+		        <label>创建时间</label>
+		        <input ng-model="query.query_param.creation_date" type="text " date-time-picker-input  display-mode="date " display-format="yyyy-MM-dd ">
+		      </md-input-container>
+	      </div>
+	      <div flex>
+	      		<md-button class="md-raised md-primary ml-nomargin ml-button " aria-label="立即搜索 " ng-click="getData() ">立即搜索</md-button>
+	        	<md-button class="md-raised ml-nomargin ml-button " aria-label="立即搜索 " ng-click="clearFilter() ">清空条件</md-button>
+	      </div>
+	    </div>
+  	</div>
+  	</md-card>
+	<!-- 筛选面板结束 -->
+	<md-card class="ml-margin-top ">
+	<!-- 表格开始 -->
+	<md-toolbar class="md-table-toolbar md-default ">
+	  <div class="md-toolbar-tools ">
+	    <span>我的付款申请</span>
+	  </div>
+	</md-toolbar>
+	<md-table-container>
+	  <table md-table md-progress="promise ">
+	    <thead md-head md-order="query.order_by " md-on-reorder="getData ">
+	    <tr md-row>
+	      <th md-column md-order-by="loan_info_code ">
+	      	单号
+	      </th>
+	      <th md-column md-numeric>
+	      	业务描述
+	      </th>
+	      <th md-column md-numeric md-order-by="apply_date ">
+	      	金额
+	      </th>
+	      <th md-column md-numeric md-order-by="amount ">
+	      	币种
+	      </th>
+	      <th md-column md-numeric md-order-by="currency_name ">
+	      	流程状态
+	      </th>
+	      <th md-column md-numeric md-order-by="status ">
+	      	创建时间
+	      </th>
+	      <th md-column md-numeric md-order-by="expected_repay_date ">
+	      	类型
+	      </th>
+	    </tr>
+	    </thead>
+	    <tbody md-body>
+	      <tr md-row ng-repeat="x in data | orderBy: id ">
+	      	<td md-cell>{{x.loan_info_code}}</td>
+	      	<td md-cell>{{x.reason_desc}}</td>
+	      	<td md-cell>{{x.apply_date}}</td>
+	      	<td md-cell>￥{{x.amount}}</td>
+	      	<td md-cell>{{x.currency_name}}</td>
+	      	<td md-cell ng-switch="x.status ">
+	      		<span ng-switch-when="SPZ ">审核中</span>
+	      		<span ng-switch-when="DHK ">待还款，已还:￥{{x.already_repay_amount ? x.already_repay_amount : '0'}}</span>
+	      		<span ng-switch-when="YHQ ">已还清</span>
+	      		<span ng-switch-when="CG ">草稿</span>
+	      		<span ng-switch-when="ZF ">已作废</span>
+	      	</td>
+	      	<td md-cell>{{x.expected_repay_date}}</td>
+	      </tr>
+	    </tbody>
+	  </table>
+	</md-table-container>
+	<!-- 表格导航开始 -->
+	<md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '，总条数：'} " md-limit="query.page_size " md-limit-options="[5, 10, 15] " md-page="query.page_number " md-total="{{total}} " md-on-paginate="getData" md-page-select></md-table-pagination>
+	<!-- 表格导航结束 -->
+	<!-- 表格结束 -->
+	</md-card>
+	<!-- 新增借款开始 -->
+    <md-button aria-label="menu " class="md-fab ml-bottom-fab " ng-click="go( '/duigong/fukuan/add', '新增付款申请') ">
+    	<md-tooltip md-direction="left ">
+          新增付款申请
+        </md-tooltip>
+        <md-icon class="iconfont ">&#xe631;</md-icon>
+    </md-button>
+	<!-- 新增借款结束 -->
+</div>
+</div>

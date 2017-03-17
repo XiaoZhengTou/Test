@@ -1,0 +1,58 @@
+<div ng-controller="taskManCtrl" class="task airfare">
+	<div ng-controller="taskPoolListCtrl">
+		<md-card>
+			<div class="ml-marginT-20" layout="row">
+				<!--<md-input-container class="md-block ml-marginlr-10" flex="30">
+		            <label>任务组</label>
+		            <md-select ng-model="taskGroup">
+						<md-option>总部大额支出复审组</md-option>
+						<md-option>总部运营费用初审组</md-option>
+					</md-select>
+				</md-input-container>-->
+				<md-input-container class="md-block ml-marginlr-10" flex="30">
+		            <label>组别</label>
+		            <md-select ng-model="station">
+						<md-option value="STAGE_IAS_AUDIT">票据岗</md-option>
+						<md-option value="STAGE_FIRST_AUDIT">初审岗</md-option>
+						<md-option value="STAGE_SECOND_AUDIT">复审岗</md-option>
+					</md-select>
+				</md-input-container>
+				<md-input-container class="md-block ml-marginlr-10" flex="30">
+		            <label>任务组名称</label>
+		            <input type="text" ng-model="task_group_name"/>
+				</md-input-container>
+				<div class="ml-textalign-right" flex="10">
+		        	<md-button class="md-raised md-primary" ng-click="refer()">查询</md-button>
+		        </div>
+			</div>
+		</md-card>
+		<md-card>
+			<md-table-container>
+	        	<table md-table md-row-select multiple ng-model="checked" class="ml-text-nowrap">
+		        	<thead md-head md-row-select >
+				        <tr md-row >
+							<th md-column>任务组</th>
+							<th md-column>组别</th>
+							<th md-column>组长</th>
+							<th md-column>任务组描述</th>
+					    </tr>
+			        </thead>
+			        <tbody md-body>
+				    	<tr md-row md-select="x.task_group_id" md-select-id="task_group_id" ng-repeat="x in datas">
+							<td md-cell>{{x.leader_name}}</td>
+							<td md-cell>{{x.station}}</td>
+							<td md-cell>{{x.leader_name}}</td>
+							<td md-cell>{{x.description}}</td>
+					    </tr>
+			        </tbody>
+		        </table>
+		        <div class="ml-textalign-right" flex>
+		        	<md-button class="md-raised md-primary" ng-click="save()">保存</md-button>
+		        	<p class="ml-color-red ml-padding-right ml-margin-0" ng-hide="selectedFlag">请正确的选择任务组</p>
+		        </div>
+	        </md-table-container>
+			<md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '总条数：'}" md-limit="viewData.data.pageSize" md-limit-options="[5, 10, 15]" md-page="viewData.data.pageNumber" md-total="{{viewData.data.totalRow}}" md-on-paginate="getData" md-page-select></md-table-pagination>
+		</md-card>	
+	</div>
+</div>
+

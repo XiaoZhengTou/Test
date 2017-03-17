@@ -1,0 +1,193 @@
+<div ng-controller="jkCtrl" class="jiehuankuan jiekuan add" ng-cloak">
+<div ng-controller="jkAddCtrl">
+<!-- 状态步骤条开始 -->
+<div class="ml-setupbar ml-margin-top ml-margin-large-bottom" layout="row" layout-align="center center">
+  <div flex="70" layout="row" class="container">
+    <div flex class="ml-text-center active item">
+      <span>填写表单</span>
+    </div>
+    <div flex class="ml-text-center item">
+      <span>选择审批人</span>
+    </div>
+    <div flex class="ml-text-center item">
+      <span>提交单据</span>
+    </div>
+  </div>
+</div>
+<!-- 状态步骤条结束 -->
+  <md-card>
+    <form name="addform">
+  	<md-card-content>
+  		<h2 class="title ml-margin-top">借款明细</h2>
+  		<div layout="row">
+  			<div flex class="ml-padding-right">
+  				<md-input-container class="md-block">
+  					<label>借款金额 ({{currencyName(add.currency).name}})</label>
+  					<input type="number" ng-model="add.amount" ng-change="calcFenqi()">
+  				</md-input-container>		
+  			</div>
+  			<div flex class="ml-padding-right">
+  				<md-input-container class="md-block">
+  					<label>借款币种</label>
+  					<md-select ng-model="add.currency" ng-change="currencyName(add.currency)">
+                <md-option ng-repeat="x in currencyList" value="{{x.id}}" ng-selected="$first">
+                  {{x.name}}
+                </md-option>
+              </md-select>
+  				</md-input-container>		
+  			</div>	
+  		</div>
+      <div layout="row">
+        <div flex class="ml-padding-right">
+          <md-input-container class="md-block">
+            <label>借款说明</label>
+            <input type="text" ng-model="add.desc"/>
+          </md-input-container>   
+        </div>
+      </div>
+      <h2 class="title">单据选择</h2>
+      <div layout="row" layout-fill class="danju cardselect ml-margin-large-top ml-margin-large-bottom">
+        <div flex class="ml-padding-right">
+          <div class="ml-card">
+            <h3>入账单位</h3>
+            <div class="empty">
+              <i class="iconfont">&#xe631;</i>
+              <p>点击添加</p>
+            </div>
+          </div> 
+        </div>
+        <div flex class="ml-padding-left ml-padding-right">
+          <div class="ml-card">
+            <h3>收款账号</h3>
+            <div class="empty" ng-if="add.bank.receiver=='' || !add.bank.receiver" drbankaccount="{'model':'add.bank'}">
+              <i class="iconfont">&#xe631;</i>
+              <p>点击添加</p>
+            </div>
+            <div class="content" ng-if="add.bank.receiver && !add.bank.receiver==''">
+              <p class="name"><span>收款人：</span>{{add.bank.receiver}}</p>
+              <p class="name">银行：<span>{{add.bank.bank_name}}</span></p>
+              <p class="name">账户：<span>{{add.bank.id}}</span></p>
+              <p class="del" ng-click="clearBank()">
+                <i class="iconfont">&#xe621;</i>
+              </p>
+            </div>
+          </div>   
+        </div>
+        <div flex class="ml-padding-left" dreachoose="{'model':'add.ea','muti':false}">
+          <div class="ml-card">
+            <h3>关联EA单据</h3>
+            <div class="empty">
+              <i class="iconfont">&#xe631;</i>
+              <p>点击添加</p>
+            </div>
+          </div>   
+        </div>  
+      </div>
+      <h2 class="title">还款方式</h2>
+      <div layout="row" class="ml-margin-top">
+        <div flex class="ml-padding-right">
+          <md-input-container class="md-block">
+            <label>还款方式</label>
+            <md-select ng-model="add.type">
+                <md-option ng-repeat="x in payType" value="{{x.id}}" ng-selected="$first">
+                  {{x.name}}
+                </md-option>
+            </md-select>
+          </md-input-container>   
+        </div>
+        <!-- 单次还款计划还清日期开始 -->
+        <div flex class="ml-padding-right" ng-if="add.type == 1">
+          <md-input-container class="md-block">
+            <label>计划还清日期</label>
+            <input ng-model="add.onetimedate" type="text" date-time-picker-input  display-mode="date" display-format="yyyy-MM-dd">
+          </md-input-container>   
+        </div>
+        <!-- 单次还款计划还清日期结束 -->
+        <!-- 分期还款计划开始 -->
+        <div flex class="ml-padding-right" ng-if="add.type == 2">
+          <md-input-container class="md-block">
+            <label>开始还款日期</label>
+            <input ng-model="add.fenqidate" ng-change="calcFenqi()" type="text" date-time-picker-input  display-mode="date" display-format="yyyy-MM-dd">
+          </md-input-container> 
+        </div>
+        <!-- 分期还款计划结束 -->
+      </div>
+      <div layout="row" ng-if="add.type == 2">
+        <div flex class="ml-padding-right">
+          <md-input-container class="md-block">
+            <label>期数选择</label>
+            <md-select ng-model="add.qishu" ng-change="calcFenqi()">
+                <md-option ng-repeat="x in fenqi" value="{{x.id}}" ng-selected="$first">
+                  {{x.name}}
+                </md-option>
+            </md-select>
+          </md-input-container>
+        </div>
+        <div flex class="ml-padding-right">
+          <md-input-container class="md-block">
+            <label>月还款额 ({{currencyName(add.currency).name}})，不高于{{(add.amount  / (add.qishu - 1)).toFixed(0)}}<span ng-if="add.fenqiamount==''">，当前为：{{(add.amount  / add.qishu).toFixed(0)}}</span></label>
+            <input type="number" name="fenqiamount" ng-model="add.fenqiamount" ng-change="calcFenqi()" min="10" max="{{add.amount / (add.qishu - 1)}}">
+            <div ng-messages="addform.fenqiamount.$error" multiple md-auto-hide="false">
+              <div ng-message="min">
+                你每月的还款额不能低于10
+              </div>
+              <div ng-message="max">
+                 按照你设定的分期数和借款额，你的月还款额度不应高于{{(add.amount  / (add.qishu - 1)).toFixed(0)}}
+              </div>
+            </div>
+          </md-input-container>   
+        </div>
+      </div>
+  	</md-card-content>
+    <!-- 分期计划开始 -->
+    <p class="emptyInfo" ng-if="(add.type == 2) && (qishuItems.length == 0)">请输入借款总额……</p>
+    <md-table-container ng-if="(add.type == 2) && (qishuItems.length > 0)">
+    <md-divider></md-divider>
+    <table md-table>
+      <thead md-head>
+      <tr md-row>
+        <th md-column>
+          期数
+        </th>
+        <th md-column>
+          还款日期
+        </th>
+        <th md-column>
+          还款额
+        </th>
+        <th md-column>
+          剩余应还
+        </th>
+        <th md-column md-numeric>
+          币种
+        </th>
+      </tr>
+      </thead>
+      <tbody md-body>
+        <tr md-row ng-repeat="x in qishuItems">
+          <td md-cell>第{{x.num}}期</td>
+          <td md-cell>{{x.which_month}}</td>
+          <td md-cell>{{x.amount}}</td>
+          <td md-cell>{{x.shengyu}}</td>
+          <td md-cell>{{currencyName(add.currency).name}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <md-divider></md-divider>
+  </md-table-container>
+  <!-- 分期计划结束 -->
+  <!-- 操作区开始 -->
+  <md-card-content>
+    <div layout="row" layout-align="center center">
+        <div flex="60" class="ml-inlineblock ml-text-center">
+          <md-button class="md-raised md-hue-2 ml-button" aria-label="上传附件" ng-click="getData()">上传附件</md-button>
+          <md-button class="md-raised md-primary ml-button" aria-label="保存" ng-click="next('save')">保存</md-button>
+          <md-button class="md-raised md-primary ml-button" aria-label="上传附件" ng-click="next()">{{NextText}}</md-button>
+        </div>
+    </div>
+  </md-card-content>
+  <!-- 操作区结束 -->
+  </form>
+  </md-card>
+</div>
+</div>

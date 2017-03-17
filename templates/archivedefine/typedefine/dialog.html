@@ -1,0 +1,101 @@
+<md-dialog aria-label="新增/编辑" style="width:600px;">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2 ng-bind="title"></h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="关闭"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <md-input-container class="md-block ml-nomargin">
+	        <label>分类名称</label>
+	        <input ng-model="archive.name">
+	    </md-input-container>
+	    <md-input-container class="md-block ml-nomargin">
+          <label>描述</label>
+          <textarea ng-model="archive.description" md-maxlength="30" rows="2" md-select-on-focus></textarea>
+        </md-input-container>
+	    <md-input-container class="md-block" flex-gt-sm>
+	        <label>保管期限</label>
+	        <md-select ng-model="archive.keep_limit">
+	          <md-option value="10">
+	            10年
+	          </md-option>
+	          <md-option value="5">
+	            5年
+	          </md-option>
+	          <md-option value="3">
+	            3年
+	          </md-option>
+	        </md-select>
+      	</md-input-container>
+      	<md-input-container class="md-block" flex-gt-sm>
+	        <label>可借阅</label>
+	        <md-select ng-model="archive.borrow_able">
+	          <md-option value="1">
+	          	是
+	          </md-option>
+	          <md-option value="0">
+	          	否
+	          </md-option>
+	        </md-select>
+      	</md-input-container>
+      	<md-input-container class="md-block" flex-gt-sm>
+	        <label>借阅期限</label>
+	        <md-select ng-model="archive.borrow_limit">
+	          <md-option value="30">
+	          	30天
+	          </md-option>
+	          <md-option value="15">
+	          	15天
+	          </md-option>
+	          <md-option value="7">
+	          	7天
+	          </md-option>
+	        </md-select>
+      	</md-input-container>
+      	<md-input-container class="md-block" flex-gt-sm>
+	        <label>续借期限</label>
+	        <md-select ng-model="archive.renew_limit">
+	          <md-option value="15">
+	          	15天
+	          </md-option>
+	          <md-option value="7">
+	          	7天
+	          </md-option>
+	        </md-select>
+      	</md-input-container>
+      	
+      	<md-radio-group ng-model="archive.status" ng-init="archive.status='1'" class="ml-nomargin">
+	        <div flex layout='row' layout-align="start center">
+	          <div style="width:80px">
+	          	状态
+	          </div>
+	          <md-radio-button
+	              ng-value="1"
+	              class="md-primary" style="margin-right:30px">
+	              	生效
+	          </md-radio-button>
+	          <md-radio-button
+	              ng-value="0"
+	              class="md-primary" >
+	              	失效
+	          </md-radio-button>
+	        </div>
+	    </md-radio-group>
+	    
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button ng-click="answer('not useful')" class="md-raised md-primary">
+       	确认
+      </md-button>
+      <md-button ng-click="cancel()" class="md-raised">
+                  取消
+      </md-button>
+    </md-dialog-actions>
+</md-dialog>

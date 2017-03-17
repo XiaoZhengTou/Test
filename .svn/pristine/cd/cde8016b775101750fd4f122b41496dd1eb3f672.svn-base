@@ -1,0 +1,66 @@
+<div ng-controller="editQuestionClassCtrl">
+	<md-card class="md-padding" layout="column">
+		<br>
+		<div layout="row">
+			<md-input-container class="md-block ml-nomargin ml-marginlr-10" flex-gt-sm>
+				<label>级别</label>
+				<md-select ng-model="state" class="ml-marginlr-10">
+					<md-option value="valid">一级</md-option>
+					<md-option value="invalid">二级</md-option>
+				</md-select>
+			</md-input-container>
+			<md-input-container class="md-block ml-nomargin" flex-gt-sm>
+				<label>类别名称</label>
+				<input ng-model="name">
+			</md-input-container>
+			<md-input-container class="md-block ml-nomargin ml-marginlr-10" flex>
+				<label>上级类别</label>
+				<md-select ng-model="state" class="ml-marginlr-10">
+					<md-option value="valid">一级</md-option>
+					<md-option value="invalid">二级</md-option>
+				</md-select>
+			</md-input-container>
+		</div>
+		<div layout="row">
+			<md-input-container class="md-block ml-nomargin ml-marginlr-10" flex-gt-sm>
+				<label>创建人</label>
+				<md-select ng-model="state" class="ml-marginlr-10">
+					<md-option value="valid">张三</md-option>
+					<md-option value="invalid">李四</md-option>
+				</md-select>
+			</md-input-container>
+			<md-input-container class="md-block ml-nomargin" flex-gt-sm>
+				<label>创建时间</label>
+				<input ng-model="createTime" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+			</md-input-container>
+			<md-input-container class="md-block ml-nomargin ml-marginlr-10" flex>
+				<label>状态</label>
+				<md-select ng-model="state" class="ml-marginlr-10">
+					<md-option value="valid">有效</md-option>
+					<md-option value="invalid">无效</md-option>
+				</md-select>
+			</md-input-container>
+		</div>
+		<div layout="row">
+			<md-input-container class="md-block ml-nomargin ml-marginlr-10" flex-gt-sm>
+				<label>停用人</label>
+				<md-select ng-model="state" class="ml-marginlr-10">
+					<md-option value="valid">张三</md-option>
+					<md-option value="invalid">李四</md-option>
+				</md-select>
+			</md-input-container>
+			<md-input-container class="md-block ml-nomargin" flex-gt-sm>
+				<label>停止时间</label>
+				<input ng-model="stopTime" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+			</md-input-container>
+			<md-input-container class="md-block ml-nomargin ml-marginlr-10" flex>
+				
+			</md-input-container>
+		</div>
+		<div class="ml-textalign-right">
+			<md-button class="md-raised md-primary md-button ng-scope md-ink-ripple" ng-click="stopped()">停用</md-button>
+			<md-button class="md-raised md-primary md-button md-ink-ripple" ng-click="keep()">保存</md-button>
+		</div>
+		<md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '总条数：'}" md-limit="query.limit" md-limit-options="[5, 10, 15]" md-page="query.page" md-total="{{feeapplylist.data.page.totalRow}}" md-on-paginate="getDesserts" md-page-select></md-table-pagination>
+	</md-card>
+</div>

@@ -1,0 +1,6 @@
+<div ng-controller="processSubmitCtrl" layout="column">
+	<h1>提交成功</h1>
+	<div class="md-toolbar-tools" layout="row" layout-align="center center">
+		<md-button class="md-raised md-primary"><i style="color:#fff;">确定</i></md-button>
+	</div>
+</div>

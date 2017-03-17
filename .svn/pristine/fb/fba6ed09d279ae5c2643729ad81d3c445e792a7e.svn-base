@@ -1,0 +1,49 @@
+<md-dialog aria-label="开户行" style="width:500px;">
+	<form>
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2>选择开户行</h2>
+				<span flex></span>
+				<md-button ng-click="cancel()">
+					<i class="iconfont" style="color:#fff;">关闭</i>
+				</md-button>
+			</div>
+		</md-toolbar>
+		<md-dialog-content style="max-width:800px;max-height:810px; ">
+			<div layout="row" class="md-padding md-margin">
+				<md-input-container style="margin-right: 10px;">
+					<label>省</label>
+					<md-select ng-model="provider">
+						<md-option value="1">北京</md-option>
+						<md-option value="2">上海</md-option>
+						<md-option value="3">广东</md-option>
+						<md-option value="4">广西</md-option>
+						<md-option value="5">湖南</md-option>
+						<md-option value="6">湖北</md-option>
+					</md-select>
+				</md-input-container>
+				<md-input-container>
+					<label>市</label>
+					<md-select ng-model="ctiy">
+						<md-option value="1">北京</md-option>
+						<md-option value="2">上海</md-option>
+						<md-option value="3">广东</md-option>
+						<md-option value="4">广西</md-option>
+						<md-option value="5">湖南</md-option>
+						<md-option value="6">湖北</md-option>
+					</md-select>
+				</md-input-container>
+				<md-input-container>
+					<label>关键字</label>
+					<input ng-model="keyword" type="text">
+				</md-input-container>
+				<div>
+					<md-button class="md-raised md-primary">查询</md-button>
+			</div>
+				</div>
+				
+		</md-dialog-content>
+		<md-dialog-actions layout="row">
+		</md-dialog-actions>
+	</form>
+</md-dialog>

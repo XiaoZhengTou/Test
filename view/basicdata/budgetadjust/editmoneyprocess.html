@@ -1,0 +1,101 @@
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<div ng-controller="editmoneyprocessCtrl" id="editmoneyprocess">
+
+    <div class="full-height ng-scope">
+        <div class="full-image-background layout-fill ng-scope layout-row" layout="row" layout-fill="">
+            <div class="animate-wrapper layout-row flex" flex="" layout="row">
+                <div id="ui-login" class="login-frame ng-scope layout-column flex" ui-view="" flex="" layout="column">
+                    <div layout="row" flex="" layout-padding="" layout-fill="" layout-align="center center" class="layout-fill ng-scope layout-align-center-center layout-row flex" style="padding: 0px">
+                        <div flex="40" flex-lg="50" flex-md="70" flex-xs="100" class="flex-xs-100 flex-md-70 flex-lg-50 flex-40" style="max-width: 100%;padding: 0px">
+                            <md-card class="md-cyan-theme" style="max-width: 100%">
+
+                                <md-toolbar ng-hide=" filter.show" class="md-table-toolbar md-default" style="background-color: white;">
+                                    <div class="md-toolbar-tools" >
+                                        <!--<div style="background-color: #2196f3;">-->
+                                            <!--<h2 class="md-title" style="color: black;font-size: 16px;margin-left: 4px;padding-left: 20px;background-color: white;">提交流程标准页</h2>-->
+                                        <!--</div>-->
+                                        <span>提交流程标准页</span>
+                                        <div flex></div>
+                                        <!--<md-button class="md-icon-button" ng-click="back()">-->
+                                            <!--<md-icon md-svg-src="img/icons/back.svg"></md-icon>-->
+                                        <!--</md-button>-->
+                                    </div>
+                                </md-toolbar>
+                                <!--<md-toolbar ng-show="filter.show " class="md-table-toolbar md-default" style="background-color: white">-->
+                                    <!--<div class="md-toolbar-tools">-->
+                                        <!--<md-icon md-svg-src="img/icons/search.svg"></md-icon>-->
+                                        <!--<form flex="" name="filter.form">-->
+                                            <!--<input type="text" ng-model="query.filter" ng-model-options="filter.options" placeholder="search" style="width: 100%;border: white;margin-left: 7px;">-->
+                                        <!--</form>-->
+                                        <!--<md-button class="md-icon-button" ng-click="removeFilter()">-->
+                                            <!--<md-icon md-svg-src="img/icons/ic_close_24px.svg" style="color: black;"></md-icon>-->
+                                        <!--</md-button>-->
+                                    <!--</div>-->
+                                <!--</md-toolbar>-->
+
+                                <md-content class=" md-cyan-theme" style="background-color: white;">
+
+                                    <table class="table ng-scope" style="margin-bottom: 0px">
+                                        <tr>
+                                            <td colspan="3">
+                                                <md-icon md-svg-src="img/icons/right.svg" style="color: black;margin-left: 7%;"></md-icon><span style="display: inline-block;vertical-align: middle;margin-left: 1%;">第一步：填写单据信息</span>
+                                                <md-icon md-svg-src="img/icons/right.svg" style="color: black;margin-left: 7%;"></md-icon><span style="color: blue;display: inline-block;vertical-align: middle;margin-left: 1%;">第二步：提交流程</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <div>
+                                        <div class="md-toolbar-tools" layout="row">
+                                            <span></span>
+                                            <span flex></span>
+                                            <md-menu>
+                                                <md-button aria-label="Open user menu" ng-click="$mdOpenMenu()" aria-label="side navigation">
+                                                    <md-icon md-svg-src="img/icons/three.svg"></md-icon>
+                                                </md-button>
+                                                <md-menu-content width="4">
+                                                    <md-menu-item>
+                                                        <md-button aria-label="side navigation">
+                                                            <md-icon md-svg-src="img/icons/excel_in.svg"></md-icon>
+                                                            <span class="ng-scope">Excel模板</span>
+                                                        </md-button>
+                                                    </md-menu-item>
+                                                    <!--<md-menu-divider></md-menu-divider>-->
+                                                    <md-menu-item>
+                                                        <md-button aria-label="side navigation">
+                                                            <md-icon md-svg-src="img/icons/excel_out.svg"></md-icon>
+                                                            <span class="ng-scope">Excel导出</span>
+                                                        </md-button>
+                                                    </md-menu-item>
+                                                </md-menu-content>
+                                            </md-menu>
+                                            <md-button class="md-primary" aria-label="下一步" ng-click="next($event)">
+                                                <md-icon md-svg-src="img/icons/add.svg" style="margin-right: 3px"></md-icon>下一步
+                                            </md-button>
+                                        </div>
+                                    </div>
+
+                                    <!-- 流程启动开始 -->
+                                    <div class="md-padding" ng-processnode forminstanceid="shenpi.forminstanceid" formtemplateid="shenpi.formid" modelid="shenpi.modelid" processlsit="shenpi.processlsit"></div>
+                                    <!-- 流程启动结束 -->
+
+
+                                </md-content>
+                            </md-card>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    #editmoneyprocess .active-Y{
+        background-color: green;
+        color: green;
+    }
+    #editmoneyprocess .active-N{
+        background-color: red;
+        color: red;
+    }
+</style>

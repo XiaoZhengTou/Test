@@ -1,0 +1,81 @@
+<md-dialog aria-label="新增菜单角色" ng-cloak style="min-width: 50%" id="resource-dialog1-detail"  ng-controller="batchmenuCtrl">
+    <form name="addresource" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 style="color: white">新增菜单角色</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="padding-top: 0px;padding-bottom: 0px" layout="row">
+
+                <div flex="30" style="border: 1px solid black;max-height: 510px;padding: 0;margin-top: 4%;" class="md-dialog-content">
+                    <ul id="qqq2" tree class="ztree" ng-model="$parent.selectNode" style="overflow: auto;max-height: 500px"></ul>
+                </div>
+                <div flex="4" class="md-dialog-content"></div>
+                <div flex="66" class="md-dialog-content">
+                    <p>已选角色：</p>
+                    <md-chips ng-model="selected" md-max-chips="1">
+                        <md-chip-template>
+                            <strong>{{$chip.name}}</strong>
+                        </md-chip-template>
+                    </md-chips>
+
+                    <md-table-container style="width: 95%;padding-left: 2.5%;">
+                        <table data-md-table data-md-row-select="options.rowSelection" multiple="{{false}}" data-ng-model="selected" md-progress="promise1">
+                        <!--<table data-md-table data-ng-model="selected" md-progress="promise">-->
+                            <thead md-head data-md-order="query1.order" md-on-reorder="getDesserts1">
+                            <tr md-row>
+                                <th md-column>角色</th>
+                                <th md-column>角色类型</th>
+                                <th md-column>描述</th>
+                            </tr>
+                            </thead>
+                            <tbody md-body>
+                            <tr md-row md-select="item" md-select-id="id" ng-repeat="item in appdata1" md-auto-select="options.autoSelect">
+                            <!--<tr md-row ng-repeat="item in appdata">-->
+                                <td md-cell>{{item.name}}</td>
+                                <td md-cell>{{item.type == '1'?'功能角色':(item.type == '2'?'数据角色':'')}}</td>
+                                <td md-cell>{{item.description}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </md-table-container>
+                    <md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '总条数：'}"
+                                         md-limit="query1.limit" md-limit-options="[5, 10, 15]" md-page="query1.page"
+                                         md-total="{{query1.total}}" md-on-paginate="getDesserts1" md-page-select
+                                         style="float: right;width:100%;"></md-table-pagination>
+
+
+
+                    <md-button class="md-primary md-raised" ng-click="answer()"  style="color: white;float: right"
+                               ng-disabled="addresource.$invalid" disabled="disabled">确定</md-button>
+                </div>
+
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>
+
+<style>
+    /*#resource-dialog1-detail .md-datepicker-input-container.md-datepicker-invalid {*/
+        /*border-bottom-color: rgb(224,224,224);*/
+    /*}*/
+    md-chips input{
+        display: none;
+    }
+    md-chips md-chips-wrap{
+        box-shadow:none;
+    }
+    #resource-dialog1-detail .md-datepicker-input-container{
+        width: 93.9%;
+        margin-left: -2px;
+    }
+    #resource-dialog1-detail .md-datepicker-calendar-icon{
+        margin-bottom: -7px;
+    }
+</style>

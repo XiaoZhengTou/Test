@@ -1,0 +1,50 @@
+<div ng-controller="addchalvctrl" layout="column" layout-padding ng-cloak>
+	<h3>制度维护申请</h3>
+		<md-content class="md-whiteframe-2dp">
+			<md-input-container md-no-float class="md-block">
+				<label>标题</label>
+				<md-icon class="reason_desc"><i class="iconfont" style="font-size: 1.5em;">&#xe62d;</i></md-icon>
+				<input ng-model="query.fee_apply_id" type="text" placeholder="标题" required>
+			</md-input-container>
+			<md-input-container class="md-block ml-nomargin" >
+				<label>类型</label>
+				<md-icon class="reason_desc"><i class="iconfont" style="font-size: 1.5em;">&#xe62d;</i></md-icon>
+				<md-select ng-init="query.order_status" ng-model="query.apply_by">
+				<md-option value="null">制度规范</md-option>
+				<md-option value="DRAFT">知识文档</md-option>
+			</md-select>
+			</md-input-container>
+			<md-input-container md-no-float class="md-block">
+				<label>内容概要</label>
+				<md-icon class="reason_desc"><i class="iconfont" style="font-size: 1.5em;">&#xe62d;</i></md-icon>
+				<input ng-model="query.apply_amount" type="text" placeholder="内容概要" required>
+			</md-input-container>
+			<md-input-container md-no-float class="md-block">
+				<label>内容</label>
+				<md-icon class="reason_desc"><i class="iconfont" style="font-size: 1.5em;">&#xe62d;</i></md-icon>
+				<input ng-model="query.reason_desc" type="text" placeholder="内容" required>
+			</md-input-container>
+			<md-input-container md-no-float class="md-block">
+				<label>源文件链接</label>
+				<md-icon class="reason_desc"><i class="iconfont" style="font-size: 1.5em;">&#xe62d;</i></md-icon>
+				<input ng-model="query.form_template_id" type="text" placeholder="源文件链接" required>
+			</md-input-container>
+			<md-input-container class="md-block ml-nomargin" flex-gt-sm>
+				<label>密集程度</label>
+				<md-icon class="reason_desc"><i class="iconfont" style="font-size: 1.5em;">&#xe62d;</i></md-icon>
+				<md-select ng-init="" ng-model="query.form_template_name">
+					<md-option value="null">公开</md-option>
+					<md-option value="DRAFT">私有</md-option>
+				</md-select>
+			</md-input-container>
+			<md-input-container md-no-float class="md-block">
+				<label>发文单位</label>
+				<md-icon class="reason_desc"><i class="iconfont" style="font-size: 1.5em;">&#xe62d;</i></md-icon>
+				<input ng-model="emseaapplyh.reason_desc" type="text" placeholder="发文单位" required>
+				</md-input-container>
+			<div layout="row" layout-align="center center">
+				<md-button class="md-raised md-primary" ng-click="openDialog()" style="height:36px;"><i class="iconinfo">&#xe665;</i> 文件上传</md-button>
+				<md-button class="md-raised md-primary">保存</md-button>
+			</div>
+		</md-content>
+	</div>

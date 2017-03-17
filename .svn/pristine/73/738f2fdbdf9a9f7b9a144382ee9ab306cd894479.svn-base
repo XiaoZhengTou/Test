@@ -1,0 +1,55 @@
+ <md-dialog aria-label="选择科目组合"  style="min-width: 50%" id="budgetcreatelist-dialog2-detail">
+    <form name="addaccounting" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 style="color: white">选择科目组合</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="padding-top: 0px;padding-bottom: 0px">
+
+                <div class="demo-tab" style="padding: 25px 25px 0 25px; text-align: center;">
+					<div layout-gt-sm="row" layout="row">
+                        <dr-subject flex="33" submodel="" itemvalue="{{ssmanualfeeinvoicel.segment1}}" flexnamemodel="ssmanualfeeinvoicel.segment1_name" flexvaluemodel="ssmanualfeeinvoicel.segment1" titlename="公司段 (必填) " proxyuser="{{ruzhangdanwei.proxy_user}}" ssaccounttype="COMPANY_CODE"></dr-subject>
+                        <dr-subject flex="33" submodel="" itemvalue="{{ssmanualfeeinvoicel.segment2}}" flexnamemodel="ssmanualfeeinvoicel.segment2_name" flexvaluemodel="ssmanualfeeinvoicel.segment2" titlename="成本中心段 (必填) " proxyuser="{{ruzhangdanwei.proxy_user}}" ssaccounttype="CENTER_CODE"></dr-subject>
+                        <dr-subject flex="33" submodel="" itemvalue="{{ssmanualfeeinvoicel.segment3}}" flexnamemodel="ssmanualfeeinvoicel.segment3_name" flexvaluemodel="ssmanualfeeinvoicel.segment3" titlename="会计科目段 (必填) " proxyuser="{{ruzhangdanwei.proxy_user}}" ssaccounttype="ACCOUNT_CODE"></dr-subject>
+					</div>
+					<div layout-gt-sm="row" layout="row">
+                        <dr-subject flex="25" submodel="" itemvalue="{{ssmanualfeeinvoicel.segment4}}" flexnamemodel="ssmanualfeeinvoicel.segment4_name" flexvaluemodel="ssmanualfeeinvoicel.segment4" titlename="明细科目段 (必填) " proxyuser="{{ruzhangdanwei.proxy_user}}" ssaccounttype="SUBJECT_CODE"></dr-subject>
+                        <dr-subject flex="25" submodel="" itemvalue="{{ssmanualfeeinvoicel.segment5}}" flexnamemodel="ssmanualfeeinvoicel.segment5_name" flexvaluemodel="ssmanualfeeinvoicel.segment5" titlename="产品段 (必填) " proxyuser="{{ruzhangdanwei.proxy_user}}" ssaccounttype="PRODUCT_CODE"></dr-subject>
+                        <dr-subject flex="25" submodel="" itemvalue="{{ssmanualfeeinvoicel.segment6}}" flexnamemodel="ssmanualfeeinvoicel.segment6_name" flexvaluemodel="ssmanualfeeinvoicel.segment6" titlename="内部往来段 (必填) " proxyuser="{{ruzhangdanwei.proxy_user}}" ssaccounttype="INTERCOM_CODE"></dr-subject>
+					    <dr-subject flex="25" submodel="" itemvalue="{{ssmanualfeeinvoicel.segment7}}" flexnamemodel="ssmanualfeeinvoicel.segment7_name" flexvaluemodel="ssmanualfeeinvoicel.segment7" titlename="备注段 (必填) " proxyuser="{{ruzhangdanwei.proxy_user}}" ssaccounttype="RESERVE_CODE"></dr-subject>
+
+					</div>
+					
+						
+					
+                </div>
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <span flex></span>
+            <md-button class="md-primary md-raised" ng-click="answer()"  style="color: white;float: right"
+                       ng-disabled="false" disabled="disabled">保存</md-button>
+
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+
+<style>
+    #budgetcreatelist-dialog1-detail .md-datepicker-input-container.md-datepicker-invalid {
+        border-bottom-color: rgb(224,224,224);
+    }
+    #budgetcreatelist-dialog1-detail .md-datepicker-input-container{
+        width: 93.9%;
+        margin-left: -2px;
+    }
+    #budgetcreatelist-dialog1-detail .md-datepicker-calendar-icon{
+        margin-bottom: -7px;
+    }
+</style>

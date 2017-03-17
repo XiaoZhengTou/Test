@@ -1,0 +1,69 @@
+<div ng-cloak class="md-inline-form">
+	<md-card>
+		<md-content>
+
+			<div layout="row" class="padding-left-right-16" style="margin-top: 22px;">
+				<div flex>
+					<md-input-container class="md-block md-cyan-theme md-input-invalid">
+						<label>一级类型</label>
+						<md-select ng-model="query.oneType">
+							<md-option ng-repeat="x in query.filter.oneTypeList" value="{{x.id}}">
+								{{x.name}}
+							</md-option>
+						</md-select>
+					</md-input-container>
+
+				</div>
+				<div flex class="padding-right">
+					<md-input-container class="md-block md-cyan-theme md-input-invalid">
+						<label>二级类型</label>
+						<input ng-model="query.twoType" type="text">
+					</md-input-container>
+
+				</div>
+				<div flex layout="row" layout-align="end">
+					<div>
+						<md-button class="md-raised md-primary" aria-label="查询" ng-click="find()">查询</md-button>
+					</div>
+				</div>
+			</div>
+		</md-content>
+	</md-card>
+	<md-card>
+		<md-content>
+			<md-card-title style="border-bottom:1px solid #eee;padding:20px 16px 16px;">
+				<md-card-title-text>
+					<span class="md-headline" style="font-size:16px;color:#777;">选择标准意见</span>
+				</md-card-title-text>
+			</md-card-title>
+			<myupload></myupload>
+			<md-table-container>
+				<table table md-table ng-model="selected" md-progress="promise" class="ml-text-nowrap">
+					<thead md-head md-on-reorder="getDesserts">
+						<tr md-row>
+							<th md-column>代码</th>
+							<th md-column>一级类型</th>
+							<th md-column>二级类型</th>
+							<th md-column>处理建议</th>
+							<th md-column>标准意见</th>
+							<th md-column>建议操作</th>
+						</tr>
+					</thead>
+					<tbody md-body>
+
+						<tr md-row ng-repeat="item in queryTable.appdata" md-auto-select="options.autoSelect">
+							<td md-cell>{{item.code}}</td>
+							<td md-cell>{{item.firstType}}</td>
+							<td md-cell>{{item.secondType}}</td>
+							<td md-cell>{{item.suggestion}}</td>
+							<td md-cell>{{item.comments}}</td>
+							<td md-cell>{{item.suggestionWay}}</td>
+						</tr>
+
+					</tbody>
+				</table>
+			</md-table-container>
+			<md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '，总条数：'}" md-limit="query.limit" md-limit-options="[5, 10, 15]" md-page="query.page_number" md-total="{{query.total}}" md-on-paginate="getData" md-page-select></md-table-pagination>
+		</md-content>
+	</md-card>
+</div>

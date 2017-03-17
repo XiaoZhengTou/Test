@@ -1,0 +1,206 @@
+<div ng-controller="danjuDecCtrl" ng-cloak class="md-inline-form">
+	<md-card>
+		<md-content>
+			<md-card-title style="border-bottom:1px solid #eee;padding:20px 16px 16px">
+				<md-card-title-text>
+					<span class="md-headline" style="font-size:16px;color:#777;">预付款</span>
+				</md-card-title-text>
+			</md-card-title>
+			<myupload></myupload>
+			<div layout="row" class="padding-left-right-16">
+				<div flex class="padding-right">
+					<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom: 0">
+						<label>申请日期</label>
+						<input ng-model="advances.applyDate" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+					</md-input-container>
+
+				</div>
+				<div flex>
+					<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom: 0">
+						<label>公司</label>
+						<input ng-model="advances.company" type="text">
+					</md-input-container>
+				</div>
+			</div>
+			<div layout="row" class="padding-left-right-16">
+				<div flex class="padding-right">
+					<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin: 0">
+						<label>经办人</label>
+						<input ng-model="advances.handler" type="text">
+					</md-input-container>
+				</div>
+				<div flex>
+					<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin: 0">
+						<label>部门</label>
+						<input ng-model="advances.departments" type="text">
+					</md-input-container>
+				</div>
+			</div>
+			<div layout="row" class="padding-left-right-16">
+				<div flex class="padding-right">
+					<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin: 0">
+						<label>活动事项</label>
+						<input ng-model="advances.events" type="text">
+					</md-input-container>
+				</div>
+				<div flex>
+					<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin: 0">
+						<label>预付金额</label>
+						<input ng-model="advances.advances" type="text">
+					</md-input-container>
+				</div>
+			</div>
+			<div layout="row" class="padding-left-right-16">
+				<div flex class="padding-right">
+					<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin: 0">
+						<label>付款方式</label>
+						<md-select ng-model="advances.payment.state">
+							<md-option ng-repeat="x in advances.payment.filter" value="{{x.id}}">
+								{{x.name}}
+							</md-option>
+						</md-select>
+					</md-input-container>
+				</div>
+				<div flex>
+					<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin: 0">
+						<label>币种</label>
+						<md-select ng-model="advances.currency.state">
+							<md-option ng-repeat="y in advances.currency.filter" value="{{y.shortName}}">
+								{{y.name}}
+							</md-option>
+						</md-select>
+					</md-input-container>
+				</div>
+			</div>
+			<div layout="row" class="padding-left-right-16">
+
+				<div flex>
+					<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom: 0">
+						<label>业务描述</label>
+						<input ng-model="advances.businessDescriptions" type="text">
+					</md-input-container>
+				</div>
+			</div>
+		</md-content>
+	</md-card>
+
+	<md-card>
+		<md-content>
+			<md-card-title style="border-bottom:1px solid #eee;padding:20px 16px 16px">
+				<md-card-title-text>
+					<span class="md-headline" style="font-size:16px;color:#777;">收款人信息</span>
+				</md-card-title-text>
+			</md-card-title>
+			<myupload></myupload>
+			<div layout="row" class="padding-left-right-16">
+				<div flex class="padding-right">
+					<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom: 0">
+						<label>供应商类型</label>
+						<input ng-model="payee.supplierType" type="text">
+					</md-input-container>
+				</div>
+				<div flex class="padding-right">
+					<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom: 0">
+						<label>供应商</label>
+						<input ng-model="payee.supplier" type="text">
+					</md-input-container>
+				</div>
+				<div flex>
+					<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom: 0">
+						<label>供应商地点</label>
+						<input ng-model="payee.supplierLocation" type="text">
+					</md-input-container>
+				</div>
+			</div>
+			<div layout="row" class="padding-left-right-16">
+				<div flex class="padding-right">
+					<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin: 0">
+						<label>收款人</label>
+						<input ng-model="payee.name" type="text">
+					</md-input-container>
+				</div>
+				<div flex class="padding-right">
+					<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin: 0">
+						<label>收款账户</label>
+						<input ng-model="payee.account" type="text">
+					</md-input-container>
+				</div>
+				<div flex>
+					<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin: 0">
+						<label>开户银行</label>
+						<input ng-model="payee.bank" type="text">
+					</md-input-container>
+				</div>
+			</div>
+			<div layout="row" class="padding-left-right-16">
+
+				<div flex>
+					<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin: 0">
+						<label>收款人地址</label>
+						<input ng-model="payee.supplierAddress" type="text">
+					</md-input-container>
+				</div>
+			</div>
+
+		</md-content>
+	</md-card>
+
+	<md-card>
+		<md-content>
+			<md-card-title style="border-bottom:1px solid #eee;padding:20px 16px 16px">
+				<md-card-title-text>
+					<span class="md-headline" style="font-size:16px;color:#777;">辅助信息</span>
+				</md-card-title-text>
+			</md-card-title>
+			<myupload></myupload>
+			<div layout="row" class="padding-left-right-16">
+
+				<div flex class="padding-right">
+					<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom: 0">
+						<label>预计核销日期</label>
+						<input ng-model="assistant.expectedVerificationDate" type="text">
+					</md-input-container>
+				</div>
+				<div flex>
+					<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom: 0">
+						<label>已核销金额</label>
+						<input ng-model="assistant.verificationMoney" type="text">
+					</md-input-container>
+				</div>
+			</div>
+			<div layout="row" class="padding-left-right-16">
+				<div flex class="padding-right">
+					<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin: 0">
+						<label>来源系统</label>
+						<input ng-model="assistant.fromSystem" type="text">
+					</md-input-container>
+				</div>
+				<div flex>
+					<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin: 0">
+						<label>来源单据链接</label>
+						<input ng-model="assistant.fromLink" type="text">
+					</md-input-container>
+				</div>
+			</div>
+			<div layout="row" class="padding-left-right-16">
+				<div flex class="padding-right">
+					<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin: 0">
+						<label>分摊项目</label>
+						<input ng-model="assistant.allocationProject" type="text">
+					</md-input-container>
+				</div>
+				<div flex>
+
+				</div>
+			</div>
+
+		</md-content>
+	</md-card>
+	<md-card>
+		<md-content>
+			<div layout="row" layout-align="end">
+				<md-button class="md-raised md-primary" aria-label="审单处理" ng-click="taken()">审单处理</md-button>
+			</div>
+		</md-content>
+	</md-card>
+</div>

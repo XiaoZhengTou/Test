@@ -1,0 +1,32 @@
+<div class="md-padding" ng-controller="payeeAccountCtrl">
+	<div style="float:left;" ng-repeat="item in payees">
+		<md-card style="width:250px;">
+			<md-card-content>
+				<p style="text-align: center;"><img src="{{item.bank_name|banks:item.bank_name}}"></p>
+				<p style="font-size:0.8em;color:#bfbfbf;">{{(item.type=="EMP"?"姓名":"公司名称")}}：{{item.receiver}}</p>
+				<p style="font-size:0.8em;color:#bfbfbf;">账号：{{item.bank_account}}</p>
+				<p style="font-size:0.8em;color:#bfbfbf;">开户行：{{item.bank_name}}</p>
+			</md-card-content>
+			<md-card-actions layout="row" layout-align="center center">
+				<md-button class="md-icon-button md-primary" ng-click="onSetDefaultAccount(item)" aria-label="Settings">
+					<i class="iconfont" style="color:#424242;">{{item.is_default=='Y'?'&#xe689;':'&#xe68a;'}}</i>
+				</md-button>
+				<md-button class="md-icon-button md-primary" ng-click="onDelete($event,item)" aria-label="Settings">
+					<i class="iconfont" style="color:#424242;">&#xe633;</i>
+				</md-button>
+				<md-button class="md-icon-button md-primary" ng-href="#/personalCenter/accountedit/{{item}}" aria-label="Settings">
+					<i class="iconfont" style="color:#424242;">&#xe61f;</i>
+				</md-button>
+
+			</md-card-actions>
+		</md-card>
+	</div>
+	<div style="float:left;color:#007AFF;">
+		<md-card style="width:250px;height:191px;" layout="column" layout-align="center center">
+			<md-button class="md-icon-button" ng-href="#/personalCenter/accountadd">
+				<i class="iconfont" style="font-size:2em;">&#xe61a;</i>
+			</md-button>
+			<p>新增银行卡</p>
+		</md-card>
+	</div>
+</div>

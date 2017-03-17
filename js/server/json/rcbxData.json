@@ -1,0 +1,81 @@
+{
+	"data": {
+		"fromDate": "2014-01-20",
+		"toDate": "2016-01-20",
+		"baoxiao": {
+			"yuejie": {
+				"title": "月结费用",
+				"catId": "0",
+				"total": "2",
+				"totalAmout": "5000",
+				"list": [{
+					"date": "2016-01-01",
+					"amount": "2000",
+					"address": "业务经理月结费用",
+					"catid": "0"
+				}, {
+					"date": "2016-02-01",
+					"amount": "3000",
+					"address": "业务经理月结费用",
+					"catid": "0"
+				}]
+			},
+			"geren": {
+				"title": "个人费用",
+				"catId": "1",
+				"total": "2",
+				"totalAmout": "1200",
+				"list": [{
+					"date": "2016-01-01",
+					"amount": "200",
+					"address": "交通补贴",
+					"catid": "1"
+				}, {
+					"date": "2016-02-01",
+					"amount": "1000",
+					"address": "话费补贴及餐饮补贴",
+					"catid": "1"
+				}]
+			},
+			"zhusu": {
+				"title": "住宿费用",
+				"catId": "2",
+				"total": "2",
+				"totalAmout": "3000",
+				"list": [{
+					"date": "2015-12-12",
+					"amount": "236.65",
+					"address": "广东省广州市喜来登大酒店",
+					"catid": "2"
+				}, {
+					"date": "2016-01-12",
+					"amount": "354.63",
+					"address": "广东省佛山市七天连锁酒店",
+					"catid": "2"
+				}, {
+					"date": "2016-04-12",
+					"amount": "400",
+					"address": "广东省东客来大酒店",
+					"catid": "2"
+				}]
+			},
+			"jipiao": {
+				"title": "机票费用",
+				"catId": "3",
+				"total": "2",
+				"totalAmout": "2000",
+				"list": [{
+					"date": "2015-12-12",
+					"amount": "800",
+					"address": "大中华航空 北京－广州",
+					"catid": "3"
+				}, {
+					"date": "2016-01-10",
+					"amount": "1200",
+					"address": "大中华航空 广州－北京",
+					"catid": "3"
+				}]
+			}
+		}
+	}
+}

@@ -1,0 +1,76 @@
+<md-dialog aria-label="我的收款方" style="min-width:700px;">
+	<form>
+		<!-- 默认表头开始 -->
+		<md-toolbar class="md-table-toolbar white" ng-hide="filter.show">
+			<div class="md-toolbar-tools">
+				<h2 class="md-title">选择入账单位</h2>
+				<div flex></div>
+				<md-button class="md-icon-button" ng-click="filter.show = true">
+					<md-icon class="iconfont bigicon">&#xe606;</md-icon>
+				</md-button>
+				<md-button class="md-icon-button" ng-click="cancel()">
+					<md-icon class="iconfont">&#xe634;</md-icon>
+				</md-button>
+			</div>
+		</md-toolbar>
+		<!-- 默认表头结束 -->
+		<!-- 搜索表头开始 -->
+		<md-toolbar class="md-table-toolbar white" ng-show="filter.show">
+			<div class="md-toolbar-tools">
+				<md-icon class="iconfont bigicon ml-margin-right">&#xe606;</md-icon>
+				<div flex layout="row" class="filterSearch">
+					<md-menu md-offset="0 -7">
+				          <span ng-click="$mdOpenMenu($event)">
+				            {{filter.value.name}}
+				            <i class="iconfont">&#xe60e;</i>
+				          </span>
+						<md-menu-content width="4">
+							<md-menu-item ng-repeat="x in filter.source">
+								<md-button ng-click="filter.setFilter(x)"> <span md-menu-align-target>
+				              </span>{{x.name}}</md-button>
+							</md-menu-item>
+						</md-menu-content>
+					</md-menu>
+					<input type="text" ng-model="searchText" ng-model-options="filter.options" placeholder="关键字……" flex>
+				</div>
+				<md-button class="md-icon-button" ng-click="removeFilter()">
+					<md-icon class="iconfont">&#xe634;</md-icon>
+				</md-button>
+			</div>
+		</md-toolbar>
+		<!-- 搜索表头结束 -->
+		<md-dialog-content>
+			<div ng-cloak>
+				<md-table-container>
+					<table md-table ng-model="selected" md-progress="promise" multiple="true"  md-row-select="true">
+						<thead md-head>
+							<tr md-row>
+								<th md-column>单位编码</th>
+								<th md-column>组织名称</th>
+								<th md-column>公司名称</th>
+								<th md-column md-numeric>是否有效</th>
+								<th md-column md-numeric>代理用户</th>
+							</tr>
+						</thead>
+						<tbody md-body>
+							<tr md-row ng-repeat="x in recevingData.data.info" class="selectRow" md-row md-select="x" md-select-id="company_id" md-auto-select="true">
+								<td md-cell>{{x.company_code}}</td>
+								<td md-cell>{{x.ou_name}}</td>
+								<td md-cell>{{x.company_name}}</td>
+								<td md-cell>{{x.enable_flag}}</td>
+								<td md-cell>{{x.proxy_user}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</md-table-container>
+				<!-- 表格导航开始 -->
+				<md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '，总条数：'}" md-limit="query.page_size" md-limit-options="[5, 10, 15]" md-page="query.page_number" md-total="{{total}}" md-on-paginate="getData" md-page-select></md-table-pagination>
+				<!-- 表格导航结束 -->
+			</div>
+		</md-dialog-content>
+		<md-dialog-actions>
+			<span flex></span>
+			<md-button class="md-raised md-primary ml-nomargin ml-button" aria-label="确定" ng-click="answer(selected)">确定</md-button>
+		</md-dialog-actions>
+	</form>
+</md-dialog>

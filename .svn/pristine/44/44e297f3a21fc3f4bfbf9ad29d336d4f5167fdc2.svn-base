@@ -1,0 +1,89 @@
+<md-dialog aria-label="新增预算" ng-cloak style="min-width: 50%" id="budgetcreatelist-dialog1-detail">
+    <form name="addbudgetcreatelist" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 style="color: white">新增预算</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="padding-top: 0px;padding-bottom: 0px">
+
+                <div class="demo-tab" style="padding: 25px 25px 0 25px; text-align: center;">
+
+                    <div layout-gt-sm="row">
+                        <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0px">
+                            <label>预算名称 (必填)</label>
+                            <input ng-model="budgetcreatelist.budget_name" type="text" required style="text-align: left;margin: 0px;">
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>预算模板 (必填)</label>
+                            <md-select ng-model="budgetcreatelist.budget_templet_id" style="text-align: left;margin: 0px;" required>
+                                <md-option ng-repeat="budgetlist in getbudgetlist" value="{{budgetlist.budget_templet_id}}">{{budgetlist.budget_templet_name}}</md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+
+                    <div layout-gt-sm="row">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>预算区间 (必填)</label>
+                            <md-select ng-model="budgetcreatelist.interval_id" style="text-align: left;margin: 0px;">
+                                <md-option ng-repeat="budgetInverval in getbudgetInverval" value="{{budgetInverval.interval_id}}">{{budgetInverval.interval_name}}</md-option>
+                            </md-select>
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>预算科目 (必填)</label>
+                            <md-select ng-model="budgetcreatelist.fee_type_tree_id" style="text-align: left;margin: 0px;" required>
+                                <md-option ng-repeat="budgetall in getbudgetall" value="{{budgetall.fee_type_tree_id}}">{{budgetall.fee_type_tree_name}}</md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+
+                    <div layout-gt-sm="row">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>预算组织 (必填)</label>
+                            <md-select ng-model="budgetcreatelist.busi_org_id" style="text-align: left;margin: 0px;" required>
+                                <md-option ng-repeat="busiorg in getbusiorg" value="{{busiorg.busi_org_id}}">{{busiorg.busi_org_name}}</md-option>
+                            </md-select>
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>币种 (必填)</label>
+                            <md-select ng-model="budgetcreatelist.currency_code" style="text-align: left;margin: 0px;" required>
+                                <md-option ng-repeat="currency in getcurrency" value="{{currency.currency_code}}">{{currency.currency_name}}</md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+
+                    <div layout-gt-sm="row">
+                        <md-datepicker ng-model="budgetcreatelist.valid_date" md-placeholder="生效时间" style="width: 100%;margin-left: -2.6%;text-align: left"></md-datepicker>
+                        <md-datepicker ng-model="budgetcreatelist.invalid_date" md-placeholder="失效时间" style="width: 100%;margin-left: -2.6%;text-align: left"></md-datepicker>
+                    </div>
+
+                </div>
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <span flex></span>
+            <md-button class="md-primary md-raised" ng-click="answer()"  style="color: white;float: right"
+                       ng-disabled="addbudgetcreatelist.$invalid" disabled="disabled">保存</md-button>
+
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+
+<style>
+    #budgetcreatelist-dialog1-detail .md-datepicker-input-container.md-datepicker-invalid {
+        border-bottom-color: rgb(224,224,224);
+    }
+    #budgetcreatelist-dialog1-detail .md-datepicker-input-container{
+        width: 93.9%;
+        margin-left: -2px;
+    }
+    #budgetcreatelist-dialog1-detail .md-datepicker-calendar-icon{
+        margin-bottom: -7px;
+    }
+</style>

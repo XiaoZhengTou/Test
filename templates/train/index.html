@@ -1,0 +1,44 @@
+<div ng-controller="trainCrl" class="airfare train">
+	<div ng-controller="trainHomeCrl"  layout="row" layout-align="center center" >
+		<md-card class="search" flex="50">
+			<md-card-title>
+	          <md-card-title-text>
+	            <span class="ml-text-center">火车票预订</span>
+	          </md-card-title-text>
+	     	 </md-card-title>
+	       <md-card-content>
+	         	<md-divider></md-divider>
+	         	<div layout="row"> 
+	         		<div flex="40" layout="row">
+							<span flex="20" class="ml-lineheight-48">出发</span>
+							<md-list-item flex="70" aria-label="fun" ng-click="fun()" drchoosestationsletter stationlist='city1' >
+								<span class="ml-color-21" ng-bind="city1.text"></span>
+								<md-divider></md-divider>
+							</md-list-item>
+					</div>
+					<md-list-item aria-label="changeCity" flex="20" ng-click="changeCity()" class="ml-text-center">
+							<i class="iconfont">&#xe66c;</i>
+					</md-list-item>
+					<div flex="40" flex-offset="5" layout="row">
+						<span flex="20" class="ml-lineheight-48">到达</span>
+						<md-list-item flex="70" ng-click="null "aria-label="city2" drchoosestationsletter stationlist='city2'>
+								<span class="ml-color-21" ng-bind="city2.text"></span>
+								<md-divider></md-divider>
+						</md-list-item>
+					</div>
+	         	</div>
+	         	<div layout="row" class="ml-marginT-20 dateSelect ml-textalign-left" >
+	         		<span flex="10" class="ml-lineheight-48">日期</span>
+	         		<div class="datepicker" flex="40" layout="row">
+						<md-datepicker ng-model="checkInDate" md-min-date="checkInMinDate" md-max-date="checkInMaxDate">
+						</md-datepicker>
+						<i><span class="ml-fontsize-12">{{checkInDate | amDateFormat:'ddd'}}</span></i>
+					</div>
+	         	</div>
+	        </md-card-content>
+	        <div class="ml-textalign-right bgcolor">
+	        	<md-button class="md-raised md-primary" ng-click="onGolist()">搜 索</md-button>
+	        </div>
+		</md-card>
+	</div>
+</div>

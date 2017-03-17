@@ -1,0 +1,45 @@
+<div layout="column" ng-controller="personalCtrl" ng-cloak class="personalCenter">
+	<div ng-controller="addPersonCtrl" class="addPerson">
+		<md-card class="ml-padding-20">
+			<form name="userForm" novalidate＝ "novalidate" ng-submit="save()">
+				<md-input-container class="md-block">
+					<input ng-model="addPerson.cnName" name="chName" required flex placeholder="中文/英文名至少填写一项">
+					<div ng-messages="userForm.chName.$error" role="alert" multiple>
+						<div ng-message="required" class="my-message">请输入名字</div>
+					</div>
+				</md-input-container>
+				<md-input-container class="md-block">
+					<input ng-model="addPerson.mobile" name="mobile" ng-pattern="/^1[34578]\d{9}$/" required flex placeholder="请输入手机号">
+					<div ng-messages="userForm.mobile.$error" role="alert" multiple>
+						<div ng-message="required" class="my-message">请输入手机号</div>
+						<div ng-message="pattern" class="my-message">请输入正确的手机号</div>
+					</div>
+				</md-input-container>
+				<div layout="row">
+					<div layout="column" flex="30">
+						<md-select placeholder="{{addPerson.certType | getCertType}}" class="ml-nomargin" ng-model="credentials" md-on-open="loadcCredentials()" flex="30">
+							<md-option ng-value="credentials.name" ng-model="credentials" ng-repeat="credentials in credentialss" ng-click="getCredentials(credentials)">
+								{{credentials.name}}
+							</md-option>
+						</md-select>
+						<!--<div class="last-left">填写非身份证号时需要填写性别和出生日期</div>-->
+					</div>
+					<div flex-offset="5" flex="65">
+						<md-input-container class="md-block credentials">
+							<input ng-model="addPerson.certNumber" name="certNumber" ng-pattern="/^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/" required type="text" ng-length="18" flex placeholder="请输入证件号">
+							<div ng-messages="userForm.certNumber.$error" role="alert" multiple>
+								<div ng-message="required" class="my-message">请输入身份证号</div>
+								<div ng-message="pattern" class="my-message">请输入正确的身份证号</div>
+							</div>
+						</md-input-container>
+					</div>
+				</div>
+			</form>
+			<div layout="row" layout-align="center center">
+				<md-button ng-click="go('/personalCenter/passengers')" class="md-raised">返回</md-button>
+				<md-button type="submit" ng-disabled="userForm.$invalid" ng-click="addPersonBaocun()" class="md-raised md-primary">保存</md-button>
+			</div>
+		</md-card>
+
+	</div>
+</div>

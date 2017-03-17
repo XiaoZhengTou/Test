@@ -1,0 +1,72 @@
+<md-dialog aria-label="编辑基础科目" ng-cloak style="min-width: 50%" id="costbasic-dialog1-detail">
+    <form name="addcostbasic1" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 style="color: white">编辑基础科目</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="padding-top: 0px;padding-bottom: 0px">
+
+                <div class="demo-tab" style="padding: 25px 25px 0 25px; text-align: center;">
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>科目名称 (必填)</label>
+                        <input ng-model="costbasic.fee_type_name" type="text" required>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>科目编码</label>
+                        <input ng-model="costbasic.fee_type_code" type="text">
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>释义</label>
+                        <input ng-model="costbasic.remark" type="text">
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm style="text-align: left;padding-top: 20px;padding-bottom: 20px;">
+                        <label>是否生效</label>
+                        <md-select ng-model="costbasic.enable_flag">
+                            <md-option value="Y">是</md-option>
+                            <md-option value="N">否</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm style="text-align: left;padding-top: 20px;padding-bottom: 20px;">
+                        <label>是否税金</label>
+                        <md-select ng-model="costbasic.is_tax">
+                            <md-option value="Y">是</md-option>
+                            <md-option value="N">否</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                </div>
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <span flex></span>
+            <md-button class="md-primary md-raised" ng-click="answer()"  style="color: white;float: right"
+                       ng-disabled="addcostbasic1.$invalid" disabled="disabled">确定</md-button>
+
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+
+<style>
+    #costbasic-dialog1-detail .md-datepicker-input-container.md-datepicker-invalid {
+        border-bottom-color: rgb(224,224,224);
+    }
+    #costbasic-dialog1-detail .md-datepicker-input-container{
+        width: 93.9%;
+        margin-left: -2px;
+    }
+    #costbasic-dialog1-detail .md-datepicker-calendar-icon{
+        margin-bottom: -7px;
+    }
+</style>

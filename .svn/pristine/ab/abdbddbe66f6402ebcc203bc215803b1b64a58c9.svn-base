@@ -1,0 +1,20 @@
+<md-bottom-sheet class="md-has-header" layout="column" ng-cloak>
+	<div layout="row" layout-align="start center" mideagroup ng-model="users">
+		<i class="iconfont" style="color:#42A5F5;">&#xe61a;</i>
+		<span class="md-padding">添加转办人</span>
+	</div>
+	<md-chips ng-model="users" name="职工" md-max-chips="5" readonly="true"  md-removable="true">
+		<md-chip-template>
+			<strong>
+				{{$chip.user_full_name}}
+			</strong>
+		</md-chip-template>
+	</md-chips>
+	<textarea ng-model="approveauditNote" maxlength="100" placeholder="留言" name="approveauditNote" rows="4" style="border-radius: 3px;width: 100%;border: 1px #d0d0d0 solid;">
+	</textarea>
+	<div layout="row" flex layout-algin="center center">
+		<md-button class="md-raised md-primary" ng-click="onHideBottomSheet()" flex style="color:#fff;">取消</md-button>
+
+		<md-button class="md-raised md-primary" ng-click="onCommiss($event)" flex style="color:#fff;">提交转办人</md-button>
+	</div>
+</md-bottom-sheet>

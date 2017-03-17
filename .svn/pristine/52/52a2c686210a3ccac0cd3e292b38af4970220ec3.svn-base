@@ -1,0 +1,131 @@
+<style>
+    .ob{
+        margin:0 10px;
+    }
+</style>
+    <div ng-controller="governFirstCtrl"  layout="row" layout-align="center center" >
+        <md-card flex class="ml-fontsize-14">
+            <div class="md-toolbar-tools">
+                <h3>
+                    <span>收款单</span>
+                </h3>
+            </div>
+            <div  ng-if="stateFlag">
+                <div layout="row" flex>
+                <md-input-container class="md-block ob" flex>
+                    <label>收款单编号</label>
+                    <input ng-model="query. receipt_code" required/>
+                </md-input-container>
+                <md-input-container class="md-block ob" flex>
+                    <label>收款单来源</label>
+                    <input ng-model="query.source_system_num" type="text" required/>
+                </md-input-container>
+            </div>
+            <div layout="row" flex>
+                <md-input-container class="md-block ob" flex>
+                    <label>单位名称</label>
+                    <input ng-model="query.company_id" required/>
+                </md-input-container>
+                <md-input-container class="md-block ob" flex>
+                    <label>收款人名称</label>
+                    <input ng-model="query.cash_receiver_name" drreceving="{'model':'receving'}"/>
+                </md-input-container>
+            </div>
+            <div layout="row" flex>
+                <md-input-container class="md-block ob" flex>
+                    <label>收款人银行账号名称</label>
+                    <input ng-model="query.cash_bank_open" required/>
+                </md-input-container>
+                <md-input-container class="md-block ob" flex>
+                    <label>收款人银行账号</label>
+                    <input ng-model="query.cash_bank_no" required/>
+                </md-input-container>
+            </div>
+            <div layout="row" flex>
+                <md-input-container class="md-block ob" flex>
+                    <label>付款人名称</label>
+                    <input ng-model="query. pay_by" required/>
+                </md-input-container>
+                <md-input-container class="md-block ob" flex>
+                    <label>结算方式</label>
+                    <md-select ng-model="query.settlte_way">
+                        <md-option value="null">转账汇款</md-option>
+                        <md-option value="null1">电汇</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+
+            <div layout="row" flex>
+                <md-input-container class="md-block ob" flex>
+                    <label>收款类型</label>
+                    <md-select ng-model="type_code">
+                        <md-option value="shouhuankuan">收还款</md-option>
+                        <md-option value="tuikuanchongfu">退款重付</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container class="md-block ob" flex>
+                    <label>经办人</label>
+                    <input/>
+                </md-input-container>
+            </div>
+            <div layout="row" flex>
+                <md-input-container class="md-block ob" flex>
+                    <label>业务描述</label>
+                    <input/>
+                </md-input-container>
+            </div>
+          </div>
+
+            <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+                <md-button class="md-raised  md-primary" ng-if="stateFlag" ng-click="state()">收起</md-button>
+                <md-button class="md-raised  md-primary"  ng-if="!stateFlag"  ng-click="state()">展开</md-button>
+                <md-button class="md-raised md-primary">查询</md-button>
+            </section>
+
+            <div class="md-toolbar-tools">
+                <h3>
+                    <span>关联借款单</span>
+                </h3>
+            </div>
+            <md-table-container>
+                <table md-table  multiple ng-model="selected" md-progress="promise">
+                    <thead md-head md-order="query.order" md-on-reorder="getDesserts">
+                    <tr md-row>
+                        <th md-column md-order-by="nameToLower"><span>借款单号</span></th>
+                        <th md-column md-numeric md-order-by="calories.value"><span>需还款金额</span></th>
+                        <th md-column md-numeric>已还款金额</th>
+                        <th md-column md-numeric>本次还款金额</th>
+                        <th md-column md-numeric>本次多还金额</th>
+                        <th md-column md-numeric>币种编码</th>
+                        <th md-column md-numeric>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody md-body>
+                    <tr md-row md-select="dessert" md-select-id="name" md-auto-select ng-repeat="dessert in shoukuandan.data.sslmrepayhs">
+                        <td md-cell>{{dessert.attrs.company_id}}</td>
+                        <td md-cell>{{dessert.attrs.need_repay_amount}}</td>
+                        <td md-cell>{{dessert.attrs.already_repay_amount}}</td>
+                        <td md-cell>{{dessert.attrs.repay_amount}}</td>
+                        <td md-cell>{{dessert.attrs.repay_amount_more}}</td>
+                        <td md-cell>a</td>
+                        <td md-cell>
+                            <md-button class="md-icon-button" aria-label="删除" ng-click="onDeleteOne()">
+                                <md-icon><i class="iconfont">&#xe633;</i></md-icon>
+                            </md-button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </md-table-container>
+
+            <md-table-pagination md-limit="query.limit" md-limit-options="[5, 10, 15]" md-page="query.page" md-total="{{desserts.count}}" md-on-paginate="getDesserts" md-page-select></md-table-pagination>
+            <div layout="row">
+                <div flex>
+                </div>
+                <div class="ml-textalign-right" flex>
+                    <md-button class="md-raised md-primary">保存</md-button>
+                </div>
+            </div>
+        </md-card>
+    </div>
+</div>

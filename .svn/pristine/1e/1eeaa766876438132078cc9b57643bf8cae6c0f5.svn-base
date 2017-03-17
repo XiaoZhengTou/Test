@@ -1,0 +1,53 @@
+<div ng-controller="personalCtrl" layout="column" ng-cloak class="personalCenter">
+	<div ng-controller="tuipiaoDetailCtrl" class="tuipiaoDetail">
+		<md-card class="ml-padding-20">
+			<div class="blue-line"><span></span>退票详情</div>
+			<div class="ml-margintb-20 ml-textalign-center">
+				<div layout="row" class="ml-color-73 detail-main-mid-top ml-lineheight-36 ml-fontsize-14">
+					<div flex>退票人姓名</div>
+					<div flex>类型</div>
+					<div flex>票价</div>
+					<div flex>基建</div>
+					<div flex>燃油</div>
+					<div flex>保险金额</div>
+					<div flex>保险应退金额</div>
+					<div flex>退票扣费</div>
+					<div flex>应退金额</div>
+				</div>
+				<div layout="row" class="ml-marginT-20">
+					<div flex>
+						<div>潘丹丹</div>
+						<div>(241325252552242)</div>
+					</div>
+					<div flex>成人</div>
+					<div flex>¥987</div>
+					<div flex>¥50</div>
+					<div flex>¥50</div>
+					<div flex>¥50</div>
+					<div flex>¥50</div>
+					<div flex>¥50</div>
+					<div flex class="ml-color-red">¥520</div>
+				</div>
+			</div>
+			<div layout="row" flex="40">
+				<div class="ml-color-73 tuipiaoRe">退票原因：</div>
+				<md-select placeholder="非自愿退票" class="ml-nomargin"  ng-model="credentials" md-on-open="loadcCredentials()" flex="30">
+				    <md-option  ng-value="credentials.name" ng-model="credentials" ng-repeat="credentials in credentialss" ng-click="getCredentials(credentials)" >
+				                <!--{{credentials.name}}-->
+				    </md-option>
+				</md-select>
+			</div>
+			<div layout="row" flex="50" class="ml-margintb-20">
+				<div class="ml-color-73">应退金额：<em>¥520</em></div>
+				<div class="ml-color-73 tuipiao-marginl">申请退票时间：<em>2016-05-05</em><em>15:05:01</em></div>
+			</div>
+			<div layout="row" flex="50">
+				<div class="ml-color-73">实际退款：<em>¥520</em></div>
+				<div class="ml-color-73 tuipiao-marginl">实际退款时间：<em>2016-05-05</em><em>15:05:01</em></div>
+			</div>
+			
+		</md-card>
+		
+		
+	</div>
+</div>

@@ -1,0 +1,142 @@
+<div ng-controller="fsCtrl" class="jiehuankuan fukuan home" ng-cloak >
+<div ng-controller="fsHomeCtrl ">
+  	<!-- 筛选面板开始 -->
+  	<md-card class="ml-padding-pc ">
+  	<div class="basefilter ">
+	    <div layout="row ">
+	      <div flex class="ml-padding-right ">
+	        <md-input-container class="md-block md-cyan-theme md-input-invalid ">
+        		<label>业务描述</label>
+        		<input ng-model="query.query_param.reason_desc" type="text ">
+      		</md-input-container>
+	      </div>
+	      <div flex class="ml-padding-right ">
+	        <md-input-container class="md-block md-cyan-theme md-input-invalid ">
+        		<label>流程状态</label>
+	            <md-select ng-model="query.query_param.order_status">
+	              <md-option ng-repeat="x in filter.orderStates" ng-value="x.id">
+	                {{x.name}}
+	              </md-option>
+	            </md-select>
+      		</md-input-container>
+	      </div>
+	      <div flex class="ml-padding-right ">
+	        <md-input-container class="md-block md-cyan-theme md-input-invalid ">
+        		<label>单号</label>
+        		<input ng-model="query.query_param.pay_info_code" type="text ">
+      		</md-input-container>
+	      </div>
+	      <div flex class="ml-padding-right ">
+	        <md-input-container class="md-block md-cyan-theme md-input-invalid ">
+        		<label>币种</label>
+	            <md-select ng-model="query.query_param.currency_code">
+	              <md-option ng-repeat="x in searchFilter.currency" ng-value="x.currency_code">
+	                {{x.currency_name}}
+	              </md-option>
+	            </md-select>
+      		</md-input-container>
+	      </div>
+	    </div>
+	    <div layout="row ">
+	       <div flex class="ml-padding-right" layout="row">
+	          <md-input-container class="md-block md-cyan-theme md-input-invalid " flex>
+		        <label>金额范围（最小值）</label>
+		        <input ng-model="query.query_param.lower_amount" type="number">
+		     </md-input-container>
+		   </div>
+		   <div flex class="ml-padding-right" layout="row">
+	          <md-input-container class="md-block md-cyan-theme md-input-invalid " flex>
+		        <label>金额范围（最大值）</label>
+		        <input ng-model="query.query_param.higher_amount" type="number">
+		      </md-input-container>
+	      </div>
+	      <div flex class="ml-padding-right ml-padding-top" ng-style="{'margin-top':'16px'}">
+		        <md-datepicker ng-model="query.query_param.creation_date" md-placeholder="创建时间"></md-datepicker>
+	      </div>
+	      <div flex>
+	      		<md-button class="md-raised md-primary ml-nomargin ml-button " aria-label="立即搜索 " ng-click="getData() ">立即搜索</md-button>
+	        	<md-button class="md-raised ml-nomargin ml-button " aria-label="立即搜索 " ng-click="clearFilter() ">清空条件</md-button>
+	      </div>
+	    </div>
+  	</div>
+  	</md-card>
+	<!-- 筛选面板结束 -->
+	<!-- 筛选面板结束 -->
+	<md-card class="ml-margin-top ">
+	<!-- 表格开始 -->
+	<md-toolbar class="md-table-toolbar md-default " style="background-color: white;border-bottom: 1px rgba(0,0,0,0.12) solid;">
+		<div class="md-toolbar-tools " style="padding: 0">
+			<div style="background-color: #2196f3;">
+                <h2 class="md-title" style="color: black;font-size: 16px;margin-left: 4px;padding-left: 20px;background-color: white;">我的费用分摊</h2>
+            </div>
+		</div>
+	</md-toolbar>
+	<md-table-container>
+	  <table md-table multiple  md-progress="promise">
+	    <thead md-head md-order="query.order_by" md-on-reorder="getData ">
+	    <tr md-row>
+	      <th md-column md-order-by="apportion_code">
+	      	单号
+	      </th>
+	      <th md-column md-numeric>
+	      	业务描述
+	      </th>
+	      <th md-column md-numeric md-order-by="approve_amount" >
+	      	金额
+	      </th>
+	      <th md-column md-numeric>
+	      	币种
+	      </th>
+	      <th md-column md-numeric>
+	      	流程状态
+	      </th>
+	      <th md-column md-numeric md-order-by="creation_date" md-desc>
+	      	创建时间
+	      </th>
+	      <th md-column md-numeric >
+	      	类型
+	      </th>
+	      <th md-column md-numeric >
+	      	操作
+	      </th>
+	    </tr>
+	    </thead>
+	    <tbody md-body>
+	    	
+	    	
+	      <tr md-row ng-repeat="x in data | orderBy: fee_sharing_id ">
+	      	<td md-cell ng-click="go('/feeSharing/see/'+x.apportion_id+'', '单据查看') ">{{x.apportion_code}}</td>
+	      	<td md-cell>{{x.reason_desc}}</td>
+	      	<td md-cell>{{x.apportion_amount | currency:''}}</td>
+	      	<td md-cell>{{x.currency_name}}</td>
+	      	<!--<td md-cell ng-repeat="statu in filter.orderStates" ng-if="statu.id==x.order_status">
+	      		{{statu.name}}
+	      	</td>-->
+	      	<td md-cell ng-bind-html="x.order_status|order_status"></td>
+
+	      	<td md-cell>{{x.creation_date | date:"yyyy-MM-dd"}}</td>
+	      	<td md-cell ng-repeat="type in filter.orderType" ng-if="type.id==x.order_type">{{type.name}}</td>
+	      	<td md-cell>
+				<a ng-click="go('/feeSharing/add/'+x.apportion_id+'', '') " style="cursor: pointer;color: blue">编辑</a>
+				<a ng-click="del($event,x.apportion_id)" style="cursor: pointer;color: blue">删除</a>
+	      	</td>
+	      </tr>
+	    </tbody>
+	  </table>
+	</md-table-container>
+	<!-- 表格导航开始 -->
+	<md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '，总条数：'} " md-limit="query.page_size " md-limit-options="[5, 10, 15] " md-page="query.page_number " md-total="{{total}} " md-on-paginate="getData" md-page-select></md-table-pagination>
+	<!-- 表格导航结束 -->
+	<!-- 表格结束 -->
+	</md-card>
+	<!-- 新增借款开始 -->
+    <md-button aria-label="menu " class="md-fab ml-bottom-fab " ng-click="go( '/feeSharing/add/add', '单据申请') ">
+    	<md-tooltip md-direction="left ">
+           单据申请
+        </md-tooltip>
+        <md-icon class="iconfont ">&#xe631;</md-icon>
+    </md-button>
+	<!-- 新增借款结束 -->
+
+</div>
+</div>

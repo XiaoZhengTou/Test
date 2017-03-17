@@ -1,0 +1,90 @@
+<div ng-controller="telAirfareCtrl" layout="column" ng-cloak class="telAirfare">
+	<div ng-controller="telAirfareIndexCtrl" class="telAirfareIndex">
+		<md-card>
+			<div class="ml-padding-20">
+				<div layout="row">
+					<div flex class="ml-padding-right">
+						<md-input-container class="md-block md-cyan-theme md-input-invalid">
+							<label>填单人</label>
+							<input ng-model="query.order_code" type="text">
+						</md-input-container>
+					</div>
+					<div flex="35" class="ml-padding-right riqi">
+						<!--<label class="ml-fontsize-12 ml-color-73">日期</label>-->
+						<div layout="row">
+							<md-datepicker flex class="ml-border-e" ng-model="query.apply_date_before" md-placeholder="开始时间"></md-datepicker>
+							<md-datepicker flex class="ml-border-e" ng-model="query.apply_date_after" md-placeholder="结束时间"></md-datepicker>
+						</div>
+					</div>
+					<div flex class="ml-padding-right" layout="row">
+						<md-input-container class="md-block md-cyan-theme md-input-invalid">
+							<label>金额(最小值)</label>
+							<input ng-model="query.order_code" type="text">
+						</md-input-container>
+						<md-input-container class="md-block md-cyan-theme md-input-invalid">
+							<label>金额(最大值)</label>
+							<input ng-model="query.order_code" type="text">
+						</md-input-container>
+					</div>
+
+				</div>
+				<div layout="row">
+					<div class="ml-padding-right" flex="33">
+						<md-input-container class="md-block md-cyan-theme md-input-invalid">
+							<label>订单状态</label>
+							<md-select ng-model="query.order_status">
+								<md-option value="null">所有</md-option>
+								<md-option value="DRAFT">草稿</md-option>
+								<md-option value="SUBMITED">待审批</md-option>
+								<md-option value="AUDITED">已审批</md-option>
+								<md-option value="DISABLED">已作废</md-option>
+							</md-select>
+						</md-input-container>
+					</div>
+				</div>
+				<div layout="row" layout-align="center center" layout-wrap>
+					<md-button class="md-raised md-primary ml-button" aria-label="查询" ng-click="getMyFeeData()">查询</md-button>
+					<md-button class="md-raised ml-button" aria-label="清空" ng-click="clearData()">清空</md-button>
+				</div>
+			</div>
+			<md-divider></md-divider>
+			<md-table-container>
+				<table md-table md-row-select multiple ng-model="selected" md-progress="promise" mdSelect="selected">
+					<thead md-head md-order="query.order" md-on-reorder="getDesserts">
+						<tr md-row>
+							<th md-column><span>订单号</span></th>
+							<th md-column md-numeric><span>EA单号</span></th>
+							<th md-column md-numeric>填单人</th>
+							<th md-column md-numeric>联系人</th>
+							<th md-column md-numeric>联系方式</th>
+							<th md-column md-numeric>金额</th>
+							<th md-column md-numeric>币种</th>
+							<th md-column md-numeric>申请日期</th>
+							<th md-column md-numeric>订单状态</th>
+						</tr>
+					</thead>
+					<tbody md-body>
+						<tr md-row md-select="airfareList" md-select-id="name" md-auto-select ng-repeat="airfareList in airfareLists" ng-dblclick="goAirfareDetail(airfareList)">
+							<td md-cell>{{airfareList.a}}</td>
+							<td md-cell>{{airfareList.b}})</td>
+							<td md-cell>{{airfareList.c}}</td>
+							<td md-cell>{{airfareList.d}}</td>
+							<td md-cell>{{airfareList.e}}</td>
+							<td md-cell>¥{{airfareList.f}}</td>
+							<td md-cell>{{airfareList.g}}</td>
+							<td md-cell>{{airfareList.h}}</td>
+							<td md-cell>{{airfareList.i}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</md-table-container>
+			<md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '，总条数：'}" md-limit="query.page_size" md-limit-options="[5, 10, 15]" md-page="query.page_number" md-total="{{FeePage.totalRow}}" md-on-paginate="MyFeeData" md-page-select></md-table-pagination>
+			<md-button class="md-fab md-accent md-hue-1" style="position:fixed;bottom:100px;right:100px;padding:0;" aria-label="新增" ng-click="goAddAirfare()">
+				<i class="iconfont" style="color:#fff;font-size:20px;">&#xe631;</i>
+				<md-tooltip md-direction="left">
+					新增机票
+				</md-tooltip>
+			</md-button>
+		</md-card>
+	</div>
+</div>

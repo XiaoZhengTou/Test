@@ -1,0 +1,196 @@
+<div ng-controller="addCtrl as vm" layout="column" ng-cloak class="md-inline-form" style="padding-bottom:60px;">
+   
+   <md-card>
+   		<div layout="row" layout-align="center center">
+   			<md-button ng-click="upload()" class="md-raised md-primary">本地上传</md-button>
+   		</div>
+   		
+   		<upload handle="fileHandle()" only="true" drop="false" files="data"></upload>
+   		
+   		<md-divider ></md-divider>
+	        
+	    <div style="height:410px;overflow:hidden;" layout="column" layout-align="center center">
+	    	<image-cropper image-url="imageUrl"
+	          width="480"
+	          height="300"
+	          show-controls="{{showControls}}"
+	          fit-on-init="false"
+	          center-on-init="true"
+	          api="cropperApi"
+	          crop-callback="updateResultImage"
+	          action-labels="myButtonLabels">
+		    </image-cropper>
+	    </div>
+    
+   </md-card>
+
+   <md-card>
+    <md-card-header>
+      <md-card-header-text layout="row" layout="start center">
+        <span class="md-title">发票信息</span>
+        <md-button class="md-raised md-primary" ng-click="discernInvoice()" style="margin-top:0;margin-bottom:0;min-height:30px;line-height:30px;">OCR识别</md-button>
+        <span flex></span>
+      </md-card-header-text>
+    </md-card-header>
+    <md-divider ></md-divider>
+    <md-card-content>
+    	<div layout="row">
+    		<div layout="row" flex="33">
+				<md-input-container flex class="md-block ml-nomargin">
+		        	<label>发票号码</label>
+		        	<input ng-model="invoice.invoice_num" />
+			    </md-input-container>
+			</div>
+			<div layout="row" flex="33">
+				<md-input-container flex class="md-block ml-nomargin">
+		        	<label>发票代码</label>
+		        	<input ng-model="invoice.invoice_code" />
+			    </md-input-container>
+			</div>
+			<div layout="row" flex="33">
+			  	<md-input-container flex class="md-block ml-nomargin">
+		        	<label>开票日期</label>
+		        	<input ng-model="invoice.invoice_date" />
+			    </md-input-container>
+			</div>
+    	</div>
+    	
+    	<div layout="row">
+    		<div layout="row" flex="33">
+				<md-input-container flex class="md-block ml-nomargin">
+		        	<label>金额合计</label>
+		        	<input ng-model="invoice.amount_sum" />
+			    </md-input-container>
+			</div>
+			<div layout="row" flex="33">
+				<md-input-container flex class="md-block ml-nomargin">
+		        	<label>税率</label>
+		        	<input ng-model="invoice.tax_rate" />
+			    </md-input-container>
+			</div>
+			<div layout="row" flex="33">
+	        	<md-input-container flex class="md-block ml-nomargin">
+		        	<label>税额</label>
+		        	<input ng-model="invoice.tax_amount" />
+			    </md-input-container>
+			</div>
+    	</div>
+    	
+    	<div layout="row">
+    		<div layout="row" flex="33">
+				<md-input-container flex class="md-block ml-nomargin">
+		        	<label>价税合计</label>
+		        	<input ng-model="invoice.total_amount" />
+			    </md-input-container>
+			</div>
+			<div layout="row" flex="33">
+				<md-input-container flex class="md-block ml-nomargin">
+		        	<label>发票类别</label>
+		        	<input ng-model="invoice.invoice_type" />
+			    </md-input-container>
+			</div>
+			<div layout="row" flex="33">
+	        	<md-input-container flex class="md-block ml-nomargin">
+		        	<label>发票联类别</label>
+		        	<input ng-model="invoice.code" />
+			    </md-input-container>
+			</div>
+    	</div>
+    	
+    	<div layout="row">
+    		<div layout="row" flex="33">
+				<md-input-container flex class="md-block ml-nomargin">
+		        	<label>购买方名称</label>
+		        	<input ng-model="invoice.purchase_unit_name" />
+			    </md-input-container>
+			</div>
+			<div layout="row" flex="33">
+				<md-input-container flex class="md-block ml-nomargin">
+		        	<label>购买方纳税人识别号</label>
+		        	<input ng-model="invoice.purchase_unit_tax_num" />
+			    </md-input-container>
+			</div>
+			<div layout="row" flex="33">
+	        	<md-input-container flex class="md-block ml-nomargin">
+		        	<label>购买方地址</label>
+		        	<input ng-model="invoice.purchase_unit_address" />
+			    </md-input-container>
+			</div>
+    	</div>
+    	
+    	<div layout="row">
+    		<div layout="row" flex="33">
+	        	<md-input-container flex class="md-block ml-nomargin">
+		        	<label>购买方电话</label>
+		        	<input ng-model="invoice.purchase_unit_tel" />
+			    </md-input-container>
+			</div>
+			
+    		<div layout="row" flex="33">
+				<md-input-container flex class="md-block ml-nomargin" flex>
+		        	<label>购买方开户行</label>
+		        	<input ng-model="invoice.purchase_unit_bank" />
+			    </md-input-container>
+			</div>
+			
+			<div layout="row" flex="33">
+				<md-input-container flex class="md-block ml-nomargin" flex>
+		        	<label>购买方银行账号</label>
+		        	<input ng-model="invoice.purchase_unit_account" />
+			    </md-input-container>
+			</div>
+    	</div>
+    	
+    	<div layout="row">
+    		<div layout="row" flex="33">
+				<md-input-container flex class="md-block ml-nomargin">
+		        	<label>销售方名称</label>
+		        	<input ng-model="invoice.sales_unit_name" />
+			    </md-input-container>
+			</div>
+			<div layout="row" flex="33">
+				<md-input-container flex class="md-block ml-nomargin">
+		        	<label>销售方纳税人识别号</label>
+		        	<input ng-model="invoice.sales_unit_tax_num" />
+			    </md-input-container>
+			</div>
+			<div layout="row" flex="33">
+	        	<md-input-container flex class="md-block ml-nomargin">
+		        	<label>销售方地址</label>
+		        	<input ng-model="invoice.sales_unit_address" />
+			    </md-input-container>
+			</div>
+    	</div>
+    	
+    	<div layout="row">
+    		<div layout="row" flex="33">
+	        	<md-input-container flex class="md-block ml-nomargin">
+		        	<label>销售方电话</label>
+		        	<input ng-model="invoice.sales_unit_tel" />
+			    </md-input-container>
+			</div>
+    		<div layout="row" flex="33">
+				<md-input-container flex class="md-block ml-nomargin" flex>
+		        	<label>销售方开户行</label>
+		        	<input ng-model="invoice.sales_unit_bank" />
+			    </md-input-container>
+			</div>
+			<div layout="row" flex="33">
+				<md-input-container flex class="md-block ml-nomargin" flex>
+		        	<label>销售方银行账号</label>
+		        	<input ng-model="invoice.sales_unit_account" />
+			    </md-input-container>
+			</div>
+    	</div>
+    	
+    </md-card-content>
+  </md-card>
+  
+  
+  <div class="ml-bottom-bar slideInUp animated" layout="row" layout-sm="column" layout-align="start center" layout-wrap>
+  	  <md-button class="md-raised md-primary"  ng-disabled="isExist" ng-click="save()">保存</md-button>
+  	  <md-button class="md-raised md-primary" ng-disabled="!isExist" ng-click="delete()">删除</md-button>
+	  <md-button class="md-raised md-primary" ng-click="checkInvoice()">税局查验</md-button>
+	  <md-button class="md-raised md-primary">异常检测</md-button>
+  </div>
+</div>

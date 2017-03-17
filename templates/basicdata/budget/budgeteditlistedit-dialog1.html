@@ -1,0 +1,67 @@
+<md-dialog aria-label="批量修改属性" ng-cloak style="min-width: 50%" id="budgeteditlistedit-dialog1-detail">
+    <form name="addbudgeteditlistedit" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 style="color: white">批量修改属性</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="padding-top: 0px;padding-bottom: 0px">
+
+                <div class="demo-tab" style="padding: 25px 25px 0 25px; text-align: center;">
+
+                    <md-input-container class="md-block" flex-gt-sm style="text-align: left">
+                        <label>金额控制方式(必选)</label>
+                        <md-select ng-model="budgeteditlistedit.control_amount_type" required>
+                            <md-option value="control">金额严控</md-option>
+                            <md-option value="alarm">金额提醒</md-option>
+                            <md-option value="notControl">金额不控</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm style="text-align: left">
+                        <label>进度控制方式(必选)</label>
+                        <md-select ng-model="budgeteditlistedit.control_process_type" required>
+                            <md-option value="control">进度严控</md-option>
+                            <md-option value="alarm">进度提醒</md-option>
+                            <md-option value="notControl">进度不控</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm style="text-align: left">
+                        <label>是否滚动(必选)</label>
+                        <md-select ng-model="budgeteditlistedit.roll_flag" required>
+                            <md-option value="Y">是</md-option>
+                            <md-option value="N">否</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                </div>
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <span flex></span>
+            <md-button class="md-primary md-raised" ng-click="answer()"  style="color: white;float: right"
+                       ng-disabled="addbudgeteditlistedit.$invalid" disabled="disabled">确定</md-button>
+
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+
+<style>
+    /*#budgeteditlistedit-dialog1-detail .md-datepicker-input-container.md-datepicker-invalid {*/
+        /*border-bottom-color: rgb(224,224,224);*/
+    /*}*/
+    #budgeteditlistedit-dialog1-detail .md-datepicker-input-container{
+        width: 93.9%;
+        margin-left: -2px;
+    }
+    #budgeteditlistedit-dialog1-detail .md-datepicker-calendar-icon{
+        margin-bottom: -7px;
+    }
+</style>

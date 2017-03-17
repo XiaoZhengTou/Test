@@ -1,0 +1,338 @@
+<style>
+	.md-table-pagination>.buttons>.label+.md-button.md-icon-button {
+		margin-left: 0;
+	}
+</style>
+<div ng-controller="tasksCtrl" ng-cloak class="md-inline-form">
+	<md-card>
+
+		<div layout="row" class="padding-left-right-16">
+			<div flex class="padding-right">
+				<md-input-container class="md-block md-cyan-theme md-input-invalid">
+					<label>扫码自动提取</label>
+					<input ng-model="query.code" type="text">
+				</md-input-container>
+			</div>
+			<div flex class="padding-right">
+				<md-button class="md-raised md-primary " aria-label="提取" ng-click="taken()">提取</md-button>
+			</div>
+			<div flex></div>
+		</div>
+
+	</md-card>
+
+	<div layout="row">
+		<div class="leftContent" flex>
+			<md-card>
+
+				<md-tabs md-dynamic-height md-border-bottom>
+					<md-tab label="当前待办" md-on-select="getCurrent()">
+
+						<div class="padding-20">
+							<div layout="row">
+								<div flex class="padding-right">
+									<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin: 0">
+										<label>单据编号</label>
+										<input ng-model="current.billCode" type="text">
+									</md-input-container>
+								</div>
+								<div flex class="padding-right">
+									<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin: 0">
+										<label>业务描述</label>
+										<input ng-model="current.billDesc" type="text">
+									</md-input-container>
+								</div>
+								<div flex>
+									<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin: 0">
+										<label>紧急程度</label>
+										<md-select ng-model="current.emergentLevelState">
+											<md-option ng-repeat="y in current.filter.emergentLevel" value="{{y.id}}">
+												{{y.name}}
+											</md-option>
+										</md-select>
+									</md-input-container>
+								</div>
+							</div>
+							<div layout="row">
+								<div flex class="padding-right" layout="row">
+									<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin: 0">
+										<label>开始金额</label>
+										<input ng-model="current.startAmount" type="number">
+									</md-input-container>
+									<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin: 0">
+										<label>结束金额</label>
+										<input ng-model="current.endAmount" type="number">
+									</md-input-container>
+								</div>
+
+								<div flex class="padding-right">
+									<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin: 0">
+										<label>币种</label>
+										<md-select ng-model="current.currency">
+											<md-option ng-repeat="x in current.filter.currencys" value="{{x.shortName}}">
+												{{x.name}}
+											</md-option>
+										</md-select>
+									</md-input-container>
+								</div>
+								<div flex>
+									<md-button class="md-raised md-primary" aria-label="查询" ng-click="searchCurrentTasks()">查询</md-button>
+								</div>
+							</div>
+
+						</div>
+						<md-divider></md-divider>
+						<md-table-container>
+							<!--<table data-md-table data-md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" data-ng-model="selected" md-progress="promise">-->
+							<table data-md-table data-ng-model="current_selected" md-progress="current_promise" class="ml-text-nowrap">
+								<thead md-head md-on-reorder="current_getDesserts">
+									<tr md-row>
+										<th md-column>紧急度</th>
+										<th md-column>单据编号</th>
+										<th md-column>类型</th>
+										<th md-column>任务组</th>
+										<th md-column>组别</th>
+										<th md-column>到达时间</th>
+										<th md-column>停留时间</th>
+									</tr>
+								</thead>
+								<tbody md-body>
+									<!--<tr md-row md-select="item" md-select-id="budget_templet_id" ng-repeat="item in feeapplylist.data.datalist" md-auto-select="options.autoSelect">-->
+									<tr md-row ng-repeat="item in current.appdata" ng-click="goList()">
+										<td md-cell>{{item.emergent_level}}</td>
+										<td md-cell>{{item.bill_code}}</td>
+										<td md-cell>{{item.bill_type_code}}</td>
+										<td md-cell>{{item.current_group_name}}</td>
+										<td md-cell>{{item.poolStage}}</td>
+										<td md-cell>{{item.node_start_time}}</td>
+										<td md-cell>{{item.in_time}}</td>
+									</tr>
+
+								</tbody>
+							</table>
+
+						</md-table-container>
+						<md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '总条数：'}" md-limit="current.limit" md-limit-options="[5, 10, 15]" md-page="current.page_number" md-total="{{current.total}}" md-on-paginate="current_getDesserts" md-page-select></md-table-pagination>
+					</md-tab>
+					<md-tab label="本月已办" md-on-select="getComplete()">
+
+						<div class="padding-20">
+							<div layout="row">
+								<div flex class="padding-right">
+									<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin: 0">
+										<label>单据编号</label>
+										<input ng-model="complete.billCode" type="text">
+									</md-input-container>
+								</div>
+								<div flex class="padding-right">
+									<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin: 0">
+										<label>业务描述</label>
+										<input ng-model="complete.billDesc" type="text">
+									</md-input-container>
+								</div>
+								<div flex>
+									<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin: 0">
+										<label>紧急程度</label>
+										<md-select ng-model="complete.emergentLevelState">
+											<md-option ng-repeat="y in complete.filter.emergentLevel" value="{{y.id}}">
+												{{y.name}}
+											</md-option>
+										</md-select>
+									</md-input-container>
+								</div>
+							</div>
+							<div layout="row">
+								<div flex class="padding-right" layout="row">
+									<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin: 0">
+										<label>开始金额</label>
+										<input ng-model="complete.startAmount" type="number">
+									</md-input-container>
+									<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin: 0">
+										<label>结束金额</label>
+										<input ng-model="complete.endAmount" type="number">
+									</md-input-container>
+								</div>
+
+								<div flex class="padding-right">
+									<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin: 0">
+										<label>币种</label>
+										<md-select ng-model="complete.currency">
+											<md-option ng-repeat="x in complete.filter.currencys" value="{{x.shortName}}">
+												{{x.name}}
+											</md-option>
+										</md-select>
+									</md-input-container>
+								</div>
+								<div flex>
+									<md-button class="md-raised md-primary" aria-label="查询" ng-click="searchCompleteTasks()">查询</md-button>
+								</div>
+							</div>
+
+						</div>
+						<md-divider></md-divider>
+						<md-table-container>
+							<!--<table data-md-table data-md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" data-ng-model="selected" md-progress="promise">-->
+							<table data-md-table data-ng-model="complete_selected" md-progress="complete_promise" class="ml-text-nowrap">
+								<thead md-head md-on-reorder="complete_getDesserts">
+									<tr md-row>
+										<th md-column>紧急度</th>
+										<th md-column>单据编号</th>
+										<th md-column>类型</th>
+										<th md-column>任务组</th>
+										<th md-column>组别</th>
+										<th md-column>到达时间</th>
+										<th md-column>停留时间</th>
+									</tr>
+								</thead>
+								<tbody md-body>
+									<!--<tr md-row md-select="item" md-select-id="budget_templet_id" ng-repeat="item in feeapplylist.data.datalist" md-auto-select="options.autoSelect">-->
+									<tr md-row ng-repeat="item in complete.appdata" ng-click="goList()">
+										<td md-cell>{{item.emergent_level}}</td>
+										<td md-cell>{{item.bill_code}}</td>
+										<td md-cell>{{item.bill_type_code}}</td>
+										<td md-cell>{{item.current_group_name}}</td>
+										<td md-cell>{{item.poolStage}}</td>
+										<td md-cell>{{item.node_start_time}}</td>
+										<td md-cell>{{item.in_time}}</td>
+									</tr>
+
+								</tbody>
+							</table>
+
+						</md-table-container>
+						<md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '总条数：'}" md-limit="complete.limit" md-limit-options="[5, 10, 15]" md-page="complete.page_number" md-total="{{complete.total}}" md-on-paginate="complete_getDesserts" md-page-select></md-table-pagination>
+
+					</md-tab>
+
+					<md-tab label="挂起" md-on-select="getSuspend()">
+						<div class="padding-20">
+							<div layout="row">
+								<div flex class="padding-right">
+									<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin: 0">
+										<label>单据编号</label>
+										<input ng-model="suspend.billCode" type="text">
+									</md-input-container>
+								</div>
+								<div flex class="padding-right">
+									<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin: 0">
+										<label>业务描述</label>
+										<input ng-model="suspend.billDesc" type="text">
+									</md-input-container>
+								</div>
+								<div flex>
+									<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin: 0">
+										<label>紧急程度</label>
+										<md-select ng-model="suspend.emergentLevelState">
+											<md-option ng-repeat="y in suspend.filter.emergentLevel" value="{{y.id}}">
+												{{y.name}}
+											</md-option>
+										</md-select>
+									</md-input-container>
+								</div>
+							</div>
+							<div layout="row">
+								<div flex class="padding-right" layout="row">
+									<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin: 0">
+										<label>开始金额</label>
+										<input ng-model="suspend.startAmount" type="number">
+									</md-input-container>
+									<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin: 0">
+										<label>结束金额</label>
+										<input ng-model="suspend.endAmount" type="number">
+									</md-input-container>
+								</div>
+
+								<div flex class="padding-right">
+									<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin: 0">
+										<label>币种</label>
+										<md-select ng-model="suspend.currency">
+											<md-option ng-repeat="x in suspend.filter.currencys" value="{{x.shortName}}">
+												{{x.name}}
+											</md-option>
+										</md-select>
+									</md-input-container>
+								</div>
+								<div flex>
+									<md-button class="md-raised md-primary" aria-label="查询" ng-click="searchSuspendTasks()">查询</md-button>
+								</div>
+							</div>
+
+						</div>
+						<md-divider></md-divider>
+						<md-table-container>
+							<!--<table data-md-table data-md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" data-ng-model="selected" md-progress="promise">-->
+							<table data-md-table data-ng-model="suspend_selected" md-progress="suspend_promise" class="ml-text-nowrap">
+								<thead md-head md-on-reorder="suspend_getDesserts">
+									<tr md-row>
+										<th md-column>紧急度</th>
+										<th md-column>单据编号</th>
+										<th md-column>类型</th>
+										<th md-column>任务组</th>
+										<th md-column>组别</th>
+										<th md-column>到达时间</th>
+										<th md-column>停留时间</th>
+									</tr>
+								</thead>
+								<tbody md-body>
+									<!--<tr md-row md-select="item" md-select-id="budget_templet_id" ng-repeat="item in feeapplylist.data.datalist" md-auto-select="options.autoSelect">-->
+									<tr md-row ng-repeat="item in suspend.appdata" ng-click="goList()">
+										<td md-cell>{{item.emergent_level}}</td>
+										<td md-cell>{{item.bill_code}}</td>
+										<td md-cell>{{item.bill_type_code}}</td>
+										<td md-cell>{{item.current_group_name}}</td>
+										<td md-cell>{{item.poolStage}}</td>
+										<td md-cell>{{item.node_start_time}}</td>
+										<td md-cell>{{item.in_time}}</td>
+									</tr>
+
+								</tbody>
+							</table>
+
+						</md-table-container>
+						<md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '总条数：'}" md-limit="suspend.limit" md-limit-options="[5, 10, 15]" md-page="suspend.page_number" md-total="{{suspend.total}}" md-on-paginate="suspend_getDesserts" md-page-select></md-table-pagination>
+
+					</md-tab>
+
+				</md-tabs>
+
+			</md-card>
+		</div>
+		<div class="rightContent" flex="25">
+			<md-card>
+
+				<md-card-title style="border-bottom:1px solid #eee;padding:20px 16px 16px">
+					<md-card-title-text>
+						<span class="md-headline" style="font-size:16px;color:#777;">组内待派单任务</span>
+					</md-card-title-text>
+				</md-card-title>
+				<myupload></myupload>
+				<md-table-container>
+					<!--<table data-md-table data-md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" data-ng-model="selected" md-progress="promise">-->
+					<table data-md-table data-ng-model="assigned_selected" md-progress="assigned_promise" class="ml-text-nowrap">
+						<thead md-head md-on-reorder="assigned_getDesserts">
+
+							<tr md-row>
+								<th md-column>紧急度&nbsp;</th>
+								<th md-column>单据编号</th>
+							</tr>
+						</thead>
+						<tbody md-body>
+							<!--<tr md-row md-select="item" md-select-id="budget_templet_id" ng-repeat="item in feeapplylist.data.datalist" md-auto-select="options.autoSelect">-->
+							<tr md-row ng-repeat="item in assigned.appdata" ng-click="toAssigned()">
+								<td md-cell>{{item.emergent_level}}</td>
+								<td md-cell>{{item.bill_code}}</td>
+
+							</tr>
+
+						</tbody>
+					</table>
+
+				</md-table-container>
+				<md-table-pagination md-label="{of: '总条数：'}" md-limit="assigned.limit" md-page="assigned.page_number" md-total="{{assigned.total}}" md-on-paginate="assigned_getDesserts"></md-table-pagination>
+
+			</md-card>
+
+		</div>
+	</div>
+</div>
+</div>

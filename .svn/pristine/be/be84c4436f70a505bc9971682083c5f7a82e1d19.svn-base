@@ -1,0 +1,259 @@
+<div ng-controller="personalCtrl" ng-cloak class="airfare">
+	<div ng-controller="gaiqianListCtrl" class="list ml-color-73">
+		<div class="list-all">
+			<div class="list-top" layout="row">
+				<md-list class="ml-textalign-left ml-nopadding" layout="row" flex="55">
+					<div flex="45" class="ml-border-e  ml-paddingl-10" layout="row">
+						<span flex="10">从</span>
+						<md-list-item flex="90" aria-label="selectCity" class="ml-lineheight-18">
+							<span class="ml-color-21">{{ticket.orgCity}}({{ticket.orgCityCode}})</span>
+							<i class="iconfont right-icon">&#xe62a;</i>
+						</md-list-item>
+					</div>
+					<md-list-item flex="10" class="ml-marginlr-10">
+						<i class="iconfont mid-icon">&#xe68e;</i>
+					</md-list-item>
+					<div flex="45" class="ml-border-e  ml-paddingl-10" layout="row">
+						<span flex="10">到</span>
+						<md-list-item flex="90" aria-label="selectCity" class="ml-lineheight-18">
+							<span class="ml-color-21">{{ticket.desCity}}({{ticket.desCityCode}})</span>
+							<i class="iconfont right-icon">&#xe62a;</i>
+						</md-list-item>
+					</div>
+				</md-list>
+				<div layout="row" flex="35" flex-offset="5" class="dateSelect">
+					<span flex="25">出发日期</span>
+					<div class="datepicker" flex="70" layout="row" layout="row">
+						<md-datepicker class="ml-border-e" ng-model="checkInDate" md-min-date="checkInMinDate" ng-change="sousuo()">
+						</md-datepicker>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="list-main ml-marginT-20 ml-border-e">
+			<md-tabs md-dynamic-height>
+				<md-tab>
+					<md-tab-label class="list-main-label">
+						<div class="list-label-in">
+							<div class="ml-color-red">{{checkInDate |date:'MM-dd'}}</div>
+							<div>{{checkInDate | amDateFormat:'ddd'}}</div>
+						</div>
+					</md-tab-label>
+					<md-tab-body>
+						<div class="list-main-top ml-marginT-20" layout="row">
+							<md-select class="ml-border-e ml-bgcolor-white ml-paddinglr-10 ml-marginlr-10" placeholder="起飞时间" ng-model="selectTime" md-on-open="loadSelectTime()" flex="20">
+								<md-option ng-click="buxian()">
+									不限
+								</md-option>
+								<md-option ng-value="selectTime" ng-repeat="selectTime in selectTimes" ng-click="getSelectTime(selectTime)">
+									{{selectTime.name}}
+								</md-option>
+							</md-select>
+							<md-select class="ml-border-e ml-bgcolor-white ml-paddinglr-10 ml-marginlr-10" placeholder="航空公司" ng-model="planeCon" md-on-open="loadSelectplane()" flex="20" flex-offset="5">
+								<md-option ng-click="buxian()">
+									不限
+								</md-option>
+								<md-option ng-value="planeCon" ng-repeat="planeCon in airlineName" ng-click="getPlane(planeCon,$index)">
+									{{planeCon}}
+								</md-option>
+							</md-select>
+							<!--<div class="ml-marginlr-10 zhifei">
+								<md-checkbox class="ml-nomargin" ng-model="zhifei" aria-label="zhifei">
+									直飞
+								</md-checkbox>
+							</div>-->
+						</div>
+						<div class="ml-marginT-20">
+							<div class="ml-paddinglr-10">
+								<md-divider></md-divider>
+								<div layout="row" class="fight-list-border ml-textalign-center ml-fontsize-13 ml-lineheight-18">
+									<div flex>航班信息</div>
+									<div flex layout="row">
+										<span flex class="ml-textalign-right">
+											起飞时间
+										</span>
+										<span flex layout="column" class="startTime ml-textalign-left">
+											<i class="iconfont" ng-class="{'startTime-color' : startTimeZaoActive==true}" ng-click="startTimeZao(reverse)">&#xe60f;</i>
+											<i class="iconfont startTime-wan" ng-class="{'startTime-color' : startTimeWanActive==true}" ng-click="startTimeWan(reverse)">&#xe60e;</i>
+										</span>
+									</div>
+									<div flex>旅行总时长</div>
+									<div flex>降落时间</div>
+									<!--<div flex>准点率/平均延时</div>
+										<div flex>推荐</div>-->
+									<div flex layout="row">
+										<span flex class="ml-textalign-right">
+											最低报价
+										</span>
+										<span flex layout="column" class="startTime ml-textalign-left">
+											<i class="iconfont" ng-class="{'startTime-color' : priceGaoActive==true}" ng-click="priceGao(reverse)">&#xe60f;</i>
+											<i class="iconfont startTime-wan" ng-class="{'startTime-color' : priceDiActive==true}" ng-click="priceDi(reverse)">&#xe60e;</i>
+										</span>
+									</div>
+								</div>
+								<md-divider></md-divider>
+							</div>
+							<div ng-if="listShow==false" layout="row" layout-sm="column" layout-align="space-around">
+								<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+							</div>
+							<div ng-if="listShow==true" layout="column" class="list-main-content ml-textalign-center ml-fontsize-14 ml-lineheight-24" ng-repeat="fightList in airfareList.lists">
+								<input type="checkbox" id="to{{$index}}" class="passCheck" checked>
+								<div layout="row" class="ml-padding-10 passTogger">
+									<div flex>
+										<div class="ml-color-21">{{fightList.airlineName}}</div>
+										<div>{{fightList.flightNo}}<span>{{fightList.planeMode}}</span></div>
+									</div>
+									<div flex>
+										<div class="ml-color-21">{{fightList.depTime}}</div>
+										<div>{{fightList.orgAirport}}</div>
+									</div>
+									<div flex>
+										<div class="ml-fontsize-13"><i ng-if="((fightList.flightTime)/60 | parseInt)>0">{{(fightList.flightTime)/60 | parseInt}}小时</i><i ng-if="((fightList.flightTime)%60)>0">{{(fightList.flightTime)%60}}分钟</i></div>
+										<md-divider></md-divider>
+										<div ng-if="stopCity" class="ml-color-blue">停<span>{{stopCity}}</span></div>
+									</div>
+									<div flex>
+										<div class="ml-color-21">{{fightList.arrTime}}</div>
+										<div>{{fightList.desAirport}}</div>
+									</div>
+									<!--<div flex>
+											<div>88%</div>
+											<div>9分钟</div>
+										</div>
+										<div flex>
+											<div class="ml-color-21">南通优选</div>
+											<div>¥1148</div>
+										</div>-->
+									<div flex>
+										<div class="ml-color-blue">¥{{fightList.allLowest}}</div>
+										<md-button class="md-raised md-primary ml-nomargin" ng-click="onShow(fightList)">
+											<label flex="5" class="passIcon iconfont" for="to{{$index}}">
+													订票
+												</label>
+										</md-button>
+									</div>
+								</div>
+								<div class="list-main-open passBottom" id="{{fightList.segmentID}}">
+
+									<md-tabs md-dynamic-height>
+										<md-tab ng-if="fightList.economies.length>0">
+											<md-tab-label>
+												<div class="list-label-in">
+													<div>经济舱</div>
+													<div><span class="ml-color-red">¥{{fightList.economiesLowest}}</span>起</div>
+												</div>
+											</md-tab-label>
+											<md-tab-body class=" ml-border-e" id="{{economie.flightId}}">
+												<div ng-repeat="economie in fightList.economies" class="yudingList ml-textalign-center ml-lineheight-48 ml-paddinglr-10" layout="column">
+													<!--<div class="list-main-open-top">
+															<span>机建/燃油：¥{{fightList.airPortFee}}/¥{{fightList.oilFee}}</span> <span ng-if="fightList.meal == true">有餐食</span>
+														</div>-->
+													<div layout="row">
+														<div flex>{{economie.vendorNumber | getVendor}}</div>
+														<div flex>{{economie.cabin}}</div>
+														<div flex class="ml-color-blue">
+															<span class="tgshuoming" ng-mouseenter="tuigaiShow(economie,$event)" ng-mouseleave="tuigaiHide()">退改签</span>
+														</div>
+														<div flex class="ml-color-red">¥{{economie.ticketPrice}}</div>
+														<div flex="20">
+															<md-button ng-click="yuDingEconomie(fightList,economie)" class="md-raised md-primary ml-nomargin">
+																改签
+															</md-button>
+														</div>
+													</div>
+													<md-divider></md-divider>
+												</div>
+											</md-tab-body>
+										</md-tab>
+										<md-tab ng-if="fightList.business.length>0">
+											<md-tab-label>
+												<div class="list-label-in">
+													<div>商务舱</div>
+													<div><span class="ml-color-red">¥{{fightList.businessLowest}}</span>起</div>
+												</div>
+											</md-tab-label>
+											<md-tab-body class=" ml-border-e" id="{{busines.flightId}}">
+												<div ng-repeat="busines in fightList.business" class="yudingList ml-textalign-center ml-lineheight-48 ml-paddinglr-10" layout="column">
+													<div layout="row">
+														<div flex>{{busines.vendorNumber | getVendor}}</div>
+														<div flex>{{busines.cabin}}</div>
+														<div flex class="ml-color-blue">
+															<span class="tgshuoming" ng-mouseenter="tuigaiShow(busines,$event)" ng-mouseleave="tuigaiHide()">退改签</span>
+														</div>
+														<div flex class="ml-color-red">¥{{busines.ticketPrice}}</div>
+														<div flex="20">
+															<md-button ng-click="yuDingBusines(fightList,busines)" class="md-raised md-primary ml-nomargin">
+																改签
+															</md-button>
+														</div>
+													</div>
+													<md-divider></md-divider>
+												</div>
+											</md-tab-body>
+										</md-tab>
+										<md-tab ng-if="fightList.heads.length>0">
+											<md-tab-label>
+												<div class="list-label-in">
+													<div>头等舱</div>
+													<div><span class="ml-color-red">¥{{fightList.headsLowest}}</span>起</div>
+												</div>
+											</md-tab-label>
+											<md-tab-body class=" ml-border-e" id="{{head.flightId}}">
+												<div ng-repeat="head in fightList.heads" class="yudingList ml-textalign-center ml-lineheight-48 ml-paddinglr-10" layout="column">
+													<div layout="row">
+														<div flex>{{head.vendorNumber | getVendor}}</div>
+														<div flex>{{head.cabin}}</div>
+														<div flex class="ml-color-blue">
+															<span class="tgshuoming" ng-mouseenter="tuigaiShow(head,$event)" ng-mouseleave="tuigaiHide()">退改签</span>
+														</div>
+														<div flex class="ml-color-red">¥{{head.ticketPrice}}</div>
+														<div flex="20">
+															<md-button ng-click="yuDingHead(fightList,head)" class="md-raised md-primary ml-nomargin">
+																预定
+															</md-button>
+														</div>
+
+													</div>
+													<md-divider></md-divider>
+												</div>
+											</md-tab-body>
+										</md-tab>
+										<md-tab ng-if="fightList.officials.length>0">
+											<md-tab-label>
+												<div class="list-label-in">
+													<div>公务舱</div>
+													<div><span class="ml-color-red">¥{{fightList.officialsLowest}}</span>起</div>
+												</div>
+											</md-tab-label>
+											<md-tab-body class=" ml-border-e" id="{{officials.flightId}}">
+												<div ng-repeat="official in fightList.officials" class="yudingList ml-textalign-center ml-lineheight-48 ml-paddinglr-10" layout="column">
+													<div layout="row">
+														<div flex>{{official.vendorNumber | getVendor}}</div>
+														<div flex>{{official.cabin}}</div>
+														<div flex class="ml-color-blue">
+															<span class="tgshuoming" ng-mouseenter="tuigaiShow(official,$event)" ng-mouseleave="tuigaiHide()">退改签</span>
+														</div>
+														<div flex class="ml-color-red">¥{{official.ticketPrice}}</div>
+														<div flex="20">
+															<md-button ng-click="yuDingOfficial(fightList,official)" class="md-raised md-primary ml-nomargin">
+																预定
+															</md-button>
+														</div>
+													</div>
+													<md-divider></md-divider>
+												</div>
+											</md-tab-body>
+										</md-tab>
+									</md-tabs>
+								</div>
+							</div>
+						</div>
+					</md-tab-body>
+				</md-tab>
+			</md-tabs>
+		</div>
+		<div id="refundChangeInfo">
+			<md-card class="ml-color-yellow ml-padding-10 ml-fontsize-13" ng-if="refundChange==true">{{refundChangeInfo?refundChangeInfo:'暂无信息'}}</md-card>
+		</div>
+	</div>
+</div>

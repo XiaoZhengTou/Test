@@ -1,0 +1,129 @@
+<div ng-cloak="" class="tabsdemoDynamicHeight" ng-app="MyApp"  >
+    <>
+        <md-tabs md-dynamic-height="" md-border-bottom="">
+            <div ng-controller="zhibanController1">
+            <md-tab label="值班排班">
+                <md-content class="md-padding">
+                    <md-table-container >
+                        <table md-table  multiple ng-model="selected1" md-progress="promise">
+                            <thead md-head md-order="query.order" md-on-reorder="getDesserts">
+                            <tr md-row>
+                                <th md-column md-order-by="nameToLower"><span>年度</span></th>
+                                <th md-column md-numeric md-order-by="calories.value"><span>值班人</span></th>
+                                <th md-column md-numeric>工作日期</th>
+                                <th md-column md-numeric>上班开始时间</th>
+                                <th md-column md-numeric>上班结束时间</th>
+                                <th md-column md-numeric>操作</th>
+
+                            </tr>
+                            </thead>
+                            <tbody md-body>
+                            <tr md-row md-select="item" md-select-id="name" md-auto-select ng-repeat="item in zhibanlist.data.data_list">
+                                <td md-cell>{{item.sche_year}}</td>
+
+                                <td md-cell md-numeric>
+                                    <input ng-model="item.user_name" type="text" style="width:80px;border:0px"/>
+                                </td>
+                                <!--<td md-cell>{{item.currency_name}}</td>-->
+                                <td md-cell>{{item.work_date}}</td>
+                                <td md-cell ng-bind="item.start_work_time"></td>
+                                <!--<td md-cell>{{item.order_status|order_status}}</td>
+                                <td md-cell>{{item.order_type|applytype}}</td>-->
+                                <td md-cell>{{item.end_work_time}}</td>
+                                <td md-cell>
+                                    <!--md-button  class="md-primary" ng-click="edit($event,item)"-->
+                                    <a ng-click="onDelete($event)" style="cursor: pointer;color: blue">编辑</a>
+                                    <a ng-click="onDelete($event)" style="cursor: pointer;color: blue">新增</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </md-table-container>
+
+                    <md-table-pagination md-limit="query.limit" md-limit-options="[5, 10, 15]" md-page="query.page" md-total="{{desserts.count}}" md-on-paginate="getDesserts" md-page-select></md-table-pagination>
+                </md-content>
+            </md-tab>
+            </div>
+            <div ng-controller="zhibanController2">
+            <md-tab label="请假">
+                <md-content class="md-padding" >
+                    <table md-table  multiple ng-model="selected2" md-progress="promise" >
+                        <thead md-head md-order="query.order" md-on-reorder="getDesserts">
+                        <tr md-row>
+                            <th md-column md-order-by="nameToLower"><span>年度</span></th>
+                            <th md-column md-numeric md-order-by="calories.value"><span>请假人</span></th>
+                            <th md-column md-numeric>请假日期</th>
+                            <th md-column md-numeric>请假开始时间</th>
+                            <th md-column md-numeric>请假结束时间</th>
+                            <th md-column md-numeric>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody md-body>
+                        <tr md-row md-select="item" md-select-id="name" md-auto-select ng-repeat="item in zhibanlist.data.data_list">
+                            <td md-cell>{{item.sche_year}}</td>
+                            <td md-cell md-numeric>
+                                <input ng-model="item.$$hashKey" type="text" style="width:80px;border:0px"/>
+                            </td>
+                            <!--<td md-cell>{{item.currency_name}}</td>-->
+                            <td md-cell>{{item.work_date}}</td>
+                            <td md-cell>{{item.start_date}}</td>
+                            <!--<td md-cell>{{item.order_status|order_status}}</td>
+                            <td md-cell>{{item.order_type|applytype}}</td>-->
+                            <td md-cell>{{item.end_date}}</td>
+                            <td md-cell>
+                                <a ng-click="onDelete($event)" style="cursor: pointer;color: blue">编辑</a>
+                                <a ng-click="onDelete($event)" style="cursor: pointer;color: blue">新增</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <md-table-pagination md-limit="query.limit" md-limit-options="[5, 10, 15]" md-page="query.page" md-total="{{desserts.count}}" md-on-paginate="getDesserts" md-page-select></md-table-pagination>
+                </md-content>
+            </md-tab>
+          </div>
+            <div ng-controller="zhibanController3">
+            <md-tab label="例外">
+                <md-content class="md-padding">
+                    <table md-table  multiple ng-model="selected3" md-progress="promise">
+                        <thead md-head md-order="query.order" md-on-reorder="getDesserts">
+                        <tr md-row>
+                            <th md-column md-order-by="nameToLower"><span>年度</span></th>
+                            <th md-column md-numeric md-order-by="calories.value"><span>类型</span></th>
+                            <th md-column md-numeric>说明</th>
+                            <th md-column md-numeric>日期</th>
+                            <th md-column md-numeric>上班开始时间</th>
+                            <th md-column md-numeric>上班结束时间</th>
+                            <th md-column md-numeric>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody md-body>
+                        <tr md-row md-select="item" md-select-id="name" md-auto-select ng-repeat="item in zhibanlist.data.data_list">
+                            <td md-cell>{{item.sche_year}}</td>
+                            <td md-cell>{{item.type}}</td>
+                            <!--<td md-cell>{{item.currency_name}}</td>-->
+                            <td md-cell>{{item.name}}</td>
+                            <td md-cell>{{item.work_date}}</td>
+                            <!--<td md-cell>{{item.order_status|order_status}}</td>
+                            <td md-cell>{{item.order_type|applytype}}</td>-->
+                            <td md-cell>{{item.start_work_time}}</td>
+                            <td md-cell>{{item.end_work_time}}</td>
+                            <td md-cell>
+                                <a ng-click="onDelete($event)" style="cursor: pointer;color: blue">编辑</a>
+                                <a ng-click="onDelete($event)" style="cursor: pointer;color: blue">新增</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <md-table-pagination md-limit="query.limit" md-limit-options="[5, 10, 15]" md-page="query.page" md-total="{{desserts.count}}" md-on-paginate="getDesserts" md-page-select></md-table-pagination>
+                </md-content>
+            </md-tab>
+            </div>
+        </md-tabs>
+    </md-content>
+</div>
+
+
+<!--
+Copyright 2016 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that can be foundin the LICENSE file at http://material.angularjs.org/HEAD/license.
+-->

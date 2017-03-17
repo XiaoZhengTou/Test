@@ -1,0 +1,166 @@
+<div ng-controller="taskManCtrl" class="task airfare">
+	<div ng-controller="ordersListCtrl">
+		<md-card layout="row" layout-wrap>
+				<div class="md-toolbar-tools" flex='100'>
+			      	<h3>
+			       		<span>派单规则</span>
+			      	</h3> 
+			    </div> 
+			    <md-divider></md-divider>
+					<md-input-container class="md-block ml-marginlr-10" flex="45">
+			            <label>规则名称</label>
+			            <input>
+					</md-input-container>
+					<md-input-container class="md-block ml-marginlr-10" flex="45">
+			            <label>优先级</label>
+			            <md-select ng-model="priorty">
+							<md-option ng-repeat="x in priortys" value="{{x}}">{{x}}</md-option>
+						</md-select>
+					</md-input-container>
+				<md-input-container class="md-block ml-marginlr-10" flex="95">
+			            <label>项目描述</label>
+			            <input>
+				</md-input-container>
+					<md-input-container class="md-block ml-marginlr-10" flex="45">
+			            <label>创建人</label>
+			            <input>
+					</md-input-container>
+					<md-input-container class="md-block ml-marginlr-10" flex="45">
+			            <label>创建日期</label>
+			            <input ng-model="newTime" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+			        </md-input-container>
+					<md-input-container class="md-block ml-marginlr-10" flex="45">
+			            <label>状态</label>
+			            <md-select ng-model="listState">
+							<md-option value="qiyong">启用</md-option>
+						</md-select>
+					</md-input-container>
+			</md-card>
+			<md-card ng-hide="!deployFlag">
+				<md-list layout="row" class="ml-bgcolor-blue ml-textalign-center md-whiteframe-2dp" >
+					<span flex="30">维度</span>
+					<span flex="40">固定值</span>
+					<span flex="15">开始区间</span>
+					<span flex="15">截止区间</span>
+				</md-list>
+				<md-list  class="ml-marginT-20">
+					<div layout="row" ng-repeat="ar in arr" class="ml-marginT-20">
+						<span flex="30">
+							<md-input-container class="md-block ml-marginlr-10" flex>
+					            <label>请选择</label>
+					            <md-select ng-model="ar.selectedType" ng-change="changed(ar)">
+									<md-option ng-repeat="x in listSel" value="{{x}}">{{x}}</md-option>
+								</md-select>
+							</md-input-container>
+						</span>
+						<span flex="40">
+							<!--单据类型-->
+							<md-input-container  ng-hide="!ar.order_type_flag" flex class="md-block ml-marginlr-10 " flex="30">
+					            <label>单据类型</label>
+					            <md-select ng-model="ar.order_type" ng-change="orderTypedChange(ar)">
+									<md-option ng-repeat="x in bils" value="{{x.bill_type_id}}"  >{{x.bill_type_name}}</md-option>
+								</md-select>
+							</md-input-container>
+							<!--模块-->
+							<md-input-container  ng-hide="!ar.module_type_flag" flex class="md-block ml-marginlr-10 " flex="30">
+					            <label>模块</label>
+					            <input type="text" ng-change="moduleIdsChange(ar)" ng-model="ar.module_type" />
+							</md-input-container>
+							
+							<!--预算组织-->
+							<md-input-container  ng-hide="!ar.busi_org_flag" flex class="md-block ml-marginlr-10 " flex="30">
+					            <label>预算组织</label>
+					            <md-select ng-model="ar.busi_org" ng-change="busiOrgChange(ar)">
+									<md-option ng-repeat="x in busis" value="{{x.busi_org_id}}"  >{{x.busi_org_name}}</md-option>
+								</md-select>
+							</md-input-container>
+							<!--核算组织-->
+							<md-input-container  ng-hide="!ar.comp_flag" flex class="md-block ml-marginlr-10 " flex="30">
+					            <label>核算组织</label>
+					            <md-select ng-model="ar.comp" ng-change="compChange(ar)">
+									<md-option ng-repeat="x in comps" value="{{x.company_id}}"  >{{x.company_name}}</md-option>
+								</md-select>
+							</md-input-container>
+							
+							<!--活动事项-->
+							<md-input-container  ng-hide="!ar.eco_flag" flex class="md-block ml-marginlr-10 " flex="30">
+					            <label>活动事项</label>
+					            <md-select ng-model="ar.eco" ng-change="ecoChange(ar)">
+									<md-option ng-repeat="x in ecos" value="{{x.fee_type_id}}"  >{{x.fee_type_name}}</md-option>
+								</md-select>
+							</md-input-container>
+							
+							<!--基础科目-->
+							<md-input-container  ng-hide="!ar.bill_flag" flex class="md-block ml-marginlr-10 " flex="30">
+					            <label>基础科目</label>
+					            <md-select ng-model="ar.bill" ng-change="billChange(ar)">
+									<md-option ng-repeat="x in bills" value="{{x.fee_type_id}}"  >{{x.fee_type_name}}</md-option>
+								</md-select>
+							</md-input-container>
+							
+							<!-- 行政组织 -->
+							<md-input-container  ng-hide="!ar.orgId_flag" flex class="md-block ml-marginlr-10 " flex="30">
+					            <label>行政组织</label>
+					            <input type="text" ng-change="orgIdChange(ar)" ng-model="ar.orgId" />
+							</md-input-container>
+							
+							<!-- 来源系统 -->
+							<md-input-container  ng-hide="!ar.sourceId_flag" flex class="md-block ml-marginlr-10 " flex="30">
+					            <label>来源系统</label>
+					            <input type="text" ng-change="sourceIdChange(ar)" ng-model="ar.sourceId" />
+							</md-input-container>
+							
+							<!-- 业务类型 -->
+							<md-input-container  ng-hide="!ar.biz_type_flag" flex class="md-block ml-marginlr-10 " flex="30">
+					            <label>业务类型</label>
+					            <input type="text" ng-change="bizTypeChange(ar)" ng-model="ar.biz_type" />
+							</md-input-container>
+							
+							
+							<!--<md-input-container  ng-hide="!ar.orgId_flag" flex class="md-block ml-marginlr-10 " flex="30">
+					            <label>业务类型</label>
+					            <input type="text" ng-change="orgIdChange(ar)" ng-model="ar.orgId" />
+							</md-input-container>-->
+						</span>
+						<span flex="15">
+							<!--<span ng-hide="!ar.selTime">
+								<div flex >
+					       			 <md-datepicker ng-model="start_finished_time" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
+					    </div>
+							</span>-->
+							<span ng-hide="!ar.selMoney">
+								<md-input-container class="md-block ml-marginlr-10" flex>
+						            <label></label>
+						            <input ng-model="ar.startValue" ng-change="startValueChange(ar)">
+								</md-input-container>
+							</span>
+						</span>
+						<span flex="15">
+							<!--<span ng-hide="!ar.selTime">
+								<div flex >
+							        <md-datepicker ng-model="start_finished_time"  md-hide-icons="calendar" md-open-on-focus></md-datepicker>
+							    </div>
+							</span>-->
+							<span ng-hide="!ar.selMoney">
+								<md-input-container class="md-block ml-marginlr-10" flex>
+						            <label></label>
+						            <input ng-model="ar.endValue" ng-change="endValueChange(ar)">
+								</md-input-container>
+							</span>
+						</span>
+					</div>
+				</md-list>
+				<md-button aria-label="menu" class="md-fab ml-bottom-fab" ng-click="addData()">
+			    		<md-tooltip md-direction="left">
+			          	新增维度
+			        </md-tooltip>
+			        <md-icon class="iconfont">&#xe631;</md-icon>
+		   		</md-button>
+		   		<md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '总条数：'}" md-limit="viewData.data.pageSize" md-limit-options="[5, 10, 15]" md-page="viewData.data.pageNumber" md-total="{{viewData.data.totalRow}}" md-on-paginate="getData" md-page-select></md-table-pagination>
+			</md-card>
+			<div class="ml-text-right">
+		        <md-button class="md-raised md-primary" ng-click="save()">保存</md-button>
+		       	<md-button class="md-raised md-primary">删除</md-button>
+			</div>
+	</div>
+</div>

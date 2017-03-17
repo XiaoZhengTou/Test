@@ -1,0 +1,116 @@
+<div ng-controller="inspectionCtrl" ng-cloak class="md-inline-form">
+	<md-card>
+		<md-content>
+			<md-card-title style="border-bottom:1px solid #eee;padding:20px 16px 16px;">
+				<md-card-title-text>
+					<span class="md-headline" style="font-size:16px;color:#777;">付款关联发票</span>
+				</md-card-title-text>
+			</md-card-title>
+			<myupload></myupload>
+			<md-table-container>
+				<table table md-table ng-model="selected" md-progress="promise" class="ml-text-nowrap">
+					<thead md-head md-on-reorder="getDesserts">
+						<tr md-row>
+							<th md-column>代码&nbsp;&nbsp;</th>
+							<th md-column>一级类型</th>
+							<th md-column>二级类型</th>
+							<th md-column>处理建议</th>
+							<th md-column>标准意见</th>
+						</tr>
+					</thead>
+					<tbody md-body>
+
+						<tr md-row ng-repeat="item in queryTable.appdata" md-auto-select="options.autoSelect">
+							<td md-cell>{{item.code}}</td>
+							<td md-cell>{{item.firstType}}</td>
+							<td md-cell>{{item.secondType}}</td>
+							<td md-cell>{{item.suggestion}}</td>
+							<td md-cell>{{item.comments}}</td>
+
+						</tr>
+						<tr>
+							<td colspan="6">
+								<md-button class="md-fab md-accent md-hue-1" style="float: right;" ng-click="add($event)">
+									<h1 style="margin-top: 0px;font-size: 36px;color: white">+</h1>
+								</md-button>
+							</td>
+						</tr>
+
+					</tbody>
+				</table>
+			</md-table-container>
+		</md-content>
+	</md-card>
+
+	<md-card>
+		<md-content>
+			<div layout="row" class="padding-left-right-16" style="margin-top: 22px;">
+				<div flex class="padding-right">
+					<md-input-container class="md-block md-cyan-theme md-input-invalid">
+						<label>审批操作</label>
+						<md-select ng-model="query.inspention" ng-change="inspentionChange()">
+							<md-option ng-repeat="x in query.filter.inspentionList" value="{{x.id}}">
+								{{x.name}}
+							</md-option>
+						</md-select>
+					</md-input-container>
+
+				</div>
+
+				<div flex class="padding-right" ng-if="query.addressListIfShow">
+					<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom: 0">
+						<label>企业通讯录</label>
+						<input ng-model="query.addressList" type="text">
+					</md-input-container>
+
+				</div>
+
+				<div flex class="padding-right" ng-if="query.dateIfShow">
+							
+					<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom: 0">
+						<label>总账日期</label>
+						<input ng-model="query.sumDate" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+					</md-input-container>
+				</div>
+
+				<div flex class="padding-right" ng-if="query.backMethodsIsShow">
+					<md-input-container class="md-block md-cyan-theme md-input-invalid">
+						<label>返回方式</label>
+						<md-select ng-model="query.backMethods">
+							<md-option ng-repeat="x in query.filter.backMethodsList" value="{{x.id}}">
+								{{x.name}}
+							</md-option>
+						</md-select>
+					</md-input-container>
+
+				</div>
+				<div flex>
+					<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom: 0" ng-if="query.addressListIfShow">
+						<label>请填写沟通意见</label>
+						<input ng-model="query.communicationOpinion" type="text">
+					</md-input-container>
+				</div>
+
+			</div>
+
+			<div layout="row" class="padding-left-right-16">
+				<div flex class="padding-right">
+					<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom: 0">
+						<label>补充意见</label>
+						<input ng-model="query.increaseSug" type="text">
+					</md-input-container>
+
+				</div>
+			</div>
+
+		</md-content>
+	</md-card>
+	<md-card>
+		<md-content>
+			<div layout="row" layout-align="end">
+				<md-button class="md-raised md-primary" aria-label="确认提交" ng-click="commit()">确认提交</md-button>
+				<md-button class="md-raised md-primary" aria-label="取消" ng-click="cancel()">取消</md-button>
+			</div>
+		</md-content>
+	</md-card>
+</div>

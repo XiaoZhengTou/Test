@@ -1,0 +1,85 @@
+<md-dialog aria-label="新增/编辑" style="width:600px;">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2 ng-bind="title"></h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="关闭"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <md-input-container class="md-block ml-nomargin">
+	        <label>分册规则号</label>
+	        <input ng-model="volumerule.code" disabled />
+	    </md-input-container>
+	    <md-input-container class="md-block ml-nomargin">
+          <label>分类目录</label>
+          <input id="catalogue" ng-model="volumerule.cname"/>
+        </md-input-container>
+        <md-input-container class="md-block ml-nomargin">
+          <label>页数上限</label>
+          <input ng-model="volumerule.page_size_limit"/>
+        </md-input-container>
+        <md-input-container class="md-block ml-nomargin">
+          <label>档案数上限</label>
+          <input ng-model="volumerule.file_size_limit"/>
+        </md-input-container>
+        <md-radio-group ng-model="volumerule.cut_able" class="ml-nomargin">
+	        <div flex layout='row' layout-align="start center">
+	          <div style="width:80px">
+	          	是否跨册
+	          </div>
+	          <md-radio-button
+	              ng-value="1"
+	              class="md-primary" style="margin-right:30px">
+	              	是
+	          </md-radio-button>
+	          <md-radio-button
+	              ng-value="0"
+	              class="md-primary" >
+	              	否
+	          </md-radio-button>
+	        </div>
+	    </md-radio-group>
+        <md-input-container class="md-block ml-nomargin">
+          <label>备注</label>
+          <textarea ng-model="volumerule.remark" md-maxlength="30" rows="2" md-select-on-focus></textarea>
+        </md-input-container>
+      	
+      	<md-radio-group ng-model="volumerule.status" class="ml-nomargin">
+	        <div flex layout='row' layout-align="start center">
+	          <div style="width:80px">
+	          	状态
+	          </div>
+	          <md-radio-button
+	              ng-value="1"
+	              class="md-primary" style="margin-right:30px">
+	              	生效
+	          </md-radio-button>
+	          <md-radio-button
+	              ng-value="0"
+	              class="md-primary" >
+	              	失效
+	          </md-radio-button>
+	        </div>
+	    </md-radio-group>
+	    
+	    
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button ng-click="answer('not useful')" class="md-raised md-primary">
+       	确认
+      </md-button>
+      <md-button ng-click="cancel()" class="md-raised">
+                  取消
+      </md-button>
+    </md-dialog-actions>
+</md-dialog>
+
+<div id="menuContent2" class="menuContent" style="display:none; position: absolute;">
+	<ul id="treeDemo" model="volumerule.cname" query="volumerule.cid" catalogue="catalogue2" target="target2" menu-tree class="ztree" style="margin-top:0; width:200px;height:auto;"></ul>
+</div>

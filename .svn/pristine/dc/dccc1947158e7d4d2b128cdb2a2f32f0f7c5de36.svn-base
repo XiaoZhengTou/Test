@@ -1,0 +1,105 @@
+<div ng-controller="addrichangctrl" layout="column" layout-padding ng-cloak>
+
+	<md-card>
+		<div>
+			<div class="md-toolbar-tools" layout="row">
+				<span>新增单据</span>
+				<span flex></span>
+			</div>
+		</div>
+		<md-divider></md-divider>
+		<div class="md-padding">
+			<div style="color:rgba(0,0,0,0.54);font-size: 12px;">
+				申请人
+			</div>
+			<md-chips>
+				<md-chip ng-repeat="item in tmpdata.applyUser">
+					<strong>{{item.user_full_name}}({{item.user_mobile}})</strong>
+					<button ng-click="onDelApplyuser($index)" class="md-primary" style="border: 0;padding: 0;"><i class="iconfont">&#xe68c;</i></button>
+				</md-chip>
+				<md-chip aria-label="编辑" style="cursor: pointer;"  drorganization="{'model':'tmpdata.applyUser'}">
+					<i class="iconfont" >&#xe631;</i>
+				</md-chip>
+			</md-chips>
+			<md-divider flex ng-show="tmpdata.applyUser.length==0"></md-divider>
+			<div>
+				<md-input-container md-no-float class="md-block">
+					<label>业务说明</label>
+					<input ng-model="formdata.emseaapplyh.reason_desc" row="3" type="text">
+				</md-input-container>
+			</div>
+		</div>
+	</md-card>
+	<md-card>
+		<div>
+			<div class="md-toolbar-tools" layout="row">
+				<span>预算明细</span>
+				<span flex></span>
+				<md-button class="md-primary" aria-label="新增" ng-click="onOpenAddrichang($event,null)">
+					<i class="iconfont">&#xe68d; 新增</i>
+				</md-button>
+				<md-button class="md-primary" aria-label="删除" ng-click="onMulDelEmseaapplyls()">
+					<i class="iconfont">&#xe68c; 删除</i>
+				</md-button>
+
+			</div>
+		</div>
+		<md-divider></md-divider>
+		<div class="md-padding">
+			<md-table-container>
+				<table md-table md-row-select multiple ng-model="selected" md-progress="promise">
+					<thead md-head md-order="query.order" md-on-reorder="getDesserts">
+						<tr md-row>
+							<th md-column md-numeric>预算组织</th>
+							<th md-column md-numeric>预算科目</th>
+							<th md-column md-numeric>预算单元</th>
+							<th md-column md-numeric>金额</th>
+							<th md-column md-numeric>操作</th>
+
+						</tr>
+					</thead>
+					<tbody md-body>
+						<tr md-row md-select="item" md-select-id="fee_apply_id" md-auto-select ng-repeat="item in formdata.emseaapplyh.emseaapplyls">
+							<td md-cell>{{item.busi_org_id}}</td>
+							<td md-cell>{{item.fee_type_id}}</td>
+							<td md-cell>{{item.budget_node_id}}</td>
+							<td md-cell>{{item.apply_amount}}</td>
+							<td md-cell>
+								<md-button class="md-icon-button md-primary" aria-label="编辑" ng-click="onOpenAddrichang($event,item)">
+									<md-icon><i class="iconfont">&#xe622;</i></md-icon>
+
+								</md-button>
+								<md-button class="md-icon-button md-primary" aria-label="删除" ng-click="onDelEmseaapplyls($index)">
+									<md-icon><i class="iconfont">&#xe633;</i></md-icon>
+								</md-button>
+							</td>
+
+						</tr>
+					</tbody>
+				</table>
+			</md-table-container>
+			<md-divider></md-divider>
+			<div layout="row" flex>
+				<span flex></span>
+				<md-input-container class="md-icon-float md-block" flex-gt-sm>
+					<!-- Use floating label instead of placeholder -->
+					<label>金额</label>
+					<input ng-model="formdata.emseaapplyh.apply_amount" type="number" readonly="true">
+				</md-input-container>
+				<md-input-container class="md-block">
+					<md-select ng-model="formdata.emseaapplyh.currency_code" aria-label="currency">
+						<md-option ng-repeat="currency in currencys" value="{{currency.shortName}}">
+							{{currency.name}}({{currency.shortName}})
+						</md-option>
+					</md-select>
+				</md-input-container>
+			</div>
+		</div>
+	</md-card>
+	<div layout="row" layout-align="end end">
+		<md-button class="md-raised md-primary" ng-click="onNext($event,emseaapplyh)">保存</md-button>
+		<md-button class="md-raised md-primary" ng-click="onNext($event,emseaapplyh)">删除</md-button>
+		<span flex></span>
+		<md-button class="md-raised md-primary" ng-click="onNext($event,emseaapplyh)">提交</md-button>
+	</div>
+</div>

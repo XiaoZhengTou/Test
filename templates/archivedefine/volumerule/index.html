@@ -1,0 +1,98 @@
+<div ng-controller="volumeCtrl" layout="column" ng-cloak class="md-inline-form">
+	<md-card layout-padding>
+		<div layout="row">
+			<div layout="row" flex="25">
+				<md-input-container class="md-block ml-nomargin" flex="90">
+					<label>分类目录</label>
+					<input id="catalogue1" ng-model="query.query_param.cname">
+				</md-input-container>
+			</div>
+			<div layout="row" flex="25">
+				<md-input-container class="md-block ml-nomargin">
+					<label>备注</label>
+					<input ng-model="query.query_param.remark">
+				</md-input-container>
+			</div>
+
+			<div layout="row" flex="25">
+				<md-input-container flex="70" class="md-block ml-nomargin">
+					<label>状态</label>
+					<md-select ng-model="query.query_param.status">
+						<md-option value="1">生效</md-option>
+						<md-option value="0">失效</md-option>
+					</md-select>
+				</md-input-container>
+			</div>
+			<div layout="row" flex="25" layout-align="center center">
+				<md-button class="md-raised md-primary" aria-label="搜 索" ng-click="onPaginate()" class="md-block" style="margin-top:0;margin-bottom:0;">搜 索</md-button>
+				<md-button class="md-raised" aria-label="清 空" ng-click="reset()" class="md-block" style="margin-top:0;margin-bottom:0;">清 空</md-button>
+			</div>
+		</div>
+	</md-card>
+
+	<md-card>
+		<md-toolbar class="md-table-toolbar md-default" ng-hide="selected.length">
+			<div class="md-toolbar-tools">
+				<h2 class="md-title">分册规则列表</h2>
+				<div flex></div>
+			</div>
+		</md-toolbar>
+		<md-toolbar class="md-table-toolbar alternate" ng-show="selected.length" style="background:#FFF;">
+			<div class="md-toolbar-tools" style="background:#FFF;">
+				<div>选中了{{selected.length}} 项 </div>
+				<div flex></div>
+				<md-button class="md-raised md-primary" ng-click="batchInvalid()">
+					批量失效
+				</md-button>
+			</div>
+		</md-toolbar>
+
+		<md-table-container>
+			<table md-table md-row-select multiple ng-model="selected" md-progress="promise">
+				<thead md-head>
+					<tr md-row>
+						<th md-column md-numeric>分册规则号</th>
+						<th md-column md-numeric>分类目录</th>
+						<th md-column md-numeric>页数上限</th>
+						<th md-column md-numeric>档案数上限</th>
+						<th md-column md-numeric>是否跨册</th>
+						<th md-column md-numeric>备注</th>
+						<th md-column md-numeric>状态</th>
+						<th md-column md-numeric>操作</th>
+					</tr>
+				</thead>
+				<tbody md-body>
+					<tr md-row md-select="volumeRule" md-select-id="id" ng-disabled="volumeRule.status == 0" ng-repeat="volumeRule in volumeRules.list">
+						<td md-cell>{{volumeRule.code}}</td>
+						<td md-cell>{{volumeRule.cname}}</td>
+						<td md-cell>{{volumeRule.page_size_limit}}</td>
+						<td md-cell>{{volumeRule.file_size_limit}}</td>
+						<td md-cell>{{volumeRule.cut_able == 1 ? "是" : volumeRule.cut_able == 0 ? "否" : ""}}</td>
+						<td md-cell>{{volumeRule.remark}}</td>
+						<td md-cell>{{volumeRule.status == 1 ? "生效" : volumeRule.status == 0 ? "失效" : ""}}</td>
+						<td md-cell>
+							<md-button ng-disabled="{{volumeRule.status == 0}}" ng-click="invalid(volumeRule.id)" class="md-primary" style="min-height:24px;line-height:24px;min-width: 40px;margin:0;">失效</md-button>
+							<md-button class="md-primary" ng-click="editDialog($event,volumeRule)" style="min-height:24px;line-height:24px;min-width: 40px;margin:0;">编辑</md-button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</md-table-container>
+
+		<md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '，总条数：'}" md-limit="query.page_size" md-limit-options="[5, 10, 15]" md-page="query.page_number" md-total="{{volumeRules.totalRow}}" md-on-paginate="onPaginate" md-page-select></md-table-pagination>
+
+		<md-button class="md-fab md-accent md-hue-1" style="position:fixed;bottom:100px;right:50px;padding:0;" aria-label="新增" ng-click="showAdd($event)">
+			<i class="iconfont" style="color:#fff;font-size:20px;">&#xe631;</i>
+			<md-tooltip md-direction="left">
+				新增分册规则
+			</md-tooltip>
+		</md-button>
+	</md-card>
+	
+	
+	
+	
+	<div id="menuContent" class="menuContent" style="display:none; position: absolute;z-index: 3;">
+		<ul id="treeDemo1" model="query.query_param.cname" query="query.query_param.cid" catalogue="catalogue" target="target" menu-tree class="ztree" style="margin-top:0; width:200px;height:auto;"></ul>
+	</div>
+</div>

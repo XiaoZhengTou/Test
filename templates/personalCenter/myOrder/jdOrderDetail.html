@@ -1,0 +1,77 @@
+<div layout="column" ng-controller="personalCtrl" ng-cloak class="personalCenter">
+	<div ng-controller="jdOrderDetailCtrl" class="orderRefunds">
+		<md-card>
+			<div class="ml-padding-13 ml-bgcolor-fc">订单信息</div>
+			<md-divider></md-divider>
+			<div layout="row">
+				<div flex class="ml-lineheight-24 ml-padding-20 ml-color-73 ml-fontsize-13">
+					<div flex class="ml-color-yellow orderStatus" ng-class="{'ml-color-ccc':order.orderStatus=='6'}">{{order.orderStatus | getJdOrderStatus}}</div>
+					<div ng-if="order.orderStatus==3">系统在为您处理，请耐心等待</div>
+					<div layout="row" class="ml-marginT-10">
+						<div layout="column" flex="70">
+							<div layout="row">
+								<span flex="15">订单号</span>
+								<span flex class="ml-color-21">{{order.orderNo}}</span>
+							</div>
+							<div layout="row">
+								<span flex="15">预订日期</span>
+								<span flex class="ml-color-21">{{order.checkInDate}}</span>
+							</div>
+						</div>
+						<!--						<div flex="30" class="ml-textalign-right">总金额 ¥ <span class="ml-color-red ml-fontsize-24">{{order.totalAmount}}</span></div>-->
+					</div>
+				</div>
+				<div flex="35" layout="row" layout-wrap class="order-main-leftBorder ml-padding-20" ng-if="order.orderStatus==1">
+					<md-button ng-click="orderQuxiao()" flex  class="detail-tbn">取消订单</md-button>
+					<md-button ng-click="orderQueren()" flex  class="detail-tbn">确认订单</md-button>
+				</div>
+			</div>
+			<md-divider></md-divider>
+			<div class="ml-padding-13 ml-bgcolor-fc">酒店信息</div>
+			<md-divider></md-divider>
+			<div class="ml-padding-20 ml-color-73 ml-lineheight-24 ml-fontsize-13 ">
+				<div class="ml-fontsize-15 ml-color-21 ">{{hotelInfo.hotelCNName}}</div>
+				<div><span>{{order.checkInDate}}至{{order.checkOutDate}}</span> <span>{{order.roomNum}}间</span></div>
+				<div ng-repeat="x in hotelRoomList">
+					{{x.roomName}} {{x.bedType}}
+				</div>
+				<div>{{hotelInfo.hotelAddress}}</div>
+			</div>
+			<md-divider></md-divider>
+			<div class="ml-padding-13 ml-bgcolor-fc">入住人</div>
+			<md-divider></md-divider>
+			<div class="ml-lineheight-24 ml-padding-20 ml-color-73" layout="row" layout-wrap>
+				<div flex="40" flex-offset="5" class="passengers-in" ng-repeat="people in passengerList">
+					<div>
+						<span>姓名：</span>
+						<span>{{people.cnName}}</span>
+					</div>
+					<div>
+						<span>证件信息：</span>
+						<span>{{people.certNumber}}</span>
+					</div>
+					<div>
+						<span>手机号码：</span>
+						<span>{{people.mobile}}</span>
+					</div>
+				</div>
+			</div>
+			<md-divider></md-divider>
+			<div class="ml-padding-13 ml-bgcolor-fc">联系人</div>
+			<md-divider></md-divider>
+			<div class="ml-lineheight-24 ml-padding-20 ml-color-73">
+				<div  flex-offset="5" class="ml-color-21" ng-if="!contactInfo.contactName">无</div>
+				<div flex-offset="5" ng-if="contactInfo.contactName">
+					<div>
+						<span>姓名：</span>
+						<span>{{contactInfo.contactName}}</span>
+					</div>
+					<div>
+						<span>手机号码：</span>
+						<span>{{contactInfo.mobile}}</span>
+					</div>
+				</div>
+			</div>
+		</md-card>
+	</div>
+</div>

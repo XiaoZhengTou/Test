@@ -1,0 +1,79 @@
+
+	<div ng-controller="huankuanCrl"  layout="row" layout-align="center center" >
+		<md-card flex class=" ml-fontsize-14">
+			<div flex class="bgcolor md-whiteframe-2dp ml-lineheight-36" style="border: 0;">还款维护</div>
+			<div  ng-if="stateFlag">
+				<div layout="row" flex>
+					<md-input-container class="md-block" flex>
+						<label>还款单编号</label>
+						<input >
+					</md-input-container>
+					<md-input-container class="md-block" flex>
+						<label>入账单位</label>
+						<input ng-model="query.fee_apply_code"/>
+					</md-input-container>
+				</div>
+				<div layout="row">
+					<div class="ml-padding-right" flex="33">
+						<md-input-container  class="md-block md-cyan-theme md-input-invalid ml-nomargin">
+							<label>还款日期</label>
+							<input ng-model="beginTime" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+						</md-input-container>
+					</div>
+					<md-input-container class="md-block" flex="33" style="margin: 0;">
+						<label>还款人</label>
+						<input ng-model="query.apply_name">
+					</md-input-container>
+					<md-input-container class="md-block ml-nomargin" flex="33">
+						<label>确认状态</label>
+						<md-select ng-model="moneyType">
+							<md-option value="null">已确认</md-option>
+							<md-option value="DRAFT">未确认</md-option>
+						</md-select>
+					</md-input-container>
+				</div>
+			</div>
+			<section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+				<md-button class="md-raised  md-primary" ng-if="stateFlag" ng-click="state()">收起</md-button>
+				<md-button class="md-raised  md-primary"  ng-if="!stateFlag"  ng-click="state()">展开</md-button>
+				<md-button class="md-raised md-primary">查询</md-button>
+			</section>
+			<md-table-container>
+				<table md-table multiple ng-model="selected" md-progress="promise">
+					<thead md-head md-order="query.order" md-on-reorder="getDesserts">
+					<tr md-row>
+						<th md-column ><span>还款单编号</span></th>
+						<th md-column md-numeric ><span>入账单位</span></th>
+						<th md-column md-numeric>供应商</th>
+						<th md-column md-numeric>确认状态</th>
+						<th md-column md-numeric>费用类型</th>
+						<th md-column md-numeric>还款总额</th>
+						<th md-column md-numeric>币种</th>
+						<th md-column md-numeric>还款人</th>
+						<th md-column md-numeric ><span>还款日期</span></th>
+					</tr>
+					</thead>
+					<tbody md-body>
+					<tr md-row md-select="dessert" md-select-id="name" md-auto-select ng-repeat="dessert in huankuandan.data.info">
+						<td md-cell>{{dessert.apply_amount }}</td>
+						<td md-cell>{{dessert.$$hashKey}}</td>
+						<td md-cell>{{dessert.apply_name}}</td>
+						<td md-cell>{{dessert.approve_amount}}</td>
+						<td md-cell>{{dessert.fee_apply_code}}</td>
+						<td md-cell>{{dessert.fee_apply_id}}</td>
+						<td md-cell>{{dessert.order_status}}</td>
+						<td md-cell>{{dessert.order_type}}</td>
+						<td md-cell>{{dessert.reason_desc}}</td>
+					</tr>
+					</tbody>
+				</table>
+			</md-table-container>
+			<md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '，总条数：'}" md-limit="query.page_size" md-limit-options="[5, 10, 15]" md-page="query.page_number" md-total="{{total}}" md-on-paginate="getData" md-page-select></md-table-pagination>
+			<md-button aria-label="menu" class="md-fab ml-bottom-fab" ng-click="go('/huankuandan/addchakan','还款单-查看页')">
+				<md-tooltip md-direction="left">
+					还款单-查看页
+				</md-tooltip>
+				<md-icon class="iconfont">&#xe631;</md-icon>
+			</md-button>
+		</md-card>
+	</div>

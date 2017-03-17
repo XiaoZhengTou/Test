@@ -1,0 +1,182 @@
+<div ng-controller="jdCtrl" class="jiudian result">
+<div layout="column" ng-controller="jdResultCtrl">
+  <!-- 日期选择开始 -->
+  <div class="basefilter" ng-class="{'loading' : hotils.loading}">
+    <div layout="row">
+      <div flex layout="row">
+        <span class="ml-margin-right ml-slect-title">目的地</span>
+        <div flex="70">
+          <md-button class="md-raised ml-button ml-full-button ml-noshadow ml-button-select" ng-click="null" drchoosecitys="{'model':'city1','data':'hotel','alldata':'all'}"><span ng-bind="selectCity"></span><i class="iconfont">&#xe62a;</i></md-button>
+        </div>
+      </div>
+      <div flex layout="row">
+        <span class="ml-margin-right ml-slect-title">入住日期</span>
+        <div flex="70" class="ml-relative">
+          <md-button class="md-raised ml-button ml-full-button ml-noshadow ml-button-select ml-noclick" ng-click="null">{{_date.checkInDate | amDateFormat:'MoDo'}}<i class="iconfont"><span class="ml-margin-small-right">{{_date.checkInDate | amDateFormat:'ddd'}}</span>&#xe680;</i></md-button>
+          <md-datepicker class="ml-button-datepicker" ng-model="_date.checkInDate" md-min-date="_date.checkInMinDate" md-max-date="_date.checkInMaxDate" ng-change="_date.checkInChange()"></md-datepicker>
+        </div>
+      </div>
+      <div flex layout="row">
+        <span class="ml-margin-right ml-slect-title">离店日期</span>
+        <div flex="70" class="ml-relative">
+          <md-button class="md-raised ml-button ml-full-button ml-noshadow ml-button-select ml-noclick" ng-click="null">{{_date.checkOutDate| amDateFormat:'MoDo'}}
+          <i class="iconfont">
+          <span class="ml-margin-small-right">{{_date.checkOutDate| amDateFormat:'ddd'}}</span>
+          &#xe680;
+          </i>
+          </md-button>
+          <md-datepicker class="ml-button-datepicker" ng-model="_date.checkOutDate" md-min-date="_date.checkOutMinDate" md-max-date="_date.checkOutMaxDate" ng-change="_date.checkOutChange()"></md-datepicker>
+        </div>
+      </div>
+    </div>
+    <div layout="row" class="ml-margin-top">
+      <div flex="33" layout="row">
+        <span class="ml-margin-right ml-slect-title">关键字</span>
+        <div flex="70">
+          <input type="text" placeholder="关键字" class="ml-search ml-width-1-1 ml-text-input" ng-model="keyword" ng-change="keywordChange()">
+        </div>
+      </div>
+      <div flex="33">
+        <md-button class="md-raised md-primary ml-nomargin ml-button" aria-label="立即搜索" ng-click="updateCrumb(selectCity);hotilSearch()">立即搜索</md-button>
+      </div>
+    </div>
+  </div>
+  <!-- 日期选择结束 -->
+  <!-- 选择面板开始 -->
+  <div class="filterPanel ml-margin-top ml-margin-bottom ml-margin-large-top" ng-class="{'loading' : hotils.loading}">
+    <md-whiteframe class="md-whiteframe-z1">
+      <md-list class="ml-nopadding">
+        <md-list-item class="md-1-line" layout="row">
+          <span class="title"><i class="ml-onefont"></i>供应商</span>
+          <div flex class="ml-margin-large-left">
+            <md-radio-group ng-model="selected.vendor" class="ml-inline-block" ng-change="selected.setVendor()">
+              <md-radio-button value="{{x.id}}" class="md-primary ml-margin-left" ng-repeat="x in filter.vendor">{{x.name}}</md-radio-button>
+            </md-radio-group>
+          </div>
+        </md-list-item>
+        <md-divider></md-divider>
+        <md-list-item class="md-1-line ml-relative" layout="row">
+          <span class="title">酒店位置</span>
+          <div flex class="ml-margin-large-left">
+            <ul class="locationSelect ml-inline-block ml-nopadding ml-nomargin">
+              <li class="active" ng-click="selected.setLandMark('clear')" ng-class="{'active' : (selected.landMark == '')}" switch>不限</li>
+              <li ng-repeat="x in filter.landMarkType" ng-click="selected.getLandMark(x.id)" switch>{{x.name}}</li>
+            </ul>
+          </div>
+          <div class="subPanel" ng-if="selected.showSub">
+              <ul class="sublist ml-inline-block">
+                <li ng-repeat="y in selected.subLandMarks" ng-click="selected.setLandMark('',y.landmarkId,y.landmarkType,y.landmarkPid,y.id)" switch>
+                {{y.landmarkName}}
+                </li>
+                <li ng-if="selected.subLandMarks.length < 1" class="empty">
+                暂无该类型的地标信息
+                </li>
+              </ul>
+              <ul class="sublist ml-inline-block">
+                <li ng-repeat="y in selected.subLandMarksSub" ng-click="selected.setLandMark('',y.landmarkId,y.landmarkType,y.landmarkPid,y.id)" switch>
+                {{y.landmarkName}}
+                </li>
+              </ul>
+          </div>
+        </md-list-item>
+        <md-divider></md-divider>
+        <md-list-item class="md-1-line" layout="row">
+          <span class="title">价格范围</span>
+          <div flex class="ml-margin-large-left">
+            <span ng-click="selected.setPriceRange('clear')" ng-class="{'active' : (selected.priceRange == '')}">不限</span>
+            <md-radio-group ng-model="selected.priceRange" class="ml-inline-block" ng-change="selected.setPriceRange()">
+              <md-radio-button value="{{x.priceRange}}" class="md-primary ml-margin-left" ng-repeat="x in filter.priceOption">{{x.name}}</md-radio-button>
+              <span class="custom title">自定义：</span>
+              <input type="number" min="0" max="9999"  class="custom from" ng-init="customFrom = 0"  ng-model="customFrom">
+              <span class="custom seperate">到</span>
+              <input type="number" min="0" max="9999" class="custom to" ng-init="customTo = 0" ng-model="customTo">
+              <button class="custom confirm" ng-disabled="(customFrom * customTo) == 0" ng-click="selected.setPriceRange('custom',customFrom,customTo)">确定</button>
+            </md-radio-group>
+          </div>
+        </md-list-item>
+        <md-divider></md-divider>
+        <md-list-item class="md-1-line" layout="row">
+          <span class="title">酒店级别</span>
+          <div flex class="ml-margin-large-left">
+            <span ng-click="selected.clearStar()" ng-class="{'active' : (selected.star.length < 1)}">不限</span>
+            <md-checkbox ng-checked="selected.existStar(x.id , selected.star)" ng-click="selected.toggerStar(x.id , selected.star)" ng-repeat="x in filter.star">
+              {{x.name}}
+            </md-checkbox>
+          </div>
+        </md-list-item>
+        <md-divider></md-divider>
+        <md-list-item class="md-1-line toggerShow" layout="row" layout-align="start start" ng-class="{'limitShow' : !showMore}" ng-init="showMore = false">
+          <span class="title">酒店品牌</span>
+          <div flex class="ml-margin-large-left">
+            <span ng-class="{'active' : (selected.hotilBrand == '')}" ng-click="selected.setHotilBrand('clear')">不限</span>
+            <md-radio-group ng-model="selected.hotilBrand" class="ml-inline-block" ng-change="selected.setHotilBrand()">
+              <md-radio-button value="{{x.brandId}}" class="md-primary ml-margin-left" ng-repeat="x in selected.hotilBrands">{{x.brandName}}</md-radio-button>
+            </md-radio-group>
+          </div>
+          <span class="toggerButton" ng-class="{'all' : showMore}" ng-click="showMore = !showMore">显示更多</span>
+        </md-list-item>
+      </md-list>
+    </md-whiteframe>
+  </div>
+  <!-- 选择面板结束 -->
+  <div class="hotilList ml-margin-large-bottom" ng-class="{'detailLoading' : hotils.detailLoading}">
+    <!-- 单个酒店开始 -->
+    <md-whiteframe class="md-whiteframe-z1 ml-margin-top ml-relative" ng-repeat="x in hotils.list" ng-class="{active: $index == curIndex}">
+    <md-progress-circular md-diameter="120" ng-if="hotils.detailLoading && ($index == curIndex)"></md-progress-circular>
+    <div layout="row" class="item">
+      <div class="image" flex="20" style="background-image: url('{{x.hotelPictureList[0].url}}'),url('img/jiudian/default.jpg');">
+      </div>
+      <div flex="60" class="detail">
+        <h3>{{x.hotelCNName}}</h3>
+        <p class="address" ng-class="x.hotelAddress ? '' : 'empty'">
+        <span class="title">地址</span>
+        <i>:</i>
+          {{x.hotelAddress ? x.hotelAddress:'无地址信息'}}
+        </p>
+        <p class="opentine" ng-class="x.hotelDecorationTime ? '' : 'empty'">
+        <span class="title">开业时间</span>
+        <i>:</i>
+        {{x.hotelDecorationTime ? x.hotelDecorationTime+'年' : '无开业时间信息'}}</p>
+        <p class="shangquan" ng-class="x.hotelBusinessCircle ? '' : 'empty'">
+        <span class="title">商业圈</span>
+        <i>:</i>
+        {{x.hotelBusinessCircle ? x.hotelBusinessCircle : '无商业圈信息'}}</p>
+        <p class="price" ng-class="x.lowestPrice>0 ? '' : 'empty'">
+        <span class="title">价格</span>
+        <i>:</i>
+        <i>¥</i>{{x.lowestPrice>0 ? x.lowestPrice : '暂无价格信息'}}<b>起</b>
+        </p>
+        <p class="star" ng-class="x.starCode>0 ? '' : 'empty'">
+        <span class="title">酒店星级</span>
+        <i>:</i>
+        <span class="star star{{x.starCode}}"></span>
+        </p>
+        <md-button class="md-raised md-primary ml-button" ng-click="viewDetail($index,x.hotelCode,'add',x.hotelCNName,x.hotelPictureList[0].url,x.hotelAddress,x)">详细信息</md-button>
+      </div>
+      <div flex="20" class="roomInfo">
+        <p ng-if="x.hotelRoomList.length == 0" class="empty">
+          暂无该酒店的房型信息
+        </p>
+        <ul class="ml-list" ng-if="x.hotelRoomList.length > 0">
+          <li ng-repeat="y in x.hotelRoomList">
+            <p><span>房型：</span>{{y.roomName}}</p>
+            <p><span>楼层：</span>{{y.fooler ? y.fooler : ''}}</p>
+            <p><span>面积：</span>{{y.acre ? y.acre + '平米' : ''}}</p>
+            <p><span>床型：</span>{{y.bedType ? y.bedType : '' }}</p>
+            <p><span>网络：</span>{{y.intent ? y.intent : ''}}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    </md-whiteframe>
+    <!-- 单个酒店结束 -->
+    <div layout="row" layout-sm="column" layout-align="center center" ng-if="hotils.loading">
+      <md-progress-circular md-diameter="120"></md-progress-circular>
+    </div>
+    <div class="navInfo" ng-if="!hotils.loading">
+      <p class="info" ng-if="!hotils.error" ng-click="hotilSearch('load')">共找到了{{hotils.total}}家酒店，你正在浏览的是前{{(hotils.pageIndex-1) * 10}}家，<span>点击加载更多……</span></p>
+      <p class="error" ng-if="hotils.error" ng-click="hotilSearch()">服务器抽风了，可能你数据发送的太过猛烈，你可以换个搜索条件重新试一下，或者点击再试一次……</p>
+    </div>
+  </div>
+</div>
+</div>

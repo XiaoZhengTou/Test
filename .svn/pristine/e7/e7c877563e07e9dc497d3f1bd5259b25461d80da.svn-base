@@ -1,0 +1,64 @@
+<div ng-controller="operationCtrl" class="task airfare">
+	<div>
+		<div class="md-toolbar-tools" layout="row">
+			<span>质检任务清单</span>
+		</div>
+	</div>
+	<md-card>
+		<md-divider></md-divider>
+		<md-table-container>
+			<table md-table md-row-select multiple ng-model="selected" md-progress="promise">
+				<thead md-head md-order="query.order" md-on-reorder="getDesserts" class="ml-bgcolor-blue ml-textalign-center md-whiteframe-2dp">
+					<tr md-row>
+						<th md-column md-numeric style="text-align: center;">代码</th>
+						<th md-column md-numeric style="text-align: center;">一级类型</th>
+						<th md-column md-numeric style="text-align: center;">二级类型</th>
+						<th md-column md-numeric style="text-align: center;">处理建议</th>
+						<th md-column md-numeric style="text-align: center;">标准意见</th>
+
+					</tr>
+				</thead>
+				<tbody md-body>
+					<tr md-row md-select="item" md-select-id="fee_apply_id" md-auto-select >
+						<td md-cell>115</td>
+						<td md-cell>凭证不规范</td>
+						<td md-cell>补助发票超过120天</td>
+						<td md-cell>1、重新补充规范补助发票2、无法补充，直接扣减补助金额</td>
+						<td md-cell>补助发票的保鲜期是120天，请换票</td>
+					</tr>
+				</tbody>
+			</table>
+		</md-table-container>
+	</md-card>
+	<md-card> 
+	    <md-divider></md-divider>
+	   <br>
+	    <div layout="row">
+	    	<md-input-container class="md-block ml-nomargin ml-marginlr-10" flex="33">
+				<label>质检合格</label>
+				<md-select ng-model="state" class="ml-marginlr-10">
+					<md-option value="1">质检合格</md-option>
+					<md-option value="2">无需整改</md-option>
+					<md-option value="3">需要整改</md-option>
+				</md-select>
+			</md-input-container>
+		</div>
+		<br>
+		<div layout="row">
+			<md-input-container class="md-block ml-nomargin" flex-gt-sm>
+				<label>补充意见</label>
+				<input ng-model="name">
+			</md-input-container>
+		</div>
+		<div class="ml-textalign-right">
+			<md-button class="md-raised md-primary md-button ng-scope md-ink-ripple" ng-click="showAlert();">确认提交</md-button>
+			<md-button class="md-raised md-primary md-button md-ink-ripple" ng-click="go('/financeQC/editTaskProcessing')">取消</md-button>
+		</div>
+	</md-card>
+	<md-button aria-label="menu" class="md-fab ml-bottom-fab" ng-click="go('/financeQC/problemSelection','标准问题选择页')">
+    	<md-tooltip md-direction="left">
+          	标准问题选择页
+        </md-tooltip>
+        <md-icon class="iconfont">&#xe631;</md-icon>
+   </md-button>
+</div>

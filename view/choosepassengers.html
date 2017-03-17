@@ -1,0 +1,39 @@
+<md-dialog aria-label="选择乘客" style="width: 50%;" class="choosepassengers">
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<h2>选择常用乘客</h2>
+			<span flex></span>
+			<md-button ng-click="cancel()">
+				<i class="iconfont" style="color:#fff;">关闭</i>
+			</md-button>
+		</div>
+	</md-toolbar>
+	<md-dialog-content style="height: 400px">
+		<div layout="row" ml-padding layout-align="space-around" ng-if="loader">
+      		<md-progress-circular md-diameter="120"></md-progress-circular>
+    	</div>
+		<md-content layout-padding layout-wrap layout="row" ng-if="!loader">
+			<div flex="33" ng-repeat="x in data" class="box">
+			<input type="checkbox" id="{{x.commPassengerId}}" ng-checked="exists(x,selected)" ng-click="toggle(x,selected)">
+			<label for="{{x.commPassengerId}}">
+				<h3><span>姓名：</span>{{x.cnName}}</h3>
+	            <p><span>电话：</span>{{x.mobile}}</p>
+	            <p><span>证件：</span>{{x.certNumber}}</p>
+	            <p><span>类型：</span>{{x.passengerType}}</p>
+             </label>
+			</div>
+		</md-content>
+	</md-dialog-content>
+	<md-dialog-actions layout="row" class="footer">
+      	<p>你已选择：
+      		<span ng-repeat="x in selected">
+				<i ng-if="!$first">、</i>
+				{{x.cnName}}
+			</span>
+      	</p>
+      	<span flex></span>
+      	<md-button ng-click="setPassengers()" class="md-raised md-primary md-button">
+        	确定选择
+      	</md-button>
+    </md-dialog-actions>
+</md-dialog>

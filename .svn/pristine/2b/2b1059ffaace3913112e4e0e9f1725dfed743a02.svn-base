@@ -1,0 +1,79 @@
+<md-dialog aria-label="新增人员类别" ng-cloak style="min-width: 50%" id="rperson-dialog1-detail">
+    <form name="addrperson" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 style="color: white">新增人员类别</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="padding-top: 0px;padding-bottom: 0px">
+
+                <div class="demo-tab" style="padding: 25px 25px 0 25px; text-align: center;">
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>人员类别(必填)</label>
+                        <input ng-model="rperson.emp_type_name" type="text" required>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm style="text-align: left;padding-top: 20px;padding-bottom: 20px;">
+                        <label>适用组织(必选)</label>
+                        <!--<md-select ng-model="rperson.org_name" required>-->
+                            <!--<md-option value="IT部1">IT部1</md-option>-->
+                            <!--<md-option value="IT部2">IT部2</md-option>-->
+                        <!--</md-select>-->
+                        <input  ng-model="rperson.org_name" type="text" required ng-click="addarea1111($event,rperson,'add')">
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm style="text-align: left;padding-top: 20px;padding-bottom: 20px;">
+                        <label>分类维度(必选)</label>
+                        <md-select ng-model="rperson.emp_type_category" required ng-change="changetype()">
+                            <!--<md-option value="1">职级</md-option>-->
+                            <md-option value="2">职位</md-option>
+                            <md-option value="3">人员</md-option>
+                            <md-option value="4">部门</md-option>
+                            <!--<md-option value="5">SQL</md-option>-->
+                        </md-select>
+                    </md-input-container>
+
+                    <a ng-click="addarea($event,rperson,'add',rperson.emp_type_category)" style="cursor: pointer;color: blue">选择人员范围</a>
+                    <md-chips ng-model="rperson.emssmemptypels" md-max-chips="1"  readonly="true">
+                        <md-chip-template>
+                            <strong>{{$chip.level_name}}</strong>
+                        </md-chip-template>
+                    </md-chips>
+
+                </div>
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <!--<span flex></span>-->
+            <md-button class="md-primary md-raised" ng-click="answer()"  style="color: white;float: right"
+                       ng-disabled="addrperson.$invalid || rperson.emssmemptypels.length == 0" disabled="disabled">确定</md-button>
+
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+
+<style>
+    /*#rperson-dialog1-detail .md-datepicker-input-container.md-datepicker-invalid {*/
+        /*border-bottom-color: rgb(224,224,224);*/
+    /*}*/
+    md-chips input{
+        display: none;
+    }
+    md-chips md-chips-wrap{
+        box-shadow:none;
+    }
+    #rperson-dialog1-detail .md-datepicker-input-container{
+        width: 93.9%;
+        margin-left: -2px;
+    }
+    #rperson-dialog1-detail .md-datepicker-calendar-icon{
+        margin-bottom: -7px;
+    }
+</style>

@@ -1,0 +1,95 @@
+<md-dialog style="width:810px;-webkit-transform: inherit;transform: inherit;" class="trans"  ng-cloak>
+	<md-toolbar class="md-table-toolbar white" ng-hide="filter.show">
+	  <div class="md-toolbar-tools">
+	    <h2 class="md-title">选择记一笔</h2>
+	    <div flex></div>
+	    <md-button class="md-icon-button" ng-click="filter.show = true">
+	      <md-icon class="iconfont" style="font-size: 24px;">&#xe606;</md-icon>
+	    </md-button>
+	    <md-button class="md-icon-button" ng-click="cancel()">
+			<md-icon class="iconfont">&#xe634;</md-icon>
+		</md-button>
+	  </div>
+	</md-toolbar>
+	
+	<md-toolbar class="md-table-toolbar white" ng-show="filter.show">
+	  <div class="md-toolbar-tools">
+	    <md-icon class="iconfont" style="font-size: 24px;">&#xe606;</md-icon>
+	    
+    	<md-menu md-offset="0 -7">
+          <span class="md-filter-menu" ng-click="$mdOpenMenu($event)">{{select.queryCondition.label}} <i class="iconfont" style="font-size: 15px;">&#xe60e;</i></span>
+          <md-menu-content width="4">
+            <md-menu-item ng-repeat="condition in queryConditions">
+              <md-button  ng-click="announceClick(condition)" ng-class="{'md-selected' : condition.label == select.queryCondition.label}">{{condition.label}} </md-button>
+            </md-menu-item>
+          </md-menu-content>
+       </md-menu>
+    
+	    <form flex name="filter.form">
+	      	<div layout="row">
+		      	<md-datepicker ng-model="date_start" md-placeholder="开始时间" md-max-date="maxDate" style="margin:0;background-color: rgb(92,107,192);"></md-datepicker>
+		        <span style="font-size:14px;margin-top:15px;">至</span>
+			    <md-datepicker ng-model="date_end" md-placeholder="结束时间" md-min-date="invoice_date_start" md-max-date="maxDate" style="margin:0;background-color: rgb(92,107,192);"></md-datepicker>
+	      	</div>
+	      
+	    </form>
+	    <md-button class="md-icon-button" ng-click="removeFilter()">
+	      <md-icon  class="iconfont" style="font-size: 16px;">&#xe634;</md-icon>
+	    </md-button>
+	  </div>
+	</md-toolbar>
+	<md-table-container>
+	  <table md-table multiple md-progress="promise" md-row-select multiple ng-model="selected">
+	    <thead md-head md-order="query.filter.sortOrder" md-on-reorder="onPaginate">
+	      <tr md-row>
+	      	<th md-column>图片</th>
+	        <th md-column md-order-by="1"><span>类型</span></th>
+	        <th md-column md-numeric md-order-by="2"><span>日期</span></th>
+	        <th md-column md-numeric>发生地点</th>
+	        <th md-column md-numeric>报销</th>
+	        <th md-column md-numeric>来源</th>
+	        <th md-column md-numeric>说明</th>
+	      </tr>
+	    </thead>
+	    <tbody md-body>
+	      <tr md-row md-select="billingNote" md-select-id="id" ng-repeat="billingNote in billingNotes.billingNotes">
+
+	      	<td md-cell>
+	      		<div class="md-photo">
+	      			<div class="photo-wrapper">
+		      			<img class="animation-fade viewer" viewer src="" data-imageloaded data-loadedclass="animation-faded" data-ng-src="http://10.16.30.77:8080/sdatt/attachment/getFirstImage/{{billingNote.id}}/BuyOne"/>
+		      		</div>
+	      		</div>
+	      	</td>
+	        <td md-cell>{{billingNote.feeCategoryName}}</td>
+	        <td md-cell>{{billingNote.happenDate}}</td>
+	        <td md-cell>{{billingNote.happenAddress}}</td>
+	        <td md-cell>{{}}</td>
+	        <td md-cell>{{billingNote.billingSourceCode}}</td>
+	        <td md-cell>{{billingNote.billingDesc}}</td>
+	      </tr>
+
+	    </tbody>
+	  </table>
+	</md-table-container>
+		
+    <md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '，总条数：'}" md-limit="query.filter.page_size" md-limit-options="[5, 10, 15]" md-page="query.filter.page_number" md-total="{{billingNotes.total}}" md-on-paginate="onPaginate" md-page-select></md-table-pagination>
+ 	
+ 	
+ 	<md-dialog-actions layout="row" layout-align="end center">
+      <span flex></span>
+      <md-button class="md-raised md-primary" ng-click="save()" ng-disabled="!selected.length">
+      	确认
+      </md-button>
+      <md-button class="md-raised md-primary" ng-click="hide()">
+                  取消
+      </md-button>
+    </md-dialog-actions>
+</md-dialog>
+
+<style>
+	.trans{
+		-webkit-transform: inherit !important;
+		transform: inherit !important;
+	}
+</style>

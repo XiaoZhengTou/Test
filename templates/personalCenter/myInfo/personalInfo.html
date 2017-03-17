@@ -1,0 +1,109 @@
+<div layout="column" ng-controller="personalCtrl" ng-cloak class="personalCenter">
+	<div ng-controller="personalInfoCtrl" class="personalInfo">
+		<md-card class="ml-color-73">
+			<md-tabs md-border-bottom md-dynamic-height>
+				<md-tab label="基本信息">
+					<div class="personalInfo-main ml-padding-20">
+						<div flex="40">
+							<form ng-cloak name="messageUserForm" novalidate="novalidate">
+								<md-input-container class="md-block">
+									<input ng-model="username" name="cnName" required flex placeholder="用户名">
+									<div ng-messages="messageUserForm.cnName.$error" role="alert" multiple>
+										<div ng-message="required" class="my-message">请输入用户名</div>
+									</div>
+								</md-input-container>
+								<md-input-container class="md-block">
+									<input ng-model="nickname" name="cnName" required flex placeholder="呢称">
+									<div ng-messages="messageUserForm.cnName.$error" role="alert" multiple>
+										<div ng-message="required" class="my-message">请输入呢称</div>
+									</div>
+								</md-input-container>
+								<md-input-container class="md-block">
+									<input ng-model="mobile" name="mobile" ng-length="11" ng-pattern="/^1[34578]\d{9}$/" required flex placeholder="手机号">
+									<div ng-messages="messageUserForm.mobile.$error" role="alert" multiple>
+										<div ng-message="required" class="my-message">请输入手机号</div>
+										<div ng-message="pattern" class="my-message">请输入正确的手机号</div>
+									</div>
+								</md-input-container>
+							</form>
+							<div class="blue-line ml-fontsize-15"><span></span>收货地址</div>
+							<div class="ml-fontsize-13" ng-if="receiverAddress.address">
+								<p>{{receiverAddress.address}}</p>
+								<md-divider></md-divider>
+							</div>
+							<div class="ml-marginT-20">
+								<md-button ng-click="go('/personalCenter/receiver','收货地址');next()" class="md-raised md-primary ml-nomargin ">选择收货地址</md-button>
+							</div>
+						</div>
+						<div flex layout="row" class="personalInfo-detail ml-padding-10">
+							<div class="picture"><img ng-src="{{imageSrc}}" src="img/userPic.png" /></div>
+							<div class="ml-paddingT-20" flex flex-offset="5">用户名：{{username}}</div>
+						</div>
+					</div>
+					<div layout="row" class="ml-padding-20" layout-align="center center">
+						<md-button ng-click="personalInfoBaocun()" ng-disabled="messageUserForm.$invalid" class="md-raised md-primary">保存</md-button>
+					</div>
+
+				</md-tab>
+				<md-tab label="头像照片">
+					<div class=" ml-padding-20" layout="row">
+						<div flex="60" class="picture-left">
+							<md-button ng-click="loadImg()" class="ml-nomargin md-primary md-raised">请选择您要上传的头像</md-button>
+							<div class="ml-fontsize-12 ml-color-73 file-detail">仅支持JPG、GIF、JPEG、BMP格式，文件小于4M</div>
+							<input type="file" file-model="myFile" id="loadImg" style="display:none;" />
+							<div layout="row" class="personalInfo-img">
+								<div class="ml-marginT-20 picture-img"><img ng-src="{{imageSrc}}" src="img/userPic.png" /></div>
+							</div>
+						</div>
+						<div flex  class="picture-right" flex-offset="5">
+							效果预览
+							<div class="ml-color-73 ml-fontsize-13">你上传的图片会自动生成2种尺寸，请注意小尺寸头像是否清晰</div>
+							<div class="ml-marginT-20 picture-100"><img ng-src="{{imageSrc}}" src="img/userPic.png" /></div>
+							<div class="ml-color-73 ml-fontsize-13">100*100像素</div>
+							<div class="ml-marginT-20 picture-50"><img ng-src="{{imageSrc}}" src="img/userPic.png" /></div>
+							<div class="ml-color-73 ml-fontsize-13">50*50像素</div>
+						</div>
+					</div>
+				</md-tab>
+			</md-tabs>
+			<!--<div class="personalInfo-main-top">
+				<div class="blue-line ml-fontsize-15"><span></span>头像</div>
+				<div class="ml-marginT-20 picture"><img ng-src="{{imageSrc}}" src="img/userPic.png" /></div>
+				<div class="ml-margintb-20">
+					<md-button ng-click="loadImg()" class="md-raised md-primary ml-nomargin">浏览...</md-button><span class="ml-fontsize-12 ml-margin-10">建议尺寸：160X160</span>
+					<input type="file" file-model="myFile" id="loadImg" style="display:none;" />
+				</div>
+			</div>
+			<form ng-cloak name="messageUserForm" novalidate="novalidate">
+				<div class="blue-line ml-fontsize-15"><span></span>昵称</div>
+				<md-input-container class="md-block">
+					<input ng-model="nickname" name="cnName" required flex placeholder="请输入呢称">
+					<div ng-messages="messageUserForm.cnName.$error" role="alert" multiple>
+						<div ng-message="required" class="my-message">请输入呢称</div>
+					</div>
+				</md-input-container>
+				<div class="blue-line ml-fontsize-15"><span></span>手机号</div>
+				<md-input-container class="md-block">
+					<input ng-model="mobile" name="mobile" ng-length="11" ng-pattern="/^1[34578]\d{9}$/" required flex placeholder="请输入手机号">
+					<div ng-messages="messageUserForm.mobile.$error" role="alert" multiple>
+						<div ng-message="required" class="my-message">请输入手机号</div>
+						<div ng-message="pattern" class="my-message">请输入正确的手机号</div>
+					</div>
+				</md-input-container>
+			</form>
+			<div>
+				<div class="blue-line ml-fontsize-15"><span></span>收货地址</div>
+				<div class="ml-fontsize-13" ng-if="receiverAddress.address">
+					<p>{{receiverAddress.address}}</p>
+					<md-divider></md-divider>
+				</div>
+				<div class="ml-marginT-20">
+					<md-button ng-click="go('/personalCenter/receiver','收货地址');next()" class="md-raised md-primary ml-nomargin ">选择收货地址</md-button>
+				</div>
+			</div>
+			<div layout="row" layout-align="center center">
+				<md-button ng-click="personalInfoBaocun()" ng-disabled="messageUserForm.$invalid" class="md-raised md-primary">保存</md-button>
+			</div>-->
+		</md-card>
+	</div>
+</div>

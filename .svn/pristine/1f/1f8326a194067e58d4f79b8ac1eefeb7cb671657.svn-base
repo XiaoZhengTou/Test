@@ -1,0 +1,110 @@
+<md-dialog aria-label="人员对应的角色" ng-cloak style="min-width: 50%" id="batchperson-dialog1-detail" ng-controller="batchpersonCtrl">
+
+    <script type="text/ng-template" id="batchpersonCheckbox.html">
+        <div ng-controller="batchpersonCtrl1">
+            <md-checkbox ng-click="addtoggle2()" ng-model="draftSelectcheck" style="margin-bottom: 0px"></md-checkbox>
+        </div>
+    </script>
+
+    <form name="addbatchperson" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 style="color: white">人员对应的角色</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="padding-top: 0px;padding-bottom: 0px">
+
+                <table class="table ng-scope" style="margin-bottom: 0px">
+                    <tr>
+                        <td rowspan="2" style="padding-top: 21px;word-break: keep-all;white-space: nowrap;">
+                            <span style="float: right">角色：</span></td>
+                        <td rowspan="2" style="padding-top: 21px;">
+                            <input ng-model="search11.name" type="text" style="width: 100%;margin: 0; ">
+                        </td>
+                        <td rowspan="2" style="padding-top: 21px;word-break: keep-all;white-space: nowrap;"><span style="float: right">角色类型：</span></td>
+                        <td rowspan="2" style="padding-top: 14px;">
+                            <md-select ng-model="search11.type" style="margin: 0px;">
+                                <md-option value="">全部</md-option>
+                                <md-option value="1">功能角色</md-option>
+                                <md-option value="2">数据角色</md-option>
+                            </md-select>
+                        </td>
+                        <td >
+                            <md-button ng-click="search_batchperson1()" >
+                                <md-icon md-svg-src="img/icons/search.svg"></md-icon>
+                            </md-button>
+
+                        </td>
+                        <td>
+                            <md-menu style="padding:4px 0;">
+                                <md-button aria-label="Open user menu" ng-click="$mdOpenMenu()" aria-label="side navigation">
+                                    <md-icon md-svg-src="img/icons/three.svg"></md-icon>
+                                </md-button>
+                                <md-menu-content width="4">
+                                    <md-menu-item>
+                                        <md-button aria-label="side navigation" ng-disabled="selected1.length == 0" ng-click="batch_failure()">
+                                            <md-icon md-svg-src="img/icons/piliang.svg"></md-icon>
+                                            <span class="ng-scope">批量取消</span>
+                                        </md-button>
+                                    </md-menu-item>
+                                </md-menu-content>
+                            </md-menu>
+                        </td>
+                </table>
+
+                <md-table-container style="width: 95%;padding-left: 2.5%;">
+                    <table data-md-table data-md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" data-ng-model="selected1" md-progress="promise1">
+                    <!--<table data-md-table data-ng-model="selected" md-progress="promise">-->
+                        <thead md-head data-md-order="query1.order" md-on-reorder="getDesserts1">
+                        <tr md-row>
+                            <th md-column>角色</th>
+                            <th md-column>角色类型</th>
+                            <th md-column>角色描述</th>
+                            <th md-column>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody md-body>
+                        <tr md-row md-select="item" md-select-id="id" ng-repeat="item in appdata1" md-auto-select="options.autoSelect">
+                        <!--<tr md-row ng-repeat="item in appdata">-->
+                            <td md-cell>{{item.name}}</td>
+                            <td md-cell>{{item.type}}</td>
+                            <td md-cell>{{item.description}}</td>
+                            <td md-cell>
+                                <md-button class="md-primary" ng-click="delete(item)" style="margin: 0px;padding: 0px">
+                                    取消角色
+                                </md-button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11">
+                                <md-button class="md-fab md-accent md-hue-1" style="float: right;" ng-click="addperson($event,edit_batchperson)">
+                                    <h1 style="margin-top: 0px;font-size: 36px;color: white">+</h1>
+                                </md-button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </md-table-container>
+
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>
+
+<style>
+    /*#batchperson-dialog2-detail .md-datepicker-input-container.md-datepicker-invalid {*/
+        /*border-bottom-color: rgb(224,224,224);*/
+    /*}*/
+    #batchperson-dialog1-detail .md-datepicker-input-container{
+        width: 93.9%;
+        margin-left: -2px;
+    }
+    #batchperson-dialog1-detail .md-datepicker-calendar-icon{
+        margin-bottom: -7px;
+    }
+</style>

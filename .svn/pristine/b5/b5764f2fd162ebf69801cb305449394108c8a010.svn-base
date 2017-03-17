@@ -1,0 +1,139 @@
+<div ng-controller="jdCtrl" class="jiudian detail order">
+<div ng-controller="jdOrderCtrl">
+<!-- 状态步骤条开始 -->
+<div class="ml-setupbar ml-margin-top ml-margin-large-bottom" layout="row" layout-align="center center">
+  <div flex="70" layout="row" class="container">
+    <div flex class="ml-text-center active item">
+      <span>填写订单</span>
+    </div>
+    <div flex class="ml-text-center item">
+      <span>酒店确认</span>
+    </div>
+    <div flex class="ml-text-center item">
+      <span>预定完成</span>
+    </div>
+  </div>
+</div>
+<!-- 状态步骤条结束 -->
+<!-- Main Content Begin -->
+<div class="mainContent">
+<md-whiteframe class="md-whiteframe-z1">
+  <div layout="row" class="orderPanel">
+    <div class="left ml-padding" flex="60">
+      <h3 class="first">预订信息</h3>
+      <ul class="ml-list">
+        <li><span class="title">房型信息：</span>{{order.room.name}}［{{order.room.break}}］</li>
+        <li><span class="title">入住时间：</span>{{order.checkInDate | amDateFormat:'MoDo'}} {{order.checkInDate | amDateFormat:'ddd'}}
+        <i>至</i>
+        {{order.checkOutDate | amDateFormat:'MoDo'}} {{order.checkOutDate | amDateFormat:'ddd'}}
+        <b>共{{order.days}}晚</b>
+        </li>
+        <li><span class="title">房间数量：<b>{{order.roomNum}}</b>间</span>
+        <md-slider-container>
+          <md-slider flex min="1" max="10" ng-model="order.roomNum" aria-label="red" id="red-slider" md-range>
+          </md-slider>
+        </md-slider-container>
+        </li>
+        <li>
+        <span>房间总计:</span>
+        <span class="num">{{order.roomNum}}间</span>
+        <span class="fuhao">x</span>
+        <span class="price"><i>¥</i>{{order.price.price}}</span>
+        <span class="fuhao">x</span>
+        <span class="night">{{order.days}}晚</span>
+        <span class="denghao">=</span>
+        <span class="total"><i>¥</i>{{order.price.price * order.roomNum * order.days}}</span>
+        </li>
+        <li>
+          <span class="note">退款须知：{{order.room.refund}}</span>
+        </li>
+      </ul>
+      <h3>入住人信息</h3>
+      <ul class="ml-chips">
+        <li class="ml-chip" ng-repeat="x in passengers.list" ng-class="$first ? 'active':''" ng-click="passengers.view($index)" switch>
+          <span class="name">{{x.cnName}}</span>
+          <i class="iconfont" ng-click="passengers.del($index)">&#xe634;</i>
+        </li>
+      </ul>
+      <ul class="passengers" ng-if="passengers.list.length>0">
+        <li><span>姓名：</span>
+          {{passengers.select.cnName ? passengers.select.cnName : passengers.list[0].cnName}}
+        </li>
+        <li><span>联系电话：</span>
+        {{passengers.select.mobile ? passengers.select.mobile : passengers.list[0].mobile}}
+        </li>
+        <li><span>身份证号：</span>
+          {{passengers.select.certNumber ? passengers.select.certNumber : passengers.list[0].certNumber}}
+        </li>
+      </ul>
+      <md-button class="md-raised md-button md-primary" ng-click="null" drchoosepassengers="{'model':'order.passengers'}"><i class="iconfont">&#xe631;</i>添加乘客</md-button>
+      <h3>联系人信息</h3>
+      <md-checkbox ng-model="ruzhu" aria-label="从入住人中选择" ng-hide="passengers.list.length==0">
+        从入住人中选择
+      </md-checkbox>
+      <div layout="row">
+          <md-input-container flex ng-if="!ruzhu || passengers.list.length==0">
+            <label>姓名</label>
+            <input type="text" ng-model="order.user.cnName">
+          </md-input-container>
+          <md-input-container flex ng-if="!ruzhu || passengers.list.length==0">
+            <label>联系电话</label>
+            <input type="text" ng-model="order.user.mobile">
+          </md-input-container>
+          <md-input-container flex="40" ng-if="ruzhu && passengers.list.length>0">
+            <label>选择联系人</label>
+            <md-select ng-model="selectedUser" ng-change="setUser(selectedUser)">
+                <md-option ng-value="user" ng-repeat="user in passengers.list"  ng-selected="$first">
+                  {{user.cnName}}（电话：{{user.mobile}}）
+                </md-option>
+            </md-select>
+          </md-input-container>
+          <md-input-container flex="30">
+            <label>最早到店时间（{{order.checkInDate | amDateFormat:'MoDo'}}）</label>
+            <input type="text" ng-model="order.user.earlystime" date-time-picker-input  display-mode="time" display-format="HH:mm a">
+          </md-input-container>
+          <md-input-container flex="30">
+            <label>最晚到店时间（{{order.checkInDate | amDateFormat:'MoDo'}}）</label>
+            <input type="text" ng-model="order.user.latestime" date-time-picker-input  display-mode="time" display-format="HH:mm a">
+          </md-input-container>
+      </div>
+      <h3>报销</h3>
+      <p>
+      <md-checkbox ng-model="baoxiao" aria-label="需要报销凭证">
+        需要报销凭证
+      </md-checkbox>
+      </p>
+      <md-input-container class="md-block" ng-if="baoxiao">
+        <label>报销凭证名称</label>
+        <md-select ng-model="selectedUser" ng-change="setUser(selectedUser)">
+          <md-option ng-value="fp" ng-repeat="fp in fapiao"  ng-selected="$first">
+            {{fp.name}}
+          </md-option>
+        </md-select>
+      </md-input-container>
+      <p class="ml-text-center">
+        <md-button class="md-raised md-primary ml-button" ng-click="jiaoYan()">提交订单</md-button>
+      </p>
+    </div>
+    <div class="right ml-padding" flex="40">
+      <div class="ml-panel">
+        <div class="thumbnail" style="background-image:url('{{order.hotil.pic}}');background-size:cover;background-position:center;height:30vh;">
+        </div>
+        <h3>{{order.hotil.name}}</h3>
+        <p>{{order.hotil.address}}</p>
+        <md-divider></md-divider>
+        <ul class="ml-list">
+          <li><span class="title">房型：</span>{{order.room.name}}［{{order.room.break}}］</li>
+          <li><span class="title">床型：</span>{{order.room.bedType}}</li>
+          <li><span class="title">WIFI：</span>{{order.room.internet}}</li>
+        </ul>
+        <md-divider></md-divider>
+        <p class="price">价格合计：<span class="total"><i>¥</i>{{order.price.price * order.roomNum * order.days}}</span></p>
+      </div>
+    </div>
+  </div>
+</md-whiteframe>
+</div>
+<!-- Main Content End -->
+</div>
+</div>

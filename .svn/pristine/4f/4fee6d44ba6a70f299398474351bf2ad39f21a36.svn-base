@@ -1,0 +1,31 @@
+<md-card layout="column" ng-controller="personalCtrl" ng-cloak class="personalCenter">
+	<div ng-controller="addInvoiceCtrl">
+		<!--<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2>新增发票抬头</h2>
+				<span flex></span>
+			</div>
+		</md-toolbar>-->
+		<div class="blue-line ml-fontsize-15 ml-padding-20 ml-bgcolor-fc"><span></span>新增发票抬头</div>
+		<md-divider></md-divider>
+		<div class="ml-padding-20">
+			<div layout="row">
+				<md-input-container class="md-block" flex="80">
+					<label>入账单位</label>
+					<input ng-model="ruzhangdanwei.company_name" disabled>
+				</md-input-container>
+				<div flex>
+					<md-button id="input_33" drruzhangdanwei="{'model':'ruzhangdanwei'}" class="md-raised md-primary">选择</md-button>
+				</div>
+			</div>
+			<md-input-container class="md-block ml-nomargin" flex="80">
+				<label>发票抬头</label>
+				<input ng-model="ruzhangdanwei.invoice_head" disabled>
+			</md-input-container>
+			<div layout="row" layout-align="center center">
+				<md-button ng-click="go('/personalCenter/invoice');" class="md-raised">取消</md-button>
+				<md-button ng-click="addInvoiceBaocun()" class="md-raised md-primary">保存</md-button>
+			</div>
+		</div>
+	</div>
+</md-card>

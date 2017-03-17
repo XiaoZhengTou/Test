@@ -1,0 +1,43 @@
+<div layout="column" ng-controller="personalCtrl" ng-cloak class="personalCenter">
+	<div ng-controller="bangdingCtrl" class="bangding">
+		<md-card>
+			<div layout="row" class="bangding-padding">
+				<div flex="80" layout="row" class="bangding-in">
+					<i class="iconfont qunaer-icon">&#xe63e;</i>
+					<span>绑定去哪儿账号</span>
+					<span class="ml-fontsize-12 ml-color-green">已绑定</span>
+				</div>
+				<md-button flex="20" class="md-raised md-primary bangding-btn ml-nomargin" ng-click="jiebang()">解绑</md-button>
+			</div>
+			<md-divider></md-divider>
+			<div ng-show="bottom == 'show'" ng-hide="bottom == 'hide'" class="bangding-card">
+				<div class="bangding-padding-in ml-color-73 ml-fontsize-12">
+					<p>
+						您正在使用的是去哪儿账号关联1个QQ账号<br /> 请你牢记改去哪儿账号：293849
+					</p>
+					<p>
+						1、解绑后需要使用此账号进行登录，解绑后的账号仍可正常使用，订单等信息不会丢失，忘记密码请在登录页找回密码;<br /> 2、该账号下关联QQ账号将全部解绑;
+					</p>
+				</div>
+				<md-divider></md-divider>
+				<div class="bangding-padding" layout="row">
+					<div flex>
+						<md-button class="md-raised md-warn bangding-btn ml-nomargin">解除绑定</md-button>
+					</div>
+					<div flex="10" class="ml-color-blue ml-textalign-right shouqi" ng-click="shouqi()">收起<i class="iconfont ml-fontsize-12">&#xe603;</i></div>
+				</div>
+			</div>
+		</md-card>
+		<md-card>
+			<div layout="row" ng-click="switch()" class="bangding-padding">
+				<div flex="80" layout="row" class="bangding-in">
+					<i class="iconfont jingdong-icon">&#xe63f;</i>
+					<span>绑定京东账号</span>
+					<span class="ml-fontsize-12 ml-color-73">未绑定</span>
+				</div>
+				<md-button flex="20" class="md-raised md-primary bangding-btn ml-nomargin" ng-click="bangding()">绑定</md-button>
+			</div>
+		</md-card>
+
+	</div>
+</div>

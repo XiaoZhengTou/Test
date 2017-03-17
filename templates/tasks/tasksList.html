@@ -1,0 +1,32 @@
+<div ng-controller="tasksListCtrl" ng-cloak class="md-inline-form">
+	<md-card>
+		<md-tabs md-dynamic-height md-border-bottom>
+			<md-tab label="单据信息" md-on-select="getCurrent()">
+				<!--<div flex ng-include="'templates/internalTransaction/customer.html'"></div>-->
+
+			</md-tab>
+			<md-tab label="影像及附件" md-on-select="getComplete()">
+				<!--<div flex ng-include="'templates/internalTransaction/supplier.html'"></div>-->
+			</md-tab>
+			<md-tab label="审批流程" md-on-select="getComplete()">
+				<!--<div flex ng-include="'templates/internalTransaction/supplier.html'"></div>-->
+			</md-tab>
+			<md-tab label="预凭证信息" md-on-select="getComplete()">
+				<!--<div flex ng-include="'templates/internalTransaction/supplier.html'"></div>-->
+			</md-tab>
+			<md-tab label="付款信息" md-on-select="getComplete()">
+				<!--<div flex ng-include="'templates/internalTransaction/supplier.html'"></div>-->
+			</md-tab>
+		</md-tabs>	
+	</md-card>
+	<md-card>
+		<div layout="row" class="padding-left-right-16" layout-align="end">
+			<md-button class="md-raised md-primary" aria-label="审单日志" ng-click="find()">审单日志</md-button>
+			<md-button class="md-raised md-primary" aria-label="作废凭证" ng-click="find()">作废凭证</md-button>
+			<md-button class="md-raised md-primary" aria-label="作废付款单" ng-click="find()">作废付款单</md-button>
+			<md-button class="md-raised md-primary" aria-label="生成付款单" ng-click="find()">生成付款单</md-button>
+			<md-button class="md-raised md-primary" aria-label="生成凭证" ng-click="find()">生成凭证</md-button>
+			<md-button class="md-raised md-primary" aria-label="审单处理" ng-click="find()">审单处理</md-button>
+		</div>	
+	</md-card>
+</div>

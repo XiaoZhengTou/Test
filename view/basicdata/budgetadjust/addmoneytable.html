@@ -1,0 +1,169 @@
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<div ng-controller="addmoneytableCtrl" id="addmoneytable">
+
+    <div class="full-height ng-scope">
+        <div class="full-image-background layout-fill ng-scope layout-row" layout="row" layout-fill="">
+            <div class="animate-wrapper layout-row flex" flex="" layout="row">
+                <div id="ui-login" class="login-frame ng-scope layout-column flex" ui-view="" flex="" layout="column">
+                    <div layout="row" flex="" layout-padding="" layout-fill="" layout-align="center center" class="layout-fill ng-scope layout-align-center-center layout-row flex" style="padding: 0px">
+                        <div flex="40" flex-lg="50" flex-md="70" flex-xs="100" class="flex-xs-100 flex-md-70 flex-lg-50 flex-40" style="max-width: 100%;padding: 0px">
+                            <md-card class="md-cyan-theme" style="max-width: 100%">
+
+                                <md-toolbar ng-hide=" filter.show" class="md-table-toolbar md-default" style="background-color: white;">
+                                    <div class="md-toolbar-tools" >
+                                        <!--<div style="background-color: #2196f3;">-->
+                                            <!--<h2 class="md-title" style="color: black;font-size: 16px;margin-left: 4px;padding-left: 20px;background-color: white;">预算金额追加</h2>-->
+                                        <!--</div>-->
+                                        <span>预算金额追加</span>
+                                        <div flex></div>
+                                        <md-button class="md-icon-button" ng-click="back()" style=" margin-right: 0px;">
+                                            <md-icon md-svg-src="img/icons/back.svg"></md-icon>
+                                        </md-button>
+                                    </div>
+                                </md-toolbar>
+                                <md-toolbar ng-show="filter.show " class="md-table-toolbar md-default" style="background-color: white">
+                                    <div class="md-toolbar-tools">
+                                        <md-icon md-svg-src="img/icons/search.svg"></md-icon>
+                                        <form flex="" name="filter.form">
+                                            <input type="text" ng-model="query.filter" ng-model-options="filter.options" placeholder="search" style="width: 100%;border: white;margin-left: 7px;">
+                                        </form>
+                                        <md-button class="md-icon-button" ng-click="removeFilter()">
+                                            <md-icon md-svg-src="img/icons/ic_close_24px.svg" style="color: black;"></md-icon>
+                                        </md-button>
+                                    </div>
+                                </md-toolbar>
+
+                                <md-content class=" md-cyan-theme" style="background-color: white;">
+                                    <form name="addmoneylist" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+                                        <table class="table ng-scope" style="margin-bottom: 0px">
+                                            <tr>
+                                                <td colspan="3">
+                                                    <md-icon md-svg-src="img/icons/right.svg" style="color: black;margin-left: 7%;"></md-icon><span style="color: blue;display: inline-block;vertical-align: middle;margin-left: 1%;">第一步：填写单据信息</span>
+                                                    <md-icon md-svg-src="img/icons/right.svg" style="color: black;margin-left: 7%;"></md-icon><span style="display: inline-block;vertical-align: middle;margin-left: 1%;">第二步：提交流程</span>
+                                                </td>
+                                            </tr>
+                                            <!--<tr>-->
+                                                <!--<td style="max-width: 20px;border-top: 0px;"><span style="float: right;">申请日期：</span></td>-->
+                                                <!--<td style="border-top: 0px;">-->
+                                                    <!--<md-datepicker ng-model="query.apply_date" md-placeholder="" required=""></md-datepicker>-->
+                                                <!--</td>-->
+                                                <!--<td style="border-top: 0px;"></td>-->
+                                            <!--</tr>-->
+                                            <tr>
+                                                <td style="max-width: 20px;border-top: 0px;"><span style="float: right;">预算名称：</span></td>
+                                                <td style="border-top: 0px;">
+                                                    <md-select ng-model="query.budget_headers_id" style="margin: 0px;width:50%;" ng-change="changebudget();getbudgetlist11(query.budget_headers_id)" required>
+                                                        <md-option ng-repeat="budget in budgetlist" value="{{budget.budget_headers_id}}" >{{budget.budget_name}}</md-option>
+                                                    </md-select>
+                                                </td>
+                                                <td style="border-top: 0px;"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="border-top: 0px;border-bottom: 1px solid #ddd;max-width: 20px;"><span style="float: right">调整事由：</span></td>
+                                                <td style="border-top: 0px;border-bottom: 1px solid #ddd;">
+                                                    <input ng-model="query.reason_desc" type="text" style="width: 50%;margin: 0;" required>
+                                                </td>
+                                                <td style="border-top: 0px;border-bottom: 1px solid #ddd;"></td>
+                                            </tr>
+                                        </table>
+
+                                        <div>
+                                            <div class="md-toolbar-tools" layout="row">
+                                                <span></span>
+                                                <span flex></span>
+                                                <md-menu>
+                                                    <md-button aria-label="Open user menu" ng-click="$mdOpenMenu()" aria-label="side navigation">
+                                                        <md-icon md-svg-src="img/icons/three.svg"></md-icon>
+                                                    </md-button>
+                                                    <md-menu-content width="4">
+                                                        <md-menu-item>
+                                                            <md-button aria-label="side navigation">
+                                                                <md-icon md-svg-src="img/icons/excel_in.svg"></md-icon>
+                                                                <span class="ng-scope">Excel模板</span>
+                                                            </md-button>
+                                                        </md-menu-item>
+                                                        <!--<md-menu-divider></md-menu-divider>-->
+                                                        <md-menu-item>
+                                                            <md-button aria-label="side navigation">
+                                                                <md-icon md-svg-src="img/icons/excel_out.svg"></md-icon>
+                                                                <span class="ng-scope">Excel导出</span>
+                                                            </md-button>
+                                                        </md-menu-item>
+                                                    </md-menu-content>
+                                                </md-menu>
+                                                <md-button class="md-primary" aria-label="批量删除" ng-click="deleteall(selected)" ng-disabled="selected.length == 0" disabled="disabled">
+                                                    <md-icon md-svg-src="img/icons/add.svg" style="margin-right: 3px"></md-icon>批量删除
+                                                </md-button>
+                                                <md-button class="md-primary" aria-label="暂存" ng-click="save()" ng-disabled="addmoneylist.$invalid">
+                                                    <md-icon md-svg-src="img/icons/add.svg" style="margin-right: 3px"></md-icon>暂存
+                                                </md-button>
+                                                <md-button class="md-primary" aria-label="下一步" ng-click="next_list()" ng-disabled="addmoneylist.$invalid || appdata.length==0" disabled="disabled">
+                                                    <md-icon md-svg-src="img/icons/add.svg" style="margin-right: 3px"></md-icon>下一步
+                                                </md-button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                    <md-table-container style="width: 95%;padding-left: 2.5%;">
+                                        <table data-md-table data-md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" data-ng-model="selected" md-progress="promise">
+                                            <!--<table data-md-table data-ng-model="selected" md-progress="promise">-->
+                                            <thead md-head data-md-order="query.order" md-on-reorder="getDesserts">
+                                            <tr md-row>
+                                                <th md-column>序号</th>
+                                                <!--<th md-column>预算名称</th>-->
+                                                <th md-column>预算单元</th>
+                                                <!--<th md-column>预算金额</th>-->
+                                                <!--<th md-column>已用金额</th>-->
+                                                <!--<th md-column>剩余金额</th>-->
+                                                <th md-column>调整金额</th>
+                                                <th md-column>操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody md-body>
+                                            <tr md-row md-select="$index" md-select-id="budget_node_id" ng-repeat="item in appdata" md-auto-select="options.autoSelect">
+                                                <!--<tr md-row ng-repeat="item in appdata">-->
+                                                <td md-cell>{{$index+1}}</td>
+                                                <!--<td md-cell>{{item.budget_name}}</td>-->
+                                                <td md-cell>{{item.budget_node_name}}</td>
+                                                <!--<td md-cell>{{item.budget_amount}}</td>-->
+                                                <!--<td md-cell>{{item.fee_amount}}</td>-->
+                                                <!--<td md-cell>{{item.budget_amount-item.fee_amount}}</td>-->
+                                                <td md-cell>{{item.adjust_amount}}</td>
+
+                                                <td md-cell style="word-break: keep-all;white-space: nowrap;">
+                                                    <a ng-click="deleteone($index)" style="cursor: pointer;color: blue">删除</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="9">
+                                                    <md-button class="md-fab md-accent md-hue-1" style="float: right;" ng-click="add($event,query.budget_headers_id,appdata)" ng-disabled="addmoneylist.$invalid">
+                                                        <h1 style="margin-top: 0px;font-size: 36px;color: white">+</h1>
+                                                    </md-button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </md-table-container>
+
+
+                                </md-content>
+                            </md-card>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    #addmoneytable .active-Y{
+        background-color: green;
+        color: green;
+    }
+    #addmoneytable .active-N{
+        background-color: red;
+        color: red;
+    }
+</style>

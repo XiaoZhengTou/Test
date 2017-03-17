@@ -1,0 +1,95 @@
+<div ng-controller="modifyCtrl as vm" ng-cloak class="buyone">
+  <form name="form" novalidate="novalidate" ng-submit="modify(form.$valid)"  ng-cloak>
+
+    <md-card>
+      	<md-card-content>
+      		<h2 class="title">记一笔明细</h2>
+      		<div layout="row">
+		    	<div layout="row" flex>
+			      	<md-input-container class="md-block" flex="90">
+			    		<label>金额</label>
+			    		<input name="amount" min="0" ng-pattern="/^[0-9]*$/"  ng-model="editAccount.amount" required/>
+				    	<div ng-show="form.amount.$error.required && !form.amount.$pristine" class="md-input-messages-animation ng-active">
+		              	报销金额不能为空
+		        		</div>
+			            <div ng-show="form.amount.$error.min">报销金额必须大于0</div>
+			            <div ng-show="form.amount.$error.pattern" class="md-input-messages-animation ng-active">
+			              	报销金额必须是数字
+			            </div>
+	            
+			    	</md-input-container>
+		      </div>
+		      <div layout="row" flex>
+		      	<md-input-container class="md-block" flex="90">
+			    		<label>币种</label>
+			    		<md-select ng-model="editAccount.currencyCode">
+			    			<md-option ng-value="d" ng-repeat="d in currencys">{{d}}</md-option>
+				      </md-select>
+			    	</md-input-container>
+		      </div>
+			</div>
+      		
+      		<div layout="row">
+		    	<div layout="row" flex="50">
+			      	<md-input-container class="md-block" flex="90">
+			    		<label>说明</label>
+			    		<textarea ng-model="editAccount.billingDesc" md-maxlength="50" rows="1" md-select-on-focus></textarea>
+			    	</md-input-container>
+			     </div>
+			     <div layout="row" flex="50">
+				    <div layout="row" flex>
+			          <md-checkbox ng-model="editAccount.ifNeedReim" ng-true-value="1" ng-false-value="0" class="custom-checkbox">
+	              		是否报销
+			          </md-checkbox>
+				    </div>
+			    </div>
+			</div>
+					
+			<div layout="row">
+		      <div layout="row" flex = "50">
+		      	<md-input-container class="md-block" flex="90">
+		    		<label>报销类型</label>
+		    		<md-select ng-model="editAccount.feeCategoryCode">
+		    			<md-option ng-value="d.id" ng-repeat="d in categorys">{{d.node}}</md-option>
+		        	</md-select>
+		    	</md-input-container>
+		      </div>
+		      
+		      <div layout="row" flex = "50">
+			      	<md-input-container class="md-block" flex="90">
+		      		<label>报销类型子项</label>
+			    		<md-select ng-model="editAccount.ecoTypeId">
+			    			<md-option ng-value="$index" ng-repeat="a in categorys[0].child">{{a}}</md-option>
+			        </md-select>
+			    </md-input-container>
+		      </div>
+			</div>
+
+			<tongyong2 ng-show="(editAccount.feeCategoryCode!=3)&&(editAccount.feeCategoryCode!=2)"></tongyong2>
+    	<jiaotong2 ng-show="editAccount.feeCategoryCode==3"></jiaotong2>
+    	<zhusu2 ng-show="editAccount.feeCategoryCode==2"></zhusu2>
+        	
+   </md-card-content>
+        
+    <!-- 影像上传列表begin -->
+		<md-card-content ng-show="files.length > 0">
+		  	<h2 class="title">影像列表</h2>
+			<div class="upload-preview">
+			  	<div ng-repeat="f in files" class="img">
+			  		<img src="" data-ng-src="{{f.base64}}" />
+			  	</div>
+			</div>
+		</md-card-content>
+		<!-- 影像上传列表end -->
+        
+    <!-- 操作区开始 -->
+		<md-card-content>
+		    <div layout="row" layout-align="center center">
+		      <md-button class="md-raised md-primary" ng-click="openDialog()" style="height:36px;"><i class="iconfont">&#xe665;</i> 影像上传</md-button>
+		      <md-button class="md-raised md-primary" aria-label="保存" type="submit" ng-disabled="form.$invalid">修改</md-button>
+		    </div>
+		</md-card-content>
+		<!-- 操作区结束 -->
+    </md-card>
+  </form>
+</div>

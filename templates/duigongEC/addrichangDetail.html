@@ -1,0 +1,50 @@
+<md-dialog aria-label="新增明细">
+	<form ng-cloak>
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2>报销明细</h2>
+				<span flex></span>
+				<md-button class="md-icon-button" ng-click="cancel()">
+					<md-icon aria-label="Close dialog">
+						<i class="iconfont">&#xe634;</i>
+					</md-icon>
+				</md-button>
+			</div>
+		</md-toolbar>
+		<md-dialog-content>
+			<div class="md-dialog-content">
+				<div layout="column" style="width:600px;">
+                    <dr-Budgets  remodel="budgets" datamodel="oldbudget" titlename="预算树 (必填)" titlenamea="预算部门 (必填)" titlenameb="预算部科目(必填)" titlenamec="预算单元(必填)"></dr-Budgets>
+<!--                    <md-input-container>
+						<label>事由</label>
+						<input ng-model="form.reason_desc" type="text">
+					</md-input-container>-->
+					<div layout="row">
+						<md-input-container>
+						<label>费用申请</label>
+							<input ng-model="ea" type="text" dreachoose="{'model':'ea'}">
+							<span ng-repeat="item in ea">{{item.reason_desc}},</span>
+						</md-input-container>
+						<md-input-container>
+							<label>金额</label>
+							<input ng-model="form.apply_amount" type="number" min="0">
+						</md-input-container>
+						<md-input-container>
+							<label>是否最后一次报销</label>
+							<md-select ng-model="form.is_last_reim">
+								<md-option ng-value="'Y'" >是</md-option>
+								<md-option ng-value="'N'" >否</md-option>
+							</md-select>
+						</md-input-container>
+					</div>
+				</div>
+			</div>
+		</md-dialog-content>
+		<md-dialog-actions layout="row">
+			<span flex></span>
+			<md-button class="md-primary" ng-click="answer(form)">
+				确定
+			</md-button>
+		</md-dialog-actions>
+	</form>
+</md-dialog>

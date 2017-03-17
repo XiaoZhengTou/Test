@@ -1,0 +1,104 @@
+<md-dialog aria-label="修改币种" ng-cloak style="min-width: 50%" id="currency-dialog2-detail">
+    <form name="addcurrency1" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 style="color: white">修改币种</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="padding-top: 0px;padding-bottom: 0px">
+
+                <div class="demo-tab" style="padding: 25px 25px 0 25px; text-align: center;">
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>币种编码(必填)</label>
+                        <input ng-model="currency.currency_code" type="tel" required>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>币种名称(必填)</label>
+                        <input ng-model="currency.currency_name" type="text" required>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>发行国家代码(必填)</label>
+                        <input ng-model="currency.issuing_territory_code" type="tel" required>
+                    </md-input-container>
+
+                    <!--<md-input-container class="md-block" flex-gt-sm style="text-align: left">-->
+                        <!--<label>使用标志(必选)</label>-->
+                        <!--<md-select ng-model="currency.enable_flag" required>-->
+                            <!--<md-option value="Y">可用</md-option>-->
+                            <!--<md-option value="N">不可用</md-option>-->
+                        <!--</md-select>-->
+                    <!--</md-input-container>-->
+
+                    <md-input-container class="md-block" flex-gt-sm style="text-align: left;padding-top: 20px;padding-bottom: 20px;">
+                        <label>使用状态(必选)</label>
+                        <md-select ng-model="currency.active_flag" required>
+                            <md-option value="Y">有效</md-option>
+                            <md-option value="N">无效</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>精度</label>
+                        <input ng-model="currency.preci" type="number">
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>符号</label>
+                        <input ng-model="currency.symbol" type="text">
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>扩展精度</label>
+                        <input ng-model="currency.extended_precision" type="number">
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>最小币值</label>
+                        <input ng-model="currency.minimum_accountable_unit" type="number">
+                    </md-input-container>
+
+                    <!--<md-input-container class="md-block" flex-gt-sm>-->
+                        <!--<label>上次提取时间</label>-->
+                        <!--<input ng-model="currency.load_date" type="text">-->
+                    <!--</md-input-container>-->
+
+                    <md-datepicker ng-model="currency.load_date" md-placeholder="上次提取时间" style="width: 100%;margin-left: -2.6%;text-align: left"></md-datepicker>
+
+                    <md-input-container class="md-block" flex-gt-sm style="text-align: left;padding-top: 20px;padding-bottom: 20px;">
+                        <label>ISO标志</label>
+                        <md-select ng-model="currency.iso_flag">
+                            <md-option value="Y">已使用</md-option>
+                            <md-option value="N">未使用</md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <md-button class="md-primary md-raised" ng-click="delete()"  style="background-color:red;color: white;float: right;margin-right: 3%;">删除</md-button>
+            <!--<span flex></span>-->
+            <md-button class="md-primary md-raised" ng-click="answer()"  style="color: white;float: right"
+                       ng-disabled="addcurrency1.$invalid" disabled="disabled">确定</md-button>
+
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+
+<style>
+    #currency-dialog2-detail .md-datepicker-input-container{
+        width: 93.9%;
+        margin-left: -2px;
+    }
+    #currency-dialog2-detail .md-datepicker-calendar-icon{
+        margin-bottom: -7px;
+    }
+</style>

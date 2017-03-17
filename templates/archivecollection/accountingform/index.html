@@ -1,0 +1,113 @@
+<div ng-controller="formArchiveCtrl as ctrl" layout="column" ng-cloak class="md-inline-form">
+	<md-card layout-padding>
+		<div layout="row">
+			<div layout="row" flex="33">
+				<md-input-container class="md-block ml-nomargin" flex="90">
+					<label>档案编号</label>
+					<input id="catalogue1" ng-model="query.query_param.archives_code">
+				</md-input-container>
+			</div>
+			<div layout="row" flex="33">
+				<md-input-container flex="70" class="md-block ml-nomargin" flex="90">
+					<label>著录状态</label>
+					<md-select ng-model="query.query_param.status">
+						<md-option value="1">草稿</md-option>
+						<md-option value="2">已提交</md-option>
+						<md-option value="3">已作废</md-option>
+					</md-select>
+				</md-input-container>
+			</div>
+			<div layout="row" flex="33">
+				<md-input-container class="md-block ml-nomargin" flex="90">
+					<label>公司</label>
+						
+					<md-select ng-model="query.query_param.company_id">
+						<md-option ng-repeat="c in $root.companies" value="{{c.company_id}}">{{c.company_name}}</md-option>
+					</md-select>
+				</md-input-container>
+			</div>
+		</div>
+		<div layout="row">
+			<div layout="row" flex="33">
+				<md-input-container class="md-block ml-nomargin" flex="90">
+					<label>档案说明</label>
+					<input ng-model="query.query_param.remark">
+				</md-input-container>
+			</div>
+			<div layout="row" flex="33" layout-align="start center">
+				<md-button class="md-raised md-primary" aria-label="搜 索" ng-click="onPaginate()" class="md-block" style="margin-top:0;margin-bottom:0;">搜 索</md-button>
+				<md-button class="md-raised" aria-label="清 空" ng-click="reset()" class="md-block" style="margin-top:0;margin-bottom:0;">清 空</md-button>
+			</div>
+			<div flex></div>
+		</div>
+	</md-card>
+
+	<md-card>
+		<md-toolbar class="md-table-toolbar md-default">
+			<div class="md-toolbar-tools">
+				<h2 class="md-title">会计报表列表</h2>
+				<div flex></div>
+				<md-menu>
+			      <md-button aria-label="下拉菜单" class="md-icon-button" ng-click="ctrl.openMenu($mdOpenMenu, $event)">
+			        <md-icon md-menu-origin md-svg-src="img/icons/three.svg"></md-icon>
+			      </md-button>
+			      <md-menu-content width="4">
+			        <md-menu-item>
+			          <md-button ng-click="ctrl.redial($event)">
+			          	Excel导出
+			          </md-button>
+			        </md-menu-item>
+			        <md-menu-item>
+			          <md-button ng-click="ctrl.checkVoicemail()">
+			            Excel导入
+			          </md-button>
+			        </md-menu-item>
+			        <md-menu-item>
+			          <md-button ng-click="batchSubmit()" ng-disabled="selected.length == 0">
+			          	 批量提交
+			          </md-button>
+			        </md-menu-item>
+			      </md-menu-content>
+			    </md-menu>
+			</div>
+		</md-toolbar>
+
+		<md-table-container>
+			<table md-table md-row-select multiple ng-model="selected" md-progress="promise">
+				<thead md-head>
+					<tr md-row>
+						<th md-column md-numeric>档案编号</th>
+						<th md-column md-numeric>档案说明</th>
+						<th md-column md-numeric>分类目录号</th>
+						<th md-column md-numeric>年度</th>
+						<th md-column md-numeric>月份</th>
+						<th md-column md-numeric>附件页数</th>
+						<th md-column md-numeric>著录状态</th>
+						<th md-column md-numeric>公司</th>
+					</tr>
+				</thead>
+				<tbody md-body>
+					<tr md-row md-select="archive.archives_id" md-select-id="archives_id" ng-disabled="archive.status == 2 || archive.status == 3" ng-repeat="archive in archives.datalist" ng-click="editRow(archive)">
+						<td md-cell>{{archive.archives_code}}</td>
+						<td md-cell>{{archive.remark}}</td>
+						<td md-cell>{{archive.category_name}}</td>
+						<td md-cell>{{archive.year_period}}</td>
+						<td md-cell>{{archive.month_period}}</td>
+						<td md-cell>{{archive.attachments_number}}</td>
+						<td md-cell ng-switch on="archive.status"> <span ng-switch-when="1">草稿</span> <span ng-switch-when="2">已提交</span><span ng-switch-when="3">已作废</span></td>
+						<td md-cell>{{archive.company_name}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</md-table-container>
+
+		<md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '，总条数：'}" md-limit="query.page_size" md-limit-options="[5, 10, 15]" md-page="query.page_number" md-total="{{archives.totalRow}}" md-on-paginate="onPaginate" md-page-select></md-table-pagination>
+
+		<md-button class="md-fab md-accent md-hue-1" style="position:fixed;bottom:100px;right:50px;padding:0;" aria-label="新增" ng-click="go('/accountingform/add')">
+			<i class="iconfont" style="color:#fff;font-size:20px;">&#xe631;</i>
+			<md-tooltip md-direction="left">
+				新增会计报表
+			</md-tooltip>
+		</md-button>
+	</md-card>
+</div>

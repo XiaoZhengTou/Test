@@ -1,0 +1,104 @@
+<div layout="column" ng-controller="personalCtrl" ng-cloak class="personalCenter">
+	<div ng-controller="trOrderDetailCtrl" class="orderRefunds">
+		<md-card>
+			<div class="ml-padding-13 ml-bgcolor-fc">订单信息</div>
+			<md-divider></md-divider>
+			<div layout="row">
+				<div flex class="ml-lineheight-24 ml-padding-20 ml-color-73 ml-fontsize-13">
+					<div class="ml-color-yellow orderStatus" ng-class="{'ml-color-ccc':baseInfo.orderStatus == 4}">
+						<span ng-if="baseInfo.orderType==1">{{baseInfo.orderStatus | getOrderStatus}}</span>
+						<span ng-if="baseInfo.orderType==2">{{baseInfo.orderStatus | tuiOrderStatus}}</span>
+					</div>
+					<div ng-if="baseInfo.orderStatus==2">系统在为您处理，请耐心等待</div>
+					<div layout="row" class="ml-marginT-10">
+						<div layout="column" flex="70">
+							<div layout="row">
+								<span flex="20">订单号</span>
+								<span flex="80" class="ml-color-21">{{baseInfo.orderNo}}</span>
+							</div>
+							<div layout="row">
+								<span flex="20">预订日期</span>
+								<span flex="80" class="ml-color-21">{{baseInfo.createDate}}</span>
+							</div>
+						</div>
+						<div flex="30" class="ml-textalign-right">总金额 ¥ <span class="ml-color-red ml-fontsize-24">{{baseInfo.totalPrice}}</span></div>
+					</div>
+				</div>
+				<div flex="35" layout="row" layout-wrap class="order-main-leftBorder ml-padding-20" ng-if="baseInfo.orderStatus==1">
+					<md-button flex ng-click="orderQuxiao()" class="detail-tbn">取消</md-button>
+					<md-button flex ng-click="orderQueren()" class="detail-tbn">去支付</md-button>
+				</div>
+				<div flex="35" layout="row" layout-wrap class="order-main-leftBorder ml-padding-20" ng-if="baseInfo.orderStatus==3&& baseInfo.orderType != 2 && baseInfo.canRefund==1 ">
+					<md-button flex ng-click="orderTuipiao()" class="detail-tbn">退票</md-button>
+				</div>
+				<!--<div flex="35" layout="row" layout-wrap class="order-main-leftBorder ml-padding-20" ng-if="baseInfo.orderStatus==3 && baseInfo.orderType == 2" >
+					<md-button flex ng-click="tuipiaoDetail()" class="detail-tbn">退票详情</md-button>
+				</div>-->
+			</div>
+			<md-divider></md-divider>
+			<div class="ml-padding-13 ml-bgcolor-fc">车票信息</div>
+			<md-divider></md-divider>
+			<div layout="column" class="ml-color-73 order-main-leftBorder">
+				<div class="ml-padding-20 ">
+					<span class="ml-marginr-20">{{fromStationTime | date:'yyyy-MM-dd'}}</span>
+					<span class="ml-marginr-20">{{baseInfo.fromStationName}}－{{baseInfo.toStationName}}</span>
+					<span class="ml-marginr-20">{{baseInfo.trainNumber}}</span>
+					<span class="ml-marginr-20">{{baseInfo.seatCode}}</span>
+					<!--<span class="ml-marginr-20">{{baseInfo}}</span>-->
+				</div>
+				<md-divider></md-divider>
+				<div class="ml-padding-20 ml-lineheight-30" layout="row">
+					<div flex="15" layout="column">
+						<div class="ml-color-21 order-time">{{fromStationTime| date:'HH:mm'}}</div>
+						<div>{{baseInfo.fromStationName}}</div>
+					</div>
+					<div flex="10" class="ml-textalign-center" style="line-height: 60px;">
+						<i class="iconfont" style="font-size: 50px">&#xe687;</i>
+					</div>
+					<div flex="15" layout="column" class="ml-textalign-right">
+						<div class="ml-color-21 order-time">{{toStationTime| date:'HH:mm'}}</div>
+						<div>{{baseInfo.toStationName}}</div>
+					</div>
+					<div flex style="line-height: 60px;" flex-offset="5">
+						<i class="iconfont">&#xe688;</i>
+						<span ng-if="orderHours>0">{{orderHours}}小时</span><span ng-if="orderMinute>0">{{orderMinute}}分钟</span>
+					</div>
+				</div>
+			</div>
+			<md-divider></md-divider>
+			<div class="ml-padding-13 ml-bgcolor-fc">乘车人</div>
+			<md-divider></md-divider>
+			<div class="ml-lineheight-24 ml-padding-20 ml-color-73" layout="row" layout-wrap>
+				<div flex="40" flex-offset="5" class="passengers-in" ng-repeat="people in ticketLists">
+					<div>
+						<span>姓名：</span>
+						<span>{{people.passengerName}}</span>
+					</div>
+					<div>
+						<span>证件信息：</span>
+						<span>{{people.certNumber}}</span>
+					</div>
+					<div>
+						<span>座次：</span>
+						<span>{{people.seatCode}}</span>
+					</div>
+				</div>
+			</div>
+			<md-divider></md-divider>
+			<div class="ml-padding-13 ml-bgcolor-fc">联系人</div>
+			<md-divider></md-divider>
+			<div class="ml-lineheight-24 ml-padding-20 ml-color-73">
+				<div flex-offset="5">
+					<div>
+						<span>姓名：</span>
+						<span>{{contact.contactName}}</span>
+					</div>
+					<div>
+						<span>手机号码：</span>
+						<span>{{contact.mobile}}</span>
+					</div>
+				</div>
+			</div>
+		</md-card>
+	</div>
+</div>

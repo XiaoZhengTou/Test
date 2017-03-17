@@ -1,0 +1,29 @@
+<div layout="column" ng-controller="personalCtrl" ng-cloak class="personalCenter">
+	<div ng-controller="nicknameCtrl" class="nickname">
+		<div class="ml-fixed-head">
+			<md-toolbar class="ml-headerbar center">
+				<div class="md-toolbar-tools">
+					<md-button class="md-icon-button back" aria-label="Settings" ng-click="goBack()">
+					    <i class="iconfont">&#xe601;</i>
+					</md-button>
+					<h2>
+					  <span>修改昵称</span>
+					</h2>
+					<span flex></span>
+				</div>
+			</md-toolbar>
+		</div>
+		<div class="personalCenter-main">
+			<md-card class="nickname-main">
+				<md-input-container class="md-block">
+					 <input ng-model="changeNickname" placeholder="修改昵称">
+				</md-input-container>
+			</md-card>
+		</div>
+		<div layout="row" class="personalCenter-btn">
+			<md-button ng-click="nicknameBaocun()" flex="100" class="md-raised md-primary btn-48p">保存</md-button>
+		</div>
+	</div>
+</div>
+	
+

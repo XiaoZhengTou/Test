@@ -1,0 +1,625 @@
+span.star {
+  color: #42A5F5;
+}
+span.star.star5:before {
+  content: '★★★★★';
+}
+span.star.star5:after {
+  content: '';
+}
+span.star.star4:before {
+  content: '★★★★';
+}
+span.star.star4:after {
+  content: '☆';
+}
+span.star.star3:before {
+  content: '★★★';
+}
+span.star.star3:after {
+  content: '☆☆';
+}
+span.star.star2:before {
+  content: '★★';
+}
+span.star.star2:after {
+  content: '☆☆☆';
+}
+span.star.star1:before {
+  content: '★';
+}
+span.star.star1:after {
+  content: '☆☆☆☆';
+}
+span.star:before {
+  content: '';
+}
+span.star:after {
+  content: '☆☆☆☆☆';
+}
+.jiudian .mainContent {
+  margin-bottom: 10px;
+}
+.jiudian.home input[type=text],
+.jiudian.home input[type=date] {
+  box-sizing: border-box;
+}
+.jiudian.home h3.title {
+  font-size: 17px;
+  line-height: 3;
+  font-weight: normal;
+  color: #757575;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+.jiudian.home md-card-content {
+  padding: 30px 15px;
+}
+.jiudian.home md-card-content .title {
+  color: #757575;
+  line-height: 38px;
+}
+.jiudian.home md-card-content div.from,
+.jiudian.home md-card-content div.to {
+  position: relative;
+}
+.jiudian.home md-card-footer {
+  padding: 8px 15px;
+  background: #eaeaea;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+.jiudian.result md-whiteframe {
+  background: white;
+  display: block;
+}
+.jiudian.result .basefilter.loading div.flex-70,
+.jiudian.result .basefilter.loading button.md-primary {
+  pointer-events: none;
+}
+.jiudian.result .filterPanel.loading > md-whiteframe > md-list * {
+  pointer-events: none;
+}
+.jiudian.result .filterPanel md-checkbox {
+  margin-bottom: 0;
+}
+.jiudian.result .filterPanel md-checkbox + md-checkbox {
+  margin-left: 10px;
+}
+.jiudian.result .filterPanel span + md-checkbox {
+  margin-left: 10px;
+}
+.jiudian.result .filterPanel ul.locationSelect {
+  display: inline-block;
+}
+.jiudian.result .filterPanel ul.locationSelect > li {
+  padding: 0 10px;
+  cursor: pointer;
+}
+.jiudian.result .filterPanel ul.locationSelect > li.active {
+  background: #42A5F5;
+  color: white;
+  border-radius: 3px;
+}
+.jiudian.result .filterPanel ul.locationSelect > li.active:hover {
+  background: #42A5F5;
+}
+.jiudian.result .filterPanel ul.locationSelect > li:hover {
+  background: #c3c3c3;
+  color: white;
+  border-radius: 3px;
+}
+.jiudian.result .filterPanel ul.locationSelect > li + li {
+  margin-left: 10px;
+}
+.jiudian.result .filterPanel span.title {
+  line-height: 55px;
+}
+.jiudian.result .filterPanel md-list-item div.flex > span {
+  padding: 0 10px;
+  cursor: pointer;
+  line-height: 53px;
+}
+.jiudian.result .filterPanel md-list-item div.flex > span.active {
+  background: #42A5F5;
+  color: white;
+  border-radius: 3px;
+}
+.jiudian.result .filterPanel md-list-item div.flex > span.active:hover {
+  background: #42A5F5;
+}
+.jiudian.result .filterPanel md-list-item div.flex .custom {
+  line-height: 23px;
+}
+.jiudian.result .filterPanel md-list-item div.flex .custom.title {
+  margin-left: 10px;
+}
+.jiudian.result .filterPanel md-list-item div.flex .custom.from,
+.jiudian.result .filterPanel md-list-item div.flex .custom.to {
+  width: 4em;
+  border-radius: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 0 5px;
+}
+.jiudian.result .filterPanel md-list-item div.flex .custom.confirm {
+  background: #42A5F5;
+  margin-left: 8px;
+  color: white;
+  border-radius: 3px;
+  padding: 0 10px;
+  border: 1px solid #42A5F5;
+  box-sizing: border-box;
+}
+.jiudian.result .filterPanel md-list-item div.flex .custom.confirm[disabled='disabled'] {
+  background: #c3c3c3;
+  border-color: #c3c3c3;
+}
+.jiudian.result .filterPanel .subPanel {
+  z-index: 1;
+  background: white;
+  left: 0;
+  right: 0;
+  position: absolute;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  top: 48px;
+}
+.jiudian.result .filterPanel .subPanel ul.sublist {
+  margin: 0;
+  padding: 0 8px;
+}
+.jiudian.result .filterPanel .subPanel ul.sublist + ul {
+  margin-top: 10px;
+}
+.jiudian.result .filterPanel .subPanel ul.sublist li {
+  padding: 0 8px;
+  margin-bottom: 5px;
+  color: #757575;
+  cursor: pointer;
+  border-radius: 3px;
+}
+.jiudian.result .filterPanel .subPanel ul.sublist li.empty {
+  color: #ff27a0;
+}
+.jiudian.result .filterPanel .subPanel ul.sublist li.empty:hover {
+  background: none;
+  color: #ff27a0;
+}
+.jiudian.result .filterPanel .subPanel ul.sublist li.active {
+  background: #757575;
+  color: white;
+}
+.jiudian.result .filterPanel .subPanel ul.sublist li.active:hover {
+  background: #757575;
+  color: white;
+}
+.jiudian.result .filterPanel .subPanel ul.sublist li:hover {
+  background: #eaeaea;
+  color: #3b3b3b;
+}
+.jiudian.result .filterPanel md-list-item.toggerShow {
+  padding-bottom: 15px;
+}
+.jiudian.result .filterPanel md-list-item.toggerShow.limitShow {
+  max-height: 55px;
+  overflow: hidden;
+  padding-bottom: 0;
+}
+.jiudian.result .filterPanel md-list-item.toggerShow span.toggerButton {
+  cursor: pointer;
+  line-height: 55px;
+  color: #757575;
+}
+.jiudian.result .filterPanel md-list-item.toggerShow span.toggerButton:after {
+  font-family: 'iconfont';
+  font-size: 1em;
+  content: '\e602';
+  margin-left: 5px;
+}
+.jiudian.result .filterPanel md-list-item.toggerShow span.toggerButton.all:after {
+  content: '\e603';
+}
+.jiudian.result .filterPanel md-list-item.toggerShow md-radio-group md-radio-button {
+  margin-bottom: 5px;
+}
+.jiudian.result .filterPanel md-list-item.toggerShow md-radio-group md-radio-button:not(:first-child) {
+  margin-top: 5px;
+}
+.jiudian.result .hotilList.detailLoading md-whiteframe > div {
+  pointer-events: none;
+}
+.jiudian.result .hotilList.detailLoading md-whiteframe md-progress-circular {
+  position: absolute;
+  margin-top: -60px;
+  margin-left: -60px;
+  top: 50%;
+  left: 50%;
+}
+.jiudian.result .hotilList .navInfo {
+  margin-top: 30px;
+  text-align: center;
+}
+.jiudian.result .hotilList .navInfo p {
+  margin: 0;
+  display: inline-block;
+  width: 50%;
+  font-size: 17px;
+  background: #757575;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 15px;
+  cursor: pointer;
+  max-width: 580px;
+}
+.jiudian.result .hotilList .navInfo p.error {
+  background: #e10c35;
+  color: white;
+}
+.jiudian.result .hotilList .item .image {
+  background-size: cover;
+  background-position: center;
+}
+.jiudian.result .hotilList .item .detail {
+  padding: 8px;
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+.jiudian.result .hotilList .item .detail h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 1;
+}
+.jiudian.result .hotilList .item .detail p {
+  margin-top: 15px;
+  margin-bottom: 0;
+  line-height: 1;
+  vertical-align: bottom;
+  color: #1d1d1d;
+}
+.jiudian.result .hotilList .item .detail p span.title {
+  float: left;
+  width: 4em;
+  height: 1em;
+  line-height: 1em;
+  text-align: justify;
+  color: #757575;
+  margin-right: 2px;
+}
+.jiudian.result .hotilList .item .detail p span.title:after {
+  content: '';
+  display: inline-block;
+  width: 100%;
+}
+.jiudian.result .hotilList .item .detail p span.title + i {
+  color: #757575;
+  margin-right: 5px;
+  display: inline-block !important;
+}
+.jiudian.result .hotilList .item .detail p.empty {
+  color: #757575;
+}
+.jiudian.result .hotilList .item .detail p.price {
+  color: #ff27a0;
+  font-family: arial;
+  font-weight: bold;
+}
+.jiudian.result .hotilList .item .detail p.price i,
+.jiudian.result .hotilList .item .detail p.price b {
+  color: #757575;
+  font-weight: normal;
+}
+.jiudian.result .hotilList .item .detail p.price i {
+  margin-right: 3px;
+}
+.jiudian.result .hotilList .item .detail p.price b {
+  margin-left: 3px;
+}
+.jiudian.result .hotilList .item .detail p.price.empty {
+  color: #757575;
+}
+.jiudian.result .hotilList .item .detail p.price.empty i,
+.jiudian.result .hotilList .item .detail p.price.empty b {
+  display: none;
+}
+.jiudian.result .hotilList .item .detail .ml-button {
+  margin: 15px 0 0;
+  box-shadow: none;
+}
+.jiudian.result .hotilList .item .roomInfo {
+  position: relative;
+}
+.jiudian.result .hotilList .item .roomInfo p.empty {
+  padding: 8px;
+  margin: 0;
+  line-height: 234px;
+  height: 234px;
+  box-sizing: border-box;
+  color: #757575;
+}
+.jiudian.result .hotilList .item .roomInfo:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: linear-gradient(to bottom, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+}
+.jiudian.result .hotilList .item .roomInfo:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: linear-gradient(to top, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+}
+.jiudian.result .hotilList .item .roomInfo ul {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 8px 0;
+  list-style: none;
+  height: 234px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.jiudian.result .hotilList .item .roomInfo ul li {
+  padding: 0 8px;
+}
+.jiudian.result .hotilList .item .roomInfo ul li p {
+  margin: 8px 0 0 0;
+  line-height: 1;
+}
+.jiudian.result .hotilList .item .roomInfo ul li p span {
+  color: #757575;
+}
+.jiudian.result .hotilList .item .roomInfo ul li p:first-child {
+  margin-top: 0;
+}
+.jiudian.result .hotilList .item .roomInfo ul li + li {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+.jiudian.detail md-whiteframe {
+  display: block;
+  background: white;
+}
+.jiudian.detail .hotilInfo {
+  padding: 15px;
+}
+.jiudian.detail .hotilInfo > div {
+  clear: both;
+}
+.jiudian.detail .hotilInfo .name {
+  font-size: 20px;
+  margin: 0;
+  line-height: 1;
+}
+.jiudian.detail .hotilInfo .price {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #757575;
+}
+.jiudian.detail .hotilInfo .price b {
+  color: #ff27a0;
+  font-size: 23px;
+  margin: 0 3px;
+}
+.jiudian.detail .hotilInfo .address {
+  color: #757575;
+  margin: 8px 0 10px;
+  line-height: 1;
+}
+.jiudian.detail .hotilInfo .slidePart {
+  width: 40vw;
+}
+.jiudian.detail .hotilInfo .commentInfo {
+  background: #f9f9f9;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 8px;
+}
+.jiudian.detail .hotilInfo .commentInfo p.rate {
+  color: #42A5F5;
+}
+.jiudian.detail .hotilInfo .commentInfo p.rate .total b {
+  font-size: 25px;
+  font-family: arial;
+}
+.jiudian.detail .hotilInfo .commentInfo p {
+  margin: 10px 0 0;
+  line-height: 1;
+  color: #757575;
+}
+.jiudian.detail .slide div.image {
+  width: 20.83vw;
+  height: 15.6vw;
+  background-size: cover;
+  background-position: center;
+}
+.jiudian.detail .picList {
+  height: 16vw;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.jiudian.detail .picList > div {
+  height: 5.2vw;
+  width: 6.2vw;
+  border: 5px solid #eaeaea;
+  box-sizing: border-box;
+  display: inline-block;
+  background-size: cover;
+  background-position: center;
+  transition: all 0.3s ease;
+}
+.jiudian.detail .picList > div.active {
+  border-color: #42A5F5;
+}
+.jiudian.detail .detailTab md-tabs-wrapper {
+  border-bottom: none;
+}
+.jiudian.detail .detailTab md-tabs-wrapper md-ink-bar {
+  background: #42A5F5;
+  top: 0;
+}
+.jiudian.detail .detailTab md-tab-item {
+  background: #eaeaea;
+  box-sizing: border-box;
+  border-bottom: none;
+  position: relative;
+}
+.jiudian.detail .detailTab md-tab-item.md-active {
+  background: white;
+}
+.jiudian.detail .detailTab md-tab-item.md-active:after {
+  border-bottom-color: white;
+  z-index: 10;
+}
+.jiudian.detail .detailTab md-tab-item + md-tab-item:after {
+  border-left: none;
+}
+.jiudian.detail .detailTab md-tab-item:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+.jiudian.detail .detailTab md-content {
+  margin-top: -1px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+.jiudian.detail .detailTab .mapContent img {
+  max-width: none;
+}
+.jiudian.detail .detailTab .setDate .total {
+  line-height: 38px;
+  font-size: 17px;
+  color: #757575;
+}
+.jiudian.detail .detailTab .setDate .total span {
+  margin: 0 3px;
+  color: #e10c35;
+  font-family: Arial;
+}
+.jiudian.detail .detailTab .roomInfo > .title {
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  line-height: 2.5;
+  background: #eaeaea;
+  padding: 0 5px;
+  box-sizing: border-box;
+}
+.jiudian.detail .detailTab .roomInfo .rooms {
+  padding: 0 5px;
+  box-sizing: border-box;
+}
+.jiudian.detail .detailTab .roomInfo .rooms .info {
+  padding: 15px 0;
+}
+.jiudian.detail .detailTab .roomInfo .rooms .info h5 {
+  font-size: 17px;
+  margin: 0;
+  line-height: 1;
+}
+.jiudian.detail .detailTab .roomInfo .rooms .info p {
+  margin: 8px 0 0;
+  line-height: 1;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #757575;
+}
+.jiudian.detail .detailTab .roomInfo .rooms .info p span {
+  color: #232323;
+}
+.jiudian.detail .detailTab .roomInfo .rooms .room {
+  padding: 15px 0;
+}
+.jiudian.detail .detailTab .roomInfo .rooms .room ul {
+  padding: 5px 0;
+}
+.jiudian.detail .detailTab .roomInfo .rooms .room ul li {
+  vertical-align: top;
+}
+.jiudian.detail .detailTab .roomInfo .rooms .room ul li.refound {
+  color: #757575;
+}
+.jiudian.detail .detailTab .roomInfo .rooms .room .name {
+  width: 33.33333333%;
+}
+.jiudian.detail .detailTab .roomInfo .rooms .room .break {
+  width: 13.33333333%;
+}
+.jiudian.detail .detailTab .roomInfo .rooms .room .refound {
+  width: 13.33333333%;
+}
+.jiudian.detail .detailTab .roomInfo .rooms .room .price {
+  width: 13.33333333%;
+}
+.jiudian.detail .detailTab .roomInfo .rooms .room .order {
+  width: 22.66666667%;
+}
+.jiudian.order md-whiteframe {
+  background: white;
+  display: block;
+}
+.jiudian.order .orderPanel {
+  padding: 16px;
+}
+.jiudian.order .orderPanel ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: #757575;
+}
+.jiudian.order .orderPanel .left h3 {
+  margin-left: -24px;
+  padding-left: 24px;
+  border-left: 3px solid #42A5F5;
+  font-weight: normal;
+  line-height: 1;
+}
+.jiudian.order .orderPanel .left h3.first {
+  margin-top: 0;
+}
+.jiudian.order .orderPanel .right .ml-panel {
+  background: #eaeaea;
+  padding: 8px;
+}
+.jiudian.order .orderPanel .right .ml-panel div.thumbnail {
+  margin: -8px -8px 0;
+}
+.jiudian.order .orderPanel .right .ml-panel h3 {
+  margin: 15px 0 0;
+  line-height: 1;
+}
+.jiudian.order .orderPanel .right .ml-panel h3 + p {
+  margin: 0;
+  padding: 10px 0;
+  line-height: 1.2;
+}
+.jiudian.order .orderPanel .right .ml-panel ul {
+  padding: 10px 0;
+}
+.jiudian.order .orderPanel .right .ml-panel .ml-list {
+  background: none;
+}
+.jiudian.order .orderPanel .right .ml-panel p.price {
+  text-align: right;
+  padding: 10px 0;
+  line-height: 1;
+  margin: 0;
+}
+.jiudian.order .orderPanel .right .ml-panel p.price .total {
+  font-size: 30px;
+  color: #ff27a0;
+}
+.jiudian.order .orderPanel .right .ml-panel p.price .total i {
+  font-size: 15px;
+  margin-right: 3px;
+}
+.jiudian.orders md-whiteframe {
+  background: white;
+  display: block;
+}

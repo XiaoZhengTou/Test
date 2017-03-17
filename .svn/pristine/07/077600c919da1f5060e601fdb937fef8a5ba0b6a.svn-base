@@ -1,0 +1,125 @@
+<div ng-controller="detailProblemManagementCtrl" class="task airfare">
+	<md-card> 
+		<div class="md-toolbar-tools">
+	      	<h3><span>整改问题详细信息</span></h3> 
+	    </div> 
+	    <md-divider></md-divider>
+	   </br>
+	    <div layout="row">
+			<md-input-container class="md-block ml-nomargin" flex-gt-sm>
+				<label>问题ID</label>
+				<input ng-model="name">
+			</md-input-container>
+			<md-input-container class="md-block ml-nomargin" flex-gt-sm>
+				<label>单据编号</label>
+				<input ng-model="name">
+			</md-input-container>
+			<md-input-container class="md-block ml-nomargin ml-marginlr-10" flex>
+				<label>质检人</label>
+				<input ng-model="name">
+			</md-input-container>
+		</div>
+		<div layout="row">
+			<md-input-container class="md-block ml-nomargin" flex-gt-sm>
+	            <label>质检完成时间</label>
+	            <input ng-model="beginTime" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+			</md-input-container>
+			<md-input-container class="md-block ml-nomargin" flex-gt-sm>
+				<label>质检计编号</label>
+				<input ng-model="name">
+			</md-input-container>
+			<md-input-container class="md-block ml-nomargin ml-marginlr-10" flex>
+				<label>质检计划名称</label>
+				<input ng-model="name">
+			</md-input-container>
+		</div>
+		<div layout="row">
+			<md-input-container class="md-block ml-nomargin" flex-gt-sm>
+				<label>问题代码</label>
+				<input ng-model="name">
+			</md-input-container>
+			<md-input-container class="md-block ml-nomargin" flex-gt-sm>
+				<label>一级类型</label>
+				<md-select ng-model="state" class="ml-marginlr-10">
+					<md-option value="0">全部</md-option>
+					<md-option value="1">总账类单据</md-option>
+					<md-option value="2">舞弊</md-option>
+					<md-option value="3">违反费用管理办法</md-option>
+					<md-option value="4">其它</md-option>
+					<md-option value="5">凭证不规范</md-option>
+					<md-option value="6">管理问题</md-option>
+					<md-option value="7">费用报账不及时</md-option>
+					<md-option value="8">发票不合规</md-option>
+					<md-option value="9">超标准或制度报账</md-option>
+					<md-option value="10">报销单填列不规范</md-option>
+				</md-select>
+			</md-input-container>
+			<md-input-container class="md-block ml-nomargin ml-marginlr-10" flex>
+				<label>二级类型</label>
+				<md-select ng-model="state" class="ml-marginlr-10">
+					<md-option value="0">全部</md-option>
+					<md-option value="1">总账类单据</md-option>
+					<md-option value="2">舞弊</md-option>
+					<md-option value="3">违反费用管理办法</md-option>
+					<md-option value="4">其它</md-option>
+					<md-option value="5">凭证不规范</md-option>
+					<md-option value="6">管理问题</md-option>
+					<md-option value="7">费用报账不及时</md-option>
+					<md-option value="8">发票不合规</md-option>
+					<md-option value="9">超标准或制度报账</md-option>
+					<md-option value="10">报销单填列不规范</md-option>
+				</md-select>
+			</md-input-container>
+		</div>
+		<div layout="row">
+			<md-input-container class="md-block ml-nomargin" flex-gt-sm>
+				<label>是否通报</label>
+				<md-select ng-model="state" class="ml-marginlr-10">
+					<md-option value="0">是</md-option>
+					<md-option value="1">否</md-option>
+				</md-select>
+			</md-input-container>
+			<md-input-container class="md-block ml-nomargin" flex-gt-sm>
+				<label>扣分值</label>
+				<input ng-model="name">
+			</md-input-container>
+			<md-input-container class="md-block ml-nomargin ml-marginlr-10" flex>
+				<label>整改状态</label>
+				<md-select ng-model="state" class="ml-marginlr-10">
+					<md-option value="0">未整改</md-option>
+					<md-option value="1">整改完成</md-option>
+				</md-select>
+			</md-input-container>
+		</div>
+		<div layout='row'>
+			<md-input-container class="md-block ml-nomargin" flex-gt-sm flex="33">
+				<label>需要处理节点</label>
+				<md-select ng-model="state" class="ml-marginlr-10">
+					<md-option value="0">经办人</md-option>
+					<md-option value="1">共享财务</md-option>
+					<md-option value="2">经营财务</md-option>
+					<md-option value="3">单位财务部长</md-option>
+					<md-option value="4">事业部财经总监</md-option>
+					<md-option value="5">预算经理</md-option>
+				</md-select>
+			</md-input-container>
+			<md-input-container class="md-block ml-nomargin" flex-gt-sm flex="33">
+				<label>整改责任人</label>
+				<md-select ng-model="state" class="ml-marginlr-10">
+					<md-option value="0">整改责任人</md-option>
+				</md-select>
+			</md-input-container>
+		</div>
+		<br>
+		<div layout="row">
+			<md-input-container class="md-block ml-nomargin" flex>
+				<label>业务处理建议</label>
+				<input ng-model="name">
+			</md-input-container>
+		</div>
+		<div class="ml-textalign-right ml-margintb-20">
+			<md-button class="md-raised md-primary">整改完成</md-button>
+        	<md-button class="md-raised md-primary">保存</md-button>
+       </div>
+	</md-card>
+</div>

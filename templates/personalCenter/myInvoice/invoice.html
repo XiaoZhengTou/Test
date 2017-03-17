@@ -1,0 +1,31 @@
+<div layout="column" ng-controller="personalCtrl" ng-cloak class="personalCenter">
+	<div ng-controller="invoiceCtrl" class="invoice">
+		<md-radio-group ng-model="invoiceChecked.company_name" class="ml-color-73">
+			<md-card class="ml-color-73 ml-fontsize-13 receiver-main">
+				<div class="blue-line ml-fontsize-15 ml-padding-20 ml-bgcolor-fc"><span></span>常用发票抬头</div>
+				<md-divider></md-divider>
+				<div class="invoice-btn">
+					<md-button ng-click="addInvoice()" class="md-raised md-primary ml-nomargin"><i class="iconfont">&#xe631;</i>新增发票抬头</md-button>
+				</div>
+				<div layout="row" layout-wrap class="ml-paddinglr20 ml-margin-large-bottom">
+					<div flex="45" ng-repeat="invoice in invoices" class="receiver-con ml-padding-10 ml-marginT-10 ml-lineheight-24 " ng-class="{true:'conActive'}[morenchecked == $index]">
+						<div layout="row" class="radio-moren">
+							<md-radio-button ng-value="invoice.company_name" ng-checked="invoiceChecked" ng-click="morenSelect(invoice,$index)"><span class="ml-fontsize-12 ml-color-blue" ng-class="{true:'morenActive'}[morenchecked == $index]">设为默认</span></md-radio-button>
+						</div>
+						<md-button class="md-icon-button remove-icon ml-color-blue" ng-click="removeItem(invoice)">
+							<i class="iconfont ml-margin-auto">&#xe633;</i>
+						</md-button>
+						<div>入账单位: <span class="ml-color-21">{{invoice.company_name}}</span></div>
+						<div>单位名称: <span class="ml-color-21">{{invoice.invoice_head}}</span></div>
+						<!--<md-button class="md-icon-button bianji-icon ml-color-blue" ng-click="invoiceBainji(invoice)">
+							<i class="iconfont ml-margin-auto">&#xe61f;</i>
+						</md-button>-->
+					</div>
+				</div>
+				<!--<div layout="row" class="ml-margintb-20" layout-align="center">
+					<md-button ng-click="invoiceCon()" class="md-raised md-primary">确定</md-button>
+				</div>-->
+			</md-card>
+		</md-radio-group>
+	</div>
+</div>

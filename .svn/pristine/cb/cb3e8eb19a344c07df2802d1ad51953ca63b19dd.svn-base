@@ -1,0 +1,26 @@
+<div ng-controller="importERPCtrl" ng-cloak class="md-inline-form">
+	<md-card>
+		<md-card-title style="border-bottom:1px solid #eee;padding:20px 16px 16px">
+			<md-card-title-text>
+				<span class="md-headline" style="font-size:16px;color:#777;text-align: center;">导入ERP</span>
+			</md-card-title-text>
+		</md-card-title>
+		<p>预凭证将导入以下会计日期，请确认。</p>
+		<div layout="row" class="padding-left-right-16">
+			<div flex class="padding-right">
+				<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom: 0">
+						<label>总账日期</label>
+						<input ng-model="query.order_code" type="number">
+					</md-input-container>
+
+			</div>
+
+		</div>
+	</md-card>
+	<md-card>
+		<div layout="row" class="padding-left-right-16" layout-align="end">
+			<md-button class="md-raised md-primary" aria-label="确认" ng-click="find()">确认</md-button>
+			<md-button class="md-raised md-primary" aria-label="取消" ng-click="find()">取消</md-button>
+		</div>
+	</md-card>
+</div>

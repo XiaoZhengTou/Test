@@ -1,0 +1,60 @@
+
+<md-dialog aria-label="信用管理" style="height:700px;width:1000px">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>信用管理</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <md-card>
+                <md-divider></md-divider>
+                <div>
+                    <md-table-container>
+                        <table md-table multiple ng-model="selected" md-progress="promise" >
+                            <thead md-head md-order="query.order" md-on-reorder="getDesserts">
+                            <tr md-row>
+                                <th md-column md-numeric>员工</th>
+                                <th md-column md-numeric>增减分值</th>
+                                <th md-column md-numeric>原因</th>
+                                <th md-column md-numeric>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody md-body>
+                            <tr md-row md-select="item" md-select-id="fee_apply_id" md-auto-select >
+                                <td md-cell>张三</td>
+                                <td md-cell>
+                                    <md-input-container class="md-block ml-nomargin" flex-gt-sm>
+                                        <label>增减分值</label>
+                                        <input ng-model="query.credit_user_name" type="number">
+                                    </md-input-container>
+                                </td>
+                                <td md-cell flex>
+                                        <md-input-container  flex class="md-block">
+                                        <label>填写原因</label>
+                                        <input ng-model="item.apply_amount" name="currecy"  type="text"  required >
+                                        </md-input-container>
+                                </td>
+                                <td md-cell>
+                                    <md-button class="md-primary" aria-label="新增" ng-click="onAddrichang()" style="width:30px;height:20px;">
+                                        <i class="iconfont">&#xe68d; </i>
+                                    </md-button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </md-table-container>
+                </div>
+            </md-card>
+            <div layout="row" layout-align="center">
+                <md-button class="md-raised md-primary">保存</md-button>
+            </div>
+
+        </md-dialog-content>
+    </form>
+</md-dialog>

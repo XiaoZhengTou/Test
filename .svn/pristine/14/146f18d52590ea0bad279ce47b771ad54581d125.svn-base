@@ -1,0 +1,46 @@
+<div ng-controller="airfareCtrl"  ng-cloak class="airfare">
+	<div ng-controller="EA_listCtrl" class="EA_list">
+		<div class="ml-fixed-head">
+			<md-toolbar class="ml-headerbar center">
+				<div class="md-toolbar-tools">
+					<md-button class="md-icon-button back" aria-label="Settings" ng-click="goBack()">
+					    <i class="iconfont">&#xe601;</i>
+					</md-button>
+					<h2>
+					  <span>请选择EA单</span>
+					</h2>
+					<span flex></span>
+				</div>
+			</md-toolbar>
+		</div>
+		<!--<md-toolbar class="toolbar">
+		<div layout="row">
+			<md-icon ng-click="go('/airfare/message');back()" flex="10" flex-offset="5" class="header-icon s24" md-svg-src="img/icons/airfare/arrow_back_white_24px.svg" aria-label="arrow"></md-icon>
+			<div class="md-flex" flex="80" flex-offset="5" >请选择EA单</div>
+		</div>
+		</md-toolbar>-->
+		<div class="EA_list-main">
+			<md-content layout="row"  class="EA_list-top EA_list-con ml-textalign-center">
+				<div flex-offset="5" flex="15" class="">申请人</div>
+				<div flex="20" class="">业务描述</div>
+				<div flex="20" class="">可用金额</div>
+				<div flex="10" class="">币种</div>
+				<div flex="30" class="">申请单号</div>
+			</md-content>
+			<md-divider></md-divider>
+			<md-content>
+				<md-list class="ml-nopadding">
+					<md-list-item ng-repeat="EA_list in EA_lists" layout="row" class="EA_list-con ml-textalign-center">
+						<md-divider></md-divider>
+						<md-checkbox flex="5" ng-checked="EA_listExists(EA_list,EA_listSelected)" ng-click="EA_listToggle(EA_list, EA_listSelected)" class= "EA_list-check" aria-label="Checkbox"></md-checkbox>
+						<div flex="15" aria-label="{{EA_list.applyName}}" class="">{{EA_list.applyName}}</div>
+						<div flex="20" aria-label="{{EA_list.reasonDesc}}" class="">{{EA_list.reasonDesc}}</div>
+						<div flex="20" aria-label="{{EA_list.availAmount}}" class="">{{EA_list.availAmount}}</div>
+						<div flex="10" aria-label="{{EA_list.currencyName}}" class="">{{EA_list.currencyName}}</div>
+						<div flex="30" aria-label="{{EA_list.feeApplyCode}}" class="">{{EA_list.feeApplyCode}}</div>
+					</md-list-item>
+				</md-list>	
+			</md-content>
+		</div>
+	</div>
+</div>

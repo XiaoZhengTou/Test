@@ -1,0 +1,170 @@
+<style type="text/css">
+	table.md-table th.md-column,table.md-table td.md-cell{
+		text-align: center;
+	}
+</style>
+<div ng-controller="fqfkCtrl" class="jiehuankuan fukuan add" ng-cloak>
+    <div ng-controller="adddanju" class="ml-width-bottom-bar">
+    	<!--状态步骤拦开始-->
+    	<div class="ml-setupbar ml-margin-top ml-margin-large-bottom" layout="row" layout-align="center center">
+		  <div flex="70" layout="row" class="container">
+		    <div flex class="ml-text-center active item">
+		      <span>填写单据信息</span>
+		    </div>
+		    <div flex class="ml-text-center active item">
+		      <span>流程及附件</span>
+		    </div>
+		    <div flex class="ml-text-center  item">
+		      <span>提交成功</span>
+		    </div>
+		  </div>
+		</div>
+		<!--
+        	描述：状态步骤栏结束
+        -->
+        <!-- 新增单据开始 -->
+        <md-card class="ml-padding-pc">
+            <div class='basefilter'>
+                <div layout="row">
+                    <div flex class="ml-padding-right">
+                        <md-input-container class="md-block md-cyan-theme md-input-invalid">
+                            <label>合同编号</label>
+                            <input ng-model="saveData.contract_no" type="text" required>
+                        </md-input-container>
+                    </div>
+                    <div flex class="ml-padding-right">
+                        <md-input-container class="md-block md-cyan-theme md-input-invalid">
+                            <label>合同名称 </label>
+                            <input ng-model="saveData.contract_name" type="text" required>
+                        </md-input-container>
+                    </div>
+                    <div flex class="ml-padding-right">
+                        <md-input-container class="md-block md-cyan-theme md-input-invalid">
+                            <label>项目经理</label>
+							<input ng-model="orgs.user_full_name" type="text" drorganization="{'model':'orgs'}" name="user_full_name" required>
+                        </md-input-container>
+                    </div>
+                    <div flex class="ml-padding-right">
+                        <md-input-container class="md-block md-cyan-theme md-input-invalid">
+                            <label>甲方</label>
+							<input ng-model="ruzhangdanwei.company_name" name="companyName" type="text" drruzhangdanwei="{'model':'ruzhangdanwei'}" required>
+                        </md-input-container>
+                    </div>
+                </div>
+                <div layout='row'>
+                    <div flex class="ml-padding-right">
+                        <md-input-container class="md-block md-cyan-theme md-input-invalid">
+                            <label>乙方联系人</label>
+                            <input ng-model="saveData.party_b_contact" type="text" required>
+                        </md-input-container>
+                    </div>
+                    <div flex class="ml-padding-right">
+                        <md-input-container class="md-block md-cyan-theme md-input-invalid">
+                            <label>乙方联系人手机号码</label>
+                            <input ng-model="saveData.party_b_contact_phone" type="text" required>
+                        </md-input-container>
+                    </div>
+                    <div flex class='ml-padding-right'>
+                        <md-input-container class="md-block ml-cyan-theme md-input-invalid" >
+                            <label>收款方</label>
+                            <input ng-model="receving.receiver" type="text" name="receiver" drreceving="{'model':'receving'}" required>
+                        </md-input-container>
+                    </div>
+                    <div flex class='ml-padding-right'>
+                        <md-input-container class="md-block">
+          					<label>业务描述</label>
+          					<textarea ng-model="saveData.contract_desc" md-maxlength="200"  md-select-on-focus></textarea>
+        				</md-input-container>
+                    </div>
+                </div>
+            </div>
+        </md-card>
+        <!--账务明细-->
+		<md-card>
+			<div>
+				<div class="md-toolbar-tools" layout="row">
+					<span>付款计划明细</span>
+					<md-menu>
+						<md-button aria-label="Open user menu" ng-click="$mdOpenMenu()" aria-label="side navigation">
+							<md-icon md-svg-src="img/icons/three.svg"></md-icon>
+						</md-button>
+						<md-menu-content width="4">
+							<md-menu-item>
+								<md-button aria-label="side navigation">
+									<md-icon md-svg-src="img/icons/excel_out.svg"></md-icon>
+									<span class="ng-scope">Excel导入</span>
+								</md-button>
+							</md-menu-item>
+						</md-menu-content>
+					</md-menu>
+					<span flex></span>
+					<md-button  ng-click="add_detial($event)">
+						<md-tooltip md-direction="left">
+							添加一条数据
+						</md-tooltip>
+						<md-icon class="iconfont ">&#xe631;</md-icon>
+					</md-button>
+				</div>
+			</div>
+			<md-divider></md-divider>
+			<div>
+				<md-table-container>
+					<table md-table multiple ng-model="selected" md-progress="promise" class="feeapplytable">
+						<thead md-head md-order="query.order" md-on-reorder="getDesserts">
+						<tr md-row>
+							<th md-column>付款批次</th>
+							<th md-column>付款日期</th>
+							<th md-column>付款方式</th>
+							<th md-column>付款金额</th>
+							<th md-column>付款比例%</th>
+							<th md-column>操作</th>
+						</tr>
+						</thead>
+						<tbody md-body>
+						<tr md-row ng-repeat="item in saveData.emsHtContractLs">
+							<td md-cell>{{item.pay_period}}</td>
+							<td md-cell>{{item.pay_time }}</td>
+							<td md-cell>{{item.payment_method}}</td>
+							<td md-cell>{{item.schedule_amount | currency:''}}</td>
+							<td md-cell>{{item.pay_percent}}</td>
+							<td md-cell>
+								<div layout="row" class="ml-color-blue">
+									<md-button style="margin-left: auto" class="md-icon-button" ng-click="add_detial($event,$index)">
+										<i class="iconfont ml-margin-auto">&#xe61f;</i>
+									</md-button>
+									<md-button class="md-icon-button ml-nomargin" ng-click="del_detial($event,$index)">
+										<i class="iconfont ml-margin-auto">&#xe633;</i>
+									</md-button>
+								</div>
+							</td>
+						</tr>
+						</tbody>
+						<tfoot md-foot>
+						<tr md-row>
+							<td md-cell>汇总金额</td>
+							<td md-cell></td>
+							<td md-cell></td>
+							<td md-cell>{{saveData.amount | currency:''}}</td>
+							<td md-cell>币种</td>
+							<td md-cell>
+								<div layout="row" layout-align="center center" ng-init="currencys=null">
+									<md-select dr-Currencyext="" currencylist="currencys" placeholder="货币类型" ng-model="currency.tmp_currency" style="min-width: 200px;">
+										<md-option ng-value="item" ng-repeat="item in currencys.data">{{item.currency_name}}({{item.currency_code}})</md-option>
+									</md-select>
+								</div>
+							</td>
+						</tr>
+						</tfoot>
+					</table>
+				</md-table-container>
+			</div>
+		</md-card>
+		<!-- 底部操作区开始 -->
+		  <div class="ml-bottom-bar slideInUp animated" layout="row">
+		    <md-button class="md-raised md-primary ml-button ml-noshadow" aria-label="保存" ng-click="add_Data()">保存</md-button>
+		    <span flex></span>
+		    <md-button class="md-raised md-primary ml-button ml-noshadow" aria-label="上传附件" ng-click="go('/fenqifukuanjihua/ad_next','审批流程')">下一步</md-button>
+		  </div>
+		  <!-- 底部操作区结束 -->
+    </div>
+</div>

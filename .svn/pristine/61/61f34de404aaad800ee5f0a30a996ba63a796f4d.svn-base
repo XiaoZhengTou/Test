@@ -1,0 +1,100 @@
+<div ng-controller="taskGroupCtrl" class="airfare">
+	<md-card>
+		<div class="md-toolbar-tools">
+	      	<h3><span>质检任务池</span></h3> 
+	    </div>  
+	    <md-divider></md-divider>
+		<div>				
+			<div layout="row" flex class="ml-marginT-20">
+				<md-input-container class="md-block ml-marginlr-10" flex>
+		            <label>质检计划编号</label>
+		            <input>
+		        </md-input-container>
+		        <md-input-container class="md-block ml-marginlr-10" flex>
+		            <label>质检计划名称</label>
+		            <input>
+		        </md-input-container>
+		        <md-input-container class="md-block ml-nomargin ml-marginlr-10" flex>
+					<label>质检任务状态</label>
+					<md-select ng-model="moneyType" class="ml-marginlr-10">
+						<md-option value="null">未分配</md-option>
+						<md-option value="DRAFT">待派工</md-option>
+						<md-option value="SUBMITED">质检中</md-option>
+						<md-option value="AUDITED">已完成</md-option>
+					</md-select>
+				</md-input-container>
+			</div>
+			<div layout='row'>
+				<md-input-container class="md-block ml-nomargin" flex="33">
+					<label>质检负责人</label>
+					<input ng-model="name">
+				</md-input-container>
+				<div layout="row">
+					<md-input-container class="md-block ml-marginlr-10" flex>
+			            <label>计划开始时间（开始）</label>
+			            <input ng-model="beginTime" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+					</md-input-container>
+					<span class="ml-lineheight-48 ml-marginlr-10">至</span>
+					<md-input-container class="md-block ml-marginlr-10" flex>
+			            <label>计划开始时间（结束）</label>
+			           <input ng-model="beginTime" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+					</md-input-container>
+				</div>
+				<div layout="row" style="margin-left: 110px;">
+					<md-input-container class="md-block ml-marginlr-10" flex>
+			            <label>要求完成时间（开始）</label>
+			            <input ng-model="beginTime" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+					</md-input-container>
+					<span class="ml-lineheight-48 ml-marginlr-10">至</span>
+					<md-input-container class="md-block ml-marginlr-10" flex>
+			            <label>要求完成时间（结束）</label>
+			           <input ng-model="beginTime" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+					</md-input-container>
+				</div>
+			</div>
+		</div>
+		<section layout="row" layout-sm="column" layout-align="end" layout-wrap class="ml-margintb-20">
+		    <md-button class="md-raised md-primary">查询</md-button>
+	    </section>
+	</md-card>
+	<md-card>
+		<md-table-container>
+        	<table md-table multiple class="ml-text-nowrap ml-text-center">
+	        	<thead md-head >
+			        <tr md-row>
+			        	<th md-column><md-checkbox></md-checkbox></th>
+						<th md-column>紧急度</th>
+						<th md-column>单据编号</th>
+						<th md-column>单据类型</th>
+						<th md-column>任务组</th>
+						<th md-column>组别</th>
+						<th md-column>处理人</th>
+						<th md-column>任务状态</th>
+						<th md-column>入池时间</th>
+						<th md-column>总耗时</th>
+						<th md-column>本节点耗时</th>
+						<th md-column>入账单位</th>
+		   			</tr>
+		        </thead>
+		        <tbody md-body>
+					<tr md-row md-select="item" md-select-id="fee_apply_id" md-auto-select ng-repeat="item in xingyong.data.datalist">
+						<td md-cell>{{item.fee_apply_id}}</td>
+						<td md-cell>{{item.credit_user_name}}</td>
+						<td md-cell>{{item.credit_id}}</td>
+						<td md-cell>{{item.currency_name}}</td>
+						<td md-cell>{{item.credit_user_code}}</td>
+						<td md-cell>{{item.creation_date}}</td>
+						<td md-cell>{{item.s}}</td>
+						<td md-cell>{{item.order_status|order_status}}</td>
+						<td md-cell>{{item.order_type|applytype}}</td>
+						<td md-cell>{{item.order_type|applytype}}</td>
+					</tr>
+				</tbody>
+    		</table>
+        </md-table-container>
+        <section layout="row" layout-sm="column" layout-align="end" layout-wrap>
+		    <md-button class="md-raised md-primary" ng-click="go('/financeQC/taskGroupChildren')">分配</md-button>
+	   </section>
+		<md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '，总条数：'}" md-limit="query.page_size" md-limit-options="[5, 10, 15]" md-page="query.page_number" md-total="{{total}}" md-on-paginate="getData" md-page-select></md-table-pagination>
+	</md-card>
+</div>

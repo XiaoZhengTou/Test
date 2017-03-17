@@ -1,0 +1,146 @@
+<div ng-controller="jdCtrl" class="jiudian orderList">
+<div layout="column" ng-controller="jdOrderListCtrl" class="ml-fixed-head">
+<!-- Header Bar Begin -->
+<md-toolbar class="ml-headerbar">
+  <div class="md-toolbar-tools">
+    <md-button class="back md-icon-button" ng-click="go('/jiudian/detail');back()" aria-label="Settings">
+      <md-icon md-svg-icon="img/icons/jiudian/back.svg"></md-icon>
+    </md-button>
+    <h2>酒店订单列表</h2>
+  </div>
+</md-toolbar>
+<!-- Header Bar End -->
+<!-- Tab Begin -->
+<md-tabs md-border-bottom md-dynamic-height md-stretch-tabs="always" class="ml-topBarTab" md-swipe-content="true">
+	<!-- Total Order Begin -->
+    <md-tab label="全部">
+       <div layout="column" layout-padding class="ml-content">
+  			<md-whiteframe class="md-whiteframe-1dp orderItem ml-whiteframe" layout="column" flex ng-click="null" ng-repeat="x in orderList">
+  				<div flex layout="row">
+  					<div flex="75">
+  						<h3>{{x.hotelName}}</h3>
+  						<p class="date">
+  							<span>{{x.checkInDate | amDateFormat:'YYYY-MM-DD'}}</span>
+  							<i>至</i>
+  							<span>{{x.checkOutDate | amDateFormat:'YYYY-MM-DD'}}</span>
+  						</p>
+  						<p class="info">
+  							<span>高级客房</span>
+  							<span>无早餐</span>
+  							<span>大床／双人床</span>
+  						</p>
+  					</div>
+  					<div flex="25">
+  						<p class="price">
+  							<i>¥</i><b>{{x.totalAmount}}</b>
+  						</p>
+  					</div>
+  				</div>
+  				<div class="statusInfo" flex>
+  					<span class="status">等待支付</span>
+  					<md-button class="md-raised md-primary ml-small-button">立即支付</md-button>
+  				</div>
+  			</md-whiteframe>
+       </div>
+    </md-tab>
+    <!-- Total Order End -->
+	<!-- Total Order Begin -->
+    <md-tab label="有效单">
+       <div layout="column" layout-padding>
+  			<md-whiteframe class="md-whiteframe-1dp orderItem ml-whiteframe" layout="column" flex ng-click="null" ng-repeat="x in orderList | filter:payedList">
+  				<div flex layout="row">
+  					<div flex="75">
+  						<h3>{{x.hotelName}}</h3>
+  						<p class="date">
+  							<span>{{x.checkInDate | amDateFormat:'YYYY-MM-DD'}}</span>
+  							<i>至</i>
+  							<span>{{x.checkOutDate | amDateFormat:'YYYY-MM-DD'}}</span>
+  						</p>
+  						<p class="info">
+  							<span>高级客房</span>
+  							<span>无早餐</span>
+  							<span>大床／双人床</span>
+  						</p>
+  					</div>
+  					<div flex="25">
+  						<p class="price">
+  							<i>¥</i><b>{{x.totalAmount}}</b>
+  						</p>
+  					</div>
+  				</div>
+  				<div class="statusInfo" flex>
+  					<span class="status">等待支付</span>
+  					<md-button class="md-raised md-primary ml-small-button">立即支付</md-button>
+  				</div>
+  			</md-whiteframe>
+       </div>
+    </md-tab>
+    <!-- Total Order End -->
+	<!-- Total Order Begin -->
+    <md-tab label="待支付">
+       <div layout="column" layout-padding>
+  			<md-whiteframe class="md-whiteframe-1dp orderItem ml-whiteframe" layout="column" flex ng-click="null" ng-repeat="x in orderList | filter:pendingList">
+  				<div flex layout="row">
+  					<div flex="75">
+  						<h3>{{x.hotelName}}</h3>
+  						<p class="date">
+  							<span>{{x.checkInDate | amDateFormat:'YYYY-MM-DD'}}</span>
+  							<i>至</i>
+  							<span>{{x.checkOutDate | amDateFormat:'YYYY-MM-DD'}}</span>
+  						</p>
+  						<p class="info">
+  							<span>高级客房</span>
+  							<span>无早餐</span>
+  							<span>大床／双人床</span>
+  						</p>
+  					</div>
+  					<div flex="25">
+  						<p class="price">
+  							<i>¥</i><b>{{x.totalAmount}}</b>
+  						</p>
+  					</div>
+  				</div>
+  				<div class="statusInfo" flex>
+  					<span class="status">等待支付</span>
+  					<md-button class="md-raised md-primary ml-small-button">立即支付</md-button>
+  				</div>
+  			</md-whiteframe>
+       </div>
+    </md-tab>
+    <!-- Total Order End -->
+	<!-- Total Order Begin -->
+    <md-tab label="退款单">
+       <div layout="column" layout-padding>
+  		<md-whiteframe class="md-whiteframe-1dp orderItem ml-whiteframe" layout="column" flex ng-click="null" ng-repeat="x in orderList | filter:refoundList">
+  			<div flex layout="row">
+  				<div flex="75">
+  					<h3>{{x.hotelName}}</h3>
+  					<p class="date">
+  						<span>{{x.checkInDate | amDateFormat:'YYYY-MM-DD'}}</span>
+  						<i>至</i>
+  						<span>{{x.checkOutDate | amDateFormat:'YYYY-MM-DD'}}</span>
+  					</p>
+  					<p class="info">
+  						<span>高级客房</span>
+  						<span>无早餐</span>
+  						<span>大床／双人床</span>
+  					</p>
+  				</div>
+  				<div flex="25">
+  					<p class="price">
+  						<i>¥</i><b>{{x.totalAmount}}</b>
+  					</p>
+  				</div>
+  			</div>
+  			<div class="statusInfo" flex>
+  				<span class="status">等待支付</span>
+  				<md-button class="md-raised md-primary ml-small-button">立即支付</md-button>
+  			</div>
+  		</md-whiteframe>
+      </div>
+    </md-tab>
+<!-- Total Order End -->
+<!-- Tab End -->
+</md-tabs>
+</div>
+</div>

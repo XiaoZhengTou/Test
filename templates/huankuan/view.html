@@ -1,0 +1,119 @@
+<div ng-controller="hkCtrl" class="jiehuankuan jiekuan view" ng-cloak>
+<div ng-controller="hkViewCtrl">
+  <md-card>
+  	<md-card-content>
+  	  <h2>{{detail.loan_info_code}}</h2>
+	  <div class="info">
+	    <h3 class="title">还款单信息</h3>
+	    <p>
+	    	<span>还款人：</span>
+	    	{{detail.apply_name}}
+	    </p>
+	    <p>
+	    	<span>还款说明：</span>
+	    	{{detail.remark}}
+	    </p>
+	    <p>
+	    	<span>还款金额：</span>
+	    	{{detail.currency_code}}
+	    	{{detail.repay_amount}}
+	    </p>
+	    <p>
+	    	<span>还款类型：</span>
+	    	{{detail.repay_type}}
+	    </p>
+	    <p>
+	    	<span>最后更新日期：</span>
+	    	{{detail.last_update_date}}
+	    </p>
+	   	<h3 class="title">该还款单关联了<b>{{detail.emslmrepayls.length}}</b>张借款单</h3>
+	    <md-table-container>
+	    <md-divider></md-divider>
+	    <table md-table>
+	      <thead md-head>
+	      <tr md-row>
+	        <th md-column>
+	          借款单号
+	        </th>
+	        <th md-column>
+	          借款人
+	        </th>
+	        <th md-column>
+	          借款日期
+	        </th>
+	        <th md-column>
+	          借款金额
+	        </th>
+	        <th md-column md-numeric>
+	          本次还款金额
+	        </th>
+	      </tr>
+	      </thead>
+	      <tbody md-body>
+	        <tr md-row ng-repeat="x in detail.emslmrepayls">
+	          <td md-cell>{{x.loan_info_code}}</td>
+	          <td md-cell>{{x.created_name}}</td>
+	          <td md-cell>{{x.creation_date}}</td>
+	          <td md-cell>
+	          	{{detail.currency_code}}
+	          	{{x.loan_amount}}
+	          </td>
+	          <td md-cell>
+	          	{{detail.currency_code}}
+	          	{{x.repay_amount}}
+	          </td>
+	        </tr>
+	      </tbody>
+	    </table>
+	    <md-divider></md-divider>
+	  </md-table-container>
+	  </div>
+	  <div class="action ml-margin-large-top">
+	  	<!-- 草稿单操作开始 -->
+	  	<div layout="row" layout-align="center center" ng-if="detail.order_status == 'DRAFT'">
+        <div flex="60" class="ml-inlineblock ml-text-center">
+        	<md-button class="md-raised md-warn ml-button" aria-label="上传附件" ng-click="del($event,detail.repay_info_id)">删除</md-button>
+          	<md-button class="md-raised md-primary ml-button" aria-label="启动流程" ng-click="next()">启动流程</md-button>
+        </div>
+    	</div>
+    	<!-- 草稿单操作结束 -->
+    	<!-- 审核中页开始 -->
+    	<div layout="row" layout-align="center center" ng-if="detail.order_status == 'SPZ'">
+        <div flex="60" class="ml-inlineblock ml-text-center">
+        	<md-button class="md-raised md-warn ml-button" aria-label="上传附件" ng-click="null">撤回</md-button>
+        	<md-button class="md-raised md-warn ml-button" aria-label="上传附件" ng-click="null">催办</md-button>
+          	<md-button class="md-raised md-primary ml-button" aria-label="保存" ng-click="null">打印</md-button>
+          	<md-button class="md-raised md-primary ml-button" aria-label="保存" ng-click="goBack()">返回</md-button>
+        </div>
+    	</div>
+    	<!-- 审核中页结束 -->
+    	<!-- 待还款页开始 -->
+    	<div layout="row" layout-align="center center" ng-if="detail.order_status == 'DHK'">
+        <div flex="60" class="ml-inlineblock ml-text-center">
+        	<md-button class="md-raised md-warn ml-button" aria-label="上传附件" ng-click="null">去还款</md-button>
+          	<md-button class="md-raised md-primary ml-button" aria-label="保存" ng-click="null">打印</md-button>
+          	<md-button class="md-raised md-primary ml-button" aria-label="保存" ng-click="goBack()">返回</md-button>
+        </div>
+    	</div>
+    	<!-- 待还款页结束 -->
+    	<!-- 已还清页开始 -->
+    	<div layout="row" layout-align="center center" ng-if="detail.order_status == 'YHQ'">
+        <div flex="60" class="ml-inlineblock ml-text-center">
+        	<md-button class="md-raised md-warn ml-button" aria-label="上传附件" ng-click="null">打印</md-button>
+          	<md-button class="md-raised md-primary ml-button" aria-label="保存" ng-click="goBack()">返回</md-button>
+        </div>
+    	</div>
+    	<!-- 已还清页结束 -->
+    	<!-- 已作废页开始 -->
+    	<div layout="row" layout-align="center center" ng-if="detail.order_status == 'ZF'">
+        <div flex="60" class="ml-inlineblock ml-text-center">
+          	<md-button class="md-raised md-primary ml-button" aria-label="保存" ng-click="goBack()">返回</md-button>
+        </div>
+    	</div>
+    	<!-- 已作废页结束 -->
+	  </div>
+  	</md-card-content>
+  	<!-- {{detail | json}} -->
+  </md-card>
+</div>
+</div>

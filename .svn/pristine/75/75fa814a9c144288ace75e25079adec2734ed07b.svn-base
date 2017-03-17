@@ -1,0 +1,52 @@
+<md-dialog aria-label="批量新增" style="width:600px;">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>批量新增</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="关闭"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+	    <md-input-container class="md-block ml-nomargin">
+          <label>档案室</label>
+          <input ng-model="batch.name"/>
+        </md-input-container>
+        <md-input-container class="md-block ml-nomargin">
+          <label>总列数</label>
+          <input ng-model="batch.columnsum"/>
+        </md-input-container>
+        <md-input-container class="md-block ml-nomargin">
+          <label>每列层数</label>
+          <input ng-model="batch.layersum"/>
+        </md-input-container>
+        <md-input-container class="md-block ml-nomargin">
+          <label>每列面数</label>
+          <md-select ng-model="batch.facesum">
+	          <md-option value="1">
+	            1
+	          </md-option>
+	          <md-option value="2">
+	            2
+	          </md-option>
+	       </md-select>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>存放上限</label>
+          <input ng-model="filingCabinet.storagelimit"/>
+        </md-input-container>
+	    
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button ng-click="answer('not useful')" class="md-raised md-primary">
+       	确认
+      </md-button>
+      <md-button ng-click="cancel()" class="md-raised">
+                  取消
+      </md-button>
+    </md-dialog-actions>
+</md-dialog>

@@ -1,0 +1,263 @@
+/*公用*/
+
+.ml-textalign-right {
+	text-align: right;
+}
+
+.ml-textalign-left {
+	text-align: left;
+}
+
+.ml-textalign-center {
+	text-align: center;
+}
+.ml-padding-20{
+	padding: 20px;
+}
+.ml-color-73{
+	color: #737373;
+}
+.ml-color-21{
+	color: #212121;
+}
+.ml-color-red{
+	color: #ff39aa !important;
+}
+.ml-color-yellow{
+	color: #ffb10a;
+}
+.ml-fontsize-13{
+	font-size: 13px !important;
+}
+.ml-fontsize-15{
+	font-size: 15px !important;
+}
+.ml-marginT-20{
+	margin-top: 20px;
+}
+.ml-lineheight-36{
+	line-height: 36px;
+}
+.ml-paddinglr20{
+	padding: 0 20px;
+}
+.telAirfare md-input-container .md-input[disabled]{
+ 	color: #212121;
+ 	background-image:none;
+ 	border-bottom: 1px solid #ccc;
+ }
+ .telAirfare .blue-line span{
+	position: absolute;
+	margin-left: -20px;
+	display: inline-block;
+	width: 3px;
+	height: 20px;
+	background-color: #2196f3;
+}
+.telAirfare .blue-line {
+	position: relative;
+}
+/*.ml-nomarginbot{
+	margin-bottom: 0;
+}*/
+/*.airfare .ml-border-e{
+	border: 1px solid #ccc;
+	border-radius: 2px;
+}
+.ml-bgcolor-white{
+	background-color: #fff;
+}
+.ml-color-red{
+	color: #ff39aa;
+}*/
+
+
+/*.ml-color-ccc{
+	color: #ccc;
+}
+.ml-color-73{
+	color: #737373;
+}
+.ml-color-21{
+	color: #212121;
+}
+.ml-color-blue{
+	color: #2196f3;
+}
+.ml-color-yellow{
+	color: #ffb10a;
+}
+.ml-bgcolor-blue{
+	background-color: #2196f3;
+}
+.ml-padding-10{
+	padding: 10px;
+}
+.ml-padding-20{
+	padding: 20px;
+}
+.ml-paddinglr-10{
+	padding: 0 10px;
+}
+.ml-paddingtb-10{
+	padding: 10px 0;
+}
+.ml-paddingl-10{
+	padding-left: 10px;
+}
+.ml-paddingl-20{
+	padding-left: 20px;
+}
+.ml-paddinglr-15{
+	padding: 0 15px;
+}
+.ml-paddinglr20{
+	padding: 0 20px;
+}
+.ml-marginlr-10{
+	margin:0 10px;
+}
+.ml-marginT-20{
+	margin-top: 20px;
+}
+.ml-marginT-10{
+	margin-top: 10px;
+}
+.ml-margintb-20{
+	margin: 20px 0;
+}
+.ml-lineheight-48{
+	line-height: 48px;
+}
+.ml-lineheight-36{
+	line-height: 36px;
+}
+.ml-lineheight-24{
+	line-height: 24px;
+}
+.ml-lineheight-18{
+	line-height: 18px !important;
+}
+.ml-fontsize-12{
+	font-size: 12px !important;
+}
+.ml-fontsize-13{
+	font-size: 13px !important;
+}
+.ml-fontsize-14{
+	font-size: 14px !important;
+}
+.ml-fontsize-15{
+	font-size: 15px !important;
+}
+.ml-fontsize-18{
+	font-size: 18px !important;
+}
+.ml-but-minwidth0{
+	min-width: 0;
+}*/
+
+i,
+div,
+em {
+	outline: none;
+	font-style: normal;
+}
+
+
+/*公用完*/
+
+
+/*index 首页开始*/
+
+.telAirfare .telAirfareIndex .riqi {
+	margin-top: 15px;
+}
+/*index 首页结束*/
+/*addAirfare 新增开始*/
+.telAirfare .addAirfare-main-left{
+	border-right: 1px solid rgba(0,0,0,0.12);
+}
+.telAirfare md-input-container > md-icon{
+	left: auto;
+	top: 0;
+	right: 15px;
+}
+.telAirfare md-input-container.md-has-icon > label{
+	left: 0;
+}
+.telAirfare md-input-container.md-has-icon {
+    padding-left: 0;
+}
+.telAirfare  md-chip-template{
+	padding: 0 10px; 
+}
+.telAirfare  .md-chips .md-chip-input-container{
+	display: none;
+}
+.telAirfare  md-chips .md-chips{
+	box-shadow: none;
+}
+.telAirfare .md-select-value *:first-child{
+	white-space: normal!important;
+    /*width: 70px;*/
+    line-height: 18px;
+}
+.telAirfare .addAirfare .addPerson em{
+	font-style: normal;
+	font-size: 12px;
+	margin-left: 20px;
+	display: inline-block;
+}
+.telAirfare .lianxiren{
+	margin-top: 30px;
+}
+.telAirfare .rmbtn{
+	margin: 0 20px 0 0;
+}
+/*addAirfare 新增结束*/
+/*phoneYzm 验证码开始*/
+.telAirfare .phoneYzm .phoneYzm-main{
+	width: 40%;
+	margin: 60px auto;
+}
+.telAirfare .phoneYzm .yzm-btn{
+	border: 1px solid #ccc;
+	height: 30px;
+    margin-top: -4px;
+    padding: 0 10px;
+    margin-right: 0;
+}
+.telAirfare .able{
+	
+}
+/*phoneYzm 验证码结束*/
+/*airfareDetail 机票详情开始*/
+.telAirfare .airfareIcon i{
+	font-size: 40px;
+}
+/*airfareDetail 机票详情结束*/
+/*tuipiao 退票开始*/
+.telAirfare .tuipiao-title{
+	margin-bottom: 20px;
+}
+.telAirfare .tuipiao .koukuan{
+	font-size: 25px;
+}
+.telAirfare .tuipiao-bot{
+	padding: 0 20px;
+}
+.telAirfare .tuipiao-bot-in{
+	padding: 10px 10% 10px;
+	background-color: #EEEEEE;
+	margin-bottom: 30px;
+}
+/*tuipiao 退票结束*/
+/*gaiqian 改签开始*/
+.telAirfare .tuipiao-marginl{
+	margin-left: 20px;
+}
+.telAirfare .tuipiaoRe{
+	padding-top: 7px;
+}
+/*gaiqian 改签结束*/

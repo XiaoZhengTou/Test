@@ -1,0 +1,68 @@
+<md-dialog aria-label="引用基础科目" ng-cloak style="min-width: 50%" id="costbudget-dialog1-detail">
+
+    <script type="text/ng-template" id="costbudgetCheckbox1.html">
+        <div ng-controller="costbudgetCtrl1">
+            <md-checkbox ng-click="addtoggle2()" ng-model="draftSelectcheck" style="margin-bottom: 0px"></md-checkbox>
+        </div>
+    </script>
+
+    <form name="addcostbudget" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 style="color: white">引用基础科目</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="padding-top: 0px;padding-bottom: 0px">
+
+                <md-table-container style="width: 95%;padding-left: 2.5%;">
+                    <table data-md-table data-md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" data-ng-model="selected1" md-progress="promise">
+                    <!--<table data-md-table data-ng-model="selected" md-progress="promise">-->
+                        <thead md-head data-md-order="query.order" md-on-reorder="getDesserts">
+                        <tr md-row>
+                            <th md-column>科目名称</th>
+                            <th md-column>科目编码</th>
+                            <th md-column>释义</th>
+                        </tr>
+                        </thead>
+                        <tbody md-body>
+                        <tr md-row md-select="item" md-select-id="budget_templet_id" ng-repeat="item in appdata" md-auto-select="options.autoSelect">
+                            <td md-cell>{{item.fee_type_name}}</td>
+                            <td md-cell>{{item.fee_type_code}}</td>
+                            <td md-cell>{{item.remark}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </md-table-container>
+                <md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '总条数：'}"
+                                     md-limit="query.limit" md-limit-options="[5, 10, 15]" md-page="query.page"
+                                     md-total="{{query.total}}" md-on-paginate="getDesserts" md-page-select></md-table-pagination>
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <span flex></span>
+            <md-button class="md-primary md-raised" ng-click="answer()"  style="color: white;float: right"
+                       ng-disabled="addcostbudget.$invalid" disabled="disabled">确定</md-button>
+
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+
+<style>
+    #costbudget-dialog1-detail .md-datepicker-input-container.md-datepicker-invalid {
+        border-bottom-color: rgb(224,224,224);
+    }
+    #costbudget-dialog1-detail .md-datepicker-input-container{
+        width: 93.9%;
+        margin-left: -2px;
+    }
+    #costbudget-dialog1-detail .md-datepicker-calendar-icon{
+        margin-bottom: -7px;
+    }
+</style>

@@ -1,0 +1,71 @@
+<div ng-controller="caseMaintenanceCtrl" ng-cloak class="md-inline-form">
+	<md-card>
+		<div layout="row" class="padding-left-right-16">
+			<div flex class="padding-right">
+				<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom:0;">
+					<label>ERP实例编码</label>
+					<input ng-model="query.dec" type="text">
+				</md-input-container>
+
+			</div>
+			<div flex class="padding-right">
+				<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom:0;">
+					<label>ERP实例名称</label>
+					<input ng-model="query.dec" type="text">
+				</md-input-container>
+			</div>
+			<div flex>
+				<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom:0;">
+					<label>ERP版本</label>
+					<md-select ng-model="query.type">
+						<md-option ng-repeat="x in query.filter.typeList" value="{{x.id}}">
+							{{x.name}}
+						</md-option>
+					</md-select>
+				</md-input-container>
+			</div>
+		</div>
+		<div layout="row" class="padding-left-right-16">
+			<div flex class="padding-right">
+				<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin:0;">
+					<label>应用服务器IP</label>
+					<input ng-model="query.dec" type="text">
+				</md-input-container>
+
+			</div>
+			<div flex class="padding-right">
+				<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin:0;">
+					<label>用户名</label>
+					<input ng-model="query.dec" type="text">
+				</md-input-container>
+			</div>
+			<div flex>
+				<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin:0;">
+					<label>密码</label>
+					<input ng-model="query.num" type="text">
+				</md-input-container>
+			</div>
+		</div>
+		<div layout="row" class="padding-left-right-16">
+			<div flex class="padding-right">
+				<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin:0;">
+					<label>数据库IP</label>
+					<input ng-model="query.dec" type="text">
+				</md-input-container>
+
+			</div>
+			<div flex class="padding-right">
+				<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin:0;">
+					<label>用户名</label>
+					<input ng-model="query.dec" type="text">
+				</md-input-container>
+			</div>
+			<div flex>
+				<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin:0;">
+					<label>密码</label>
+					<input ng-model="query.num" type="text">
+				</md-input-container>
+			</div>
+		</div>
+	</md-card>
+</div>

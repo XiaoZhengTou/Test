@@ -1,0 +1,96 @@
+<div ng-controller="personalCtrl" ng-cloak class="personalCenter">
+	<div ng-controller="gaiqianDetailCtrl" class="gaiqianDetail">
+		<md-card class="ml-padding-20 ml-fontsize-14 gaiqianDetail-main">
+			<div class="blue-line ml-fontsize-15"><span></span>填写改签申请</div>
+			<div layout="row" class="ml-marginT-10">
+				<div class="ml-color-73 tuipiaoRe">1.选择改签原因</div>
+				<div class="select-marginl" flex="30">
+					<md-select placeholder="请选择*" class="ml-nomargin" ng-model="reason">
+						<md-option ng-repeat="reason in reasons" ng-value="reason">
+							{{reason}}
+						</md-option>
+					</md-select>
+				</div>
+				<div class="ml-color-73 tuipiaoRe ml-fontsize-12"><i class="iconfont ml-color-blue">&#xe683;</i>因航空公司原因改签，请选择"航班延误或取消，航班时刻变更"，否则将影响您的实际改签费用</div>
+			</div>
+			<div class="ml-marginT-20">
+				<md-input-container class="ml-nomargin">
+					<textarea ng-model="gaiqianshuoming" aria-label="tuipiaoshuoming" cols="200" name="remark" md-maxlength="120"></textarea>
+				</md-input-container>
+			</div>
+			<div class="ml-color-73">2.选择改签乘机人</div>
+			<md-table-container>
+				<table md-table md-row-select multiple ng-model="selected" md-progress="promise" mdSelect="selected">
+					<thead md-head md-order="query.order" md-on-reorder="getDesserts">
+						<tr md-row>
+							<th md-column><span>姓名(证件号)</span></th>
+							<th md-column md-numeric><span>类型</span></th>
+							<th md-column md-numeric>票价</th>
+							<th md-column md-numeric>基建</th>
+							<th md-column md-numeric>燃油</th>
+							<th md-column md-numeric>订单状态</th>
+						</tr>
+					</thead>
+					<tbody md-body>
+						<tr md-row md-select="gaiPassenger"  md-select-id="name" md-auto-select ng-repeat="gaiPassenger in gaiPassengers" ng-disabled="gaiPassenger.ticketInstanceStatus !=2" >
+							<td md-cell>
+								<div>{{gaiPassenger.passengerName}}</div>
+								<div>({{gaiPassenger.certNumber}})</div>
+							</td>
+							<td md-cell>{{gaiPassenger.passengerType}}</td>
+							<td md-cell>¥{{gaiPassenger.ticketPrice}}</td>
+							<td md-cell>¥{{gaiPassenger.airportFee}}</td>
+							<td md-cell>¥{{gaiPassenger.oilFee}}</td>
+							<td md-cell ng-class="{'ml-color-blue':gaiPassenger.ticketInstanceStatus==2,'ml-color-red':gaiPassenger.ticketInstanceStatus!=2}">{{gaiPassenger.ticketInstanceStatus | getTicketInstanceStatus}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</md-table-container>
+			<md-divider></md-divider>
+			<div class="blue-line ml-fontsize-15 marginT30"><span></span>新航班信息</div>
+			<div class="ml-marginT-20 ml-textalign-center" ng-if="fightList">
+				<div layout="row" class="ml-color-73 detail-main-mid-top ml-lineheight-36  ml-marginT-20 ">
+					<div flex>行程</div>
+					<div flex>起飞-到达</div>
+					<div flex>航班日期</div>
+					<div flex>航空公司</div>
+					<div flex>舱位</div>
+					<div flex>票价</div>
+					<div flex>基建/燃油</div>
+				</div>
+				<div layout="row" class="ml-marginT-20 tuikuan-main-bot">
+					<div flex>{{fightList.orgCity}}－{{fightList.desCity}}</div>
+					<div flex>
+						<div>{{fightList.depTime}} {{fightList.orgAirport}}</div>
+						<div>{{fightList.arrTime}} {{fightList.desAirport}}</div>
+					</div>
+					<div flex>{{fightList.depDate}}</div>
+					<div flex>{{fightList.airlineName}}{{fightList.flightNo}}</div>
+					<div flex class="ml-color-blue">{{fightListDetail.cabin}}</div>
+					<div flex class="ml-color-red">¥{{fightListDetail.ticketPrice}}</div>
+					<div flex>¥{{fightListDetail.airPortFee}}/¥{{fightListDetail.oilFee}}</div>
+				</div>
+				<md-divider></md-divider>
+			</div>
+			
+			<div class="addPerson ml-marginT-20">
+				<md-button class="md-raised md-primary ml-paddinglr20 ml-nomargin" ng-click="getplane()">选择新航班</md-button>
+			</div>
+			<div class="blue-line ml-fontsize-15 marginT30"><span></span>联系人信息</div>
+			<div layout="row" flex="50" class="ml-marginT-20">
+				<div class="ml-color-73" flex="20">改签联系人</div>
+				<div class="tuipiao-marginl">{{contact.contactName}}</div>
+			</div>
+			<div layout="row" flex="50" class="ml-marginT-10">
+				<div class="ml-color-73" flex="20">手机</div>
+				<div class="tuipiao-marginl">{{contact.mobile}}</div>
+			</div>
+			<!--<div class="ml-margintb-20">改期将增加您的手续费，如有疑问请联系电话800-800</div>-->
+			<div class="ml-marginT-20" layout="row" layout-align="center center" layout-wrap>
+				<md-button type="submit" ng-click="messageBack()" class="md-raised ml-paddinglr20">返回</md-button>
+				<md-button type="submit" ng-click="gaiqiantijiao(event)" class="md-raised md-primary ml-paddinglr20">提交</md-button>
+			</div>
+		</md-card>
+
+	</div>
+</div>

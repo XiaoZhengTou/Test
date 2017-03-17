@@ -1,0 +1,233 @@
+<div layout="column" ng-controller="personalCtrl" ng-cloak class="personalCenter">
+	<div ng-controller="myOrderCtrl" class="myOrder">
+		<md-card>
+			<md-tabs md-border-bottom md-dynamic-height>
+				<md-tab md-on-select="getIndex()">
+					<md-tab-label>
+						<md-input-container class="md-block ml-nomargin" flex-gt-sm>
+							<md-select ng-model="OrderState" placeholder="机票" ng-change="changeStates()">
+								<md-option ng-repeat="OrderState in OrderStates" value="{{OrderState}}">
+									{{OrderState}}
+								</md-option>
+							</md-select>
+						</md-input-container>
+					</md-tab-label>
+					<md-tab-body>
+						<div layout="row" class="ml-padding-20">
+							<label class="ml-color-73 dindanTime">订单时间</label>
+							<div flex="40" layout="row">
+								<div flex class="ml-textalign-left">
+									<md-datepicker class="ml-border-e" ng-change="getNewData()" ng-model="checkInDateo" md-placeholder="开始时间"></md-datepicker>
+								</div>
+								<div flex flex-offset="10">
+									<md-datepicker class="ml-border-e" ng-change="getNewData()" ng-model="checkOutDateo" md-placeholder="结束时间" md-min-date="checkOutMinDateo"></md-datepicker>
+								</div>
+							</div>
+							<div flex="40" flex-offset="5" class="riqi" layout="row">
+								<span ng-repeat="orderStr in orderStrs" class="riqi margin10" ng-class="{true:'active'}[tab == $index]" ng-click="getOrderStr(orderStr,$index)">
+									{{orderStr.name}}
+								</span>
+							</div>
+							<div flex>
+								<md-button ng-click="myOrderSearch()" class="md-raised md-primary ml-nomargin">搜 索</md-button>
+							</div>
+						</div>
+						<!--机票-->
+						<div ng-if="OrderState == '机票'">
+							<div class="ml-color-73 myOrder-list-con" ng-repeat="airfareOrder in airfareOrders">
+								<md-divider></md-divider>
+								<div class="ml-bgcolor-fc ml-padding-13">
+									<span class="ml-color-21">机票</span>
+									<span class="riqi-mid">{{airfareOrder.orderNo}}</span>
+									<span>{{airfareOrder.createDate | date:'yyyy-MM-dd HH:mm'}}</span>
+								</div>
+								<md-divider></md-divider>
+								<div layout="row">
+									<div flex="60" layout="column">
+										<div layout="row" class="ml-padding-20 order-main-leftCon">
+											<div flex>{{airfareOrder.orgCity}} - {{airfareOrder.desCity}}</div>
+											<div flex class="ml-textalign-right">{{(airfareOrder.arrTime-airfareOrder.depTime)/60000/60 |parseInt}}小时{{(airfareOrder.arrTime-airfareOrder.depTime)/60000%60}}分钟</div>
+										</div>
+										<div class="ml-padding-20 order-main-Con" layout="row">
+											<div flex="10" class="myorderStatus ml-textalign-center" style="background-color: #ff39aa;">机票</div>
+											<div flex="35" layout="row">
+												<span class="order-main-Con-span">始</span>
+												<div layout="column">
+													<div>{{airfareOrder.orgAirport}}</div>
+													<div class="ml-fontsize-14 ml-lineheight-24">{{airfareOrder.depTime | date:'yyyy-MM-dd HH:mm'}}</div>
+												</div>
+											</div>
+											<div flex="35" layout="row">
+												<span>到</span>
+												<div layout="column">
+													<div>{{airfareOrder.desAirport}}</div>
+													<div class="ml-fontsize-14 ml-lineheight-24">{{airfareOrder.arrTime | date:'yyyy-MM-dd HH:mm'}}</div>
+												</div>
+											</div>
+											<div class="ml-textalign-right" flex="20">{{airfareOrder.airlineName}}{{airfareOrder.flightNo}}</div>
+										</div>
+									</div>
+									<div flex="40" layout="row" class="ml-textalign-center order-main-right">
+										<!--<span class="order-main-leftBorder" flex>¥{{airfareOrder.orderPrice}}*{{airfareOrder.passengers.length}}</span>-->
+										<span class="order-main-leftBorder" flex>¥{{airfareOrder.orderPrice}}</span>
+										<span flex class="order-main-leftBorder ml-color-yellow" ng-class="{'ml-color-ccc':airfareOrder.orderStatus=='4'}">
+										<span ng-if="airfareOrder.orderType==1">{{airfareOrder.orderStatus | getOrderStatus}}</span>
+										<span ng-if="airfareOrder.orderType==2">{{airfareOrder.orderStatus | tuiOrderStatus}}</span>
+										<span ng-if="airfareOrder.orderType==3">{{airfareOrder.orderStatus | gaiOrderStatus}}</span>
+										</span>
+										<span flex class="order-main-leftBorder xiangqing ml-color-blue"><span ng-click="airfareOrderDetail(airfareOrder)" >查看详情</span></span>
+									</div>
+								</div>
+								<md-divider></md-divider>
+								<div class="ml-padding-13">
+									<span class="ml-marginr-20 ml-color-21">乘机人</span>
+									<span class="ml-margin-10" ng-repeat="passenger in airfareOrder.passengers">
+									{{passenger.passengerName}}
+								</span>
+								</div>
+								<md-divider></md-divider>
+							</div>
+							<div layout="row" class="ml-textalign-right yejiao ml-color-73 ml-fontsize-12 ml-padding-20">
+								<span flex layout="row">
+								<em flex>每一页的行:</em>
+								<md-select class="ml-nomargin" ng-model="pageSize" placeholder="{{pageSize}}">
+									<md-option ng-repeat="pageSize in pageSizes" ng-click="getPageSize(pageSize)">
+										{{pageSize}}
+									</md-option>
+								</md-select>
+							</span>
+								<span class="ml-textalign-right">{{selPage>1?selectedLeftPage:selPage}} - {{selectedPage}} of {{totalAmount?totalAmount:0}}</span>
+								<span class="pageIcon">
+								<i ng-click="pageLeft()" ng-class="{'active':selectLeftPage==true}" class="iconfont ml-fontsize-12">&#xe601;</i>
+								<i ng-click="pageRight()" ng-class="{'active':selectRightPage==true}" class="iconfont ml-fontsize-12">&#xe604;</i>
+							</span>
+							</div>
+						</div>
+
+						<!--酒店-->
+						<div ng-if="OrderState == '酒店'">
+							<div class="ml-color-73 myOrder-list-con" ng-repeat="hotelOrder in hotelOrders">
+								<md-divider></md-divider>
+								<div class="ml-bgcolor-fc ml-padding-13">
+									<span class="ml-color-21">酒店</span>
+									<span class="riqi-mid">{{hotelOrder.orderNo}}</span>
+									<span>{{hotelOrder.createTime | date:'yyyy-MM-dd HH:mm'}}</span>
+								</div>
+								<md-divider></md-divider>
+								<div layout="row">
+									<div flex="60" layout="column" class="ml-padding-20">
+										<div layout="row">
+											<div flex="10" class="myorderStatus ml-textalign-center" style="background-color: cornflowerblue">酒店</div>
+											<div flex>{{hotelOrder.hotelName}}</div>
+										</div>
+										<div class="ml-lineheight-30">{{hotelOrder.checkInDate | date:'yyyy-MM-dd'}} 至 {{hotelOrder.checkOutDate | date:'yyyy-MM-dd'}}</div>
+										<div class="ml-lineheight-30">{{orderTime}}晚 {{hotelOrder.roomNum}}间 {{hotelOrder.roomName}}</div>
+									</div>
+									<div flex="40" layout="row" class="ml-textalign-center jdorder-main-right">
+										<span class="order-main-leftBorder" flex>¥{{hotelOrder.totalAmount}}</span>
+										<span class="order-main-leftBorder ml-color-yellow" ng-class="{'ml-color-ccc':hotelOrder.orderStatus == 6}" flex>{{hotelOrder.orderStatus | getJdOrderStatus}}</span>
+										<span class="order-main-leftBorder xiangqing ml-color-blue" flex><span ng-click="hotelOrderDetail(hotelOrder)" >查看详情</span></span>
+									</div>
+								</div>
+								<md-divider></md-divider>
+								<div class="ml-padding-13">
+									<span>地址：</span>
+									<span class="margin20">{{hotelOrder.hotelAddress}}</span>
+								</div>
+								<md-divider></md-divider>
+							</div>
+							<!--页脚-->
+							<div layout="row" class="ml-textalign-right yejiao ml-color-73 ml-fontsize-12 ml-padding-20">
+								<span flex layout="row">
+								<em flex>每一页的行:</em>
+								<md-select class="ml-nomargin" ng-model="pageSize" placeholder="{{pageSize}}">
+									<md-option ng-repeat="pageSize in pageSizes" ng-click="getPageSize(pageSize)">
+										{{pageSize}}
+									</md-option>
+								</md-select>
+							</span>
+								<span class="ml-textalign-right">{{selPage>1?selectedLeftPage:selPage}} - {{selectedPage}} of {{jdtotalAmount?jdtotalAmount:0}}</span>
+								<span class="pageIcon">
+								<i ng-click="pageLeft()" ng-class="{'active':selectLeftPage==true}" class="iconfont ml-fontsize-12">&#xe601;</i>
+								<i ng-click="pageRight()" ng-class="{'active':selectRightPage==true}" class="iconfont ml-fontsize-12">&#xe604;</i>
+							</span>
+							</div>
+						</div>
+
+						<!--火车票-->
+						<div ng-if="OrderState == '火车票'">
+							<div class="ml-color-73 myOrder-list-con" ng-repeat="trainorder in trainorders">
+								<md-divider></md-divider>
+								<div class="ml-bgcolor-fc ml-padding-13">
+									<span class="ml-color-21">火车票</span>
+									<span class="riqi-mid">{{trainorder.orderNo}}</span>
+									<span class="margin20">{{trainorder.createDate}}</span>
+								</div>
+								<md-divider></md-divider>
+								<div layout="row">
+									<div flex="60" layout="column">
+										<div layout="row" class="ml-padding-20 order-main-leftCon">
+											<div flex>{{trainorder.fromStationName}}－{{trainorder.toStationName}}</div>
+											<div flex class="ml-textalign-right">{{(trainorder.endTrainDate-trainorder.startTrainDate)/60000/60 |parseInt}}小时{{(trainorder.endTrainDate-trainorder.startTrainDate)/60000%60}}分钟</div>
+										</div>
+										<div class="ml-padding-20 order-main-Con" layout="row">
+											<div flex="10" class="myorderStatus ml-textalign-center" style="background-color: #4caf50">火车票</div>
+											<div flex="40" layout="row">
+												<span class="order-main-Con-span">始</span>
+												<div layout="column">
+													<div>{{trainorder.fromStationName}}</div>
+													<div class="ml-fontsize-14 ml-lineheight-24">{{trainorder.fromStationTime}}</div>
+												</div>
+											</div>
+											<div flex="40" layout="row">
+												<span>到</span>
+												<div layout="column">
+													<div>{{trainorder.toStationName}}</div>
+													<div class="ml-fontsize-14 ml-lineheight-24">{{trainorder.toStationTime}}</div>
+												</div>
+											</div>
+											<div class="ml-textalign-right" flex="10">{{trainorder.trainNumber}}</div>
+										</div>
+									</div>
+									<div flex="40" layout="row" class="ml-textalign-center order-main-right">
+										<span class="order-main-leftBorder" flex>¥{{trainorder.totalPrice}}</span>
+										<span flex class="order-main-leftBorder ml-color-yellow" ng-class="{'ml-color-ccc':trainorder.orderStatus=='4'}">
+											<span ng-if="trainorder.orderType==1">{{trainorder.orderStatus | getOrderStatus}}</span>
+											<span ng-if="trainorder.orderType==2">{{trainorder.orderStatus | tuiOrderStatus}}</span>
+										</span>
+										<span class="order-main-leftBorder xiangqing ml-color-blue" flex><span ng-click="trainOrderDetail(trainorder)" >查看详情</span></span>
+									</div>
+								</div>
+								<md-divider></md-divider>
+								<!--<div class="ml-padding-13">
+									<span>乘车人</span>
+									<span class="margin20">李丽</span>
+								</div>
+								<md-divider></md-divider>-->
+							</div>
+							<!--页脚-->
+							<div layout="row" class="ml-textalign-right yejiao ml-color-73 ml-fontsize-12 ml-padding-20">
+								<span flex layout="row">
+									<em flex>每一页的行:</em>
+									<md-select class="ml-nomargin" ng-model="pageSize" placeholder="{{pageSize}}">
+										<md-option ng-repeat="pageSize in pageSizes" ng-click="getPageSize(pageSize)">
+											{{pageSize}}
+										</md-option>
+									</md-select>
+								</span>
+								<span class="ml-textalign-right">{{selPage>1?selectedLeftPage:selPage}} - {{selectedPage}} of {{trTotalAmount?trTotalAmount:0}}</span>
+								<span class="pageIcon">
+									<i ng-click="pageLeft()" ng-class="{'active':selectLeftPage==true}" class="iconfont ml-fontsize-12">&#xe601;</i>
+									<i ng-click="pageRight()" ng-class="{'active':selectRightPage==true}" class="iconfont ml-fontsize-12">&#xe604;</i>
+								</span>
+							</div>
+						</div>
+					</md-tab-body>
+				</md-tab>
+				<airfareorder ng-if="OrderState == '机票'"></airfareorder>
+				<jiudianorder ng-if="OrderState == '酒店'"></jiudianorder>
+				<trainorder ng-if="OrderState == '火车票'"></trainorder>
+			</md-tabs>
+		</md-card>
+	</div>
+</div>

@@ -1,0 +1,82 @@
+<md-dialog aria-label="选择预算科目" ng-cloak style="min-width: 70%;max-width: 70%;" id="processauthyewu-feetype-detail">
+    <form name="addprocessauthyewu3" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 style="color: white">选择预算科目</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="padding-top: 0px;padding-bottom: 0px" layout="row">
+
+                <div flex="25" style="border: 1px solid black;max-height: 510px;padding: 0;margin-top: 4%;" class="md-dialog-content">
+                    <md-list-item class="md-3-line asda" ng-repeat="item in feetypetree" ng-click="getfeetype(item.fee_type_tree_id,item.fee_type_tree_name)">
+                        <div class="md-list-item-text asda" layout="column">
+                            <p>{{ item.fee_type_tree_name }}</p>
+                        </div>
+                    </md-list-item>
+                </div>
+                <div flex="25" style="border: 1px solid black;max-height: 510px;padding: 0;margin-top: 4%;margin-left: 1%;overflow: auto;" class="md-dialog-content">
+                    <md-list-item class="md-3-line asda" ng-repeat="item in feetype">
+                        <div class="md-list-item-text" layout="column">
+
+                            <p><md-checkbox ng-model="item.check1" ng-disabled="item.disabled1" ng-checked="exists(item, selected)"  ng-click="(item.disabled1?'':toggle(item, selected))" style="margin-bottom: 0px;word-break: break-word;">{{ item.fee_type_name }}</md-checkbox></p>
+                            <p><md-checkbox ng-model="item.check1" style="display: none"></md-checkbox></p>
+
+                        </div>
+                    </md-list-item>
+                </div>
+
+                <!--<div flex="4" class="md-dialog-content"></div>-->
+                <div flex="46" class="md-dialog-content" style="max-width: 46%;min-width: 46%">
+
+                    <p>已选预算科目：</p>
+                    <md-chips ng-model="selected" md-max-chips="1" required="">
+                        <md-chip-template>
+                            <strong>{{$chip.fee_type_tree_name}}-{{$chip.fee_type_name}}</strong>
+                        </md-chip-template>
+                    </md-chips>
+                    <p></p>
+
+                    <md-button class="md-primary md-raised" ng-click="answer(selected,adjust_amount)"  style="color: white;float: right"
+                               ng-disabled="addprocessauthyewu3.$invalid || selected.length==0" disabled="disabled">确定</md-button>
+                </div>
+
+            </div>
+        </md-dialog-content>
+        <!--<md-dialog-actions>-->
+            <!--<span flex></span>-->
+            <!--<md-button class="md-primary md-raised" ng-click="answer()"  style="color: white;float: right">确定</md-button>-->
+
+        <!--</md-dialog-actions>-->
+    </form>
+</md-dialog>
+
+<style>
+    #processauthyewu-feetype-detail .md-datepicker-input-container{
+        width: 75%;
+        /*margin-left: -2px;*/
+    }
+    md-list-item.md-3-line, md-list-item.md-3-line > .md-no-style {
+        height: auto;
+        min-height: 45px;
+        max-height: 45px;
+    }
+    md-chips input{
+        display: none;
+    }
+    md-chips md-chips-wrap{
+        box-shadow:none;
+    }
+    #processauthyewu-feetype-detail .md-list-item-inner{
+        min-height: 40px !important;
+        max-height: 40px !important;
+    }
+    #processauthyewu-feetype-detail .asda{
+        min-height: 40px !important;
+        max-height: 40px !important;
+    }
+</style>

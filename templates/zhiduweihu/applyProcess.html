@@ -1,0 +1,25 @@
+<md-dialog aria-label="文件上传" style="width:750px;"  ng-cloak>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>文件上传</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <i class="iconfont" style="color:#fff;font-size:20px;">&#xe634;</i>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content" style="padding:0;">
+            <upload handle="fileHandle()" only="false" drop="true" files="files" selected="selectFile()" remove="removeImg(event,index,file)"></upload>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+        <span flex></span>
+        <md-button type="submit" class="md-raised md-primary" ng-click="save()">
+            确定
+        </md-button>
+        <md-button ng-click="cancel()">
+            取消
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

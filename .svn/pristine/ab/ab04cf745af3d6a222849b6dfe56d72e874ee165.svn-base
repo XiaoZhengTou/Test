@@ -1,0 +1,57 @@
+<div ng-controller="airfareCtrl" layout="column" ng-cloak class="airfare">
+	<div ng-controller="detailCtrl" class="detail detail-main ml-color-21">
+		<md-card class="ml-padding-20 ml-color-73 detail-main-top">
+			<div>订单号 <em>{{RefundsOrderNo}}</em></div>
+			<div class="ml-color-blue ml-fontsize-18 success">{{order.orderStatus | getOrderStatus}}</div>
+			<div flex class="zonge ml-fontsize-14">订单总额: <em class="ml-color-red">¥{{order.totalAmount}}</em></div>
+			<div class="detail-top-btn">
+				<md-button class="md-raised rmbtn" ng-click="orderQuxiao()">取消</md-button>
+				<md-button class="md-raised md-primary ml-nomargin" ng-click="orderQueren()">去支付</md-button>
+			</div>
+		</md-card>
+		<md-card class="ml-padding-20 detail-main-mid ml-textalign-center">
+			<div layout="row" class="ml-color-73 detail-main-mid-top ml-lineheight-36 ml-fontsize-14">
+				<div flex>行程(单程)</div>
+				<div flex>起飞时间/机场</div>
+				<div flex>降落时间/机场</div>
+				<div flex>航空公司</div>
+				<div flex>舱位</div>
+				<div flex>票价</div>
+				<div flex>基建/燃油</div>
+			</div>
+			<div layout="row" class="ml-marginT-20 ml-fontsize-13">
+				<div flex>{{ticket.orgCity}}>{{ticket.desCity}}</div>
+				<div flex>
+					<div>{{ticket.depTime | date:'yyyy-MM-dd'}}<em>{{ticket.depTime | date:'HH:mm'}}</em><em>{{ticket.orgAirport}}</em></div>
+				</div>
+				<div flex>
+					<div>{{ticket.depTime | date:'yyyy-MM-dd'}}<em>{{ticket.arrTime | date:'HH:mm'}}</em><em>{{ticket.desAirport}}</em></div>
+				</div>
+				<div flex>{{ticket.airlineName}}{{ticket.flightNo}}</div>
+				<div flex>{{ticketPrice.cabin}}</div>
+				<div flex class="ml-color-red">¥{{ticketPrice.ticketPrice}}</div>
+				<div flex>¥{{ticketPrice.airportFee}}/¥{{ticketPrice.oilFee}}</div>
+			</div>
+		</md-card>
+		<md-card class="ml-padding-20 detail-main-bot">
+			<div class="userMessage ">
+				<div class="blue-line ml-color-73"><span></span>乘机人信息</div>
+				<div class="passengerMes ml-margintb-20 ml-fontsize-13" layout="row" ng-repeat="people in passengers">
+					<div flex="5" class="ml-textalign-center"><i>{{$index+1}}</i></div>
+					<div flex="15">成人<em>{{people.cnName}}</em></div>
+					<div flex>{{people.certTypeStr ||getCertType}}<em>{{people.certNumber}}</em></div>
+					<div flex>手机号<em>{{people.mobile}}</em></div>
+				</div>
+			</div>
+			<md-divider></md-divider>
+			<div class="userMessage ml-marginT-10">
+				<div class="blue-line ml-fontsize-15 ml-color-73"><span></span>联系人信息</div>
+				<div class="ml-marginT-20 ml-fontsize-13" layout="row">
+					<div flex="15" flex-offset="5">{{contact.contactName}}</div>
+					<div flex>手机号<em>{{contact.mobile}}</em></div>
+				</div>
+			</div>
+		</md-card>
+		
+	</div>
+</div>

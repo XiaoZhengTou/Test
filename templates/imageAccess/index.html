@@ -1,0 +1,100 @@
+<div ng-controller="accessCtrl as ctrl" layout="column" ng-cloak>
+	
+	<md-card>
+		<md-card-title style="border-bottom:1px solid #eee;padding:20px 16px 16px">
+          <md-card-title-text>
+            <span class="md-headline" style="font-size:16px;color:#777;">当前版本：v1.0.3 更新时间：2016-05-22 16:44 更新人：肖楚意    
+            	<md-menu>
+			      <md-button class="md-raised md-primary" ng-click="ctrl.openMenu($mdOpenMenu, $event)">
+			        	查看历史版本
+			      </md-button>
+			      <md-menu-content width="4">
+			        <md-menu-item>
+			          <md-button ng-click="ctrl.redial($event)">
+			            <md-icon md-svg-icon="call:dialpad" md-menu-align-target></md-icon>
+			            Redial
+			          </md-button>
+			        </md-menu-item>
+			        <md-menu-item>
+			          <md-button disabled="disabled" ng-click="ctrl.checkVoicemail()">
+			            <md-icon md-svg-icon="call:voicemail"></md-icon>
+			            Check voicemail
+			          </md-button>
+			        </md-menu-item>
+			        <md-menu-divider></md-menu-divider>
+			        <md-menu-item>
+			          <md-button ng-click="ctrl.toggleNotifications()">
+			            <md-icon md-svg-icon="social:notifications-{{ctrl.notificationsEnabled ? 'off' : 'on'}}"></md-icon>
+			            {{ctrl.notificationsEnabled ? 'Disable' : 'Enable' }} notifications
+			          </md-button>
+			        </md-menu-item>
+			      </md-menu-content>
+			    </md-menu>
+            </span>
+          </md-card-title-text>
+      </md-card-title>
+       
+       <md-card-content style="padding:0;">
+       		<div layout="row">
+       			<div layout="column" style="min-width:300px;">
+				  <md-toolbar style="background-color: rgb(255,255,255);color: #666;">
+				    <div class="md-toolbar-tools">
+				      	<table width="100%" class="left-sidebar-table">
+	       					<tr>
+		       					<td>文件名</td>
+		       					<td>分类</td>
+	       					</tr>
+       					</table>
+				    </div>
+				  </md-toolbar>
+				  <md-content flex style="height:410px;border-right:1px solid #ccc;">
+				  	<table width="100%" id="table-container" class="left-sidebar-table-content">
+				  		<tbody data-ng-model="itemsList.items"  as-sortable>
+				  			<tr ng-click="selectedRow($event, d)" ng-repeat="d in itemsList.items" as-sortable-item>
+			  					<td as-sortable-item-handle>
+			  						<table width="100%" cellspacing="0">
+			  							<tr>
+					       					<td>{{d.name}}</td>
+					       					<td>
+					       						{{d.type}}
+					       					</td>
+			  							</tr>
+			  						</table>
+			  					</td>
+	       						
+	       					</tr>
+				  		</tbody>
+       				</table>
+				  </md-content>
+				</div>
+				
+       			<div layout="column" flex>
+       			  <md-toolbar style="background-color: rgb(255,255,255);color: #666;">
+				    <div class="md-toolbar-tools" layout-align="center center">
+				    	文件预览
+				    </div>
+				  </md-toolbar>
+				  <md-content flex>
+				  	<div style="height:410px;overflow:hidden;" layout="column" layout-align="center center">
+				    	<image-cropper image-url="imageUrl"
+				          width="480"
+				          height="300"
+				          show-controls="{{showControls}}"
+				          fit-on-init="false"
+				          center-on-init="true"
+				          watermarked="true"
+				          api="cropperApi"
+				          crop-callback="updateResultImage"
+				          action-labels="myButtonLabels">
+					    </image-cropper>
+				    </div>
+				  </md-content>
+       				
+       			</div>
+       			
+       			
+       		</div>
+        </md-card-content>
+	</md-card>
+	
+</div>

@@ -1,0 +1,75 @@
+<div ng-controller="reportQCCtrl" class="task airfare">
+	<md-card> 
+		<div class="md-toolbar-tools">
+	      	<h3><span>质检报告</span></h3> 
+	    </div>
+	    <md-divider></md-divider>
+	  </br>
+		<div layout='row'>
+			<md-input-container class="md-block ml-nomargin" flex="33">
+				<label>任务组</label>
+				<input ng-model="name">
+			</md-input-container>
+			<div layout="row">
+				<md-input-container class="md-block ml-marginlr-10" flex>
+		            <label>总账日期（开始）</label>
+		            <input ng-model="beginTime" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+				</md-input-container>
+				<span class="ml-lineheight-48 ml-marginlr-10">至</span>
+				<md-input-container class="md-block ml-marginlr-10" flex>
+		            <label>总账日期（结束）</label>
+		           <input ng-model="beginTime" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+				</md-input-container>
+			</div>
+		</div>
+		<div class="ml-textalign-right ml-margintb-20">
+        	<md-button class="md-raised md-primary">查询</md-button>
+        	<md-button class="md-raised md-primary">重置</md-button>
+       </div>
+	</md-card>
+	<md-card>
+		<div class="md-toolbar-tools">
+	      	<h3><span>质检结果统计表</span></h3> 
+	    </div>
+		<md-divider></md-divider>
+		<md-table-container>
+			<table md-table md-row-select multiple ng-model="selected" md-progress="promise">
+				<thead md-head md-order="query.order" md-on-reorder="getDesserts" class=" ml-textalign-center md-whiteframe-2dp">
+					<tr md-row>
+						<th md-column md-numeric>任务组</th>
+						<th md-column md-numeric>单据总数</th>
+						<th md-column md-numeric>质检单据量</th>
+						<th md-column md-numeric>质检比例</th>
+						<th md-column md-numeric>问题单据量</th> 
+						<th md-column md-numeric>问题单据占质检比</th>
+						<th md-column md-numeric>无需整改单据量</th>
+						<th md-column md-numeric>需整改单据量</th>
+						<th md-column md-numeric>以整改单据量</th>
+						<th md-column md-numeric>待整改单据量</th>
+
+					</tr>
+				</thead>
+				<tbody md-body>
+					<tr md-row md-select="item" md-select-id="fee_apply_id" md-auto-select ng-repeat="item in xingyong.data.datalist">
+						<td md-cell>{{item.fee_apply_id}}</td>
+						<td md-cell>{{item.credit_user_name}}</td>
+						<td md-cell>{{item.credit_id}}</td>
+						<td md-cell>{{item.currency_name}}</td>
+						<td md-cell>{{item.credit_user_code}}</td>
+						<td md-cell>{{item.creation_date}}</td>
+						<td md-cell>{{item.s}}</td>
+						<td md-cell>{{item.order_status|order_status}}</td>
+						<td md-cell>{{item.order_type|applytype}}</td>
+						<td md-cell>{{item.order_type|applytype}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</md-table-container>
+	</md-card>
+	<md-button aria-label="menu" class="md-fab ml-bottom-fab" ng-click="go('/financeQC/detailReportQC','质检结果明细表')">
+    	<md-tooltip md-direction="left">
+          	质检结果明细表
+        </md-tooltip>
+        <md-icon class="iconfont">&#xe631;</md-icon>
+   </md-button>
+</div>

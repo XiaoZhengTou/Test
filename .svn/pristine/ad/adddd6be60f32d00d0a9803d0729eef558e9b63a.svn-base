@@ -1,0 +1,117 @@
+<md-dialog aria-label="修改区域" ng-cloak style="min-width: 50%" id="area-dialog2-detail">
+    <form name="addarea1" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 style="color: white">修改区域</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="padding-top: 0px;padding-bottom: 0px">
+
+                <div class="demo-tab" style="padding: 25px 25px 0 25px; text-align: center;">
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>名称(必填)</label>
+                        <input ng-model="area.area_name" type="text" required>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm style="text-align: left">
+                        <label>区域类型(必选)</label>
+                        <md-select ng-model="area.region_type_code" required>
+                            <md-option value="0">大区</md-option>
+                            <md-option value="1">国家</md-option>
+                            <md-option value="2">省</md-option>
+                            <md-option value="3">市</md-option>
+                            <md-option value="4">县/区</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>编码(必填)</label>
+                        <input ng-model="area.area_code" type="text" required>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>拼音码</label>
+                        <input ng-model="area.pin_yin" type="text">
+                    </md-input-container>
+
+                    <!--<md-input-container class="md-block" flex-gt-sm>-->
+                        <!--<label>上级区域</label>-->
+                        <!--<input ng-model="area.parent_area_name" type="text">-->
+                    <!--</md-input-container>-->
+
+                    <md-autocomplete
+                            md-no-cache="noCache"
+                            md-selected-item="selectedItem"
+                            md-search-text="searchText"
+                            md-items="item in querySearch()"
+                            md-item-text="item.area_name"
+                            md-min-length="0"
+                            placeholder="上级区域"
+                            md-menu-class="autocomplete-custom-template">
+                        <md-item-template>
+                            <span> {{item.area_name}} </span>
+                        </md-item-template>
+                        <md-not-found>
+                            <span ng-if="searchText != ''">不存在名为 "{{searchText}}" 的区域。请先添加该区域.</span>
+                        </md-not-found>
+
+                    </md-autocomplete>
+
+                    <!--<md-input-container class="md-block" flex-gt-sm>-->
+                        <!--<label>区域路径</label>-->
+                        <!--<input ng-model="area.full_path" type="text" disabled>-->
+                    <!--</md-input-container>-->
+
+                    <md-input-container class="md-block" flex-gt-sm style="text-align: left">
+                        <label>是否热门城市(必选)</label>
+                        <md-select ng-model="area.hot_city_flag" required>
+                            <md-option value="1">是</md-option>
+                            <md-option value="0">否</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm style="text-align: left;padding-top: 20px;padding-bottom: 20px;">
+                        <label>是否出差可选(必选)</label>
+                        <md-select ng-model="area.is_travel_city" required>
+                            <md-option value="Y">是</md-option>
+                            <md-option value="N">否</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm style="text-align: left;padding-top: 20px;padding-bottom: 20px;">
+                        <label>生效状态(必选)</label>
+                        <md-select ng-model="area.active_flag" required>
+                            <md-option value="Y">有效</md-option>
+                            <md-option value="N">无效</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                </div>
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <!--<md-button class="md-primary md-raised" ng-click="delete()"  style="background-color:red;color: white;float: right;margin-right: 3%;">删除</md-button>-->
+            <!--<span flex></span>-->
+            <md-button class="md-primary md-raised" ng-click="answer()"  style="color: white;float: right"
+                       ng-disabled="addarea1.$invalid" disabled="disabled">确定</md-button>
+
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+
+<style>
+    #area-dialog2-detail .md-datepicker-input-container{
+        width: 93.9%;
+        margin-left: -2px;
+    }
+    #area-dialog2-detail .md-datepicker-calendar-icon{
+        margin-bottom: -7px;
+    }
+</style>

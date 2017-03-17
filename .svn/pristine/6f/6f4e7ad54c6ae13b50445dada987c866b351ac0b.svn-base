@@ -1,0 +1,27 @@
+<div ng-controller="analogSampledCtrl" class="task airfare">
+	<md-card>
+		<md-divider></md-divider>
+		<md-table-container>
+			<table md-table md-row-select multiple ng-model="selected" md-progress="promise">
+				<thead md-head md-order="query.order" md-on-reorder="getDesserts" class="ml-bgcolor-blue md-whiteframe-2dp">
+					<tr md-row>
+						<th md-column md-numeric style="text-align: center;">质检计划</th>
+						<th md-column md-numeric style="text-align: center;">单据编号</th>
+						<th md-column md-numeric style="text-align: center;">单据类型</th>
+						<th md-column md-numeric style="text-align: center;">任务组</th>
+						<th md-column md-numeric style="text-align: center;">入账单位</th> 
+					</tr>
+				</thead>
+				<tbody md-body>
+					<tr md-row md-select="item" md-select-id="fee_apply_id" md-auto-select ng-repeat="item in xingyong.data.datalist">
+						<td md-cell>{{item.fee_apply_id}}</td>
+						<td md-cell>{{item.credit_user_name}}</td>
+						<td md-cell>{{item.credit_id}}</td>
+						<td md-cell>{{item.currency_name}}</td>
+						<td md-cell>{{item.credit_user_code}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</md-table-container>
+	</md-card>
+</div>

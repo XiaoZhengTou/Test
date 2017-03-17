@@ -1,0 +1,120 @@
+<div ng-controller="governCtrl" class="airfare">
+	<div ng-controller="governHomeCrl">
+		<md-card layout="row" layout-wrap>
+			<div class="md-toolbar-tools">
+		      	<h3>
+		       		<span>付款申请</span>
+		      	</h3> 
+		    </div>  
+		    <md-divider></md-divider>				
+			<md-input-container class="md-block ml-marginlr-10" flex="30">
+	            <label>付款单号</label>
+	            <input ng-model="loan_info_code">
+	        </md-input-container>
+	        <md-input-container flex="30" class="ml-margintlr-20">
+				<label>入账单位</label>
+				<input ng-model="ruzhangdanwei.company_name" type="text" drruzhangdanwei="{'model':'ruzhangdanwei'}">
+			</md-input-container>
+	        <div flex="30" layout="row">
+	        	<md-input-container class="md-block ml-marginlr-10">
+		            <label>金额（最小值）</label>
+		            <input type="text" ng-model="loan_amount_from">
+		        </md-input-container>
+		        <span class="ml-lineheight-48 ml-marginlr-10">至</span>
+		        <md-input-container class="md-block ml-marginlr-10">
+		            <label>金额（最大值）</label>
+		            <input type="text" ng-model="loan_amount_to">
+		        </md-input-container>
+	        </div>
+			<div layout="row" flex="30"  class="ml-marginlr-10">
+				<div flex >
+			        <md-datepicker ng-model="apply_date_from" md-placeholder="申请日期（起）" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
+			    </div>
+			    <div class="ml-lineheight-36">至</div>
+			    <div flex class="ml-marginLe-20">
+			        <md-datepicker ng-model="apply_date_to" md-placeholder="申请日期（止）" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
+			    </div>
+			</div>
+			<md-input-container flex="30" class="ml-margintlr-20">
+				<label>申请人</label>
+				<input ng-model="orgs.user_full_name" type="text" drorganization="{'model':'orgs'}">
+			</md-input-container>
+	       <!--<div class="ml-padding-0" flex="30">
+	       	 <dr-Currency  ngrequired="true" oldcurrencycode=""  currencycodemodel="emslmloan.order_type4" currencynamemodel="emslmloan.order_type5" currencymodel="currency"  titlename="货币类型"  class="ml-padding-0"></dr-Currency>
+	       </div>-->
+			<md-input-container class="md-block ml-marginlr-10" flex="30">
+	            <label>事由</label>
+	            <input type="text" ng-model="reason_desc">
+	        </md-input-container>
+	        <!--<md-input-container class="md-block ml-marginlr-10" flex="30">
+	            <label>供应商</label>
+	            <input>
+	        </md-input-container>
+	        <md-input-container class="md-block ml-marginlr-10" flex="30">
+	            <label>供应商地址</label>
+	            <input>
+	        </md-input-container>-->
+	        <md-input-container class="md-block ml-marginlr-10" flex="30">
+	            <label>支付单状态</label>
+	            <md-select ng-model="biz_status">
+					<md-option ng-repeat="x in payState" value="{{x.id}}">{{x.name}}</md-option>
+				</md-select>
+	        </md-input-container>
+	        <md-input-container class="md-block ml-marginlr-10" flex="30">
+	            <label>导接口状态</label>
+	            <md-select ng-model="import_erp_status" >
+					<md-option ng-repeat="x in interfaceState" value="{{x.id}}">{{x.name}}</md-option>
+				</md-select>
+	        </md-input-container>
+			<div class="ml-text-center" flex="100">
+			    <md-button class="md-raised md-primary" ng-click="refer()">查询</md-button>
+			</div>
+		</md-card>
+		<md-card>
+			<md-table-container>
+	        	<table md-table multiple class="ml-text-nowrap ml-text-center" md-row-select ng-model="selected">
+		        	<thead md-head md-row-select>
+				        <tr md-row>
+							<th md-column>付款类型</th>
+							<th md-column>付款单号</th>
+							<th md-column>入账单位</th>
+							<th md-column>金额</th>
+							<th md-column>币种</th>
+							<th md-column>摘要</th>
+							<th md-column>供应商</th>
+							<th md-column>供应商地址</th>
+							<th md-column>付款状态</th>
+							<th md-column>申请日期</th>
+							<th md-column>导接口状态</th>
+			   			</tr>
+			        </thead>
+			        <tbody md-body>
+				        <tr md-row ng-repeat="x in datas" md-select="x.loan_info_id" md-select-id="loan_info_id" ng-click="details(x.loan_info_id)">
+							<td md-cell>{{x.payment_type}}</td>
+							<td md-cell>{{x.loan_info_code}}</td>
+							<td md-cell>{{x.company_name}}</td>
+							<td md-cell>{{x.loan_amount}}</td>
+							<td md-cell>{{x.currency_name}}</td>  
+							<td md-cell>{{v.sensitive_info}}</td>
+							<td md-cell>{{x.vendor_name}}</td>
+							<td md-cell>{{x.vendor_site_name}}</td>
+							<td md-cell>{{x.order_status}}</td>
+							<td md-cell>{{x.apply_date}}</td>
+							<td md-cell>{{x.import_erp_status}}</td>
+			    		</tr>
+			        </tbody>
+		        </table>
+	        </md-table-container>
+			<!--<md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '，总条数：'}" md-limit="query.page_size" md-limit-options="[5, 10, 15]" md-page="query.page_number" md-total="{{total}}" md-on-paginate="getData" md-page-select></md-table-pagination>-->
+			<md-button aria-label="menu" class="md-fab ml-bottom-fab" ng-click="onGoList()">
+	    	<md-tooltip md-direction="left">
+	          	新增付款信息
+	        </md-tooltip>
+	        <md-icon class="iconfont">&#xe631;</md-icon>
+	    </md-button>
+			<section layout="row" layout-sm="column" layout-align="center right" layout-wrap>
+			    <md-button class="md-raised md-primary" ng-click="onSubmit($event)">提交付款申请</md-button>
+		   </section>
+		</md-card>
+	</div>
+</div>

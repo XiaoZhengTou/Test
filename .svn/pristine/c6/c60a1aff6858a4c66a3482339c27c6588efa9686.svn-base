@@ -1,0 +1,65 @@
+<div ng-controller="personalCtrl" ng-cloak class="personalCenter">
+	<div ng-controller="trainTuipiaoCtrl" class="tuipiao">
+		<md-card class="ml-padding-20 ml-fontsize-14 gaiqianDetail-main">
+			<div class="blue-line ml-fontsize-15"><span></span>退票申请</div>
+			<!--<div layout="row" class="ml-marginT-10">
+				<div class="ml-color-73 tuipiaoRe">1.选择退票原因</div>
+				<div class="select-marginl" flex="30">
+					<md-select placeholder="请选择*" class="ml-nomargin" ng-model="reason">
+						<md-option ng-repeat="reason in trainReasons" ng-value="reason">
+							{{reason}}
+						</md-option>
+					</md-select>
+				</div>
+			</div>
+			<div class="ml-marginT-20">
+				<md-input-container class="ml-nomargin">
+					<textarea ng-model="tuipiaoshuoming" aria-label="tuipiaoshuoming" cols="200" name="remark" md-maxlength="120"></textarea>
+				</md-input-container>
+			</div>-->
+			<div class="ml-color-73 ml-marginT-10">选择退票乘机车人</div>
+			<md-table-container>
+				<table md-table md-row-select multiple ng-model="selected" md-progress="promise">
+					<thead md-head md-order="query.order" md-on-reorder="getDesserts">
+						<tr md-row>
+							<th md-column><span>姓名(证件号)</span></th>
+							<th md-column md-numeric><span>类型</span></th>
+							<th md-column md-numeric>座次</th>
+							<th md-column md-numeric>票价</th>
+							<th md-column md-numeric>服务费</th>
+							<th md-column md-numeric>订单状态</th>
+						</tr>
+					</thead>
+					<tbody md-body>
+						<tr md-row md-select="tuiPassenger" md-select-id="name" md-auto-select ng-repeat="tuiPassenger in trainTicketLists" ng-disabled="tuiPassenger.ticketStatus !=2">
+							<td md-cell>
+								<div>{{tuiPassenger.passengerName}}</div>
+								<div>({{tuiPassenger.certNumber}})</div>
+							</td>
+							<td md-cell>{{tuiPassenger.passengerType | getCertType}}</td>
+							<td md-cell>{{tuiPassenger.seatCode}}</td>
+							<td md-cell>¥{{tuiPassenger.seatPrice}}</td>
+							<td md-cell>¥{{tuiPassenger.servicePrice}}</td>
+							<td md-cell ng-class="{'ml-color-blue':tuiPassenger.ticketStatus==2,'ml-color-red':tuiPassenger.ticketStatus!=2}">{{tuiPassenger.ticketStatus | getTicketTrainStatus}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</md-table-container>
+			<md-divider></md-divider>
+			<div class="blue-line ml-fontsize-15 marginT30"><span></span>联系人信息</div>
+			<div layout="row" flex="50" class="ml-marginT-20">
+				<div class="ml-color-73" flex="20">退票联系人</div>
+				<div class="tuipiao-marginl">{{trainContact.contactName}}</div>
+			</div>
+			<div layout="row" flex="50" class="ml-marginT-10">
+				<div class="ml-color-73" flex="20">手机</div>
+				<div class="tuipiao-marginl">{{trainContact.mobile}}</div>
+			</div>
+			<div class="ml-marginT-20" layout="row" layout-align="center center" layout-wrap>
+				<md-button type="submit" ng-click="messageBack()" class="md-raised ml-paddinglr20">返回</md-button>
+				<md-button type="submit" ng-click="tuipiaoCon(event)" class="md-raised md-primary ml-paddinglr20">提交</md-button>
+			</div>
+		</md-card>
+
+	</div>
+</div>

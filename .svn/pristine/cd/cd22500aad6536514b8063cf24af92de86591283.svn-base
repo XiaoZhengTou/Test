@@ -1,0 +1,77 @@
+<div ng-controller="jdCtrl" class="jiudian commit">
+<div layout="column" ng-controller="jdCommitCtrl" class="ml-fixed-head">
+<!-- Header Bar Begin -->
+<md-toolbar class="ml-headerbar">
+  <div class="md-toolbar-tools">
+    <md-button class="back md-icon-button" aria-label="Settings" ng-click="go('/jiudian/detail');back()">
+      <md-icon md-svg-icon="img/icons/jiudian/back.svg"></md-icon>
+    </md-button>
+    <h2>
+      <span>金茂华美达酒店</span>
+    </h2>
+  </div>
+</md-toolbar>
+<!-- Header Bar End -->
+<!-- Pingfen Begin -->
+<div class="title">
+  <span>酒店总评：</span><b>4.4分</b><span class="star star4"></span>
+</div>
+<!-- Pingfen End -->
+<md-card class="commitCard">
+  <md-card-content class="commitContent">
+  <md-tabs md-border-bottom md-dynamic-height md-stretch-tabs="always" md-swipe-content="true">
+    <md-tab label="全部">
+      <md-content>
+        <section ng-repeat="x in commitList">
+          <span class="rate">{{x.star}}分</span>
+          <h3>{{x.commitTitle}}</h3>
+          <p class="info"><span>砖家点评</span>{{x.author}}</p>
+          <div class="content" limitHeight ng-if="loadingComplete">
+            <p>{{x.content}}</p>
+            <a ng-click="showMore($event)" class="showMore"><i class="iconfont">&#xe602;</i></a>
+          </div>
+          <p class="meta">
+            <span class="date">2014-05-04</span>
+            <span class="from">经去哪儿网预订</span>
+          </p>
+          <div class="picShow">
+            <slick lazy-load="ondemand" arrows="false" slides-to-show="3" slides-to-scroll="1" infinite="false" adaptiveHeight="true">
+            <div ng-repeat="y in x.pictureList">
+                <div class="image"><img ng-src="{{y.url}}"/></div>
+            </div>
+            </slick>
+            <span class="total">共{{x.pictureList.length}}张<i class="iconfont">&#xe605;</i></span>
+          </div>
+          <div class="action">
+          <md-button ng-click="null" class="md-icon-button launch ml-small-icon" >
+            <md-icon class="iconfont">&#xe610;</md-icon>
+          </md-button><b>{{x.zan}}</b>
+          <md-button ng-click="null" class="md-icon-button launch ml-small-icon" >
+            <md-icon class="iconfont">&#xe600;</md-icon>
+          </md-button><b>{{x.commitList.length}}</b>
+          </div>
+          <p>{{x.commitList[0].content}}</p>
+        </section>
+      </md-content>
+    </md-tab>
+    <md-tab label="好评">
+      <md-content>
+      <!-- Code -->
+      </md-content>
+    </md-tab>
+    <md-tab label="待改善">
+      <md-content>
+        <!-- Code -->
+      </md-content>
+    </md-tab>
+    <md-tab label="好评">
+      <md-content>
+        <!-- Code -->
+      </md-content>
+    </md-tab>
+  </md-tabs>
+  </md-card-content>
+</md-card>
+<!-- Tab End -->
+</div>
+</div>

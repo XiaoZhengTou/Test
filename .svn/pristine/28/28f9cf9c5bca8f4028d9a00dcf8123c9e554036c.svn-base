@@ -1,0 +1,279 @@
+<md-dialog aria-label="城市列表" style="height: 500px;width: 50%;">
+	<form>
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2><div><span style="position:absolute;"><i class="iconfont">&#xe636;</i></span>
+					<input placeholder="支持中文/拼音输入"
+					ng-model="search"  
+					ng-change="onSearch(search)" 
+					style="background-color:transparent;padding-left:20px;border-top:0;border-left:0;border-right:0;color:#fff;">
+					<span ng-click="search=null" ng-show="search!=null" style="cursor:pointer";>
+						<i class="iconfont">&#xe60d;</i></span>
+					</div>
+				</h2>
+				<span flex></span>
+				<md-button ng-click="cancel()">
+					<i class="iconfont" style="color:#fff;">关闭</i>
+				</md-button>
+			</div>
+		</md-toolbar>
+		<md-dialog-content>
+			<div ng-cloak>
+				<md-content ng-if="search==null">
+					<md-tabs md-dynamic-height md-border-bottom>
+						<md-tab label="热门">
+							<md-content class="md-padding">
+								<div layout="row">
+									<div>
+										<md-button ng-repeat="item in citys.Hot" ng-click="answer(item)" aria-label="item.text" ng-bind="item.text"></md-button>
+									</div>
+								</div>
+							</md-content>
+						</md-tab>
+						<md-tab label="ABCD">
+							<md-content class="md-padding">
+								<div layout="row">
+									<div class="md-padding">
+										<span style="color:#f94eae;">A</span>
+									</div>
+									<div>
+										<md-button ng-repeat="item in citys.A" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+									</div>
+								</div>
+								<div layout="row">
+									<div class="md-padding">
+										<span style="color:#f94eae;">B</span>
+									</div>
+									<div>
+										<md-button ng-repeat="item in citys.B" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+									</div>
+								</div>
+								<div layout="row">
+									<div class="md-padding">
+										<span style="color:#f94eae;">C</span>
+									</div>
+									<div>
+										<md-button ng-repeat="item in citys.C" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+									</div>
+								</div>
+								<div layout="row">
+									<div class="md-padding">
+										<span style="color:#f94eae;">D</span>
+									</div>
+									<div>
+										<md-button ng-repeat="item in citys.D" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+									</div>
+								</div>
+							</md-content>
+						</md-tab>
+						<md-tab label="EFGH">
+							<md-content class="md-padding">
+								<div layout="row">
+									<div class="md-padding">
+										<span style="color:#f94eae;">E</span>
+									</div>
+									<div>
+										<md-button ng-repeat="item in citys.E" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+									</div>
+								</div>
+								<div layout="row">
+									<div class="md-padding">
+										<span style="color:#f94eae;">F</span>
+									</div>
+									<div>
+										<md-button ng-repeat="item in citys.F" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+									</div>
+								</div>
+								<div layout="row">
+									<div class="md-padding">
+										<span style="color:#f94eae;">G</span>
+									</div>
+									<div>
+										<md-button ng-repeat="item in citys.G" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+									</div>
+								</div>
+								<div layout="row">
+									<div class="md-padding">
+										<span style="color:#f94eae;">H</span>
+									</div>
+									<div>
+										<md-button ng-repeat="item in citys.H" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+									</div>
+								</div>
+							</md-content>
+						</md-tab>
+						<md-tab label="JKLM">
+							<md-content class="md-padding">
+								<div layout="row">
+									<div class="md-padding">
+										<span style="color:#f94eae;">J</span>
+									</div>
+									<div>
+										<md-button ng-repeat="item in citys.J" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+									</div>
+								</div>
+								<div layout="row">
+									<div class="md-padding">
+										<span style="color:#f94eae;">K</span>
+									</div>
+									<div>
+										<md-button ng-repeat="item in citys.K" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+									</div>
+								</div>
+								<div layout="row">
+									<div class="md-padding">
+										<span style="color:#f94eae;">L</span>
+									</div>
+									<div>
+										<md-button ng-repeat="item in citys.L" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+									</div>
+								</div>
+								<div layout="row">
+									<div class="md-padding">
+										<span style="color:#f94eae;">M</span>
+									</div>
+									<div>
+										<md-button ng-repeat="item in citys.M" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+									</div>
+								</div>
+							</md-content>
+						</md-tab>
+						<md-tab label="NOPQRS">
+							<md-content class="md-padding">
+								<div layout="row">
+									<div class="md-padding">
+										<span style="color:#f94eae;">N</span>
+									</div>
+									<div>
+										<md-button ng-repeat="item in citys.N" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+									</div>
+								</div>
+								<div layout="row">
+									<div class="md-padding">
+										<span style="color:#f94eae;">P</span>
+									</div>
+									<div>
+										<md-button ng-repeat="item in citys.P" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+									</div>
+								</div>
+								<div layout="row">
+									<div class="md-padding">
+										<span style="color:#f94eae;">Q</span>
+									</div>
+									<div>
+										<md-button ng-repeat="item in citys.Q" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+									</div>
+								</div>
+								<div layout="row">
+									<div class="md-padding">
+										<span style="color:#f94eae;">R</span>
+									</div>
+									<div>
+										<md-button ng-repeat="item in citys.R" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+									</div>
+								</div>
+								<div layout="row">
+									<div class="md-padding">
+										<span style="color:#f94eae;">S</span>
+									</div>
+									<div>
+										<md-button ng-repeat="item in citys.S" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+									</div>
+								</div>
+							</md-content>
+						</md-tab>
+						<md-tab label="TUVWX">
+							<md-content class="md-padding">
+								<div layout="row">
+									<div class="md-padding">
+										<span style="color:#f94eae;">T</span>
+									</div>
+									<div>
+										<md-button ng-repeat="item in citys.T" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+									</div>
+								</div>
+
+								<div layout="row">
+									<div class="md-padding">
+										<span style="color:#f94eae;">W</span>
+									</div>
+									<div>
+										<md-button ng-repeat="item in citys.W" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+									</div>
+								</div>
+								<div layout="row">
+									<div class="md-padding">
+										<span style="color:#f94eae;">X</span>
+									</div>
+									<div>
+										<md-button ng-repeat="item in citys.X" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+									</div>
+								</div>
+							</md-content>
+						</md-tab>
+						<md-tab label="YZ">
+							<md-content class="md-padding">
+								<div layout="row">
+									<div class="md-padding">
+										<span style="color:#f94eae;">Y</span>
+									</div>
+									<div>
+										<md-button ng-repeat="item in citys.Y" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+									</div>
+								</div>
+								<div layout="row">
+									<div class="md-padding">
+										<span style="color:#f94eae;">Z</span>
+									</div>
+									<div>
+										<md-button ng-repeat="item in citys.Z" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+									</div>
+								</div>
+							</md-content>
+						</md-tab>
+					</md-tabs>
+				</md-content>
+				<md-content ng-if="search!=null">
+					<md-button ng-repeat="item in citys.A|filter:search" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+					<md-button ng-repeat="item in citys.B|filter:search" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+					<md-button ng-repeat="item in citys.C|filter:search" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+					<md-button ng-repeat="item in citys.D|filter:search" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+					<md-button ng-repeat="item in citys.E|filter:search" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+					<md-button ng-repeat="item in citys.F|filter:search" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+					<md-button ng-repeat="item in citys.G|filter:search" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+					<md-button ng-repeat="item in citys.H|filter:search" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+					<md-button ng-repeat="item in citys.I|filter:search" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+					<md-button ng-repeat="item in citys.J|filter:search" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+					<md-button ng-repeat="item in citys.K|filter:search" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+					<md-button ng-repeat="item in citys.L|filter:search" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+					<md-button ng-repeat="item in citys.M|filter:search" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+					<md-button ng-repeat="item in citys.N|filter:search" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+					<md-button ng-repeat="item in citys.O|filter:search" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+					<md-button ng-repeat="item in citys.P|filter:search" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+					<md-button ng-repeat="item in citys.Q|filter:search" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+					<md-button ng-repeat="item in citys.R|filter:search" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+					<md-button ng-repeat="item in citys.S|filter:search" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+					<md-button ng-repeat="item in citys.T|filter:search" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+					<md-button ng-repeat="item in citys.U|filter:search" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+					<md-button ng-repeat="item in citys.V|filter:search" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+					<md-button ng-repeat="item in citys.W|filter:search" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+					<md-button ng-repeat="item in citys.X|filter:search" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+					<md-button ng-repeat="item in citys.Y|filter:search" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+					<md-button ng-repeat="item in citys.Z|filter:search" ng-bind="item.text" aria-label="item.text" ng-click="answer(item)"></md-button>
+					<!--<md-list flex>
+						<md-list-item ng-repeat="item in citys.A||filter:search" ng-click="answer(item)">
+							<div class="md-list-item-text" layout="column">
+								<p>{{ item.text }}</p>
+							</div>
+						</md-list-item>
+						<md-list-item ng-repeat="item in citys.B" ng-click="answer(item)">
+							<div class="md-list-item-text" layout="column">
+								<p>{{ item.text }}</p>
+							</div>
+						</md-list-item>
+					</md-list>-->
+				</md-content>
+			</div>
+		</md-dialog-content>
+	</form>
+</md-dialog>

@@ -1,0 +1,168 @@
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<div ng-controller="workflowCtrl" id="busiorg">
+    <div class="full-height ng-scope">
+        <div class="full-image-background layout-fill ng-scope layout-row" layout="row" layout-fill="">
+            <div class="animate-wrapper layout-row flex" flex="" layout="row">
+                <div id="ui-login" class="login-frame ng-scope layout-column flex" ui-view="" flex="" layout="column">
+                    <div layout="row" flex="" layout-padding="" layout-fill="" layout-align="center center" class="layout-fill ng-scope layout-align-center-center layout-row flex" style="padding: 0px">
+                        <div flex="40" flex-lg="50" flex-md="70" flex-xs="100" class="flex-xs-100 flex-md-70 flex-lg-50 flex-40" style="max-width: 100%;padding: 0px">
+                            <md-card class="md-cyan-theme" style="max-width: 100%">
+
+                                <md-toolbar ng-hide="selected.length || filter.show" class="md-table-toolbar md-default" style="background-color: white;">
+                                    <div class="md-toolbar-tools" >
+                                        <!--<div style="background-color: #2196f3;">-->
+                                            <!--<h2 class="md-title" style="color: black;font-size: 16px;margin-left: 4px;padding-left: 20px;background-color: white;">工作流表单</h2>-->
+                                        <!--</div>-->
+                                        <span>工作流表单</span>
+                                        <div flex></div>
+                                        <!--<md-button class="md-icon-button" ng-click="filter.show = true">-->
+                                            <!--<md-icon md-svg-src="img/icons/find.svg"></md-icon>-->
+                                        <!--</md-button>-->
+                                    </div>
+                                </md-toolbar>
+
+                                <md-content class=" md-cyan-theme" style="background-color: white;">
+                                    <md-table-container style="width: 95%;padding-left: 2.5%;">
+                                        <!--<table data-md-table data-md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" data-ng-model="selected" md-progress="promise">-->
+                                        <table data-md-table data-ng-model="selected" md-progress="promise">
+                                            <thead md-head data-md-order="query.order" md-on-reorder="getDesserts">
+                                            <tr md-row>
+                                                <th md-column>系统标识</th>
+                                                <th md-column>模块标识</th>
+                                                <th md-column>模块名称</th>
+                                                <th md-column>表单标识</th>
+                                                <th md-column>表单标题</th>
+                                                <th md-column>表单URL</th>
+                                                <th md-column>服务标识</th>
+                                                <th md-column>状态</th>
+                                                <th md-column>操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody md-body>
+                                            <!--<tr md-row md-select="item" md-select-id="budget_templet_id" ng-repeat="item in feeapplylist.data.datalist" md-auto-select="options.autoSelect">-->
+                                            <tr md-row ng-repeat="item in appdata">
+                                                <td md-cell>{{item.sys_id}}</td>
+                                                <td md-cell>{{item.model_id}}</td>
+                                                <td md-cell>{{item.model_name}}</td>
+                                                <td md-cell>{{item.template_form_id}}</td>
+                                                <td md-cell>{{item.title}}</td>
+                                                <td md-cell>{{item.url}}</td>
+                                                <td md-cell>{{item.service_id}}</td>
+                                                <td md-cell style="word-break: keep-all;white-space: nowrap;">
+                                                    <div style=" width:30px; height:30px;  border-radius:25px;" ng-class="(item.status == '1' ? 'active-Y':'active-N')">
+                                                        <span style="height:30px; line-height:30px; display:block; text-align:center">{{item.status}}</span>
+                                                    </div>
+                                                </td>
+                                                <td md-cell style="word-break: keep-all;white-space: nowrap;">
+                                                    <a class="md-primary" ng-click="delete(item)" style="cursor: pointer;color:#548ADA;margin-left: 10px" ng-if="item.status == '0'">
+                                                        启用
+                                                    </a>
+
+                                                    <a class="md-primary" ng-click="delete(item)" style="cursor: pointer;color:#548ADA;margin-left: 10px" ng-if="item.status == '1'">
+                                                        关闭
+                                                    </a>
+                                                    <a class="md-primary" ng-click="edit($event,item)" style="cursor: pointer;color:#548ADA" ng-if="item.status == '1'">
+                                                        修改
+                                                    </a>
+                                                    <a class="md-primary" ng-click="paramsflow($event,item)" style="cursor: pointer;color:#548ADA" ng-if="item.status == '1'">
+                                                        流程数据配置
+                                                    </a>
+                                                    <a class="md-primary" ng-click="callback($event,item)" style="cursor: pointer;color:#548ADA;margin-right: 10px" ng-if="item.status == '1'">
+                                                        回调方法配置
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="9">
+                                                    <md-button class="md-fab md-accent md-hue-1" style="float: right;" ng-click="add($event)">
+                                                        <h1 style="margin-top: 0px;font-size: 36px;color: white">+</h1>
+                                                    </md-button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </md-table-container>
+                                    <!--<md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '总条数：'}"-->
+                                                         <!--md-limit="query.limit" md-limit-options="[5, 10, 15]" md-page="query.page"-->
+                                                         <!--md-total="{{query.total}}" md-on-paginate="getDesserts" md-page-select></md-table-pagination>-->
+
+                                    <!--<table ng-table="tableParams" class="table table-condensed table-bordered table-striped" show-filter="true" style="font-size:13px;width: 94%;margin: 3%;margin-top: 3%;">-->
+                                        <!--<tr ng-repeat="user in $data">-->
+                                            <!--<td title="'系统标识'" filter="{ sys_id: 'text'}" sortable="'sys_id'">-->
+                                                <!--{{user.sys_id}}</td>-->
+
+                                            <!--<td title="'模块标识'" filter="{ model_id: 'text'}" sortable="'model_id'" style="word-wrap:break-word">-->
+                                                <!--{{user.model_id}}</td>-->
+                                            <!--<td title="'模块名称'" filter="{ model_name: 'text'}" sortable="'model_name'" style="word-wrap:break-word">-->
+                                                <!--{{user.model_name}}</td>-->
+                                            <!--<td title="'表单标识'" filter="{ template_form_id: 'text'}" sortable="'template_form_id'" style="word-wrap:break-word">-->
+                                                <!--{{user.template_form_id}}</td>-->
+                                            <!--<td title="'表单标题'" filter="{ title: 'text'}" sortable="'title'" style="word-wrap:break-word">-->
+                                                <!--{{user.title}}</td>-->
+                                            <!--<td title="'表单URL'" filter="{ url: 'text'}" sortable="'url'" style="TABLE-LAYOUT: fixed;WORD-BREAK: break-all;">-->
+                                                <!--{{user.url}}</td>-->
+                                            <!--<td title="'服务标识'" filter="{ service_id: 'text'}" sortable="'service_id'" style="TABLE-LAYOUT: fixed;WORD-BREAK: break-all;">-->
+                                                <!--{{user.service_id}}</td>-->
+
+                                            <!--<td title="'状态'" filter="{ status: 'text'}" sortable="'状态'" style="word-wrap:break-word">-->
+                                                <!--<div style=" width:30px; height:30px;  border-radius:25px;" ng-class="(user.status == '1' ? 'active-Y':'active-N')">-->
+                                                    <!--<span style="height:30px; line-height:30px; display:block; text-align:center">{{user.status}}</span>-->
+                                                <!--</div>-->
+                                            <!--</td>-->
+
+                                            <!--<td title="'操作'" style="max-width: 10%;word-wrap:break-word;white-space: nowrap;">-->
+
+                                                <!--<a class="md-primary" ng-click="delete(user)" style="cursor: pointer;color:#548ADA;margin-left: 10px" ng-if="user.status == '0'">-->
+                                                    <!--启用-->
+                                                <!--</a>-->
+
+                                                <!--<a class="md-primary" ng-click="delete(user)" style="cursor: pointer;color:#548ADA;margin-left: 10px" ng-if="user.status == '1'">-->
+                                                    <!--关闭-->
+                                                <!--</a>-->
+                                                <!--<a class="md-primary" ng-click="edit($event,user)" style="cursor: pointer;color:#548ADA" ng-if="user.status == '1'">-->
+                                                    <!--修改-->
+                                                <!--</a>-->
+                                                <!--<a class="md-primary" ng-click="paramsflow($event,user)" style="cursor: pointer;color:#548ADA" ng-if="user.status == '1'">-->
+                                                    <!--流程数据配置-->
+                                                <!--</a>-->
+                                                <!--<a class="md-primary" ng-click="callback($event,user)" style="cursor: pointer;color:#548ADA;margin-right: 10px" ng-if="user.status == '1'">-->
+                                                    <!--回调方法配置-->
+                                                <!--</a>-->
+
+                                            <!--</td>-->
+                                        <!--</tr>-->
+                                        <!--<tr>-->
+                                            <!--<td colspan="9">-->
+                                                <!--<md-button class="md-fab md-accent md-hue-1" style="float: right;" ng-click="add($event)">-->
+                                                    <!--<h1 style="margin-top: 0px;font-size: 36px;color: white">+</h1>-->
+                                                <!--</md-button>-->
+                                            <!--</td>-->
+                                        <!--</tr>-->
+                                    <!--</table>-->
+                                    <!--</fieldset>-->
+
+                                </md-content>
+                            </md-card>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    #busiorg .active-Y{
+        background-color: green;
+        color: green;
+    }
+    #busiorg .active-N{
+        background-color: red;
+        color: red;
+    }
+    .md-button.md-default-theme[disabled], .md-button[disabled], .md-button.md-default-theme.md-raised[disabled], .md-button.md-raised[disabled], .md-button.md-default-theme.md-fab[disabled], .md-button.md-fab[disabled], .md-button.md-default-theme.md-accent[disabled], .md-button.md-accent[disabled], .md-button.md-default-theme.md-warn[disabled], .md-button.md-warn[disabled] {
+        color: rgba(0,0,0,0.38) !important;
+        cursor: default;
+    }
+</style>

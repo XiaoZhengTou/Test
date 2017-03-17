@@ -1,0 +1,145 @@
+<style>
+	.arc{
+		display: block;
+		width:0;
+		height:0;
+		position: relative;
+		top:8px;
+		left:0;
+		border-style:solid;
+		border-width:12px;
+		border-color:#666 transparent transparent transparent;
+	}
+	.ml-padding-sub{
+		
+	}
+	
+	.ml-padding-sub div{
+		padding-top:12px;
+	}
+</style>
+<div ng-controller="wsCtrl" class="jiehuankuan fukuan add" ng-cloak>
+	<div ng-controller="wsSeeCtrl" class="ml-width-bottom-bar">
+		<md-card>
+			<md-card-content>
+				<div layout="row">
+					<div flex class="ml-padding-right">
+						<md-input-container class="md-block md-cyan-theme md-input-invalid">
+							<label>工单类型</label>
+							<md-select ng-model="detailData.ssmanualorderh.order_type">
+				              <md-option ng-repeat="x in ordertype"  ng-value="x.id">
+				                	{{x.name}}
+				              </md-option>
+				            </md-select>
+						</md-input-container>
+					</div>
+					<div flex class="ml-padding-right">
+						<md-input-container class="md-block md-cyan-theme md-input-invalid">
+							<label>入账单位</label>
+							<input type="text" ng-value="detailData.ssmanualorderh.company_name">
+						</md-input-container>
+					</div>
+					<div flex class="ml-padding-right">
+						<md-input-container class="md-block md-cyan-theme md-input-invalid">
+							<label>经办人</label>
+							<input type="text" ng-model="detailData.ssmanualorderh.apply_name">
+						</md-input-container>
+					</div>
+					<div flex class="ml-padding-right">
+						<md-input-container class="md-block md-cyan-theme md-input-invalid">
+							<label>部门</label>
+							<input type="text" ng-value="detailData.ssmanualorderh.org_name">
+						</md-input-container>
+					</div>
+				</div>
+				<div layout="row">
+					<div flex class="ml-padding-right">
+						<md-input-container class="md-block md-cyan-theme md-input-invalid">
+							<label>凭证日期</label>
+							<input type="text" ng-value="detailData.ssmanualorderh.apply_date | to_date | date:'yyyy-MM-dd'">
+						</md-input-container>
+					</div>
+					<div flex class="ml-padding-right">
+						<md-input-container class="md-block md-cyan-theme md-input-invalid">
+							<label>币种</label>
+							<input type="text" ng-model="detailData.ssmanualorderh.currency_name">
+						</md-input-container>
+					</div>
+					<div flex class="ml-padding-right">
+						<!--<md-input-container class="md-block md-cyan-theme md-input-invalid">
+							<label>单据状态</label>
+							<input type="text" ng-value="detailData.ssmanualorderh.order_status">
+						</md-input-container>-->
+						<div style="margin:36px;">单据状态： <span ng-bind-html="detailData.ssmanualorderh.order_status | order_status"></span></div>
+					</div>
+					<div flex></div>
+				</div>
+			</md-card-content>
+		</md-card>
+		
+		<md-card>
+			<md-card-content>
+		
+				<div ng-click="toggle = !toggle" class="ml-padding-right" ng-init="toggle = ($index+1)" ng-repeat="item in detailData.ssmanualfeeinvoiceh" style="cursor: pointer;padding: 12px 0;border-bottom: 1px solid #e1e1e1;">
+					<div layout="row">
+						<div flex class="ml-padding-right">发票类型：<span ng-repeat="x in ordertype" ng-if="item.order_type==x.id">{{x.name}}</span></div>
+						<div flex class="ml-padding-right">发票号：<span>{{item.invoice_code}}</span></div>
+						<div flex class="ml-padding-right">状态：<span ng-bind-html="order_status | order_status"></span></div>
+						<div flex class="ml-padding-right"><span><i class="arc"></i></span></div>
+					</div>
+					<!--AP-->
+					<div ng-if="item.order_type=='AP'" layout="row" layout-wrap class="ml-padding-sub" ng-show="toggle">
+						<div flex="25">供应商名称：{{item.vendor_name}}</div>
+						<div flex="25">供应商地址名：{{item.vendor_site_name}}</div>
+						<div flex="25">发票金额：{{item.invoice_amount}}</div>
+						<div flex="25">币种名称：{{item.currency_name}}</div>
+						<div flex="25">发票ID：{{item.invoice_id}}</div>
+						<div flex="25">发票摘要：{{item.reason_desc}}</div>
+					</div>
+					<!--AP end-->
+					
+					<!--AR_INV-->
+					<div ng-if="item.order_type=='AR_INV'" layout="row" layout-wrap class="ml-padding-sub" ng-show="toggle">
+						<div flex="25">客户名称：{{item.customer_name}}</div>
+						<div flex="25">客户地点名称：{{item.customer_site_name}}</div>
+						<div flex="25">事务处理类型：{{item.cust_trx_type_name}}</div>
+						<div flex="25">发票金额：{{item.amount}}</div>
+						<div flex="25">币种名称：{{item.currency_name}}</div>
+						<div flex="25">发票ID：{{item.invoice_id}}</div>
+						<div flex="25">发票摘要：{{item.reason_desc}}</div>
+					</div>
+					<!--AR_INV end-->
+					
+					<!--AR-->
+					<div ng-if="item.order_type=='AR'" layout="row" layout-wrap class="ml-padding-sub" ng-show="toggle">
+						<div flex="25">客户名称：{{item.customer_name}}</div>
+						<div flex="25">客户地点名称：{{item.customer_site_name}}</div>
+						<div flex="25">收款类型：{{item.calling_api}}</div>
+						<div flex="25">收款方法名称：{{item.receipt_method_name}}</div>
+						<div flex="25">银行账户名称：{{item.bank_account_name}}</div>
+						<div flex="25">发票金额：{{item.amount}}</div>
+						<div flex="25">币种名称：{{item.currency_name}}</div>
+						<div flex="25">发票ID：{{item.invoice_id}}</div>
+						<div flex="25">发票摘要：{{item.reason_desc}}</div>
+					</div>
+					<!--AR end-->
+					
+					<!--GL-->
+					<div ng-if="item.order_type=='GL'" layout="row" layout-wrap class="ml-padding-sub" ng-show="toggle">
+						<div flex="25">发票金额：{{item.invoice_amount}}</div>
+						<div flex="25">币种名称：{{item.currency_name}}</div>
+						<div flex="25">发票ID：{{item.invoice_id}}</div>
+						<div flex="25">发票摘要：{{item.reason_desc}}</div>
+						<div flex="100" >
+							dddddddd
+						</div>
+					</div>
+					<!--GL end-->
+
+				</div>
+		
+			</md-card-content>
+		</md-card>
+		
+	</div>
+</div>

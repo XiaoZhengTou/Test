@@ -1,0 +1,146 @@
+<div ng-controller="yfkCtrl" class="jiehuankuan jiekuan add" ng-cloak">
+<div ng-controller="yfkAddCtrl" class="ml-width-bottom-bar">
+<!-- 状态步骤条开始 -->
+<div class="ml-setupbar ml-margin-top ml-margin-large-bottom" layout="row" layout-align="center center">
+  <div flex="70" layout="row" class="container">
+    <div flex class="ml-text-center active item">
+      <span>填写单据信息</span>
+    </div>
+    <div flex class="ml-text-center item">
+      <span>流程及附件</span>
+    </div>
+    <div flex class="ml-text-center item">
+      <span>提交成功</span>
+    </div>
+  </div>
+</div>
+<!-- 状态步骤条结束 -->
+  <md-card>
+    <form name="addform">
+  	<md-card-content>
+  		<h2 class="title ml-margin-top">新增单据</h2>
+  		<div layout="row">
+  			<div flex class="ml-padding-right">
+  				<md-input-container class="md-block">
+  					<label>预付款金额</label>
+  					<input type="text" ng-model="add.amount" ng-change="null">
+  				</md-input-container>		
+  			</div>
+  			<div flex class="ml-padding-right">
+  				<md-input-container class="md-block">
+  					<label>币种</label>
+  					<md-select ng-model="add.currency">
+                <md-option ng-repeat="x in currencyList" ng-value="x" ng-selected="$first">
+                  {{x.name}}
+                </md-option>
+              </md-select>
+  				</md-input-container>		
+  			</div>	
+  		</div>
+      <div layout="row">
+        <div flex class="ml-padding-right">
+          <md-input-container class="md-block">
+            <label>付款方式</label>
+            <md-select ng-model="add.paymethod">
+                <md-option ng-repeat="x in paymethodList" value="{{x.id}}" ng-selected="$first">
+                  {{x.name}}
+                </md-option>
+              </md-select>
+          </md-input-container>  
+        </div>
+        <div flex class="ml-padding-right">
+          <md-input-container class="md-block">
+            <label>预计核销日期</label>
+            <input type="text" ng-model="add.hxdate" type="text" date-time-picker-input  display-mode="date" display-format="yyyy-MM-dd">
+          </md-input-container>   
+        </div>  
+      </div>
+      <div layout="row">
+        <div flex class="ml-padding-right">
+          <md-input-container class="md-block">
+            <label>关联EA申请单</label>
+            <input type="text" ng-model="add.ea[0].fee_apply_code" dreachoose="{'model':'add.ea'}">
+          </md-input-container>   
+        </div>
+        <div flex class="ml-padding-right">
+          <md-input-container class="md-block">
+            <label>入账单位</label>
+            <input type="text" ng-model="add.ruzhangdanwei.company_name" drruzhangdanwei="{'model':'add.ruzhangdanwei'}">
+          </md-input-container>   
+        </div>  
+      </div>
+      <div layout="row">
+        <div flex class="ml-padding-right">
+          <md-input-container class="md-block">
+            <label>业务描述</label>
+            <input type="text" ng-model="add.desc"/>
+          </md-input-container>   
+        </div>
+      </div>
+  	</md-card-content>
+  </form>
+  </md-card>
+  <md-card>
+    <md-card-content>
+      <h2 class="title">收款方信息</h2>
+      <div layout="row" class="ml-margin-top">
+        <div flex class="ml-padding-right">
+          <md-input-container class="md-block">
+            <label>收款人</label>
+            <input type="text" ng-model="add.bank.receiver" drreceving="{'model':'add.bank'}">
+          </md-input-container>   
+        </div>
+        <div flex class="ml-padding-right">
+          <md-input-container class="md-block">
+            <label>收款账户</label>
+            <input type="text" ng-model="add.bank.bank_account" disabled>
+          </md-input-container>   
+        </div>
+      </div>
+      <div layout="row" class="ml-margin-top">
+        <div flex class="ml-padding-right">
+          <md-input-container class="md-block">
+            <label>开户银行</label>
+            <input type="text" ng-model="add.bank.bank_name" disabled>
+          </md-input-container>   
+        </div>
+        <div flex class="ml-padding-right">
+          <md-input-container class="md-block">
+            <label>供应商</label>
+            <input type="text" ng-model="add.bank.vendor_id" disabled>
+          </md-input-container>   
+        </div>
+      </div>
+      <div layout="row" class="ml-margin-top">
+        <div flex class="ml-padding-right">
+          <md-input-container class="md-block">
+            <label>供应商地点</label>
+            <input type="text" ng-model="add.bank.vendor_code" disabled>
+          </md-input-container>   
+        </div>
+        <div flex class="ml-padding-right">
+          <md-input-container class="md-block">
+            <label>供应商类型</label>
+            <input type="text" ng-model="add.bank.vendor_type" disabled>
+          </md-input-container>
+        </div>
+      </div>
+      <div layout="row">
+        <div flex class="ml-padding-right">
+          <md-input-container class="md-block">
+            <label>收款人地址</label>
+            <input type="text" ng-model="add.bank.bank_adress" disabled>
+          </md-input-container>   
+        </div>
+      </div>
+    </md-card-content>
+  </md-card>
+  <!-- 底部操作区开始 -->
+  <div class="ml-bottom-bar slideInUp animated" layout="row">
+    <md-button class="md-raised md-primary ml-button ml-noshadow" aria-label="上传附件" ng-click="next()">保存</md-button>
+    <span flex></span>
+    <md-button class="md-raised md-primary ml-button ml-noshadow" aria-label="上传附件" ng-click="next()">下一步</md-button>
+  </div>
+  <!-- 底部操作区结束 -->
+</div>
+</div>

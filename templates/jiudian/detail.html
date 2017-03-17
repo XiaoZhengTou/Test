@@ -1,0 +1,179 @@
+<div ng-controller="jdCtrl" class="jiudian detail">
+<div layout="column" ng-controller="jdDetailCtrl">
+<!-- 酒店图片信息开始 -->
+<md-whiteframe class="md-whiteframe-z1 md-padding hotilInfo ml-margin-bottom">
+  <h3 class="name">{{detail.data.hotelCNName}}</h3>
+  <p class="ml-float-right price"><i>¥</i><b>{{detail.data.lowestPrice}}</b>起</p>
+  <p class="address"><i class="iconfont">&#xe62a;</i>{{detail.data.hotelAddress}}</p>
+  <div layout="row">
+    <div layout="row" class="slidePart">
+      <div flex class="ml-relative slide">
+        <ks-swiper-container initial-slide="0" loop="false" show-nav-buttons="false" slides-per-view="1"
+        autoplay="false" swiper="swiper">
+          <ks-swiper-slide class="swiper-slide" ng-repeat="x in detail.data.hotelPictureList" swiper="swiper">
+            <div class="image" style="background-image: url('{{x.url}}'),url('img/jiudian/default.jpg')">
+            </div>
+          </ks-swiper-slide>
+        </ks-swiper-container>
+      </div>
+      <div flex class="ml-padding-left picList ml-empty-bug">
+        <div ng-repeat="x in detail.data.hotelPictureList" ng-click="slideTo($index)" ng-class="$first ? 'active':''" style="background-image: url('{{x.url}}'),url('img/jiudian/default.jpg')" switch>
+        </div>
+      </div>
+    </div>
+    <div flex class="commentInfo ml-panel ml-panel-box">
+      <div class="rateInfo">
+        <p class="rate">
+          <span class="total"><b>{{detail.data.starCode}}</b>/5分</span>
+          <span class="star star{{detail.data.starCode}}"></span>
+          </p>
+        <p class="commit">284条短评（包含5条专家点评）</p>
+        <p class="paiming">佛山豪华酒店排名</p>
+        <p class="mingci">第2（共32家）</p>
+        <p class="time">开业时间：{{detail.data.hotelOpeningTime}}</p>
+        <p class="tel">电话：{{detail.data.hotelPhone}}</p>
+        <p class="url">网址：{{detail.data.hotelUrl}}</p>
+        <p class="code">酒店编码：{{detail.data.hotelCode}}</p>
+      </div>
+    </div>
+  </div>
+</md-whiteframe>
+<!-- 酒店图片信息结束 -->
+<md-tabs md-dynamic-height md-border-bottom class="ml-margin-large-bottom detailTab">
+  <md-tab label="房间预订">
+    <md-content class="md-padding">
+        <!-- 时间信息开始 -->
+        <div layout="row" class="setDate ml-margin-bottom">
+          <div flex="30" layout="row">
+            <span class="ml-margin-right ml-slect-title">入住日期</span>
+            <div flex="70" class="ml-relative">
+              <md-button class="md-raised ml-button ml-full-button ml-noshadow ml-button-select ml-noclick" ng-click="null">{{_date.checkInDate | amDateFormat:'MoDo'}}<i class="iconfont"><span class="ml-margin-small-right">{{_date.checkInDate | amDateFormat:'ddd'}}</span>&#xe680;</i></md-button>
+              <md-datepicker class="ml-button-datepicker" ng-model="_date.checkInDate" md-min-date="_date.checkInMinDate" md-max-date="_date.checkInMaxDate" ng-change="_date.checkInChange()"></md-datepicker>
+            </div>
+          </div>
+          <div flex="10" class="total ml-text-center">
+            共<span>{{_date.checkOutDate | amDifference : _date.checkInDate : 'days' }}</span>晚
+          </div>
+          <div flex="30" layout="row">
+            <span class="ml-margin-right ml-slect-title">离店日期</span>
+            <div flex="70" class="ml-relative">
+              <md-button class="md-raised ml-button ml-full-button ml-noshadow ml-button-select ml-noclick" ng-click="null">{{_date.checkOutDate| amDateFormat:'MoDo'}}
+              <i class="iconfont">
+              <span class="ml-margin-small-right">{{_date.checkOutDate| amDateFormat:'ddd'}}</span>
+              &#xe680;
+              </i>
+              </md-button>
+              <md-datepicker class="ml-button-datepicker" ng-model="_date.checkOutDate" md-min-date="_date.checkOutMinDate" md-max-date="_date.checkOutMaxDate" ng-change="_date.checkOutChange()"></md-datepicker>
+            </div>
+          </div>
+          <div flex="30">
+            <md-button class="md-raised md-primary ml-nomargin ml-button" aria-label="立即搜索" ng-click="detail.reGetRooms()">重新搜索</md-button>
+          </div>
+        </div>
+        <!-- 时间信息结束 -->
+        <!-- 房型信息开始 -->
+        <div class="roomInfo ml-margin-large-top">
+          <!-- 加载器开始 -->
+          <div layout="row" layout-sm="column" layout-align="space-around" ng-if="detail.loader">
+            <md-progress-circular md-diameter="120"></md-progress-circular>
+          </div>
+          <!-- 加载器结束 -->
+          <!-- 标题开始 -->
+          <div class="title" layout="row" ng-if="!detail.loader">
+            <div flex="25">
+              房型信息
+            </div>
+            <div flex="25" class="ml-text-center">
+              预订网站
+            </div>
+            <div flex="10" class="ml-text-center">
+                早餐
+            </div>
+            <div flex="10" class="ml-text-center">
+              退订政策
+            </div>
+            <div flex="10" class="ml-text-center">
+              日均价
+            </div>
+            <div flex="20" class="ml-text-right">
+              优惠后价格
+            </div>
+          </div>
+          <!-- 标题结束 -->
+          <!-- 房间预订开始 -->
+          <div class="rooms" layout="row" ng-repeat-start="x in detail.data.hotelRoomList" ng-if="!detail.loader">
+            <div flex="25" class="info">
+              <h5 class="title">{{x.roomName}}</h5>
+              <p class="internet">
+                <span class="title">网络：</span>
+                {{x.intent}}
+              </p>
+              <p class="area">
+                <span>面积：</span>{{x.acre}}平米／{{x.fooler}}层</p>
+              <p class="desc">
+                <span>描述：</span>
+                {{x.description}}
+              </p>
+              <p class="tese">
+                <span>床型：</span>
+                {{x.bedType}}
+              </p>
+            </div>
+            <div flex="75" class="room">
+              <ul class="ml-block ml-inline-block ml-nomargin" ng-repeat-start="y in x.hotelPriceList">
+                <li class="name ml-text-center"><span>{{y.supplierCode}}</span></li>
+                <li class="break ml-text-center"><span>{{y.hasBreakfast}}</span></li>
+                <li class="refound ml-text-center"><span>{{y.termCancelDescription}}</span></li>
+                <li class="price ml-text-center">¥<span>{{detail.getAverage(y.priceList)}}</span></li>
+                <li class="order ml-text-right">
+                <md-menu md-offset="0 -7">
+                <md-button class="md-raised md-primary ml-button ml-nopadding ml-nomargin" ng-click="$mdOpenMenu($event)">预订</md-button>
+                <md-menu-content width="4">
+                <md-menu-item ng-repeat="z in y.priceList">
+                  <md-button ng-click="detail.order(z,y,x)">
+                  <md-icon class="iconfont"  md-menu-align-target>
+                    &#xe660;
+                  </md-icon>
+                  {{z.sellDate | amDateFormat:'MoDo'}}
+                  <span class="price">
+                    <i>¥</i>{{z.price}}
+                  </span>
+                  </md-button>
+                </md-menu-item>
+              </md-menu-content>
+              </md-menu>
+                </li>
+              </ul>
+              <md-divider ng-repeat-end ng-if="!$last"></md-divider>
+            </div>
+          </div>
+          <md-divider ng-repeat-end ng-if="!$last && !detail.loader"></md-divider>
+          <!-- 房间预订结束 -->
+        </div>
+        <!-- 房型信息结束 -->
+    </md-content>
+  </md-tab>
+  <md-tab label="位置交通">
+    <md-content class="mapContent">
+      <baidu-map options="mapOptions" ak="oZuS9PRHgGb8Z01npwENWe4R" offline="offlineOpts" on-map-loaded="loadMap(map)" style="width: 100%; height: 600px;display: block;" ng-if="detail.map"></baidu-map>
+      <p ng-if="!detail.map">抱歉，没有该酒店的地标信息</p>
+    </md-content>
+  </md-tab>
+  <md-tab label="设施概况">
+    <md-content class="md-padding">
+      123123123
+    </md-content>
+  </md-tab>
+  <md-tab label="点评回答">
+    <md-content class="md-padding">
+      123123123
+    </md-content>
+  </md-tab>
+  <md-tab label="如何返现">
+    <md-content class="md-padding">
+      123123123
+    </md-content>
+  </md-tab>
+</md-tabs>
+</div>
+</div>

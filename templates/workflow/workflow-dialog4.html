@@ -1,0 +1,184 @@
+<md-dialog aria-label="回调方法配置" ng-cloak style="min-width: 90%" id="workflow-dialog4-detail" ng-click="cancelclick($event,$index)">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2 style="color: white">回调方法配置</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content style="background-color: #F2F2F2;">
+        <md-toolbar style="width: 96%;min-height: 22px;margin: 10px 24px 0 24px;background-color: white;font-size: 14px">
+            <div layout-gt-sm="row">
+                <span style="color: black;margin-left: 5%">模块名称：</span><input ng-model="params_callback.model_name" type="text" required disabled>
+                <span style="color: black;margin-left: 18%">表单名称：</span><input ng-model="params_callback.title" type="text" required disabled>
+            </div>
+        </md-toolbar>
+
+        <div layout="row">
+            <div class="md-dialog-content" flex="30" style="padding: 0px;margin: 10px 24px 0 24px;background-color: white;">
+                <md-radio-group ng-model="select_id" >
+                    <table class="table ng-scope">
+                        <thead>
+                        <tr>
+                            <th class="ng-binding ng-scope" colspan="3" style="background-color: #FAFAFA">
+                                <span>开放类</span>
+                                <md-button style="margin: 0;cursor: pointer;color:#548ADA;float: right;margin-left: 13px" ng-click="deleteparms11()" ng-disabled="showdelete"><md-icon md-svg-src="img/icons/delete.svg" style="margin-right: 3px"></md-icon>删除</md-button>
+                                <md-button style="margin: 0;cursor: pointer;color:#548ADA;float: right" ng-click="newparms()"><md-icon md-svg-src="img/icons/add.svg" style="margin-right: 3px"></md-icon>新增</md-button>
+
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="ng-binding ng-scope"></th>
+                            <th class="ng-binding ng-scope">类名</th>
+                            <th class="ng-binding ng-scope">类路径</th>
+                        </tr>
+                        </thead>
+                        <tbody class="md-caption">
+                        <tr class="ng-scope" ng-repeat="hinvit in datainfo" ng-click="findparms(hinvit.id)" style="cursor: pointer">
+                            <td class="ng-binding ng-scope">
+                                <!--<input name="tbDss_rowSelect" type="radio" ng-model="select_id" value="{{hinvit.data_bean_id}}">-->
+                                <md-radio-button ng-value="hinvit.id" class="md-primary" style="margin-bottom: 0px"></md-radio-button>
+                            </td>
+                            <td class="ng-binding ng-scope" style="TABLE-LAYOUT: fixed;WORD-BREAK: break-all;">{{hinvit.bean_id}}</td>
+                            <td class="ng-binding ng-scope">{{hinvit.class_name }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </md-radio-group>
+            </div>
+            <div class="md-dialog-content" flex="70" style="padding: 0px;margin: 10px 24px 0 24px;background-color: white;">
+                <form name="addcallback" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+                    <md-toolbar style="background-color: #FAFAFA;min-height: 41px;max-height: 41px;border-bottom: 1px solid #DDDDDD;color: black">
+                        <div class="md-toolbar-tools">
+                            <h4>添加方法</h4>
+                            <span flex></span>
+                            <md-button style="cursor: pointer;font-size: 16px;margin-right: 5px;color: black" ng-disabled="fid_repeat_error || addcallback.$invalid  || fid_repeat_error1" disabled="disabled" ng-hide="showlist"
+                                       ng-click="saveparms()">
+                                <md-icon md-svg-src="img/icons/add.svg" style="margin-right: 3px"></md-icon>保存
+                            </md-button>
+                        </div>
+                    </md-toolbar>
+                    <md-dialog-content ng-hide="showlist">
+                        <div class="demo-tab" style="padding: 0px 25px 0 25px; text-align: center;">
+
+
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>系统标识</label>
+                                    <input ng-model="params_callback.sys_id" type="text" required disabled>
+                                </md-input-container>
+
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>模块标识</label>
+                                    <input ng-model="params_callback.model_id" type="text" required disabled>
+                                </md-input-container>
+                            </div>
+
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>表单标识</label>
+                                    <input ng-model="params_callback.template_form_id" type="text" required disabled>
+                                </md-input-container>
+
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>类名</label>
+                                    <input ng-model="params_callback.bean_id" type="text" required>
+                                </md-input-container>
+                            </div>
+
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>类路径</label>
+                                    <input ng-model="params_callback.class_name" type="text" required>
+                                </md-input-container>
+                            </div>
+
+                            <div layout-gt-sm="row">
+                                <span>[注意]:方法必须包含一个类型为CdpWfParameterPOJO的参数</span>
+                            </div>
+
+                            <!--<md-input-container class="md-block" flex-gt-sm>-->
+                            <!--<label>类方法</label>-->
+                            <!--<input ng-model="params_callback.url" type="text" required>-->
+                            <!--</md-input-container>-->
+
+                        </div>
+                    </md-dialog-content>
+
+                    <md-toolbar style="background-color: #FAFAFA;min-height: 41px;max-height: 41px;border-bottom: 1px solid #DDDDDD;color: black">
+                        <div class="md-toolbar-tools">
+                            <h4>回调方法列表</h4>
+                            <span flex></span>
+                            <md-button style="cursor: pointer;font-size: 16px;margin-right: 5px;color: black;" ng-click="addparms1()" ng-hide="showlist">添加</md-button>
+                            <md-button style="cursor: pointer;font-size: 16px;color: black;" ng-disabled="addtablealldelete" ng-click="deleteparms()" ng-hide="showlist">删除</md-button>
+                        </div>
+                    </md-toolbar>
+                    <md-dialog-content ng-hide="showlist">
+                        <table class="table ng-scope" style="background-color: white">
+                            <thead>
+                            <tr>
+                                <th class="ng-binding ng-scope" style="width: 40px;">
+                                    <md-checkbox ng-click="addtoggle2()" ng-model="draftSelectcheck" style="margin-bottom: 0px"></md-checkbox>
+                                </th>
+                                <th class="ng-binding ng-scope" style="width: 20%;">方法名</th>
+                                <th class="ng-binding ng-scope" style="width: 20%;">是否可用</th>
+                                <th class="ng-binding ng-scope" style="width: 50%;">方法描述</th>
+                            </tr>
+                            </thead>
+                            <tbody class="md-caption">
+                            <tr ng-repeat="hinvit in cdp_wf_params | filter: myFilter" class="ng-scope">
+                                <td class="ng-binding ng-scope">
+                                    <md-checkbox ng-checked="addexists1(hinvit.option_id, selected1)" ng-click="addtoggle1(hinvit.option_id, selected1)" style="margin-bottom: 0px"> </md-checkbox>
+                                </td>
+                                <td class="ng-binding ng-scope" ng-click="(hinvit.fid0) = true;okclick0($event,$index)" ng-class="$index+'fid'" ng-blur="cancelsavedis()">
+                                    <span ng-if="!(hinvit.fid0)" ng-class="hinvit.fiderror == true?'fidinputerror':''">{{hinvit.method_name}}</span>
+                                    <input ng-model="hinvit.method_name" type="text" ng-show="(hinvit.fid0)" style="width: 100%;margin: 0;height: 100%;" required ng-blur="cancelsavedis()">
+                                </td>
+                                <td class="ng-binding ng-scope" ng-click="(hinvit.ftype0) = true;okclick1($event,$index)" ng-class="$index+'ftype'">
+                                    <span ng-if="!(hinvit.ftype0)" >{{hinvit.is_enabled == 'Y'? '是':'否' }}</span>
+                                    <select ng-model="hinvit.is_enabled" ng-show="(hinvit.ftype0)" style="width: 100%;margin: 0;height: 100%;" required>
+                                        <option value="Y">是</option>
+                                        <option value="N">否</option>
+                                    </select>
+                                </td>
+                                <td class="ng-binding ng-scope" ng-click="(hinvit.fname0) = true;okclick($event,$index)" ng-class="$index+'fname'">
+                                    <span ng-if="!(hinvit.fname0)">{{hinvit.method_desc}}</span>
+                                    <input ng-model="hinvit.method_desc" type="text" ng-show="(hinvit.fname0)" style="width: 100%;margin: 0;height: 100%;" required>
+                                </td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </md-dialog-content>
+
+                </form>
+            </div>
+        </div>
+
+
+    </md-dialog-content>
+    <!--<md-dialog-actions>-->
+    <!--<span flex></span>-->
+    <!--<md-button class="md-primary md-raised" ng-click="answer()"  style="color: white;float: right"-->
+    <!--ng-disabled="addworkflow.$invalid" disabled="disabled">保存</md-button>-->
+
+    <!--</md-dialog-actions>-->
+</md-dialog>
+
+<style>
+    #workflow-dialog4-detail .fidinputerror{
+        color: red;
+    }
+    #workflow-dialog4-detail .md-datepicker-input-container.md-datepicker-invalid {
+        border-bottom-color: rgb(224,224,224);
+    }
+    #workflow-dialog4-detail .md-datepicker-input-container{
+        width: 93.9%;
+        margin-left: -2px;
+    }
+    #workflow-dialog4-detail .md-datepicker-calendar-icon{
+        margin-bottom: -7px;
+    }
+</style>

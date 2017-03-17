@@ -1,0 +1,111 @@
+<div ng-controller="wsCtrl" class="jiehuankuan fukuan add" ng-cloak>
+	<div ng-controller="wsAddCtrl" class="ml-width-bottom-bar">
+		<!-- 新增单据开始 -->
+		<md-card>
+			<md-card-content>
+				<div layout="row">
+					<div flex class="ml-padding-right">
+						<md-input-container class="md-block md-cyan-theme md-input-invalid">
+							<label>工单类型</label>
+							<md-select ng-model="saveData.ssmanualfeeinvoiceh.order_type">
+				              <md-option value="AR" selected>
+				                	AR应收收款
+				              </md-option>
+				           </md-select>
+						</md-input-container>
+					</div>
+					<div flex class="ml-padding-right">
+						<md-input-container class="md-block md-cyan-theme md-input-invalid">
+							<label>入账单位</label>
+							<input ng-model="ruzhangdanwei.company_name" type="text" drruzhangdanwei="{'model':'ruzhangdanwei'}">
+						</md-input-container>
+					</div>
+				</div>
+
+				<div layout="row">
+					<div flex class="ml-padding-right">
+						<md-input-container class="md-block md-cyan-theme md-input-invalid">
+							<label>经办人</label>
+							<input ng-model="orgs.user_full_name" type="text" drorganization="{'model':'orgs'}">
+						</md-input-container>
+					</div>
+					<div flex class="ml-padding-right">
+						<md-input-container class="md-block md-cyan-theme md-input-invalid">
+							<label>部门</label>
+							<input ng-model="saveData.ssmanualfeeinvoiceh.org_name" ng-value="orgs.org_name" type="text">
+						</md-input-container>
+					</div>
+				</div>
+				<div layout="row">
+					<div flex class="ml-padding-right">
+						<md-input-container class="md-block md-cyan-theme md-input-invalid">
+							<label>总金额</label>
+							<input type="text" ng-model="saveData.ssmanualfeeinvoiceh.amount">
+						</md-input-container>
+					</div>
+					<div flex class="ml-padding-right">
+						<dr-Currency  ngrequired="true" oldcurrencycode=""  currencycodemodel="saveData.ssmanualfeeinvoiceh.currency_code" currencynamemodel="saveData.ssmanualfeeinvoiceh.currency_name" currencymodel=""  titlename="货币类型"></dr-Currency>
+					</div>
+				</div>
+				<div layout="row">
+					<div flex class="ml-padding-right">
+						<md-input-container class="md-block md-cyan-theme md-input-invalid">
+							<label>客户</label>
+							<input ng-model="customer.customer_name" type="text" drcustomer="{'model':'customer','company_id':ruzhangdanwei.company_id}">
+						</md-input-container>
+					</div>
+					<div flex class="ml-padding-right">
+						<md-input-container class="md-block md-cyan-theme md-input-invalid">
+							<label>客户地址</label>
+							<input type="text" ng-value="customer.customer_site_name">
+						</md-input-container>
+					</div>
+				</div>
+				<div layout="row">
+					
+					<div flex="50" class="ml-padding-right">
+						<md-input-container class="md-block md-cyan-theme md-input-invalid">
+							<label>申请日期</label>
+							<input ng-model="saveData.ssmanualfeeinvoiceh.apply_date" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+						</md-input-container>
+					</div>
+					<div flex class="ml-padding-right">
+						<!--<md-input-container class="md-block md-cyan-theme md-input-invalid">
+							<label>收款类型</label>
+							<input ng-model="saveData.ssmanualfeeinvoiceh.calling_api" type="text">
+						</md-input-container>-->
+						<dr-receivable titlename="收款类型" companyid="{{ruzhangdanwei.company_id}}" remodel="receivable"></dr-receivable>
+						
+					</div>
+				</div>
+				<div layout="row">
+					<div flex="50" class="ml-padding-right">
+						<dr-Receiptmethode  remodel="receipt" titlename="收款方法" itemvalue="" 
+							receiptmethodid="saveData.ssmanualfeeinvoiceh.receipt_method_id"
+							receiptmethodname="saveData.ssmanualfeeinvoiceh.receipt_method_name"></dr-Receiptmethode>
+					</div>
+					<div flex class="ml-padding-right">
+						<md-input-container class="md-block md-cyan-theme md-input-invalid">
+							<label>银行账户</label>
+							<input ng-value="receipt.bank_account_name" type="text" >
+						</md-input-container>
+					</div>
+				</div>
+				<div layout='row'>
+					<div flex class="ml-padding-right">
+						<md-input-container class="md-block">
+							<label>摘要 </label>
+							<textarea ng-model="saveData.ssmanualfeeinvoiceh.description" md-maxlength="280" maxlength="280" rows="2" md-select-on-focus></textarea>
+						</md-input-container>
+					</div>
+				</div>
+			</md-card-content>
+		<!-- 底部操作区开始 -->
+			<div class="ml-bottom-bar slideInUp animated" layout="row" style="z-index: 9">
+				<md-button type="submit" class="md-raised md-primary ml-button ml-noshadow" aria-label="保存" ng-click="save()">保存</md-button>
+			</div>
+			<!-- 底部操作区结束 -->
+		</md-card>
+		<!-- 新增单据结束 -->
+	</div>
+</div>

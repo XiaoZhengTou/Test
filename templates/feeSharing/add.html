@@ -1,0 +1,245 @@
+<div ng-controller="fsCtrl" class="jiehuankuan fukuan add" ng-cloak>
+	<div ng-controller="fsAddCtrl" class="ml-width-bottom-bar">
+		<!-- 状态步骤条开始 -->
+		<form name="userForm">
+		<div class="ml-setupbar ml-margin-top ml-margin-large-bottom" layout="row" layout-align="center center">
+		  <div flex="70" layout="row" class="container">
+		    <div flex class="ml-text-center active item">
+		      <span>填写单据信息</span>
+		    </div>
+		    <div flex class="ml-text-center item">
+		      <span>流程及附件</span>
+		    </div>
+		    <div flex class="ml-text-center  item">
+		      <span>提交成功</span>
+		    </div>
+		  </div>
+		</div>
+		<!-- 状态步骤条结束 -->
+		<!-- 新增单据开始 -->
+		<md-card>
+			<md-card-content>
+				<div layout="row">
+					<!--<div flex class="ml-padding-right">
+						<md-input-container class="md-block md-cyan-theme md-input-invalid">
+							<label>创建时间</label>
+							<input ng-model="saveData.creation_date" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+						</md-input-container>
+					</div>-->
+					<div class="ml-padding-right" flex="50">
+						<md-input-container class="md-block">
+							<label>类型</label>
+							<md-select ng-model="saveData.order_type" name="orderType" required>
+								<md-option ng-repeat="x in origindata.orderType" ng-selected="saveData.order_type==x.id" ng-value="x.id">
+									{{x.name}}
+								</md-option>
+							</md-select>
+							<!--<div ng-messages="userForm.orderType.$error" ng-show="userForm.orderType.$error.required" class="md-input-messages-animation md-auto-hide ng-active" aria-live="assertive">
+							    <div ng-message="required" class="md-input-message-animation ng-scope" style="opacity: 1; margin-top: 0px;">入账单位不能为空</div>
+							</div>-->
+						</md-input-container>
+						
+				</div>
+				</div>
+				<div layout="column" layout-wrap layout-gt-sm="row">
+					<div flex flex="50">
+						<!--<md-checkbox ng-model="saveData.is_import_erp"  aria-label="是否导入ERP">
+							是否导入ERP
+						</md-checkbox>-->
+						<md-switch ng-model="saveData.is_import_erp" aria-label="是否导入ERP">
+						    是否导入ERP
+						  </md-switch>
+					</div>
+				</div>
+					<div ng-show='saveData.is_import_erp'>
+						<div layout='row'>
+							<div flex class="ml-padding-right">
+							
+							<!--<md-input-container class="md-block">
+								<label>入账单位</label>
+								<md-select ng-model="add.accounting_unit">
+									<md-option ng-repeat="x in origindata.accounting_unit" ng-selected="$first" ng-value="x">
+										{{x.name}}
+									</md-option>
+								</md-select>
+							</md-input-container>-->
+								<md-input-container class="md-block">
+									<label>入账单位</label>
+										<input ng-model="ruzhangdanwei.company_name" readonly name="companyName"  type="text" drruzhangdanwei="{'model':'ruzhangdanwei'}" required>
+										<!--<div ng-messages="userForm.companyName.$error">
+											<div ng-message="required">入账单位不能为空</div>
+										</div>-->
+									<!--<input ng-model="saveData.company_id" type="text" drreceving="{'model':'receving'}">-->
+									<!--<input ng-model="receving.receiver" type="text" drreceving="{'model':'receving'}" >-->
+
+								</md-input-container>
+
+							</div>
+							<div flex class="ml-padding-right">
+
+								<md-input-container class="md-block">
+									<label>ERP类型</label>
+									<md-select ng-model="saveData.imp_erp_type" name="erpType"  required>
+										<md-option ng-repeat="x in origindata.imp_erp_type" ng-selected="saveData.img_erp.type==x.id" ng-value="x.id">
+											{{x.name}}
+										</md-option>
+									</md-select>
+								</md-input-container>
+							</div>
+						</div>
+
+						<div layout='row'>
+							<div flex class="ml-padding-right">
+								<md-input-container class="md-block">
+									<label>供应商名称</label>
+									<input ng-model="receving.receiver" name="vendorName" type="text" drreceving="{'model':'receving'}" required>
+								</md-input-container>
+
+							</div>
+							<div flex class="ml-padding-right">
+							<dr-Dictitem dictmodel="vendor" itemvaluemodel="" itemnamemodel="" titlename="供应商类型" itemvalue="{{saveData.vendor_type}}"  code="VENDOR_TYPE"></dr-Dictitem>
+								<!--<md-input-container class="md-block">
+									<label>供应商类型</label>
+									<md-select ng-model="saveData.vendor_id">
+										<md-option ng-repeat="x in origindata.supplier_type" ng-selected="$first" ng-value="x.id">
+											{{x.name}}
+										</md-option>
+									</md-select>itemValue
+								</md-input-container>-->
+							</div>
+							</div>
+					
+					</div>
+					<div layout='row'>
+						<div flex class="ml-padding-right">
+							<md-input-container class="md-block">
+								<label>业务描述</label>
+								<textarea ng-model="saveData.reason_desc" md-maxlength="280" maxlength="280"  rows="1" md-select-on-focus></textarea>
+							</md-input-container>
+						</div>
+					</div>
+			</md-card-content>
+		</md-card>
+		<!-- 新增单据结束 -->
+		<!--账务明细-->
+		<md-card class="ml-margin-top ">
+			<!-- 表格开始 -->
+			<!--<md-toolbar class="md-table-toolbar md-default ">
+				<div class="md-toolbar-tools ">
+					<div layout="row" layout-align="center">
+						 <span class="toolbal-title">账务明细</span>
+							<md-menu>
+								<md-button aria-label="Open user menu" ng-click="$mdOpenMenu()" aria-label="side navigation">
+									<md-icon md-svg-src="img/icons/three.svg"></md-icon>
+								</md-button>
+								<md-menu-content width="4">
+									<md-menu-item>
+										<md-button aria-label="side navigation">
+											<md-icon md-svg-src="img/icons/excel_out.svg"></md-icon>
+											<span class="ng-scope">Excel导入</span>
+										</md-button>
+									</md-menu-item>
+								</md-menu-content>
+							</md-menu>
+							<md-button aria-label="menu " class="md-add-btn" ng-click="addOrEditAccount($event)">
+								<md-tooltip md-direction="left ">
+									添加一条数据
+								</md-tooltip>
+								<md-icon class="iconfont ">&#xe631;</md-icon>
+							</md-button>
+					</div>
+				</div>
+			</md-toolbar>-->
+			<md-toolbar class="md-table-toolbar md-default " style="background-color: white;border-bottom: 1px rgba(0,0,0,0.12) solid;">
+				<div class="md-toolbar-tools " style="padding: 0">
+					<div style="background-color: #2196f3;">
+		                <h2 class="md-title" style="color: black;font-size: 16px;margin-left: 4px;padding-left: 20px;background-color: white;">账务明细</h2>
+		            </div>
+		            <md-menu style="margin:0;">
+								<md-button aria-label="Open user menu" ng-click="$mdOpenMenu()" aria-label="side navigation">
+									<md-icon md-svg-src="img/icons/three.svg"></md-icon>
+								</md-button>
+								<md-menu-content width="4">
+									<md-menu-item>
+										<md-button aria-label="side navigation">
+											<md-icon md-svg-src="img/icons/excel_in.svg"></md-icon>
+											<span class="ng-scope">Excel导入</span>
+										</md-button>
+									</md-menu-item>
+								</md-menu-content>
+							</md-menu>
+							<md-button aria-label="menu " class="md-add-btn" ng-click="addOrEditAccount($event)">
+								<md-tooltip md-direction="left ">
+									添加一条数据
+								</md-tooltip>
+								<md-icon class="iconfont ">&#xe631;</md-icon>
+							</md-button>
+				</div>
+			</md-toolbar>
+			<md-table-container style="margin-bottom:32px;">
+				<table md-table md-progress="promise ">
+					<thead md-head >
+						<tr md-row>
+							<th md-column>
+								预算科目
+							</th>
+							<th md-column md-numeric>
+								预算单元
+							</th>
+							<th md-column md-numeric>
+								借贷类型
+							</th>
+							<th md-column md-numeric>
+								总金额
+							</th>
+							<th md-column md-numeric>
+								操作
+							</th>
+							<th md-column md-numeric>
+								创建时间
+							</th>
+							
+						</tr>
+					</thead>
+					<tbody md-body>
+						<tr md-row ng-repeat="x in saveData.emscaapportionls">
+							<td md-cell>{{x.fee_type_name}}</td>
+							<td md-cell>{{x.budget_node_desc}}</td>
+							<td md-cell><span ng-repeat="type in origindata.accountings.types" ng-if="type.id==x.debit_credit_type">{{type.name}}</span></td>
+							<td md-cell>{{x.budget_amount | currency:''}}</td>
+							<td md-cell>
+								<a ng-click="addOrEditAccount($event,$index)" style="cursor: pointer;color: blue">编辑</a>
+                                <a ng-click="delAccount($event,$index)" style="cursor: pointer;color: blue">删除</a>
+							</td>
+							<td md-cell>{{saveData.creation_date}}</td>
+						</tr>
+					</tbody>
+					<tfoot md-foot>
+						<tr md-row>
+							<td md-cell>汇总金额</td>
+							<td md-cell></td>
+							<td md-cell></td>
+							<td md-cell>{{saveData.apportion_amount | currency:''}}</td>
+							<td md-cell>币种</td>
+							<td md-cell>
+								<dr-Currency ngrequired="false" oldcurrencycode="{{saveData.currency_code}}" currencycodemodel="" currencynamemodel="" currencymodel="currency"  titlename=""></dr-Currency>
+								<!--<dr-Currency currencycodemodel="saveData.currency_code" currencynamemodel="saveData.currency_name" currencymodel="currency"  titlename="货币类型"></dr-Currency>-->
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</md-table-container>
+
+			<!--账务明细 end-->
+			<!-- 底部操作区开始 -->
+			<div class="ml-bottom-bar slideInUp animated" layout="row"  style="z-index: 999">
+				<md-button  type="submit" class="md-raised md-primary ml-button ml-noshadow" aria-label="保存"  ng-click="userForm.$valid && save()">保存</md-button>
+				<span flex></span>
+				<md-button class="md-raised md-primary ml-button ml-noshadow" aria-label="下一步" ng-click="go('/feeSharing/add_next','流程及附件')">下一步</md-button>
+			</div>
+			<!-- 底部操作区结束 -->
+		</md-card>
+		</form>
+		</div>
+	</div>
+	

@@ -1,0 +1,62 @@
+<md-dialog aria-label="出差授权" ng-cloak style="min-width: 50%" id="processauth-dialog2-detail">
+    <form name="addprocessauth" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 style="color: white">出差授权</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="padding-top: 0px;padding-bottom: 0px">
+
+                <div class="demo-tab" style="padding: 25px 25px 0 25px; text-align: center;">
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>授权人</label>
+                        <input ng-model="processauth.from_who_name" type="text" disabled>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>被授权人</label>
+                        <input ng-model="processauth.to_who_name" type="text" required disabled>
+                    </md-input-container>
+
+                    <div layout="row">
+                        <md-input-container class="md-block" flex-gt-sm style="text-align: left;" flex="50">
+                            <label>开始时间</label>
+                            <md-datepicker ng-model="processauth.start_time" required="" disabled></md-datepicker>
+                        </md-input-container>
+
+                        <md-input-container class="md-block" flex-gt-sm style="text-align: left;" flex="50">
+                            <label>结束时间</label>
+                            <md-datepicker ng-model="processauth.end_time" required md-min-date="processauth.start_time" disabled></md-datepicker>
+                        </md-input-container>
+                    </div>
+
+                </div>
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <span flex></span>
+            <md-button ng-if="processauth.status == '1'" class="md-primary md-raised" ng-click="delete()"  style="background-color:red;color: white;float: right;margin-right: 3%;">作废</md-button>
+
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+
+<style>
+    /*#processauth-dialog2-detail .md-datepicker-input-container.md-datepicker-invalid {*/
+        /*border-bottom-color: rgb(224,224,224);*/
+    /*}*/
+    #processauth-dialog2-detail .md-datepicker-input-container{
+        width: 75%;
+        /*margin-left: -2px;*/
+    }
+    /*#processauth-dialog2-detail .md-datepicker-calendar-icon{*/
+        /*margin-bottom: -7px;*/
+    /*}*/
+</style>

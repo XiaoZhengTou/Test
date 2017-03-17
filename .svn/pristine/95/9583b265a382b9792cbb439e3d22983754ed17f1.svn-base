@@ -1,0 +1,65 @@
+<div layout="column" ng-controller="personalCtrl" ng-cloak class="personalCenter">
+	<div ng-controller="receiverCtrl" class="receiver">
+		<md-radio-group ng-model="receiverChecked.name">
+			<md-card class="ml-color-73 ml-fontsize-13  receiver-main ml-padding-20">
+				<div>
+					<md-button ng-click="addReceiver()" ng-disabled="receivers.length>19" class="md-raised md-primary ml-nomargin"><i class="iconfont">&#xe631;</i>新增收货地址</md-button><em class="ml-fontsize-12">您已创建<span class="ml-color-green">{{receivers.length}}</span>个收货地址，最多可创建<span class="ml-color-red">20</em>个</em>
+				</div>
+				<div ng-repeat="receiver in receivers" class="receiver-con ml-padding-10 ml-marginT-10 ml-lineheight-24" ng-class="{true:'conActive'}[morenchecked == $index]">
+					<div layout="row" class="radio-moren radio-moren-rec">
+						<div class="ml-fontsize-15 ml-color-21">{{receiver.name}}</div>
+						<md-radio-button ng-value="receiver.name" ng-checked="receiverChecked" ng-click="morenSelect(receiver,$index)"><span class="ml-fontsize-12 ml-color-blue" ng-class="{true:'morenActive'}[morenchecked == $index]">默认地址</span></md-radio-button>
+					</div>
+					<div class="ml-marginT-10">收货人 :<em class="ml-color-21">{{receiver.name}}</em></div>
+					<div>所在地区 :<em class="ml-color-21">{{receiver.address}}</em></div>
+					<div>地址 :<em class="ml-color-21">{{receiver.address}}</em></div>
+					<div>邮编 :<em class="ml-color-21">{{receiver.Postcodes}}</em></div>
+					<div>手机 :<em class="ml-color-21">{{receiver.tel}}</em></div>
+					<md-button class="md-icon-button remove-icon ml-color-blue" ng-click="removeItem(receiver,receivers)">
+						<i class="iconfont ml-margin-auto">&#xe633;</i>
+					</md-button>
+					<md-button class="md-icon-button bianji-icon ml-color-blue" ng-click="receiverBainji(receiver)">
+						<!--编辑-->
+						<i class="iconfont ml-margin-auto">&#xe61f;</i>
+					</md-button>
+				</div>
+				<div layout="row" class="ml-marginT-20" layout-align="center center">
+					<md-button ng-click="receiverCon();go('/personalCenter/personalInfo')" class="md-raised md-primary">确定</md-button>
+				</div>
+			</md-card>
+		</md-radio-group>
+		<!--<md-radio-group ng-model="receiverChecked.name" layout="row" layout-wrap>
+			<md-card ng-repeat="receiver in receivers" class="ml-color-73 ml-fontsize-14  receiver-main">
+				<div class="receiver-main-top ml-paddinglr20">
+					<p layout="row">
+						<span flex="30">{{receiver.name}}</span>
+						<span flex="70">{{receiver.tel}}</span>
+					</p>
+					<p layout="row" class="address">
+						{{receiver.address}} {{receiver.Postcodes}}
+					</p>
+				</div>
+				<div layout="row" class="receiver-main-bot ml-color-21 ml-paddinglr20 bgcolor" flex="100">
+					<md-radio-button flex ng-value="receiver.name" class="ml-fontsize-12" ng-checked="receiverChecked" ng-click="morenSelect(receiver)">设为默认</md-radio-button>
+					<div flex layout="row" class="ml-color-73">
+						<md-button class="md-icon-button" ng-click="removeItem(receiver,receivers)">
+							<i class="iconfont ml-margin-auto">&#xe633;</i>
+						</md-button>
+						<md-button class="md-icon-button" ng-click="receiverBainji(receiver)">
+							<i class="iconfont ml-margin-auto">&#xe61f;</i>
+						</md-button>
+					</div>
+				</div>
+			</md-card>
+			<md-card layout-align="center center" class="ml-color-blue invoice-main">
+				<md-button class="md-icon-button" ng-click="addReceiver()">
+					<i class="iconfont" style="font-size:2em;">&#xe61a;</i>
+				</md-button>
+				<p>新增收货地址</p>
+			</md-card>
+		</md-radio-group>
+		<div layout="row" layout-align="center center">
+			<md-button ng-click="receiverCon();go('/personalCenter/personalInfo')" class="md-raised md-primary">确定</md-button>
+		</div>-->
+	</div>
+</div>

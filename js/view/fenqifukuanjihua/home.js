@@ -1,0 +1,138 @@
+define(['angular','js/common/module','js/shared/vendor','js/shared/currency','js/shared/organization'], function(angular) {
+    // Incluede Style In Project Begin
+    publicFunction.addStyle('jiehuankuan.css');
+    publicFunction.addStyle('md-data-table.min.css');
+    // Incluede Style In Project End
+    var home = angular.module('query_contract',['angularMoment','mdvendor','mdcurrency','mdorganization'])
+        .filter('order_status', function($sce) {
+        return function(status) {
+            var htmlstatus = null;
+            switch(status) {
+                case 'DRAFT':
+                    htmlstatus = '<span style="color:#fff;background:gray;padding: 3px;border-radius: 3px;">草稿</span>';
+                    break;
+                case 'SUBMITED':
+                    htmlstatus = '<span style="color:#fff;background:green;padding: 3px;border-radius: 3px;">待审批</span>';
+                    break;
+                case 'AUDITED':
+                    htmlstatus = '<span style="color:#fff;background:dodgerblue;padding: 3px;border-radius: 3px;">已审批</span>';
+                    break;
+                case 'DISABLED':
+                    htmlstatus = '<span style="color:#fff;background:orange;padding: 3px;border-radius: 3px;">已作废</span>';
+                    break;
+                default:
+                    htmlstatus = '<span style="color:#fff;background:palegreen;padding: 3px;border-radius: 3px;">未知状态</span>';
+                    break;
+            }
+            return $sce.trustAsHtml(htmlstatus);
+        }
+
+    });
+
+    home.controller('fqqdCtrl',function($scope,$rootScope,$http,$filter,jhkPublic,moment,$timeout,$mdDialog,$mdToast) {
+        //查询参数
+        $scope.orgs={};
+        $scope.vendor={tpm_vendor:{}};
+        $scope.currency = {tmp_currency:{}};
+        $scope.query={
+            page_number:1,
+            page_size:10,
+            query_param:{
+                contract_name:null, //合同名称	string
+                contract_no:null,	//合同编号	string
+                currency_code:null,	//币种	string
+                project_mng_name:null,	//项目经理	string
+                vendor_code:null,        //收款方
+                begin_total_amount:null,//最小值
+                end_total_amount:null//最大值
+            }
+        };
+        //清空条件
+        $scope.clear_condition=function() {
+            //console.log($scope.currency.tmp_currency);
+            $scope.orgs.user_full_name=null;
+            $scope.receving={};
+            $scope.query = {
+                page_number: 1,
+                page_size: $scope.query.page_size,
+                query_param:{
+                    contract_name: null, //合同名称	string
+                    contract_no: null,	//合同编号	string
+                    currency_code: null,	//币种	string
+                    project_mng_name: null,	//项目经理	string
+                    vendor_code: null,       //收款方
+                    begin_total_amount: null,//最小值
+                    end_total_amount: null//最大值
+                }
+            }
+
+        }
+
+        //取数据
+        $scope.getData = function(){
+            $scope.promise = $timeout(function () {}, 500);
+            $scope.query.query_param.project_mng_name=$scope.orgs.user_full_name;
+            $scope.query.query_param.currency_code=$scope.currency.tmp_currency.currency_code;
+            $scope.query.query_param.vendor_code=$scope.vendor.tpm_vendor.vendor_code;
+            var getconfig = {
+                method: 'POST',
+                url:bystagespayUrl+"ht/EmsHtContract/pageLike",
+                noLoader : true,
+                data : {
+                    page_number: $scope.query.page_number,
+                    page_size: $scope.query.page_size,
+                    query_param : $scope.query.query_param
+                }
+            };
+            $http(getconfig).success(function(response){
+                $scope.data = response.data.info;
+                $scope.total = response.data.totalRow
+
+            }).error(function(response){
+                alert('请求失败!') ;
+            });
+        };
+        $scope.getData();
+        // 取数据结束
+        //删除一个草稿状态的单据
+        $scope.del_detial=function(event,contract_id){
+            var confirm = $mdDialog.confirm().title('删除确认').textContent('确定删除此条数据？').ariaLabel('删除').targetEvent(event).ok('删除').cancel('取消');
+            $mdDialog.show(confirm).then(function() {
+                var delById = function(contract_id) {
+                    $http({
+                        method: 'delete',
+                        url: bystagespayUrl + "/ht/EmsHtContract/delete/" + contract_id
+                    }).success(function (response) {
+                            if (response.code == "0000") {
+                                $mdToast.show(
+                                    $mdToast.simple()
+                                        .textContent('删除成功!')
+                                        .position('top right')
+                                        .hideDelay(3000)
+                                );
+                                //刷新页面
+                                //$scope.query.order_rule = !$scope.query.order_rule;
+                                $scope.getData();
+                            } else {
+                                response.data.code;
+                                $mdDialog.show(
+                                    $mdDialog.alert()
+                                        .parent(angular.element(document.body))
+                                        .clickOutsideToClose(true)
+                                        .title('提示信息')
+                                        .textContent(response.msg)
+                                        .ariaLabel('提示信息')
+                                        .ok('确定')
+                                );
+                            }
+                        }).error(function (data, status) {
+                        console.log(status);
+                    });
+
+                }
+                delById(contract_id);
+                event.stopPropagation();
+            })
+        }
+    })
+})

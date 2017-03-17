@@ -1,0 +1,68 @@
+<md-dialog aria-label="修改汇率" ng-cloak style="min-width: 50%" id="rate-dialog2-detail">
+    <form name="addrate1" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 style="color: white">修改汇率</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="padding-top: 0px;padding-bottom: 0px">
+
+                <div class="demo-tab" style="padding: 25px 25px 0 25px; text-align: center;">
+
+                    <md-input-container class="md-block" flex-gt-sm style="text-align: left">
+                        <label>原币种(必选)</label>
+                        <md-select ng-model="rate.from_currency" required>
+                            <md-option ng-repeat="currency in currencydata_form" value="{{currency.currency_code}}">{{currency.currency_name}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm style="text-align: left;padding-top: 20px;padding-bottom: 20px;">
+                        <label>目标币种(必选)</label>
+                        <md-select ng-model="rate.to_currency" required>
+                            <md-option ng-repeat="currency in currencydata_to" value="{{currency.currency_code}}">{{currency.currency_name}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm style="text-align: left;padding-top: 20px;padding-bottom: 20px;">
+                        <label>汇率类型(必选)</label>
+                        <md-select ng-model="rate.conversion_type" required ng-change="changedate(rate.conversion_type)">
+                            <md-option value="CORPORATE">公司</md-option>
+                            <md-option value="N">即时</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>汇率</label>
+                        <input ng-model="rate.conversion_rate" type="number">
+                    </md-input-container>
+
+                    <md-datepicker ng-model="rate.conversion_date" md-date-filter="onlyWeekendsPredicate" md-placeholder="日期" style="width: 100%;margin-left: -2.6%;text-align: left"></md-datepicker>
+
+                </div>
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <!--<md-button class="md-primary md-raised" ng-click="delete()"  style="background-color:red;color: white;float: right;margin-right: 3%;">删除</md-button>-->
+            <!--<span flex></span>-->
+            <md-button class="md-primary md-raised" ng-click="answer()"  style="color: white;float: right"
+                       ng-disabled="addrate1.$invalid" disabled="disabled">确定</md-button>
+
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+
+<style>
+    #rate-dialog2-detail .md-datepicker-input-container{
+        width: 93.9%;
+        margin-left: -2px;
+    }
+    #rate-dialog2-detail .md-datepicker-calendar-icon{
+        margin-bottom: -7px;
+    }
+</style>

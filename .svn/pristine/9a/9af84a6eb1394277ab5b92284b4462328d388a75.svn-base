@@ -1,0 +1,45 @@
+<div ng-controller="jdOrdersCtrl" class="jiudian orders">
+<div>
+<!-- 主内容块儿开始 -->
+<div class="mainContent">
+<md-whiteframe class="md-whiteframe-z1 ml-padding ml-margin-large-bottom">
+<table class="ml-table ml-width-1-1">
+  <thead>
+    <tr>
+      <th>酒店 <span>10000009090</span><span>2016-06-06</span><span>10:11</span><span class="from">去哪儿酒店直销</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <h5>佛山顺德酒店</h5>
+        <p class="checkIn">
+        <i class="iconfont"></i>2016-05-18</p>
+        <p class="checkOut">
+        <i class="iconfont"></i>2016-05-20</p>
+      </td>
+      <td>¥538 x 1单</td>
+      <td>¥538<span>返¥15.00</span></td>
+      <td>预订取消</td>
+      <td>查看详情</td>
+    </tr>
+    <tr>
+      <td>
+        <h5>佛山顺德酒店</h5>
+        <p class="checkIn">
+        <i class="iconfont"></i>2016-05-18</p>
+        <p class="checkOut">
+        <i class="iconfont"></i>2016-05-20</p>
+      </td>
+      <td>¥538 x 1单</td>
+      <td>¥538<span>返¥15.00</span></td>
+      <td>预订取消</td>
+      <td>查看详情</td>
+    </tr>
+  </tbody>
+</table>
+</md-whiteframe>
+</div>
+<!-- 主内容块儿结束 -->
+</div>
+</div>

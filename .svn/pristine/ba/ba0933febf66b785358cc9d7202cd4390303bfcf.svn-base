@@ -1,0 +1,197 @@
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<div ng-controller="processauthyewuCtrl" id="processauthyewu">
+
+    <div class="full-height ng-scope">
+        <div class="full-image-background layout-fill ng-scope layout-row" layout="row" layout-fill="">
+            <div class="animate-wrapper layout-row flex" flex="" layout="row">
+                <div id="ui-login" class="login-frame ng-scope layout-column flex" ui-view="" flex="" layout="column">
+                    <div layout="row" flex="" layout-padding="" layout-fill="" layout-align="center center" class="layout-fill ng-scope layout-align-center-center layout-row flex" style="padding: 0px">
+                        <div flex="40" flex-lg="50" flex-md="70" flex-xs="100" class="flex-xs-100 flex-md-70 flex-lg-50 flex-40" style="max-width: 100%;padding: 0px">
+
+                            <md-card class="ml-padding-pc">
+                                <md-toolbar ng-hide="selected.length || filter.show" class="md-table-toolbar md-default" style="background-color: white;border-bottom: 1px solid #ddd;">
+                                    <div class="md-toolbar-tools" >
+                                        <!--<div style="background-color: #2196f3;">-->
+                                        <!--<h2 class="md-title" style="color: black;font-size: 16px;margin-left: 4px;padding-left: 20px;background-color: white;">区域</h2>-->
+                                        <!--</div>-->
+                                        <span>业务授权</span>
+                                        <div flex></div>
+                                        <!--<md-button class="md-icon-button" ng-click="filter.show = true">-->
+                                        <!--<md-icon md-svg-src="img/icons/find.svg"></md-icon>-->
+                                        <!--</md-button>-->
+                                    </div>
+                                </md-toolbar>
+                                <div class="basefilter" style="width: 90%;margin-left: 5%;margin-top: 1%;">
+                                    <div layout="row">
+                                        <div flex class="ml-padding-right">
+                                            <md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom: 0;">
+                                                <label>授权人</label>
+                                                <input ng-model="search.from_who_name" type="text" readonly required>
+                                            </md-input-container>
+                                        </div>
+                                        <div flex class="ml-padding-right">
+                                            <md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom: 0;">
+                                                <label>被授权人</label>
+                                                <input ng-model="search.to_who_name" type="text" readonly required ng-click="search.status=='2'?addperson2($event):''">
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                    <div layout="row" style="margin-bottom: 18px;">
+                                        <div flex class="ml-padding-right">
+                                            <md-chips ng-model="ruleselected" md-max-chips="1">
+                                                <md-chip-template>
+                                                    <strong>{{$chip.rule_name}}</strong>
+                                                </md-chip-template>
+                                                <input type="text" placeholder="点击授权节点" ng-click="" readonly class="chipinput" ng-if="search.status=='2'">
+                                            </md-chips>
+                                        </div>
+                                    </div>
+                                    <div layout="row">
+                                        <div flex class="ml-padding-right">
+                                            <md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom: 0;">
+                                                <label>开始日期</label>
+                                                <md-datepicker ng-model="search.start_time" md-placeholder="" required
+                                                               ng-disabled="search.status!='2'"></md-datepicker>
+                                            </md-input-container>
+                                        </div>
+                                        <div flex class="ml-padding-right">
+                                            <md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom: 0;">
+                                                <label>结束日期</label>
+                                                <md-datepicker ng-model="search.end_time" md-placeholder="" md-min-date="search.start_time" required
+                                                               ng-disabled="search.status!='2'"></md-datepicker>
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                </div>
+                                <md-toolbar ng-hide="selected.length || filter.show" class="md-table-toolbar md-default" style="background-color: white;border-bottom: 1px solid #ddd;">
+                                    <div class="md-toolbar-tools" >
+                                        <!--<div style="background-color: #2196f3;">-->
+                                        <!--<h2 class="md-title" style="color: black;font-size: 16px;margin-left: 4px;padding-left: 20px;background-color: white;">区域</h2>-->
+                                        <!--</div>-->
+                                        <span>授权条件</span>
+                                        <div flex></div>
+                                        <!--<md-button class="md-icon-button" ng-click="filter.show = true">-->
+                                        <!--<md-icon md-svg-src="img/icons/find.svg"></md-icon>-->
+                                        <!--</md-button>-->
+                                    </div>
+                                </md-toolbar>
+
+                                <div class="basefilter" style="width: 90%;margin-left: 5%;margin-top: 1%;">
+
+                                    <div layout="row">
+                                        <div flex class="ml-padding-right">
+                                            <md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom: 0;">
+                                                <label>金额>=</label>
+                                                <input ng-model="search.start_amount" type="number" required
+                                                       ng-disabled="search.status!='2'">
+                                            </md-input-container>
+                                        </div>
+                                        <div flex class="ml-padding-right">
+                                            <md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom: 0;">
+                                                <label>金额<</label>
+                                                <input ng-model="search.end_amount" type="number" required min="{{search.start_amount}}"
+                                                       ng-disabled="search.status!='2'">
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+
+                                    <div layout="row">
+                                        <div flex class="ml-padding-right">
+                                            <md-chips ng-model="moduleselected" md-max-chips="1">
+                                                <md-chip-template>
+                                                    <strong>{{$chip.itemName}}</strong>
+                                                </md-chip-template>
+                                                <input type="text" placeholder="点击选择模块(多选)" ng-click="getmodule($event,moduleselected)" readonly class="chipinput" ng-if="search.status=='2'">
+                                            </md-chips>
+                                        </div>
+                                    </div>
+
+                                    <div layout="row" style="margin: 18px 0;">
+                                        <div flex class="ml-padding-right">
+                                            <md-chips ng-model="orgselected" md-max-chips="1">
+                                                <md-chip-template>
+                                                    <strong>{{$chip.org_name}}</strong>
+                                                </md-chip-template>
+                                                <input type="text" placeholder="点击选择行政部门(多选)" ng-click="addorg($event)" readonly class="chipinput" ng-if="search.status=='2'">
+                                            </md-chips>
+                                        </div>
+                                    </div>
+
+                                    <div layout="row" style="margin: 18px 0;">
+                                        <div flex class="ml-padding-right">
+                                            <md-chips ng-model="ruzhangdanwei" md-max-chips="1">
+                                                <md-chip-template>
+                                                    <strong>{{$chip.company_name}}</strong>
+                                                </md-chip-template>
+                                                <input type="text" placeholder="点击选择入账单位(多选)" drruzhangdanweiselect="{'model':'ruzhangdanwei'}" readonly class="chipinput" ng-if="search.status=='2'">
+                                            </md-chips>
+                                        </div>
+                                    </div>
+
+                                    <div layout="row">
+                                        <div flex class="ml-padding-right">
+                                            <md-chips ng-model="busiorgselected" md-max-chips="1">
+                                                <md-chip-template>
+                                                    <strong>{{$chip.busi_org_name}}</strong>
+                                                </md-chip-template>
+                                                <input type="text" placeholder="点击选择预算部门(多选)" ng-click="getbusiorg($event,busiorgselected)" readonly class="chipinput" ng-if="search.status=='2'">
+                                            </md-chips>
+                                        </div>
+                                    </div>
+
+                                    <div layout="row" style="margin: 18px 0;">
+                                        <div flex class="ml-padding-right">
+                                            <md-chips ng-model="feetypeselected" md-max-chips="1">
+                                                <md-chip-template>
+                                                    <strong>{{$chip.fee_type_name}}</strong>
+                                                </md-chip-template>
+                                                <input type="text" placeholder="点击选择预算科目(多选)" ng-click="getfeetype($event,feetypeselected)" readonly class="chipinput" ng-if="search.status=='2'">
+                                            </md-chips>
+                                        </div>
+                                    </div>
+
+                                    <div layout="row">
+                                        <div flex STYLE="text-align: center;margin-top: 2%">
+                                            <md-button class="md-raised md-primary ml-nomargin ml-button" aria-label="保存" ng-click="save()"
+                                                    ng-if="search.status=='2'">保存</md-button>
+                                            <md-button class="md-primary md-raised" aria-label="作废" ng-click="delete()"
+                                                       style="background-color:red;color: white;"  ng-if="search.status=='1'">作废</md-button>
+                                            <md-button class="md-raised md-primary ml-nomargin ml-button" aria-label="返回" ng-click="back()">返回</md-button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </md-card>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    #processauthyewu .active-Y{
+        background-color: green;
+        color: green;
+    }
+    #processauthyewu .active-N{
+        background-color: red;
+        color: red;
+    }
+    #processauthyewu .md-datepicker-input-container{
+        width:71%;
+    }
+    #processauthyewu md-chips input{
+        /*display: none;*/
+    }
+    #processauthyewu md-chips md-chips-wrap{
+        /*box-shadow:none;*/
+    }
+    #processauthyewu .chipinput{
+        font-family: 'PingFang SC', 'Microsoft YaHei', 'Microsoft JhengHei', 'WenQuanYi Micro Hei', STHeiti;
+        font-size: 15px;
+        cursor: pointer;
+    }
+</style>

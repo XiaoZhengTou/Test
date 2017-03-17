@@ -1,0 +1,41 @@
+<div layout="column" ng-controller="personalCtrl" ng-cloak class="personalCenter">
+	<div ng-controller="addReceiverCtrl" class="addReceiver">
+		<md-card class="ml-padding-20">
+			<div layout="row">
+				<md-input-container flex="70" class="md-block">
+					<input ng-model="receiver.name" placeholder="收货人">
+				</md-input-container>
+				<md-button flex="20" flex-offset="10" layout="column">
+					<i class="iconfont lianxiren">&#xe623;</i>
+					<span>选联系人</span>
+				</md-button>
+			</div>
+			<div>
+				<md-input-container class="md-block ml-nomargin">
+					<input ng-model="receiver.tel" placeholder="联系方式">
+				</md-input-container>
+			</div>
+			<!--<md-list class="ml-nopadding">
+				<md-list-item ng-click="go('/personalCenter/addReceiver');next()">
+					<p>所在地区</p>
+					<p class="personalInfo-main-mid"></p>
+					<i class="iconfont" flex="5">&#xe605;</i>
+				</md-list-item>
+			</md-list>-->
+			<div>
+				<md-input-container class="md-block">
+					<input ng-model="receiver.address" placeholder="详细地址(街道/楼牌号等)">
+				</md-input-container>
+			</div>
+			<div>
+				<md-input-container class="md-block ml-nomargin">
+					<input ng-model="receiver.Postcodes" placeholder="邮政编号">
+				</md-input-container>
+			</div>
+			<div layout="row" layout-align="center center">
+				<md-button class="md-raised" ng-click="go('/personalCenter/receiver')">返回</md-button>
+				<md-button ng-click="addInvoiceBaocun()" class="md-raised md-primary">保存</md-button>
+			</div>
+		</md-card>
+	</div>
+</div>

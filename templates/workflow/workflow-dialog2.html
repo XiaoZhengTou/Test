@@ -1,0 +1,70 @@
+<md-dialog aria-label="修改工作流表单" ng-cloak style="min-width: 50%" id="busiorg-dialog2-detail">
+    <form name="addworkflow2" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 style="color: white">修改工作流表单</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="padding-top: 0px;padding-bottom: 0px">
+
+                <div class="demo-tab" style="padding: 25px 25px 0 25px; text-align: center;">
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>系统标识</label>
+                        <input ng-model="workflow.sys_id" type="text" required>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm style="text-align: left;padding-top: 20px;padding-bottom: 20px;">
+                        <label>模块标识</label>
+                        <md-select ng-model="workflow.model_id" required>
+                            <md-option ng-repeat="item in workflow_modle" value={{item.code}}>{{item.name}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>表单标题</label>
+                        <input ng-model="workflow.title" type="text" required>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>表单URL</label>
+                        <input ng-model="workflow.url" type="text" required>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>服务标识</label>
+                        <input ng-model="workflow.service_id" type="text" required>
+                    </md-input-container>
+
+                    <!--<md-datepicker name="data" ng-model="workflow.load_date" md-placeholder="上次提取时间" style="width: 100%;margin-left: -2.6%;text-align: left"></md-datepicker>-->
+
+                </div>
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <span flex></span>
+            <md-button class="md-primary md-raised" ng-click="answer()"  style="color: white;float: right"
+                       ng-disabled="addworkflow2.$invalid" disabled="disabled">保存</md-button>
+
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+
+<style>
+    #workflow-dialog2-detail .md-datepicker-input-container.md-datepicker-invalid {
+        border-bottom-color: rgb(224,224,224);
+    }
+    #workflow-dialog2-detail .md-datepicker-input-container{
+        width: 93.9%;
+        margin-left: -2px;
+    }
+    #workflow-dialog2-detail .md-datepicker-calendar-icon{
+        margin-bottom: -7px;
+    }
+</style>

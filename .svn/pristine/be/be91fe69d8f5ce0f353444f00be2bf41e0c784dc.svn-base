@@ -1,0 +1,72 @@
+<div ng-controller="telAirfareCtrl" layout="column" ng-cloak class="telAirfare">
+	<div ng-controller="airfareDetailCtrl" class="airfareDetail">
+		<md-card>
+			<div class="ml-padding-20" layout="row" layout-align="center center" layout-wrap>
+				<md-button type="submit" ng-click="gotuipiao()" class="md-raised md-primary">退票</md-button>
+				<md-button type="submit" ng-click="gogaiqian()" class="md-raised md-primary">改签</md-button>
+			</div>
+			<md-divider></md-divider>
+			<div layout class="ml-fontsize-13">
+				<div flex="60" class="ml-padding-20 addAirfare-main-left">
+					<div class="ml-fontsize-15 blue-line"><span></span>乘机人</div>
+					<div class="ml-marginT-20">
+						<md-chips ng-model="passengers" md-on-remove="removePassenger(passengers)" md-on-select="getPassenger($chip)">
+							<md-chip-template>{{$chip.cnName}}</md-chip-template>
+						</md-chips>
+						<div class="ml-lineheight-36">
+							<div flex="80">
+								{{selected.cnName?selected.cnName:passengers[0].cnName}}
+								<md-divider></md-divider>
+							</div>
+							<div layout="row">
+								<div flex="30">
+									{{selected.certType?selected.certType:passengers[0].certType | getCertType}}
+									<md-divider></md-divider>
+								</div>
+								<div flex-offset="10" flex="60">
+									{{selected.certNumber?selected.certNumber:passengers[0].certNumber}}
+									<md-divider></md-divider>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="lianxiren">
+						<div class=" ml-fontsize-15 blue-line"><span></span>联系人</div>
+						<md-input-container class="md-block ml-nomarginbot">
+							<input ng-model="PassengersCnName" flex placeholder="联系人姓名" disabled>
+						</md-input-container>
+						<md-input-container class="md-block ml-nomarginbot">
+							<input ng-model="PassengersMobile" flex placeholder="联系人手机号" disabled>
+						</md-input-container>
+					</div>
+					<div class="ml-marginT-20">
+						<div class="ml-fontsize-15 blue-line"><span></span>报销</div>
+						<md-input-container class="md-block ml-nomarginbot" flex="80">
+							<label>发票抬头</label>
+							<input ng-model="invoice" disabled>
+						</md-input-container>
+					</div>
+					<md-input-container class="md-block ml-nomarginbot" flex="80">
+						<label>EA单据</label>
+						<input ng-model="danju" disabled>
+					</md-input-container>
+				</div>
+				<div flex="40" class="ml-padding-20">
+					<md-input-container class="md-block ml-nomargin">
+						<input ng-model="startDate" placeholder="出发日期" disabled>
+					</md-input-container>
+					<div layout="row">
+						<md-input-container class="md-block ml-nomargin" flex>
+							<input ng-model="startAdd" placeholder="出发" disabled>
+						</md-input-container>
+						<div flex class="airfareIcon ml-textalign-center"><i class="iconfont">&#xe68e;</i></div>
+						<md-input-container class="md-block ml-nomargin" flex>
+							<input ng-model="endAdd" placeholder="到达" disabled>
+						</md-input-container>
+					</div>
+					<div>订单总额：<span class="ml-color-red">¥345</span></div>
+				</div>
+			</div>
+		</md-card>
+	</div>
+</div>

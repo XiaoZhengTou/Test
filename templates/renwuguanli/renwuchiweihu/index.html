@@ -1,0 +1,50 @@
+<div ng-controller="taskManCtrl" class="task airfare">
+	<div ng-controller="maintainHomeCtrl">
+		<md-card>
+			<div class="md-toolbar-tools">
+		      	<h3>
+		       		<span>任务组</span>
+		      	</h3> 
+		   </div> 
+			<div layout="row">
+				<div layout="row" flex='75' class="ml-marginT-20">
+					<md-input-container class="md-block ml-marginlr-10" flex="50">
+			            <label>任务池组名称</label>
+			            <input>
+					</md-input-container>
+					<md-input-container class="md-block ml-marginlr-10" flex="25">
+			            <label>状态</label>
+			            <md-select ng-model="priorty">
+							<md-option value="qiyong">启用</md-option>
+							<md-option value="weiqiyong">未启用</md-option>
+						</md-select>
+					</md-input-container>
+				</div>
+				<div class="ml-marginT-20">
+					<md-button class="md-raised md-primary">查询</md-button>
+				</div>
+			</div>
+		</md-card>
+		<md-card class="ml-text-center">
+			<md-list class="ml-bgcolor-blue md-whiteframe-2dp" layout="row" >
+				<span flex="20">任务池</span>
+				<span flex="20">主管</span>
+				<span flex="40">任务池描述</span>
+				<span flex="20">状态</span>
+			</md-list>
+			<md-list layout="row" style="min-height:200px ">
+				<span flex="20">工单任务池</span>
+				<span flex="20">杨会计</span>
+				<span flex="40">所有财务工单的任务池</span>
+				<span flex="20">正常</span>
+			</md-list>
+			<md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '总条数：'}" md-limit="viewData.data.pageSize" md-limit-options="[5, 10, 15]" md-page="viewData.data.pageNumber" md-total="{{viewData.data.totalRow}}" md-on-paginate="getData" md-page-select></md-table-pagination>
+			<md-button aria-label="menu" class="md-fab ml-bottom-fab" ng-click="onGoList()">
+		    	<md-tooltip md-direction="left">
+		          	新增单据
+		        </md-tooltip>
+		        <md-icon class="iconfont">&#xe631;</md-icon>
+		    </md-button>
+		</md-card>	
+	</div>
+</div>

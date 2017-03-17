@@ -1,0 +1,206 @@
+<style type="text/css">
+	.datetime .md-datepicker-button {
+		display: none;
+	}
+	
+	.datetime .md-datepicker-input-container {
+		margin-left: 3px;
+	}
+	
+	.com-pt-20 {
+		padding-top: 20px;
+	}
+	
+	.com-m-0 {
+		margin: 0;
+	}
+	
+	.datetime .md-datepicker-button {
+		display: none;
+	}
+	
+	.datetime .md-datepicker-input-container {
+		margin-left: 3px;
+	}
+	
+	.currency md-input-container {
+		padding: 0;
+		margin: 0;
+	}
+	
+	.feeapplytable md-input-container {
+		padding: 0;
+		margin: 0;
+	}
+	
+	.feeapplytable .md-errors-spacer {
+		display: none;
+	}
+	
+	form {
+		padding: 0;
+	}
+	
+	._md {
+		padding: 8px;
+	}
+</style>
+<div ng-controller="addBillPCtrl">
+	<!-- 状态步骤条开始 -->
+	<div class="ml-setupbar ml-margin-top ml-margin-large-bottom" layout="row" layout-align="center center">
+		<div flex="70" layout="row" class="container">
+			<div flex class="ml-text-center active item">
+				<span>填写单据信息</span>
+			</div>
+			<div flex class="ml-text-center  item">
+				<span>流程及附件</span>
+			</div>
+			<div flex class="ml-text-center  item">
+				<span>提交成功</span>
+			</div>
+		</div>
+	</div>
+	<!-- 状态步骤条结束 -->
+	<md-card class="md-padding com-pt-26" layout="column" style="padding-top:30px;">
+		<div layout="row">
+			<md-input-container class="md-block ml-nomargin" flex-gt-sm>
+				<label>创建时间</label>
+				<input ng-model="formdata.emsecfeereimh.apportion_date" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+			</md-input-container>
+			<md-input-container class="md-block ml-nomargin" flex-gt-sm>
+				<label>入账单位</label>
+				<input ng-model="ruzhangdanwei.company_name" type="text" drruzhangdanwei="{'model':'ruzhangdanwei'}" required ">
+			</md-input-container>
+		</div>
+		<div layout="row ">
+			<md-input-container class="md-block ml-nomargin " flex-gt-sm>
+				<label>类型</label>
+				<input ng-model="add.type " type="text " disabled>
+			</md-input-container>
+			<md-input-container class="md-block ml-nomargin " flex-gt-sm>
+				<label>导ERP类型</label>
+				<md-select ng-model="add.jz.name ">
+					<md-option ng-repeat="x in add.jz " value="{{x.id}} ">
+						{{x.name}}
+					</md-option>
+				</md-select>
+			</md-input-container>
+		</div>
+		<div layout="row ">
+			<md-input-container class="md-block " flex>
+				<label>业务描述</label>
+				<textarea ng-model="add.desc " maxlength="50 "></textarea>
+			</md-input-container>
+		</div>
+	</md-card>
+	<md-card style="margin-bottom:60px; ">
+		<!-- 表格开始 -->
+		<md-toolbar class="md-table-toolbar md-default ">
+			<div class="md-toolbar-tools ">
+				<div layout="row " layout-align="center ">
+					<span class="toolbal-title ">账务明细</span>
+					<md-menu>
+						<md-button aria-label="Open user menu " ng-click="$mdOpenMenu() " aria-label="side navigation ">
+							<md-icon md-svg-src="img/icons/three.svg "></md-icon>
+						</md-button>
+						<md-menu-content width="4 ">
+							<md-menu-item>
+								<md-button aria-label="side navigation ">
+									<md-icon md-svg-src="img/icons/excel_in.svg "></md-icon>
+									<span class="ng-scope ">Excel导入</span>
+								</md-button>
+							</md-menu-item>
+							<!--<md-menu-divider></md-menu-divider>-->
+							<md-menu-item>
+								<md-button aria-label="side navigation ">
+									<md-icon md-svg-src="img/icons/excel_out.svg "></md-icon>
+									<span class="ng-scope ">Excel导出</span>
+								</md-button>
+							</md-menu-item>
+						</md-menu-content>
+					</md-menu>
+					<md-button style="color: blue " class="md-primary " aria-label="新增 " ng-click="onAddrichang() ">
+						<i class="iconfont ">&#xe68d; 新增</i>
+					</md-button>
+				</div>
+			</div>
+		</md-toolbar>
+		<div>
+			<md-table-container>
+				<table md-table multiple ng-model="selected " md-progress="promise " class="feeapplytable ">
+					<thead md-head md-order="query.order " md-on-reorder="getDesserts ">
+						<tr md-row>
+							<th>EA</th>
+							<th>预算组织</th>
+							<th>预算科目</th>
+							<th>预算单元</th>
+							<th>借贷类型</th>
+							<th>总金额</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody md-body>
+						<tr md-row md-select="item " md-select-id="fee_apply_id " md-auto-select ng-repeat="item in formdata.emsecfeereimh.emscaapportionls track by $index ">
+							<td>
+								<md-input-container>
+									<label>单号</label>
+									<input ng-model="item.ea.fee_apply_code " type="text " drfeeapplyv2="{ 'model': 'item.ea'} ">
+								</md-input-container>
+							</td>
+							<td>
+								<dr-Budgetorg remodel="item.budget.busiorg " titlename="预算部门 "></dr-Budgetorg>
+							</td>
+							<td>
+								<dr-Budgetnode remodel="item.budget.feenode " busiorgid="item.budget.busiorg.busi_org_id " titlename="预算科目 "></dr-Budgetnode>
+							</td>
+							<td>
+								<dr-Budgetunit remodel="item.budget.budgetunit " busiorgid="item.budget.busiorg.busi_org_id " feetypeid="item.budget.feenode.fee_type_id " titlename="预算单元 "></dr-Budgetunit>
+							</td>
+							<td>
+								<md-input-container>
+									<label>借贷类型</label>
+									<md-select ng-model="item.debit_credit_type ">
+										<md-option ng-value=" 'DR' ">借</md-option>
+										<md-option ng-value=" 'CR' " ng-selected="true ">贷</md-option>
+									</md-select>
+								</md-input-container>
+							</td>
+							<td>
+								<md-input-container md-no-float class="md-block ">
+									<input ng-model="item.budget_amount " ng-change="onCountmoney() " maxlength="9 " type="number " min="0 " max="999999999 " required placeholder="填写金额 ">
+								</md-input-container>
+							</td>
+							<td layout="row ">
+								<md-button class="md-icon-button md-primary " style="padding: 0;margin: 0; " aria-label="删除 " ng-click="onDelEmseaapplyls($index) ">
+									<md-icon><i class="iconfont ">&#xe633;</i></md-icon>
+								</md-button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</md-table-container>
+			<div layout="row ">
+				<span flex></span>
+				<div style="margin: 28px 5px 0 0; ">
+					<span>费用合计：</span>
+					<span>{{total}}</span>
+				</div>
+				<div style="margin-right:15px; ">
+	<div layout="row " layout-align="center center " ng-init="currencys=null ">
+    <md-select dr-Currencyext=" " currencylist="currencys " placeholder="货币类型 " ng-model="formdata.emsecfeereimh.tmp_currency ">
+      <md-option ng-selected="item.currency_code==formdata.emsecfeereimh.currency_code " ng-value="item " ng-repeat="item in currencys.data ">{{item.currency_name}}({{item.currency_code}})</md-option>
+    </md-select>
+  </div>
+				</div>
+			</div>
+		</div>
+		<!--账务明细 end-->
+	</md-card>
+	<!-- 底部操作区开始 -->
+		<div class="ml-bottom-bar slideInUp animated " layout="row ">
+    <md-button class="md-raised md-primary ml-button ml-noshadow " aria-label="上传附件 " ng-click="saveData() ">保存</md-button>
+    <span flex></span>
+    <md-button class="md-raised md-primary ml-button ml-noshadow " aria-label="上传附件 " ng-click="go( '/provision/approveP', '查看页') ">下一步</md-button>
+  </div>
+	<!-- 底部操作区结束 -->
+</div>

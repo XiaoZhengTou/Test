@@ -1,0 +1,199 @@
+<div ng-controller="airfareCtrl" layout="column" ng-cloak class="airfare">
+	<div ng-controller="messageCtrl" class="message">
+		<md-card class="ml-padding-20 ml-color-73 ml-fontsize-13">
+			<div class="message-main">
+				<div class="person">
+					<div class="blue-line ml-fontsize-15"><span></span>乘机人</div>
+					<div class="ml-marginT-20">
+						<md-chips ng-model="passengers" md-on-remove="removePassenger(passengers)" md-on-select="getPassenger($chip)">
+							<md-chip-template>{{$chip.cnName}}</md-chip-template>
+						</md-chips>
+						<div ng-if="passengers[0].cnName" class="ml-lineheight-36">
+							<div flex="50">
+								{{selected.cnName?selected.cnName:passengers[0].cnName}}
+								<md-divider></md-divider>
+							</div>
+							<div layout="row" flex="50">
+								<div flex="30">
+									{{selected.certType?selected.certType:passengers[0].certType | getCertType}}
+									<md-divider></md-divider>
+								</div>
+								<div flex-offset="10" flex="60">
+									{{selected.certNumber?selected.certNumber:passengers[0].certNumber}}
+									<md-divider></md-divider>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="addPerson ml-marginT-20">
+						<md-button drchoosepassengers="{'model':'passengers'}" class="md-raised md-primary ml-paddinglr20 ml-nomargin">添加乘机人</md-button>
+						<em>剩余{{fightListDetail.seatNum | getSeatNum}}张成人票</em>
+					</div>
+				</div>
+				<div class="lianxiren" flex="50">
+					<form ng-cloak name="messageUserForm" novalidate="novalidate">
+						<div class="blue-line ml-fontsize-15"><span></span>联系人</div>
+						<md-input-container class="md-block">
+							<input ng-model="PassengersCnName" name="cnName" required flex placeholder="联系人姓名">
+							<div ng-messages="messageUserForm.cnName.$error" role="alert" multiple>
+								<div ng-message="required" class="my-message">请输入联系人姓名</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block">
+							<input ng-model="PassengersMobile" name="mobile" ng-length="11" ng-pattern="/^1[34578]\d{9}$/" required flex placeholder="联系人手机号">
+							<div ng-messages="messageUserForm.mobile.$error" role="alert" multiple>
+								<div ng-message="required" class="my-message">请输入联系人手机号</div>
+								<div ng-message="pattern" class="my-message">请输入正确的手机号</div>
+							</div>
+						</md-input-container>
+					</form>
+				</div>
+				<div class="payType">
+					<div class="blue-line ml-fontsize-15"><span></span>支付方式</div>
+					<md-select placeholder="{{selectedPaytype}}" ng-model="pay" md-on-open="loadcCredentials()" flex="30">
+						<md-option ng-repeat="pay in pays" ng-click="getPay(pay)">
+							{{pay.payType}}
+						</md-option>
+					</md-select>
+					<md-button ng-if="tlementType=='2'" class="ml-nomargin ml-border-e ml-paddinglr20">请选择关联的EA单据</md-button>
+					<div layout="row" class="ml-marginT-10" ng-show="EA_lists.length >0" ng-repeat="EA_list in EA_lists">
+						<div flex="25" layout="column">
+							<div>申请人</div>
+							<div>业务描述</div>
+							<div>可用金额</div>
+							<div>币种</div>
+							<div>申请单号</div>
+						</div>
+						<div flex="70" flex-offset="5" layout="column">
+							<div>{{EA_list.applyName}}</div>
+							<div>{{EA_list.reasonDesc}}</div>
+							<div>{{EA_list.availAmount}}</div>
+							<div>{{EA_list.currencyName}}</div>
+							<div>{{EA_list.feeApplyCode}}</div>
+						</div>
+					</div>
+				</div>
+				<div class="baoxiao">
+					<div class="blue-line ml-fontsize-15"><span></span>报销</div>
+					<div class="ml-marginT-20">
+						<md-checkbox class="ml-nomargin ml-marginT-20" ng-model="selectedInvoice" aria-label="invoice">
+							需要报销凭证
+						</md-checkbox>
+					</div>
+					<div ng-if="selectedInvoice">
+						<div ng-if="invoice" flex="50" class="ml-lineheight-36 ml-marginT-20">
+							{{invoice.invoice_head}}
+							<md-divider></md-divider>
+						</div>
+						<div class="ml-marginT-20">
+							<md-button class="md-raised md-primary rmbtn ml-paddinglr20" ng-click="invoiceShow($event)">添加发票抬头</md-button>
+						</div>
+					</div>
+				</div>
+				<!--<md-input-container class="md-block" flex="40">
+						 <input ng-model="addPerson.cnName" name="chName" required  flex placeholder="收件人姓名">
+						 <div ng-messages="userForm.chName.$error" role="alert" multiple>
+					         <div ng-message="required" class="my-message">请输入名字</div>
+					     </div>
+					</md-input-container>
+					<md-input-container  class="md-block" flex="40">
+						  <input ng-model="addPerson.mobile" name="mobile" ng-pattern="/^1[34578]\d{9}$/" required  flex placeholder="收件人手机号码">
+						  <div ng-messages="userForm.mobile.$error" role="alert" multiple>
+					         <div ng-message="required" class="my-message">请输入手机号</div>
+					         <div ng-message="pattern" class="my-message">请输入正确的手机号</div>
+					     </div>
+					</md-input-container>
+					<div>
+						<md-button class="ml-border-e rmbtn ml-paddinglr20">省</md-button>
+						<md-button class="ml-border-e rmbtn ml-paddinglr20">市</md-button>
+						<md-button class="ml-border-e rmbtn ml-paddinglr20">区/县</md-button>
+					</div>
+					<md-input-container class="md-block" flex="40">
+						 <input ng-model="addPerson.cnName" name="chName" required  flex placeholder="收件人详细地址，不需要重复填写省/市/区县">
+						 <div ng-messages="userForm.chName.$error" role="alert" multiple>
+					         <div ng-message="required" class="my-message">请输入收件人详细地址</div>
+					     </div>
+					</md-input-container>
+					<div>
+						<md-select placeholder="行程单和差额发票" class="ml-nomargin"  ng-model="credentials" md-on-open="loadcCredentials()" flex="30">
+				            <md-option  ng-value="credentials.name" ng-model="credentials" ng-repeat="credentials in credentialss" ng-click="getCredentials(credentials)" >
+				                {{credentials.aa}}
+				            </md-option>
+				       </md-select>
+					</div>
+					<div layout="row" flex="50">
+				        <md-select placeholder="单位" class="ml-nomargin"  ng-model="credentials" md-on-open="loadcCredentials()" flex="30">
+				            <md-option  ng-value="credentials.name" ng-model="credentials" ng-repeat="credentials in credentialss" ng-click="getCredentials(credentials)" >
+				                {{credentials.aa}}
+				            </md-option>
+				        </md-select>
+						<md-input-container  class="md-block ml-nomargin" flex-offset="10" flex="60">
+						     <input ng-model="addPerson.cnName" name="chName" required  flex placeholder="发票抬头，请填写单位名称">
+						 <div ng-messages="userForm.chName.$error" role="alert" multiple>
+					         <div ng-message="required" class="my-message">请输入单位名称</div>
+					     </div>
+						</md-input-container>
+					</div>
+				</div>-->
+
+				<div class="message-detail ml-border-e ml-lineheight-24">
+					<div class=" ml-padding-20">
+						<div layout="row">
+							<div flex="70" class="ml-color-21 message-detail-top">
+								<span>{{fightMessage.depDate | date:'MM-dd'}}</span>
+								<span>{{fightMessage.depDate | amDateFormat:'ddd'}}</span>
+								<span>{{fightMessage.orgCity}}－{{fightMessage.desCity}}</span>
+								<span ng-if="fightMessage.meal == true">提供餐食</span>
+								<span ng-if="fightMessage.meal == false">无餐食</span>
+							</div>
+							<div flex="30" class="ml-textalign-right ml-fontsize-12">{{fightListDetail.cabin}}</div>
+						</div>
+						<div layout="row" class="ml-marginT-20">
+							<div flex="30">
+								<div class="ml-fontsize-18 ml-color-21">{{fightMessage.depTime}}</div>
+								<div>{{fightMessage.orgAirport}}</div>
+							</div>
+							<div flex="40" class="ml-fontsize-12 ml-textalign-center">
+								<div>{{(fightMessage.flightTime)/60 | parseInt}}h{{(fightMessage.flightTime)%60}}m</div>
+								<md-divider></md-divider>
+								<div>{{fightMessage.airlineName}}</div>
+							</div>
+							<div flex="30" class="ml-textalign-right">
+								<div class="ml-fontsize-18 ml-color-21">{{fightMessage.arrTime}}</div>
+								<div>{{fightMessage.desAirport}}</div>
+							</div>
+						</div>
+						<div class="ml-marginT-20" ng-if="fightListDetail.refundChangeInfo">
+							<div class="ml-color-blue tgshuoming" ng-click="tgshuoming()">
+								退改签说明
+								<i ng-hide="tuigaiShow" class="iconfont ml-fontsize-12">&#xe602;</i>
+								<i ng-if="tuigaiShow" class="iconfont ml-fontsize-12">&#xe603;</i>
+							</div>
+							<div ng-if="tuigaiShow">{{fightListDetail.refundChangeInfo}}</div>
+						</div>
+					</div>
+					<md-divider></md-divider>
+					<div class="ml-padding-20" layout="row">
+						<div flex>
+							<div>订单总额</div>
+							<div class="ml-marginT-10">成人票</div>
+							<div>基建费</div>
+							<div>燃油费</div>
+							<div>服务费</div>
+						</div>
+						<div flex class="ml-textalign-right">
+							<div class="ml-color-red">¥{{total*passengers.length}}</div>
+							<div class="ml-marginT-10"><span class="ml-color-21">¥{{fightListDetail.ticketPrice}}/人</span> ＊{{passengers.length}}</div>
+							<div><span class="ml-color-21">¥{{fightListDetail.airPortFee}}/人</span> ＊{{passengers.length}}</div>
+							<div><span class="ml-color-21">¥{{fightListDetail.oilFee}}/人</span> ＊{{passengers.length}}</div>
+							<div><span class="ml-color-21">¥{{fightListDetail.serviceAmount}}/人</span> ＊{{passengers.length}}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="sub-btn">
+				<md-button type="submit" ng-disabled="messageUserForm.$invalid" ng-click="messageConfirm()" class="md-raised md-primary ml-paddinglr20">提交订单</md-button>
+			</div>
+		</md-card>
+	</div>
+</div>

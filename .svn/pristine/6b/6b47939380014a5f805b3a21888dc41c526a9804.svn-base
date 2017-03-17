@@ -1,0 +1,67 @@
+<md-dialog aria-label="新增账务明细" ng-cloak style="min-width: 50%" >
+    <form name="add_bills" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 style="color: white">新增账务明细</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="padding-top: 0px;padding-bottom: 0px">
+
+                <div class="demo-tab" style="padding: 25px 25px 0 25px; text-align: center;">
+                    <div layout-gt-sm="row">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>付款时间 (必填)</label>
+                            <input type="date" ng-model="pay_time"  required>
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <div  layout-align="center center" ng-init=" itemdiccode='C_ALL_PAYMENT_METHOD'" ng-init="itemdiclist=null">
+                                <md-select dr-Dictitemext="" diccode="itemdiccode" diclist="itemdiclist" placeholder="付款方式" ng-model="itemValue" ng-required style="min-width: 200px;">
+                                    <md-option ng-value="dic.itemValue" ng-repeat="dic in itemdiclist.data">{{dic.itemName}}</md-option>
+                                </md-select>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div layout-gt-sm="row">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>付款金额 (必填)</label>
+                            <input type="number" ng-model="emscaapportionl.schedule_amount" min="0" required >
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>付款比例% (必填)</label>
+                            <input ng-model="emscaapportionl.pay_percent" type="number"  required>
+                        </md-input-container>
+                    </div>
+
+                </div>
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <span flex></span>
+            <md-button class="md-primary md-raised" ng-click="answer()"  style="color: white;float: right"
+                       ng-disabled="false" disabled="disabled">保存</md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+
+<style>
+    div.layout-gt-sm-row md-input-container{
+        padding:0px;
+        margin:0px 5px;
+    }
+    #budgetcreatelist-dialog1-detail .md-datepicker-input-container.md-datepicker-invalid {
+        border-bottom-color: rgb(224,224,224);
+    }
+    #budgetcreatelist-dialog1-detail .md-datepicker-input-container{
+        width: 93.9%;
+        margin-left: -2px;
+    }
+    #budgetcreatelist-dialog1-detail .md-datepicker-calendar-icon{
+        margin-bottom: -7px;
+    }
+</style>

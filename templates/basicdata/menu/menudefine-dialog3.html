@@ -1,0 +1,44 @@
+<md-dialog aria-label="选择上级菜单" ng-cloak style="min-width: 50%" id="menudefine-dialog3-detail">
+    <form name="addmenudefine" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 style="color: white">选择上级菜单</h2>
+                <span flex></span>
+                <!--<md-button class="md-icon-button" ng-click="cancel()">-->
+                    <!--<md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>-->
+                <!--</md-button>-->
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="padding-top: 0px;padding-bottom: 0px">
+
+                <div class="demo-tab" style="padding: 25px 25px 0 25px; text-align: center;">
+
+                    <ul tree class="ztree" ng-model="$parent.selectNode11" style="overflow: auto;max-height: 399px"></ul>
+
+                </div>
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <span flex></span>
+            <md-button class="md-primary md-raised" ng-click="answer($event)"  style="color: white;float: right"
+                       ng-disabled="addmenudefine.$invalid" disabled="disabled">确定</md-button>
+            <md-button class="md-primary md-raised" ng-click="cancel($event)"  style="color: white;float: right"
+                       ng-disabled="addmenudefine.$invalid" disabled="disabled">返回</md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+
+<style>
+    /*#menudefine-dialog3-detail .md-datepicker-input-container.md-datepicker-invalid {*/
+        /*border-bottom-color: rgb(224,224,224);*/
+    /*}*/
+    #menudefine-dialog3-detail .md-datepicker-input-container{
+        width: 93.9%;
+        margin-left: -2px;
+    }
+    #menudefine-dialog3-detail .md-datepicker-calendar-icon{
+        margin-bottom: -7px;
+    }
+</style>

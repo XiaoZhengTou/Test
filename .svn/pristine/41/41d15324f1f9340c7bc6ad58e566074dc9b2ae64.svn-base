@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+	<!-- Header Part Begin -->
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<meta name="description" content="Materia - Admin Template with Angularjs">
+		<meta name="keywords" content="materia,material, material template">
+		<meta name="author" content="solutionportal">
+		<title>慧捷报</title>
+		<link rel="icon" type="image/png" href="img/logo1.png">
+		<link rel="stylesheet" href="css/app.css" />
+		<link rel="stylesheet" href="css/angular-material.css" />
+		<link rel="stylesheet" href="css/ml.css" />
+		<!-- 日期选择模块 -->
+		<link rel="stylesheet" href="css/sc-date-time.css" />
+		<link rel="stylesheet" media="print" href="css/angularPrint.css" />
+		<!--<link rel="stylesheet" href="css/md-data-table.css" />-->
+		<link rel="stylesheet" href="libs/dist/ng-table.min.css">
+		<script type="text/javascript" charset="utf-8">
+		if (window.innerWidth == '944') {
+  			document.getElementsByTagName('html')[0].className+=' showInFrame';
+		}
+		</script>
+		<link rel="stylesheet" href="css/zTreeStyle.css">
+		<script src="libs/jquery-1.10.2.min.js"></script>
+		<script src="libs/jquery.ztree.all.js"></script>
+	</head>
+	<!-- Header Part End -->
+
+	<body id="app" ng-class="{'nav-expand': navFull, 'body-full': bodyFull}" ng-controller="AppCtrl" style="overflow: hidden;">
+		<!-- Main Container Begin -->
+		<div layout="row" class="ml-full-height" ng-class="{true: 'ml-login'}[loginMod]">
+			<!-- Left Side Begin -->
+			<md-sidenav class="os-windows admin-sidebar-left ml-hidde-overflow left-sidenav md-whiteframe-2dp" md-is-locked-open="layout.sideMenuSize !== 'hidden'" ng-class="{true:'fullMenu',false:'iconMenu' }[layout.fullMenuSize]" id="sidebar-left" ng-mouseover="activateHover()" ng-mouseleave="removeHover()" flex ng-if="!loginMod">
+				<!-- Side Top Toolbar Begin -->
+
+				<div class="md-toolbar-tools md-primary" style="min-height: 64px;" layout="row" layout-align="center center">
+					<a href="#/home">
+						<img ng-src="{{sidebarInfo.appLogo}}" style="height:45px;" alt="慧捷报" ng-cloak>
+					</a>
+				</div>
+				<md-divider></md-divider>
+				<!-- Side Top Toolbar End -->
+				<!-- Side Menu Begin -->
+				<md-content style="background: #2b3c5a;color:#989fb2;" class="ml-auto-overflow" flex="9">
+					<md-list ng-repeat-start="item in items" aria-label="item.name" class="sideMenu ml-nopadding" ng-class="{true:'left-sidenav-expand',false:'left-sidenav-collapse'}[item.open]">
+						<md-list-item style="background: #2b3c5a;" ng-href="#/{{item.alias}}" aria-label="item.name" ng-click="openLink(item.name)" ng-if="!layout.fullMenuSize" title="{{item.name}}">
+							<span class="iconfont" ng-bind="item.icon"></span>
+						</md-list-item>
+						<md-list-item style="background: #2b3c5a;" ng-click="toggleDropdownMenu(item.open,$index)" ng-if="layout.fullMenuSize"  aria-label="item.name">
+							<span class="iconfont" style="margin-right:20px;" ng-bind="item.icon"></span>
+							<span ng-show="layout.fullMenuSize" ng-bind="item.name"></span>
+							<span flex ng-show="layout.fullMenuSize"></span>
+							<span class="iconfont" ng-show="layout.fullMenuSize" ng-bind="item.open?'&#xe608;':'&#xe605;'"></span>
+						</md-list-item>
+						<md-list class="subSideMemu" ng-show="item.open && layout.fullMenuSize"  aria-label="item.name">
+							<md-list-item  style="background: #2b3c5a;" ng-repeat="child in item.children track by $index" aria-label="child.name" ng-click="openLink(item.name,child.name)" href="#/{{child.alias}}" ng-class="{'active': '{{child.name}}' == layout.activeItem}" ng-show="layout.fullMenuSize">
+								<span style="width: 60px;"></span><span style="color:#d0d6e0;" ng-bind="child.name"></span>
+							</md-list-item>
+						</md-list>
+					</md-list>
+					<md-divider ng-repeat-end></md-divider>
+				</md-content>
+				<!-- Side Menu End -->
+			</md-sidenav>
+			<!-- Left Side End -->
+			<!-- Right Side Begin -->
+			<div id="admin-panel" layout="column" class="ml-auto-overflow" flex>
+				<!-- Top Toolbar Begin -->
+				<md-toolbar class="admin-toolbar" style="background: #ffffff;color: #202020;" ng-if="(layout.showToolbar) && !loginMod" ng-class="[layout.toolbarSize,layout.toolbarClass]">
+					<div class="md-toolbar-tools ng-scope">
+						<!-- Icon Menu Begin -->
+						<md-button class="md-icon-button" ng-click="toggleMenuSize()" aria-label="隐藏左菜单">
+							<md-icon md-font-icon aria-label="隐藏左菜单" >
+							<span class="iconfont" style="color:#000;font-size: 1.7em;" ng-bind="layout.fullMenuSize?'&#xe693;':'&#xe695;'"></span>
+							</md-icon>
+						</md-button>
+						<span flex></span>
+						<md-button class="md-icon-button" ng-click="null" aria-label="查询">
+							<md-icon md-font-icon class="iconfont" style="color:#000;">
+								&#xe606;
+							</md-icon>
+						</md-button>
+						<md-button class="md-icon-button" ng-click="null" aria-label="二维码">
+							<md-icon md-font-icon class="iconfont" style="color:#000;">
+								&#xe690;
+							</md-icon>
+						</md-button>
+						<md-button class="md-icon-button" ng-click="null" aria-label="设置">
+							<md-icon md-font-icon class="iconfont" style="color:#000;">
+								&#xe666;
+							</md-icon>
+						</md-button>
+						<md-button class="md-icon-button" ng-click="null" aria-label="消息">
+							<md-icon md-font-icon class="iconfont" style="color:#000;">
+								&#xe68f;
+							</md-icon>
+						</md-button>
+						<!-- Icon Menu End -->
+						<md-menu>
+							<md-button class="md-icon-button" aria-label="个人中心" ng-click="$mdOpenMenu()" aria-label="操作">
+								<md-icon class="iconfont" style="color:#000;">
+									&#xe65c;
+								</md-icon>
+							</md-button>
+							<md-menu-content width="3">
+								<md-menu-item>
+									<md-button aria-label="side navigation" ng-href="#/home">
+										<md-icon md-font-icon="zmdi zmdi-account" class="iconfont" style="color:#000;">&#xe647;
+										</md-icon>
+										<span class="ng-scope">个人资料</span>
+									</md-button>
+								</md-menu-item>
+								<md-menu-divider>
+								</md-menu-divider>
+								<md-menu-item>
+									<md-button aria-label="side navigation" ng-click="logOut()">
+										<md-icon md-font-icon="zmdi zmdi-account" class="iconfont" style="color:#000;">&#xe692;
+										</md-icon>
+										<span class="ng-scope">退出</span>
+									</md-button>
+								</md-menu-item>
+							</md-menu-content>
+						</md-menu>
+					</div>
+				</md-toolbar>
+				<!-- Top Toolbar End -->
+				<!-- Main Content Begin -->
+				<div id="container" flex="8" class="ml-full-height ml-auto-overflow ml-page-padding">
+					<!-- Breadcrumb Begin -->
+					<ul class="ml-breadcrumb ml-inline-block" ng-if="!loginMod">
+						<li ng-repeat="crumbs in breadcrumbs" class="ng-scope">
+							<span translate="" class="ng-scope ng-binding" ng-bind="crumbs"></span>
+							<md-icon ng-if="!$last" class="iconfont">
+								&#xe604;
+							</md-icon>
+						</li>
+						<!-- 子模块面包屑开始 -->
+						<li ng-repeat="x in modCrumb" class="ng-scope" ng-click="goCrumb(x.path,$index,$last)">
+							<md-icon class="iconfont">
+								&#xe604;
+							</md-icon>
+							<span translate="" class="ng-scope ng-binding" ng-bind="x.title"></span>
+						</li>
+						<!-- 子模块面包屑结束 -->
+					</ul>
+					<!-- Breadcrumb End -->
+					<div ng-view>
+
+					</div>
+				</div>
+				<!-- Main Content End -->
+			</div>
+			<!-- Right Side End -->
+		</div>
+		<!-- Min Container End -->
+		<script data-baseurl="./" data-main="main.js" src="libs/require.js" id="main">
+		</script>
+	</body>
+</html>

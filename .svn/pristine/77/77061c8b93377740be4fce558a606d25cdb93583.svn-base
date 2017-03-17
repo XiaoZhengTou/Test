@@ -1,0 +1,630 @@
+/*公共*/
+
+.ml-textalign-right {
+	text-align: right;
+}
+
+.ml-textalign-left {
+	text-align: left;
+}
+
+.ml-textalign-center {
+	text-align: center;
+}
+
+.ml-bgcolor-fc {
+	background-color: #fcfcfc;
+}
+
+.ml-padding-20 {
+	padding: 20px;
+}
+.ml-paddingT-20 {
+	padding-top: 20px;
+}
+.ml-paddingl-10{
+	padding-left: 10px;
+}
+.ml-paddinglr20{
+	padding: 0 20px;
+}
+.ml-padding-13 {
+	padding: 13px 20px;
+}
+.ml-marginT-10{
+	margin-top: 10px;
+}
+.ml-margintb-20{
+	margin: 20px 0;
+}
+.ml-marginT-20{
+	margin-top: 20px;
+}
+.ml-margin-10{
+	margin: 0 10px;
+}
+.ml-margin-auto{
+	margin: 0 auto;
+}
+.ml-marginr-20{
+	margin-right: 20px;
+}
+.ml-color-green{
+	color: #32a237;
+}
+.ml-color-73 {
+	color: #737373;
+}
+.ml-color-yellow{
+	color: #ffb10a;
+}
+.ml-color-21 {
+	color: #212121;
+}
+.ml-color-blue{
+	color: #2196f3 !important;
+}
+.ml-color-red{
+	color: #ff39aa !important;
+}
+.ml-color-ccc {
+	color: #ccc !important;
+}
+.ml-fontsize-12 {
+	font-size: 12px !important;
+}
+.ml-fontsize-13{
+	font-size: 13px !important;
+}
+.ml-fontsize-14 {
+	font-size: 14px !important;
+}
+.ml-fontsize-15{
+	font-size: 15px !important;
+}
+.ml-fontsize-18{
+	font-size: 18px !important;
+}
+.ml-fontsize-24{
+	font-size: 24px !important;
+}
+.ml-lineheight-24{
+	line-height: 24px;
+}
+.ml-lineheight-30{
+	line-height: 30px;
+}
+.ml-lineheight-36{
+	line-height: 36px;
+}
+i,em{
+	font-style: normal;
+}
+.personalCenter .blue-line span{
+	position: absolute;
+	margin-left: -20px;
+	display: inline-block;
+	width: 3px;
+	height: 20px;
+	background-color: #2196f3;
+}
+.personalCenter .blue-line {
+	position: relative;
+}
+.personalCenter em{
+	font-style: normal;
+	margin-left: 10px;
+	display: inline-block;
+}
+.personalCenter .detail-main-mid-top{
+	background-color: #eee;
+}
+.personalCenter .bgcolor{
+	background-color: #EEE;
+	border-top:1px solid #ccc;
+}
+.personalCenter .marginT30{
+	margin-top: 30px;
+}
+.personalCenter md-table-container tbody tr:hover{
+	/*cursor: pointer;*/
+	background-color: #eee
+}
+/*公共完*/
+
+
+/*myOrder 我的订单*/
+
+.personalCenter md-tabs md-tabs-wrapper {
+	background-color: #fcfcfc !important;
+}
+
+.personalCenter .myOrder md-datepicker .md-button {
+	margin: 0;
+}
+
+.personalCenter .myOrder .md-datepicker-input-container {
+	padding-bottom: 0;
+}
+
+.personalCenter .myOrder .riqi span {
+	/*margin-top: 5px;*/
+	display: inline-block;
+	cursor: pointer;
+	border-radius: 2px;
+	padding: 2px 10px;
+	line-height: 32px;
+	height: 32px;
+}
+
+.personalCenter .myOrder .riqi-mid {
+	margin: 0 10px 0 30px;
+	border-right: 1px solid #ccc;
+	padding-right:10px ;
+}
+.personalCenter .myOrder .margin10{
+	margin: 0 5px;
+}
+.personalCenter .myOrder .riqi span:hover,
+.personalCenter .myOrder .riqi span.active {
+	background-color: rgb(92, 107, 192);
+	color: #fff;
+}
+
+.personalCenter .order-main-leftBorder {    /*公用*/
+	border-left: 1px solid #eee; 
+}
+.personalCenter .myOrder .xiangqing span{
+	cursor: pointer;
+}
+.personalCenter .myOrder .order-main-leftCon {
+	border-bottom: 1px solid #eee;
+}
+
+.personalCenter .myOrder .order-main-right {
+	line-height: 137px;
+}
+.personalCenter .myOrder .jdorder-main-right {
+	line-height: 120px;
+}
+.personalCenter .myOrder .order-main-Con span {
+	display: inline-block;
+	background-color: royalblue;
+	color: #fff;
+	margin-right: 5px;
+	padding: 0 2px;
+	    height: 22px;
+}
+.personalCenter .myOrder .order-main-Con .order-main-Con-span{
+	background-color: #ffb10a;
+}
+.personalCenter .myOrder .myOrder-list-con{
+	margin-bottom: 20px;
+}
+.personalCenter .myOrder .myorderStatus{
+	color: #fff;
+	height: 24px;
+    margin-right: 10px;
+    padding: 2px 0;
+}
+.personalCenter .myOrder .yejiao{
+	margin: 30px 0;
+}
+.personalCenter .myOrder .yejiao span{
+	line-height: 26px;
+	margin-left: 30px;
+}
+.personalCenter .myOrder .pageIcon i{
+	margin-left: 20px;
+	cursor: pointer;
+	transform: scale(0.8);
+}
+.personalCenter .myOrder .pageIcon i.active{
+	color: royalblue;
+}
+.personalCenter .myOrder md-input-container  md-select:not([disabled]):focus .md-select-value,
+.personalCenter .myOrder md-input-container  .md-select-value{
+	    border-bottom-width: 0px;
+}
+.personalCenter .myOrder md-tab-item:first-of-type{
+	padding-top: 5px;
+}
+.personalCenter .myOrder .md-select-value span{
+	color: #212121;
+}
+.personalCenter .myOrder .dindanTime{
+	font-size: 13px;
+	padding-top: 10px;
+}
+
+/*myOrder 我的订单完*/
+
+/*orderRefunds 订单详情*/
+.personalCenter .orderRefunds .detail-tbn{
+	background-color: #00bcd4;
+	color: #fff;
+}
+.personalCenter .orderRefunds .order-time{
+	font-size: 24px;
+	font-weight: 500;
+}
+.personalCenter .orderRefunds .orderStatus{
+	/*margin-bottom: 20px;*/
+	font-size: 20px;
+}
+.personalCenter .orderRefunds .passengers-in{
+	padding-bottom: 20px;
+}
+.personalCenter .orderRefunds .md-button{
+	height: 40px;
+}
+/*orderRefunds 订单详情完*/
+
+/*tuipiaoDetail 退票详情*/
+.personalCenter .tuipiaoRe{
+	padding-top: 7px;
+}
+.personalCenter .tuipiao-marginl{
+	margin-left: 20px;
+}
+.personalCenter .tuipiaoDetail em{
+	color: #212121;
+}
+/*tuipiaoDetail 退票详情完*/
+/*tuikuan 退款详情*/
+.personalCenter .tuikuan .tuikuan-bot-list{
+	line-height: 50px;
+    margin-left: -10%;
+}
+.personalCenter .tuikuan-main-bot{
+	margin-bottom: 30px;
+}
+/*进度上*/
+.personalCenter .tuikuan .container > .item {
+  padding-top: 30px;
+  position: relative;
+}
+.personalCenter .tuikuan .container > .item:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 14px;
+  height: 2px;
+  background: #ccc;
+}
+.personalCenter .tuikuan .container > .item:first-of-type:before{
+  right: 0;
+  left: 50%;
+  width: 50%;
+}
+.personalCenter .tuikuan .container > .item:last-of-type:before{
+  right: 0;
+  width: 50%;
+}
+.personalCenter .tuikuan .container > .item:after {
+  content: '';
+  position: absolute;
+  left: calc(50% - 7px);
+  top: 5px;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  border-radius: 50%;
+  background: #ccc;
+}
+.personalCenter .tuikuan .container > .item:first-child.active:after {
+  font-size: 12px;
+  content: "\e67b";
+  font-family: "iconfont";
+  color: white;
+}
+
+/*进度下*/
+.personalCenter .tuikuan .container-bot > .item {
+  padding-left: 10%;
+  position: relative;
+}
+.personalCenter .tuikuan .container-bot > .item:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 2px;
+  height: 51%;
+  background: #ccc;
+}
+.personalCenter .tuikuan .container-bot > .item:first-child:before{
+	  top: 50%;
+}
+.personalCenter .tuikuan .container-bot > .item:after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ccc;
+  left: -9px;
+  top: 32%;
+}
+.personalCenter .tuikuan .item.active:before,
+.personalCenter .tuikuan .item.active:after {
+  background: #42A5F5;
+}
+.personalCenter .tuikuan .item.active,
+.personalCenter .tuikuan .item.active{
+  color: #212121;
+}
+/*tuikuan 退款详情完*/
+ /*gaiqianDetail 改签详情*/ /*改签退票tuipiao公用*/
+
+.personalCenter .gaiqianDetail-main{
+	position: relative;
+}
+.personalCenter .gaiqianDetail-main .select-marginl{
+	margin: 0 20px;
+}
+.personalCenter .gaiqianDetail-main md-input-container .md-input{
+	border-width: 1px;
+	min-height: 70px;
+	line-height: 18px;
+	
+}
+.personalCenter .gaiqian-dialog{
+	position: relative;
+}
+.personalCenter .close-dialog{
+	position: absolute;
+	right: 20px;
+	top: 5px;
+	cursor: pointer;
+}
+ /*gaiqianDetail 改签详情完*/
+
+/*passengers 常用旅客*/
+.personalCenter .passengers .md-button,
+.personalCenter .invoice-main .md-button{
+	min-width: 0;
+}
+/*.personalCenter .passengers .passengers-main{
+	width: 270px;
+	height: 156px;
+}*/
+.personalCenter .addperson-btn{
+	margin: 10px 20px 0 auto;
+}
+/*.personalCenter .passengers .zhengjian-lh{
+	line-height: 36px;
+}*/
+
+/*passengers 常用旅客完*/
+/*addPerson 新增常用旅客*/
+.personalCenter .addPerson .last-left{
+	font-size: 12px;
+	color: #bfbfbf;
+	line-height: 20px;
+	margin-top: 10px;
+}
+.personalCenter .addPerson md-select .md-select-value span{
+	color: #212121;
+}
+.personalCenter .addPerson .addCred{
+	margin-left: 5px;
+}
+.personalCenter .addPerson .credentials{
+	margin-top: 0;
+}
+/*addPerson 新增常用旅客完*/
+
+/*danju 我的单据*/
+/*.personalCenter .order_status{
+	color: #fff;
+    width: 30%;
+    text-align: center;
+    margin-left: auto;
+}*/
+.personalCenter .tijiao{
+	font-size: 12px;
+	color: #ccc;
+}
+.personalCenter .riqi .md-button.md-icon-button{
+	margin: -5px -10px;
+}
+.personalCenter .riqi md-datepicker{
+	margin-right: 10px;
+}
+/*danju 我的单据完*/
+/*backlog 代办事宜*/
+.personalCenter .backlog-main .redIcon{
+	width: 22px;
+	height: 22px;
+	border-radius: 50%;
+	background-color: #ff51b3;
+	color: #fff;
+	position: absolute;
+	top: 5px;
+	line-height: 22px;
+	text-align: center;
+	z-index: 9999;
+	left: 53%;
+	transform: scale(0.9);
+	font-size: 12px;
+	display: block;
+}
+/*backlog 代办事宜完*/
+/*personalInfo 个人信息*/
+
+.personalCenter .personalInfo .picture{
+	width:100px;
+	height: 100px;
+	margin-left: 5%;
+}
+.personalCenter .personalInfo .picture img{
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	border: 1px solid #EEE;
+}
+.personalCenter .personalInfo .personalInfo-main{
+	min-height: 300px;
+	position: relative;
+}
+.personalCenter .personalInfo .personalInfo-detail{
+	background-color: #FCFCFC;
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	width: 40%;
+	border: 1px solid #EEE;
+}
+.personalCenter .personalInfo .personalInfo-img{
+	background-color: #FCFCFC;
+	border:1px solid #EEE;
+}
+.personalCenter .personalInfo .file-detail{
+	margin: 10px 0 20px 0;
+}
+.personalCenter .personalInfo .picture-img{
+	width:160px;
+	height: 160px;
+	margin: 20px auto;
+}
+.personalCenter .personalInfo .picture-right{
+	border-left: 1px solid #EEE;
+	padding: 10px 0 0 20px;
+}
+.personalCenter .personalInfo .picture-100{
+	width:100px;
+	height: 100px;
+	border: 1px solid #EEE;
+}
+.personalCenter .personalInfo .picture-50{
+	width:50px;
+	height: 50px;
+	border: 1px solid #EEE;
+}
+.personalCenter .personalInfo img{
+	width: 100%;
+	height: 100%;
+}
+/*personalInfo 个人信息完*/
+
+/*invoice 发票抬头*/
+.personalCenter .invoice-btn{
+	margin: 10px 20px;
+}
+.personalCenter .invoice-main{
+	width: 300px;
+	min-height: 110px;
+} 
+.personalCenter .bianji-icon{
+	position: absolute;
+	top: 0;
+	right: 50px;
+}
+.personalCenter .invoice-top p{
+	min-height: 40px;
+} 
+.personalCenter md-input-container .md-input[disabled]{
+	color: #212121;
+    background-image: none;
+    border-bottom: 1px solid #ccc;
+}
+/*invoice 发票抬头完*/
+/*receiver 收货地址*/  /*与发票抬头公用*/
+.personalCenter .receiver-main{
+	/*width: 300px;*/
+	min-height: 160px;
+}
+.personalCenter .receiver-con{
+	position: relative;
+	border: 1px solid #EEE;
+	margin-right: 20px;
+}
+.personalCenter  .receiver-con:hover,
+.personalCenter .conActive{
+	border-color: #ffb10a;
+}
+.personalCenter  .remove-icon{
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+/*.personalCenter .receiver .bianji-icon{
+	position: absolute;
+	bottom: 0;
+	right: 20px;
+}*/
+.personalCenter .morenActive{
+	background-color: #ffb10a;
+	color: #fff !important;
+	padding: 2px;
+	
+}
+.personalCenter .radio-moren .md-ink-ripple{
+	display: none;
+}
+.personalCenter .radio-moren-rec md-radio-button{
+	margin: 0 0 0 20px;
+}
+.personalCenter .radio-moren md-radio-button .md-label{
+	margin-left: 0;
+}
+/*.personalCenter .receiver-main-top{
+	min-height: 125px;
+}
+.personalCenter .receiver-main-bot{
+	line-height: 35px;
+}*/
+/*receiver 收货地址完*/
+/*addReceiver 增加收货地址*/
+.personalCenter .addReceiver .lianxiren{
+	font-size: 30px;
+}
+/*addReceiver 增加收货地址完*/
+
+/*bangding 账号和绑定设置*/
+.personalCenter .bangding .qunaer-icon,
+.personalCenter .bangding .jingdong-icon{
+	width: 18px;
+	height: 18px;
+	color: #fff;
+	display: inline-block;
+	border-radius: 2px;
+}
+.personalCenter .bangding .qunaer-icon{
+	background-color: #0088a4;
+}
+.personalCenter .bangding .jingdong-icon{
+	background-color: #c10001;
+}
+.personalCenter .bangding-in span{
+	margin-left: 10px;
+}
+.personalCenter .bangding .bangding-card{
+	background-color: #fdfdfd;
+}
+
+.personalCenter .bangding-padding{
+	padding: 10px;
+}
+.personalCenter .bangding-padding-in{
+	padding:0 10px;
+}
+.personalCenter .bangding-padding-in p{
+	line-height: 18px;
+}
+.personalCenter .bangding-in{
+	margin-top: 12px;
+}
+.personalCenter .bangding-in i{
+	margin-top: -2px;
+}
+.personalCenter .bangding .shouqi{
+	line-height: 36px;
+	cursor: pointer;
+}
+.personalCenter .bangding .shouqi i{
+	margin-left: 8px;
+}
+/*bangding 账号和绑定设置完*/

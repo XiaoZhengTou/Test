@@ -1,0 +1,88 @@
+<div ng-controller="mappingListCtrl" ng-cloak class="md-inline-form">
+	<md-card>		
+		<div layout="row" class="padding-left-right-16">
+			<div flex class="padding-right">
+				<md-input-container class="md-block md-cyan-theme md-input-invalid">
+					<label>ERP实例</label>
+					<md-select ng-model="query.payCompany">
+						<md-option ng-repeat="x in query.filter.payCompanyList" value="{{x.id}}">
+							{{x.name}}
+						</md-option>
+					</md-select>
+				</md-input-container>
+
+			</div>
+			<div flex class="padding-right"></div>
+
+			<div flex></div>
+		</div>
+
+	</md-card>
+	<md-card>
+		<md-table-container>
+			<!--<table data-md-table data-md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" data-ng-model="selected" md-progress="promise">-->
+
+			<table data-md-table data-ng-model="selected" md-progress="promise" class="ml-text-nowrap">
+				<thead md-head md-on-reorder="getDesserts">
+					<tr md-row>
+						<th md-column>科目集</th>
+						<th md-column>科目集名称</th>
+						<th md-column>ERP数据源</th>
+						<th md-column>备注</th>
+						<th md-column>操作</th>
+
+					</tr>
+				</thead>
+				<tbody md-body>
+					<!--<tr md-row md-select="item" md-select-id="budget_templet_id" ng-repeat="item in feeapplylist.data.datalist" md-auto-select="options.autoSelect">-->
+
+					<tr md-row ng-repeat="item in queryTable.appdata">
+						<td md-cell>{{item.companyNum}}</td>
+						<td md-cell>{{item.companyName}}</td>
+						<td md-cell>{{item.ERPVersion}}</td>
+						<td md-cell>{{item.ERPCompanyNum}}</td>
+						<td md-cell>
+							<md-button class="md-primary" ng-click="edit($event,item)">
+								<md-icon md-svg-src="img/icons/edit.svg"></md-icon>
+							</md-button>
+						</td>
+
+					</tr>
+
+				</tbody>
+			</table>
+
+		</md-table-container>
+
+	</md-card>
+	<md-card>
+		<md-card-title style="border-bottom:1px solid #eee;padding:20px 16px 16px">
+			<md-card-title-text>
+				<span class="md-headline" style="font-size:16px;color:#777;">适用入账单位范围</span>
+			</md-card-title-text>
+		</md-card-title>
+		<md-table-container>
+			<!--<table data-md-table data-md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" data-ng-model="selected" md-progress="promise">-->
+			<table data-md-table data-ng-model="selected" md-progress="promise">
+				<thead md-head md-on-reorder="getDesserts">
+					<tr md-row>
+						<th md-column>入账单位编号</th>
+						<th md-column>入账单位名称</th>
+
+					</tr>
+				</thead>
+				<tbody md-body>
+					<!--<tr md-row md-select="item" md-select-id="budget_templet_id" ng-repeat="item in feeapplylist.data.datalist" md-auto-select="options.autoSelect">-->
+					<tr md-row ng-repeat="item in queryTable.appdata">
+						<td md-cell>{{item.companyNum}}</td>
+						<td md-cell>{{item.companyName}}</td>
+
+					</tr>
+
+				</tbody>
+			</table>
+
+		</md-table-container>
+
+	</md-card>
+</div>

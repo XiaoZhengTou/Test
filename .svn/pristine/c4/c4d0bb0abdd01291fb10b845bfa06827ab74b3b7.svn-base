@@ -1,0 +1,63 @@
+<md-dialog aria-label="日历设置">
+    <form ng-cloak ng-controller="zhibanriliController" >
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>日历设置</h2>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content style="width:500px;height:400px">
+            <md-card class="md-padding" layout="column">
+                <div layout="row" layout-wrap flex>
+                    <div flex class="ml-padding-right">
+                        <md-input-container class="md-block md-cyan-theme md-input-invalid ml-nomargin">
+                            <label>年度</label>
+                            <input ng-model="query.company_id" type="text"/>
+                        </md-input-container>
+                    </div>
+                </div>
+                <div layout="row" layout-wrap flex>
+                    <div layout="row">设置工作日：</div>
+                    <div flex-xs flex="50">
+                        <md-checkbox aria-label="Select All"
+                                     ng-checked="isChecked()"
+                                     md-indeterminate="isIndeterminate()"
+                                     ng-click="toggleAll()">
+                           全选
+                        </md-checkbox>
+                    </div>
+                    <div class="demo-select-all-checkboxes" flex="100" ng-repeat="item in items" style="margin-left:90px">
+                        <md-checkbox ng-checked="exists(item, selected)" ng-click="toggle(item, selected)">
+                            {{ item }}
+                        </md-checkbox>
+                    </div>
+                </div>
+                <div layout="row" layout-wrap flex>
+                    <div layout="row">设置工作日：</div>
+                    <div flex-xs flex="100" style="margin-left:90px">
+                        <md-input-container class="md-block md-cyan-theme md-input-invalid ml-nomargin">
+                            <label>上班时间</label>
+                            <input ng-model="query.sche_year" type="text"/>
+                        </md-input-container>
+                    </div>
+                    <div  flex="100" style="margin-left:90px">
+                        <md-input-container class="md-block md-cyan-theme md-input-invalid ml-nomargin">
+                            <label>下班时间</label>
+                            <input ng-model="query.sche_year" type="text"/>
+                        </md-input-container>
+                    </div>
+                </div>
+
+            </md-card>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row" layout-align="center">
+            <md-button class="md-primary" ng-click="answer('useful')">
+                重新生成日历
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

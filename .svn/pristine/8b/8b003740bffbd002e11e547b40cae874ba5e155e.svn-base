@@ -1,0 +1,62 @@
+define(['angular', 'js/shared/choosecitys.js',
+	'js/shared/organization.js', 'js/view/choosepassenger.js',
+	'js/shared/bankaccount.js',
+	'js/shared/feeapply.js',
+	'js/shared/receving.js',
+	'js/shared/ruzhangdanwei.js',
+	'js/shared/dictitem.js',
+	'js/shared/currency.js',
+	'js/shared/vendor.js',
+	'js/shared/budget.js',
+	'js/shared/budgetpart.js',
+	'js/shared/budgets.js',
+	'js/shared/borrowing.js',
+	'js/shared/feeapplyv2.js'
+], function(angular) {
+	publicFunction.addStyle('md-data-table.min.css');
+	var app = angular.module('md.component.demo', ['muchoosecitys',
+			'muchoosepassengers',
+			'mdorganization',
+			'md.bankaccount',
+			'md.eachoose',
+			'md.receving',
+			'md.ruzhangdanwei',
+			'mddictitem',
+			'mdcurrency',
+			'mdvendor',
+			'mdbudget',
+			'mdbudgetpart',
+			'mdbudgets',
+			'md.borrowing',
+			'md.feeapplyv2'
+		])
+		.controller('componentctrl', ['$scope', function($scope) {
+			$scope.citys = null;
+			$scope.orgs = null;
+			$scope.banks = null;
+			$scope.ea = [];
+			$scope.receving = {};
+			$scope.ruzhangdanwei = {};
+			$scope.budget = {};
+			$scope.busiorg = null;
+			$scope.feenode = null;
+			$scope.budget3 = null;
+			$scope.isuser = true;
+			$scope.orgslist = [];
+			$scope.hotel = "hotel";
+			$scope.vendor=null;
+			//字典专用
+			$scope.diclmModel = {
+				'dictmodel': null,
+				'code': 'C_LM_ORDER_TYPE',
+				'titlename': '借款类型',
+				'itemvalue': null,
+				'redisabled': false,
+				'itemnamemodel': null,
+				'itemvaluemodel': null,
+				'ngrequired': false
+			}
+		}]);
+	angular._LoadModule('md.component.demo');
+	return app;
+});

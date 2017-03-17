@@ -1,0 +1,104 @@
+<md-dialog aria-label="新增人员" ng-cloak style="min-width: 50%" id="pedetail-dialog1-detail">
+    <form name="addpedetail" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 style="color: white">新增人员</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="padding-top: 0px;padding-bottom: 0px">
+
+                <div class="demo-tab" style="padding: 25px 25px 0 25px;">
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>角色名称(必填)</label>
+                        <input ng-model="pedetail.role_name" type="text" required disabled>
+                    </md-input-container>
+
+                    <label>已选人员：</label>
+                    <md-chips ng-model="selected" md-max-chips="1">
+                        <md-chip-template>
+                            <strong>{{$chip.user_full_name}}</strong>
+                        </md-chip-template>
+                    </md-chips>
+
+                    <table ng-table="tableParams2" class="table table-condensed table-bordered table-striped" show-filter="true" style="text-align: center;width: 94%;margin: 3%;">
+                        <tr ng-repeat="user in $data">
+                            <td>
+                                <md-checkbox ng-model="user.check11" ng-checked="exists(user, selected)"  ng-click="toggle(user, selected)" style="margin-bottom: 0px;display: none"></md-checkbox>
+                                <md-checkbox ng-model="user.check1" ng-checked="exists(user, selected)"  ng-click="toggle(user, selected)" style="margin-bottom: 0px"></md-checkbox></td>
+
+                            <td title="'姓名'" filter="{ user_full_name: 'text'}" sortable="'user_full_name'">
+                                {{user.user_full_name}}</td>
+
+                            <td title="'部门'" filter="{ org_name: 'text'}" sortable="'org_name'" style="word-wrap:break-word">
+                                {{user.org_name}}</td>
+
+                            <td title="'手机号'" filter="{ telephone_number: 'text'}" sortable="'telephone_number'" style="word-wrap:break-word">
+                                {{user.telephone_number}}</td>
+
+                            <!--<td title="'职位'" filter="{ name: 'text'}" sortable="'name'" style="word-wrap:break-word">-->
+                                <!--{{user.name}}</td>-->
+
+                            <!--<td title="'所属部门'" filter="{ description: 'text'}" sortable="'description'" style="word-wrap:break-word">-->
+                                <!--{{user.description}}</td>-->
+                        </tr>
+                    </table>
+
+                    <div style="margin-right: 3%;float: right;" layout="row">
+                        <span style="margin: 25px 27px 26px 0;">Page:</span>
+                        <md-select ng-model="pageindex">
+                            <md-option ng-repeat="page in pages" value="{{page}}">{{page}}</md-option>
+                        </md-select>
+
+                        <span style="margin: 25px 27px 26px 0;">Rows per page:</span>
+                        <md-select ng-model="pagesize">
+                            <md-option value="5">5</md-option>
+                            <md-option value="10">10</md-option>
+                            <md-option value="20">20</md-option>
+                        </md-select>
+
+                        <span style="margin:27px 0 26px 18px;">{{page1}} - {{page2}} of {{total}}</span>
+                        <md-button class="md-primary" md-no-ink style="min-width: 1%" ng-click="lastpage()" ng-disabled="lastpaged">
+                            <span> < </span>
+                        </md-button>
+                        <md-button class="md-primary" md-no-ink style="min-width: 1%" ng-click="nextpage()" ng-disabled="nextpaged">
+                            <span> > </span>
+                        </md-button>
+                    </div>
+
+                </div>
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <span flex></span>
+            <md-button class="md-primary md-raised" ng-click="answer()"  style="color: white;float: right"
+                       ng-disabled="addpedetail.$invalid" disabled="disabled">确定</md-button>
+
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+
+<style>
+    /*#pedetail-dialog1-detail .md-datepicker-input-container.md-datepicker-invalid {*/
+        /*border-bottom-color: rgb(224,224,224);*/
+    /*}*/
+    md-chips input{
+        display: none;
+    }
+    md-chips md-chips-wrap{
+        box-shadow:none;
+    }
+    #pedetail-dialog1-detail .md-datepicker-input-container{
+        width: 93.9%;
+        margin-left: -2px;
+    }
+    #pedetail-dialog1-detail .md-datepicker-calendar-icon{
+        margin-bottom: -7px;
+    }
+</style>

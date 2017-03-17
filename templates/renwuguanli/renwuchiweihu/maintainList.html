@@ -1,0 +1,37 @@
+<div ng-controller="taskManCtrl" class="task airfare">
+	<div ng-controller="maintainListCtrl">
+		<md-card>
+			<div class="md-toolbar-tools">
+		      	<h3>
+		       		<span>任务池</span>
+		      	</h3> 
+		   </div> 
+			<div layout="row"  class="ml-marginT-20">
+				<md-input-container class="md-block ml-marginlr-10" flex>
+		            <label>任务池</label>
+		            <input>
+				</md-input-container>
+				<md-input-container class="md-block ml-marginlr-10" flex>
+		            <label>组长</label>
+		            <md-select ng-model="Mips">
+						<md-option value="MIp">MIP通讯录</md-option>
+					</md-select>
+				</md-input-container>
+				<md-input-container class="md-block ml-marginlr-10" flex="25">
+		            <label>状态</label>
+		            <md-select ng-model="priorty">
+						<md-option value="zhengchang">正常</md-option>
+						<md-option value="zuofei">作废</md-option>
+					</md-select>
+				</md-input-container>
+			</div>
+			<md-input-container class="md-block ml-marginlr-10" flex>
+	            <label>说明</label>
+	            <input>
+			</md-input-container>
+			<div class="ml-marginT-20 ml-text-right">
+				<md-button class="md-raised md-primary">保存</md-button>
+			</div>
+		</md-card>	
+	</div>
+</div>

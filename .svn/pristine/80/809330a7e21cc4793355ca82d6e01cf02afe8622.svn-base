@@ -1,0 +1,42 @@
+<div class="md-whiteframe-2dp" ng-controller="accountPayeeEditCtrl" style="background-color: #fff;">
+	<md-content class="md-padding">
+		<form name="cprojectForm">
+			<md-input-container class="md-icon-float md-block">
+				<!-- Use floating label instead of placeholder -->
+				<label for="creceiver">{{(item.type=="EMP"?"姓名":"公司名称")}}</label>
+				<input name="creceiver" ng-model="account.receiver" type="text" required>
+			</md-input-container>
+			<md-input-container>
+				<label>卡类型</label>
+				<md-select ng-init="account.card_type" ng-model="account.card_type">
+					<md-option value="0">
+						银行卡
+					</md-option>
+					<md-option value="1">
+						商务卡
+					</md-option>
+					<md-option value="2">
+						第三方
+					</md-option>
+					<md-option value="3">
+						其它
+					</md-option>
+				</md-select>
+			</md-input-container>
+			<md-input-container class="md-icon-float md-block">
+				<!-- Use floating label instead of placeholder -->
+				<label for="cbankaccount">银行账号</label>
+				<input name="cbankaccount" ng-model="account.bank_account" type="text" required>
+			</md-input-container>
+			<md-input-container class="md-icon-float md-block">
+				<!-- Use floating label instead of placeholder -->
+				<label for="cbankname">开户银行</label>
+				<input name="cbankname" ng-model="account.bank_name" drbanks="{'model':'city1','data':'air','alldata':'all'}" type="text" required>
+			</md-input-container>
+			<section layout="row" layout-align="center center" layout-wrap>
+				<md-button class="md-raised md-primary" ng-href="#/personalCenter/account">返回</md-button>
+				<md-button class="md-raised md-primary" ng-disabled="cprojectForm.$invalid" ng-click="editPayee()">修改</md-button>
+			</section>
+		</form>
+	</md-content>
+</div>

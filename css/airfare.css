@@ -1,0 +1,524 @@
+/*公用*/
+.ml-textalign-right{
+	text-align: right;
+}
+.ml-textalign-left{
+	text-align: left;
+}
+.ml-textalign-center{
+	text-align: center;
+}
+.airfare .ml-border-e{
+	border: 1px solid #ccc;
+	border-radius: 2px;
+}
+.ml-bgcolor-white{
+	background-color: #fff;
+}
+.ml-color-red{
+	color: #ff39aa;
+}
+/*.ml-color-freshred{
+	color: red;
+}*/
+.ml-color-ccc{
+	color: #ccc;
+}
+.ml-color-73{
+	color: #737373;
+}
+.ml-color-21{
+	color: #212121;
+}
+.ml-color-blue{
+	color: #2196f3;
+}
+.ml-color-yellow{
+	color: #ffb10a;
+}
+.ml-bgcolor-blue{
+	background-color: #2196f3;
+}
+.ml-padding-10{
+	padding: 10px;
+}
+.ml-padding-20{
+	padding: 20px;
+}
+.ml-paddinglr-10{
+	padding: 0 10px;
+}
+.ml-paddingtb-10{
+	padding: 10px 0;
+}
+.ml-paddingl-10{
+	padding-left: 10px;
+}
+.ml-paddingl-20{
+	padding-left: 20px;
+}
+.ml-paddinglr-15{
+	padding: 0 15px;
+}
+.ml-paddinglr20{
+	padding: 0 20px;
+}
+.ml-marginlr-10{
+	margin:0 10px;
+}
+.ml-marginT-20{
+	margin-top: 20px;
+}
+.ml-marginT-10{
+	margin-top: 10px;
+}
+.ml-margintb-20{
+	margin: 20px 0;
+}
+.ml-marginLe-20{
+	margin-left: 20px;
+}
+.ml-lineheight-48{
+	line-height: 48px;
+}
+.ml-lineheight-36{
+	line-height: 36px;
+}
+.ml-lineheight-24{
+	line-height: 24px;
+}
+.ml-lineheight-18{
+	line-height: 18px !important;
+}
+.ml-fontsize-12{
+	font-size: 12px !important;
+}
+.ml-fontsize-13{
+	font-size: 13px !important;
+}
+.ml-fontsize-14{
+	font-size: 14px !important;
+}
+.ml-fontsize-15{
+	font-size: 15px !important;
+}
+.ml-fontsize-18{
+	font-size: 18px !important;
+}
+.ml-but-minwidth0{
+	min-width: 0;
+}
+i,div,em{
+	outline: none;
+	font-style: normal;
+}
+.airfare em{
+	font-style: normal;
+	margin-left: 10px;
+	display: inline-block;
+}
+.airfare .blue-line span{
+	position: absolute;
+	margin-left: -20px;
+	display: inline-block;
+	width: 3px;
+	height: 20px;
+	background-color: #2196f3;
+}
+
+/*公用完*/
+
+/*search 搜索开始*/
+.airfare .search-main{
+	max-width: 520px;
+	margin: 20px auto;
+}
+.airfare .search-main-header{
+	/*height: 35px;*/
+	line-height: 2.5;
+	font-size: 17px;
+}
+.airfare .search md-radio-button .md-label{
+	margin-left:0
+}
+.airfare .search md-radio-button .md-container{
+	left: auto;
+    right: 10px;
+}
+.airfare .search md-radio-group.layout-row md-radio-button{
+	margin-right: 30px;
+}
+.airfare .bgcolor{
+	background-color: #EEE;
+	border-top:1px solid #ccc;
+}
+.airfare .search .search-main-top .md-button{
+	min-width: 0;
+	margin: 0;
+}
+/*日期选择*/
+.airfare .dateSelect{
+	line-height: 40px;
+}
+.airfare .datepicker{
+	position: relative;
+}
+.airfare .datepicker i{
+	position: absolute;
+	right: 28%;
+}
+.airfare .datepicker .md-datepicker-input-container{
+	padding-bottom:0;
+	margin-left: 0;
+}
+.airfare .datepicker .md-datepicker-triangle-button{
+	top: 30%;
+}
+.airfare .datepicker .md-datepicker-expand-triangle{
+	left: 40%;
+}
+
+/*日期选择完*/
+/*search 搜索结束*/
+
+/*list 列表页开始*/
+.airfare .list{
+	position: relative;
+}
+.airfare .list .fight-list-border{
+	padding: 2px 0;
+}
+.airfare .list .fight-list-border div:not(:last-child){
+	border-right: 1px solid #eee;
+}
+.airfare .list .startTime{
+	line-height: 6px;
+    margin: 4px auto 0;
+}
+.airfare .list .startTime i{
+	font-size: 12px;
+	transform: scale(0.6);
+    cursor: pointer;
+}
+.airfare .list .startTime .startTime-color{
+	color: #ccc;
+}
+/*.airfare .list .list-all{
+	padding-bottom: 30px;
+}*/
+.airfare .list #refundChangeInfo{
+	position: absolute;
+	z-index: 99;
+	width: 30%;
+	/*top: 50px;
+	left: 50%;*/
+}
+.airfare .list .list-top md-list>div>span{
+	line-height: 44px;
+}
+.airfare .list .list-top md-list .mid-icon{
+	margin: 0 auto;
+}
+.airfare .list .list-top md-list .right-icon{
+	margin-left: auto;
+}
+.airfare .list .md-select-value{
+	border-bottom-width: 0px;
+	padding: 2px 2px 4px;
+}
+.airfare .list .md-tab{
+	line-height: 23px;
+}
+.airfare .list .list-main-open>.md-tab{
+	line-height: 22px;
+}
+.airfare .list md-tab-content{
+	border-top: 1px solid #ccc;
+	margin-top: -1px;
+}
+.airfare .list md-tab-content,
+.airfare .list md-tabs .md-tab.md-active{
+	background-color: #FFF;
+}
+.airfare .list .list-main-open{
+	position: relative;
+}
+.airfare .list .list-main-open-top{
+	position: absolute;
+	top: 20px;
+	right: 30px;
+}
+.airfare .list .list-main-open md-tab-content,
+.airfare .list .list-main-open md-tabs .md-tab.md-active{
+	background-color: #eee;
+}
+.airfare .list md-tabs md-ink-bar{
+	background-color: rgb(92,107,192);
+	top: 0;
+}
+.airfare .list .list-main-open md-tabs md-ink-bar{
+	margin-top: 1px;
+}
+.airfare .list .list-main-open>md-tabs .md-tab{
+	margin-top: 0;
+}
+.airfare .list .list-main-open>md-tabs .md-tab.md-active,
+/*.airfare .list md-tabs .md-tab.md-active,*/
+.airfare .list .list-label-in.md-active{
+	margin-top: 1px;
+}
+.airfare .list md-tabs-wrapper{
+	z-index: 9;
+}
+.airfare .list .list-main-open md-tabs-wrapper{
+	margin-left: 30px;
+}
+.airfare .list md-tabs .md-tab.md-active{
+	color: #737373;
+}
+.airfare .list md-select.md-default-theme:not([disabled]):focus .md-select-value, 
+.airfare .list md-select:not([disabled]):focus .md-select-value{
+	border-bottom-color:rgba(0,0,0,0);
+}
+.airfare .list .md-select-value span{
+	color: #212121;
+}
+.airfare .list md-list-item,
+.airfare .list md-list-item .md-list-item-inner{
+	min-height: 0;
+}
+.airfare .list .list-top{
+	padding: 0 20px;
+}
+.airfare .list .list-top .md-button{
+	min-width: 0;
+	margin: 0;
+	min-height: 44px;
+    line-height: 15px;
+}
+.airfare .list .datepicker i{
+	left: 52%;
+}
+.airfare .list .md-datepicker-input-container{
+	border-bottom-width: 0px;
+}
+/*.airfare .list .pageIcon{
+	height: 36px;
+	border: 1px solid #ccc;
+	background-color: #fff;
+	border-radius: 2px;
+}
+.airfare .list .pageIcon span{
+	height: 30px;
+	margin-top: 2px;
+	width: 2px;
+	background-color: #eee;
+	display: inline-block;
+}*/
+.airfare .list md-tab-item{
+	margin-top: 2px;
+	padding: 0;
+}
+.airfare .list .list-label-in{
+	height: 100%;
+	border: 1px solid #ccc;
+	margin-left: -1px;
+	padding: 0px 24px;
+}
+.airfare .list-main-open md-tab-item{
+	background-color: #EEE;
+}
+.airfare .list-main-open md-tab-item:first-of-type .list-label-in{
+	margin-left: 0 !important;
+	
+}
+/*.airfare .list .zhifei{
+	line-height: 32px;
+}*/
+.airfare .list .list-main-content:nth-child(odd){
+	background-color: #f9faff;
+}
+.airfare .list .list-main-content span,
+.airfare .list md-tab-label span{
+	margin-left: 5px;
+}
+.airfare .list .list-main-content .md-button,
+.airfare .list .list-main-open .md-button{
+	line-height: 24px;
+    min-height: 24px;
+}
+.airfare .list .yudingList{
+	background-color: #eee;
+}
+/*.airfare .list .list-main-content{
+	border-left: 2px solid #ff39aa;
+}*/
+/*下拉框*/
+/*.airfare .list .passCheck{
+	display: none;
+}
+.airfare .list input.passCheck:checked+.passTogger{
+	border-left: none;
+}
+.airfare .list input.passCheck:checked+.passTogger .passIcon:after{
+	content:'\e60e';
+	font-size: 12px;
+}
+.airfare .list .passIcon:after{
+  content: '\e60f';
+  font-size: 12px;
+}
+.airfare .list .passTogger{
+	border-left: 2px solid #ff39aa;
+}
+.airfare .list .passBottom{
+	display: block;
+}
+.airfare .list input.passCheck:checked+.passTogger+.passBottom{
+	display: none;
+}
+.airfare .list label{
+	cursor: pointer;
+	display: block;
+	line-height: 24px;
+    min-height: 24px;
+    min-width: 76px;
+}*/
+/*下拉框完*/
+
+.airfare .list .fenye {
+	margin: 30px;
+}
+.airfare .list .fenye .md-button {
+    border: 1px solid #ccc;
+    height: 30px;
+    margin: 0;
+}
+.airfare .list .fenye input {
+    width: 40px;
+    color: #555;
+}
+.airfare .list .fenye .gotoPage{
+	margin-left: 20px;
+}
+/*list 列表页完*/
+
+/*messages 信息开始*/
+.airfare .message .message-main{
+	min-height: 470px;
+	position: relative;
+}
+.airfare .tgshuoming{ /*与list通用*/
+	cursor: pointer;
+}
+.airfare .message .tgshuoming i{
+	margin-left: 5px;
+}
+.airfare .message md-chips .md-chips{
+	box-shadow:none;
+}
+.airfare .message .md-chips .md-chip-input-container{
+	display: none;
+}
+.airfare .message md-input-container .md-errors-spacer{
+	min-height: 0;
+}
+.airfare .message .md-chips .md-chip md-chip-template{
+	padding: 0 10px; 
+	/*outline: none;
+	display: block;*/
+}
+.airfare .md-select-value *:first-child{
+	white-space: normal!important;
+    /*width: 70px;*/
+    line-height: 18px;
+}
+/*.airfare .message md-select .md-select-value{
+	margin-bottom: 26px;
+}*/
+.airfare md-select .md-select-value span{
+	color: #333;
+}
+.airfare .message .addPerson em{
+	font-style: normal;
+	font-size: 12px;
+	margin-left: 20px;
+	display: inline-block;
+}
+.airfare .lianxiren,
+.airfare .message .baoxiao{
+	margin-top: 30px;
+}
+.airfare .rmbtn{
+	margin: 0 20px 0 0;
+}
+.airfare .message .message-detail{
+	background-color: #EEE;
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	width: 40%;
+}
+.airfare .message .message-detail-top span{
+	margin-right: 10px;
+}
+.airfare .message .sub-btn{
+	margin: 50px auto 0;
+}
+.airfare .blue-line {
+	position: relative;
+}
+/*messages 信息结束*/
+
+/*detail 订单详情*/
+.airfare .detail .detail-main-top{
+	position: relative;
+}
+.airfare .detail .detail-top-btn{
+	margin: 30px auto 0;
+}
+.airfare .detail .success{
+	margin: 0 auto;
+}
+.airfare .detail .detail-main-top .zonge{
+	position: absolute;
+	top: 42px;
+	left: 60%;
+}
+.airfare .detail-main-mid-top{
+	background-color: #eee;
+}
+.airfare .detail .passengerMes i{
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: #2196f3;
+	display: inline-block;
+	color: #fff;
+}
+.airfare .detail .userMessage{
+	position: relative;
+}
+/*detail 订单详情完*/
+
+.ml-overflow-hidden span{
+	padding: 0 3px;
+	white-space : nowrap;
+	text-overflow:ellipsis;
+	overflow: hidden;
+}
+.ml-text-nowrap td{
+	white-space : nowrap;
+}
+
+
+.z-index-99{
+	position: relative;
+	z-index: 99;
+}
+.ml-margintlr-20{
+	margin: 0 20px;
+}
+.ml-padding-0 md-input-container{
+	margin: 0 !important;
+}

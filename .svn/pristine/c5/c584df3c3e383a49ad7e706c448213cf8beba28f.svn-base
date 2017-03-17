@@ -1,0 +1,331 @@
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<div ng-controller="expensefirstCtrl" id="expensefirst">
+    <div class="full-height ng-scope">
+        <div class="full-image-background layout-fill ng-scope layout-row" layout="row" layout-fill="">
+            <div class="animate-wrapper layout-row flex" flex="" layout="row">
+                <div id="ui-login" class="login-frame ng-scope layout-column flex" ui-view="" flex="" layout="column">
+                    <div layout="row" flex="" layout-padding="" layout-fill="" layout-align="center center" class="layout-fill ng-scope layout-align-center-center layout-row flex" style="padding: 0px">
+                        <div flex="40" flex-lg="50" flex-md="70" flex-xs="100" class="flex-xs-100 flex-md-70 flex-lg-50 flex-40" style="max-width: 100%;padding: 0px">
+                            <form name="addexpensefirst" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+                                <md-card class="md-cyan-theme" style="max-width: 100%">
+                                    <table class="table ng-scope" style="margin-bottom: 2%;margin-left: 2%;margin-top: 1%;width: 96%;">
+                                        <tr>
+                                            <td style="width: 50%;border-top: 0px;">
+                                                <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                                                    <label>选择收款方</label>
+                                                    <input ng-model="receving.receiver" type="text" drreceving="{'model':'receving'}" readonly required>
+                                                </md-input-container>
+                                            </td>
+                                            <td style="width: 50%;border-top: 0px;">
+                                                <md-input-container class="md-block" flex-gt-sm style="text-align: left;margin-bottom: 0;">
+                                                    <label>选择入账单位</label>
+                                                    <input ng-model="ruzhangdanwei.company_name" type="text" drruzhangdanwei="{'model':'ruzhangdanwei'}" readonly required>
+                                                </md-input-container>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border-top: 0px;width: 50%">
+                                                <md-input-container class="md-block" flex-gt-sm style="text-align: left;margin-bottom: 0;">
+                                                    <label>币种</label>
+                                                    <md-select ng-model="query.currency_code" required ng-change="getrate(query.currency_code)">
+                                                        <md-option ng-repeat="data in query.currencydata" value="{{data.currency_code}}">{{data.currency_name}}({{data.currency_code}})</md-option>
+                                                    </md-select>
+                                                </md-input-container>
+                                            </td>
+                                            <td style="border-top: 0px;width: 50%">
+                                                <md-input-container class="md-block" flex-gt-sm style="text-align: left;margin-bottom: 0;">
+                                                    <label>汇率</label>
+                                                    <input ng-model="query.conversion_rate" type="text" required ng-disabled="true">
+                                                </md-input-container>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border-top: 0px;width: 100%" colspan="2">
+                                                <a style="color: blue;cursor: pointer" ng-click="chooseEA($event,query.fee_apply)">关联申请单</a>
+                                                <md-chips ng-model="query.fee_apply" md-max-chips="1" style="width: 100%" placeholder="关联申请单">
+                                                    <md-chip-template>
+                                                        <strong>{{$chip.fee_apply_code}}</strong>
+                                                    </md-chip-template>
+                                                </md-chips>
+
+                                            </td>
+                                            <!--<td style="border-top: 0px;width: 50%">-->
+                                                <!--<a style="color: blue;cursor: pointer" ng-click="chooseLM($event,query.loan_info)">核销借款：选择关联借款单</a>-->
+                                                <!--<md-chips ng-model="query.loan_info" md-max-chips="1" style="width: 100%">-->
+                                                    <!--<md-chip-template>-->
+                                                        <!--<strong>{{$chip.loan_info_code}}</strong>-->
+                                                    <!--</md-chip-template>-->
+                                                <!--</md-chips>-->
+                                            <!--</td>-->
+                                        </tr>
+                                        <tr>
+                                            <td style="border-top: 0px;border-bottom: 0px;width: 100%" colspan="2">
+                                                <!--<label>业务描述</label>-->
+                                                <!--<md-chips ng-model="query.fee_apply" md-max-chips="1" style="width: 100%"-->
+                                                          <!--placeholder="业务描述" secondary-placeholder="业务描述" readonly="true">-->
+                                                    <!--<md-chip-template>-->
+                                                        <!--<strong>{{$chip.reason_desc}}</strong>-->
+                                                    <!--</md-chip-template>-->
+                                                <!--</md-chips>-->
+                                                <md-input-container class="md-block" flex-gt-sm style="text-align: left;margin-bottom: 0;">
+                                                    <label>业务描述</label>
+                                                    <input ng-model="query.reason_desc" type="text" md-maxlength="100" required>
+                                                </md-input-container>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </md-card>
+                            </form>
+
+                            <form name="addexpensefirst1" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+
+                                <md-card class="md-cyan-theme" style="max-width: 100%">
+
+                                    <md-toolbar class="md-table-toolbar md-default" style="background-color: white;">
+                                        <div class="md-toolbar-tools" >
+                                            <!--<div style="font-size: 20px">-->
+                                                <!--<h2 class="md-title" style="color: black;font-size: 16px;margin-left: 4px;padding-left: 20px;background-color: white;">行程明细</h2>-->
+                                            <!--</div>-->
+                                            <span>行程明细</span>
+                                            <div flex></div>
+                                            <!--<md-button style=" margin-right: 0px;" ng-click="addtrip1()">-->
+                                                <!--+添加-->
+                                            <!--</md-button>-->
+                                            <md-button class="md-primary" aria-label="添加" ng-click="addtrip1()" style="color: rgb(92,107,192);" ng-disabled="query.currency_code == ''">
+                                                <i class="iconfont">&#xe68d; 添加</i>
+                                            </md-button>
+                                            <!--<md-button class="md-icon-button" ng-click="filter.show = true">-->
+                                            <!--<md-icon md-svg-src="img/icons/find.svg"></md-icon>-->
+                                            <!--</md-button>-->
+                                        </div>
+                                    </md-toolbar>
+
+                                    <md-content class=" md-cyan-theme" style="background-color: white;" style="background-color: white;">
+
+                                        <md-toolbar class="md-table-toolbar alternate" ng-show="daywarn" style="background-color: lightcoral;">
+                                            <div class="md-toolbar-tools">
+                                                <span>出发时间和到达时间存在交集，请注意！</span>
+                                                <span flex></span>
+                                            </div>
+                                        </md-toolbar>
+
+                                        <md-toolbar class="md-table-toolbar alternate" ng-show="dayerror2" style="background-color: lightcoral;">
+                                            <div class="md-toolbar-tools">
+                                                <span>补助天数有误，请重新选择！</span>
+                                                <span flex></span>
+                                            </div>
+                                        </md-toolbar>
+
+                                        <md-toolbar class="md-table-toolbar alternate" ng-show="dayerror1" style="background-color: lightcoral;">
+                                            <div class="md-toolbar-tools">
+                                                <span>住宿天数有误，请重新选择！</span>
+                                                <span flex></span>
+                                            </div>
+                                        </md-toolbar>
+
+                                        <md-toolbar class="md-table-toolbar alternate" ng-show="dayerror" style="background-color: lightcoral;">
+                                            <div class="md-toolbar-tools">
+                                                <span>出发时间和到达时间有误，请重新选择！</span>
+                                                <span flex></span>
+                                            </div>
+                                        </md-toolbar>
+
+                                        <md-table-container style="width: 95%;padding-left: 2.5%;">
+                                            <!--<table data-md-table data-md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" data-ng-model="selected" md-progress="promise">-->
+                                            <table data-md-table data-ng-model="selected" md-progress="promise">
+                                                <thead md-head data-md-order="query.order" md-on-reorder="getDesserts">
+                                                <tr md-row>
+                                                    <th md-column style="min-width: 45px;">申请人</th>
+                                                    <th md-column style="padding-right: 20px;">出发城市</th>
+                                                    <th md-column style="padding-right: 20px;">目的城市</th>
+                                                    <th md-column style="text-align: center;">出发时间</th>
+                                                    <th md-column style="text-align: center;">到达时间</th>
+                                                    <th md-column>住宿天数</th>
+                                                    <th md-column>补助天数</th>
+                                                    <th md-column>操作</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody md-body>
+                                                <!--<tr md-row md-select="item" md-select-id="budget_templet_id" ng-repeat="item in feeapplylist.data.datalist" md-auto-select="options.autoSelect">-->
+                                                <tr md-row ng-repeat="item in appdata">
+                                                    <td md-cell style="word-break: keep-all;" ng-class="(item.person_error? 'aatrue':'aafalse')">
+                                                        <md-chips ng-model="item.person" md-max-chips="1" style="display: inline-block;" required="">
+                                                            <md-chip-template>
+                                                                <strong>{{$chip.person_name}}</strong>
+                                                            </md-chip-template>
+                                                        </md-chips>
+                                                        <a style="cursor: pointer;color: blue;" ng-click="addperson($event,item);item.person_error = false">添加</a>
+                                                    </td>
+                                                    <td md-cell style="word-break: keep-all;white-space: nowrap" ng-click="choosecity1($event,item,'1',$index);item.from_area_code_error=false" ng-class="(item.from_area_code_error? 'aatrue':'aafalse')">
+                                                        {{item.from_area_name}}
+                                                    </td>
+                                                    <td md-cell style="word-break: keep-all;white-space: nowrap" ng-click="choosecity1($event,item,'2',$index);item.to_area_codes_error=false" ng-class="(item.to_area_codes_error? 'aatrue':'aafalse')">{{item.to_area_names}}</td>
+
+                                                    <td md-cell style="word-break: keep-all;white-space: nowrap;padding-right: 18px;" ng-click="item.start_date_error=false" ng-class="(item.start_date_error? 'aatrue':'aafalse');(item.date_error? 'aatrue1':'aafalse1')">
+                                                        <!--{{item.start_date || '出发时间'}}-->
+                                                        <md-datepicker ng-model="item.start_date" md-placeholder="" ng-change="edit_start_date($event, item,$index);"></md-datepicker>
+                                                    </td>
+                                                    <td md-cell style="word-break: keep-all;white-space: nowrap;padding-right: 18px;" ng-click="item.end_date_error=false" ng-class="(item.end_date_error? 'aatrue':'aafalse');(item.date_error? 'aatrue2':'aafalse2')">
+                                                        <!--{{item.end_date || '到达时间'}}-->
+                                                        <md-datepicker ng-model="item.end_date" md-placeholder="" ng-change="edit_end_date($event, item,$index);"></md-datepicker>
+                                                    </td>
+
+                                                    <td md-cell style="text-align: center;" ng-click="item.lodging_days_error=false" ng-class="(item.lodging_days_error? 'aatrue':'aafalse')">
+                                                        <!--{{item.lodging_days}}-->
+                                                        <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;padding-top: 7px;">
+                                                            <input ng-model="item.lodging_days" type="text" required ng-change="edit_lodging_days(item)">
+                                                        </md-input-container>
+                                                    </td>
+                                                    <td md-cell style="text-align: center;" ng-click="item.assistance_days_error=false" ng-class="(item.assistance_days_error? 'aatrue':'aafalse')">
+                                                        <!--{{item.assistance_days}}-->
+                                                        <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;padding-top: 7px;">
+                                                            <input ng-model="item.assistance_days" type="text" required ng-change="edit_assistance_days(item,$index)">
+                                                        </md-input-container>
+                                                    </td>
+                                                    <td md-cell style="word-break: keep-all;white-space: nowrap;">
+                                                        <a class="md-primary" ng-click="delete(item,$index)" style="margin: 0;padding: 0;color: blue;cursor: pointer;">
+                                                            删除
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </md-table-container>
+                                    </md-content>
+
+                                    <div style="border-top: 1px rgba(0,0,0,0.12) solid">
+                                        <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0px;width: 30%;margin-left: 3%;margin-top: 3%;display: inline-block">
+                                            <label ng-class="(asserror == true ? 'lmfalse':'')">补助合计</label>
+                                            <input ng-model="query.assistance_fee" type="number" required ng-change="checkass(query.assistance_fee)"
+                                                   ng-class="(asserror == true ? 'lmfalse':'')">
+                                            <div ng-show="asserror" class="hint" style="color: red"><br/>补助合计大于补助标准！</div>
+                                        </md-input-container>
+                                        <span>（补助标准：{{query.totalass}}）</span>
+                                    </div>
+
+                                    <!--<md-toolbar class="md-table-toolbar md-default" style="background-color: white;">-->
+                                        <!-- -->
+                                    <!--</md-toolbar>-->
+                                </md-card>
+
+                                <md-card class="md-cyan-theme" style="max-width: 100%">
+
+                                    <md-toolbar class="md-table-toolbar md-default" style="background-color: white;">
+                                        <div class="md-toolbar-tools" >
+                                            <!--<div style="background-color: #2196f3;">-->
+                                                <!--<h2 class="md-title" style="color: black;font-size: 16px;margin-left: 4px;padding-left: 20px;background-color: white;">消费记录</h2>-->
+                                            <!--</div>-->
+                                            <span>消费记录</span>
+                                            <div flex></div>
+                                            <!--<md-button style=" margin-right: 0px;" ng-click="chooseBuy($event)" ng-disabled="query.currency_code == ''">-->
+                                                <!--+添加-->
+                                            <!--</md-button>-->
+                                            <md-button class="md-primary" aria-label="添加" ng-click="chooseBuy($event)" ng-disabled="query.currency_code == ''" disabled="disabled" style="color: rgb(92,107,192);">
+                                                <i class="iconfont">&#xe68d; 添加</i>
+                                            </md-button>
+                                        </div>
+                                    </md-toolbar>
+
+                                    <md-content class=" md-cyan-theme" style="background-color: white;">
+
+                                        <md-list-item class="md-3-line" ng-repeat="item in todos" style="min-height: 53px;margin-left: 9px;">
+                                            <div class="md-list-item-text" layout="column">
+                                                <p>
+                                                    <span>{{ item.ecoTypeName }}</span>
+                                                    <span style="margin-left: 4px;">:</span>
+                                                    <span style="margin-left: 4px;">{{ item.amount1 }}</span>
+                                                    <span style="margin-left: 4px;" ng-if="item.rateerror">缺乏对应币种的汇率，当条消费记录不生效！</span>
+                                                </p>
+                                                <p style="color: #9A9C9B;">
+                                                    <span>{{ item.feeCategoryName }}</span>
+                                                    <span style="margin-left: 4px;"> || </span>
+                                                    <span style="margin-left: 4px;">{{item.billingDesc}}</span>
+                                                    <span style="margin-left: 2%;">{{item.amount1}}</span>
+                                                </p>
+                                            </div>
+                                        </md-list-item>
+
+                                    </md-content>
+
+                                    <h2 style="color: red;margin-left: 3%">合计：{{query.totalbuy}}</h2>
+                                </md-card>
+
+                                <md-card class="md-cyan-theme" style="max-width: 100%">
+                                    <md-toolbar class="md-table-toolbar md-default" style="background-color: white;">
+                                        <div class="md-toolbar-tools" >
+                                            <div flex></div>
+                                            <h2 style="color: red">共计：{{asserror == false?query.totalbuy + query.assistance_fee : query.totalbuy}}</h2>
+                                            <md-button class="md-primary md-raised" ng-click="next()"  style="color: white;margin-right: 1%;"
+                                                       ng-disabled="asserror || addexpensefirst1.$invalid || addexpensefirst.$invalid || dayerror || dayerror1 || dayerror2" disabled="disabled">
+                                                    下一步</md-button>
+                                        </div>
+                                    </md-toolbar>
+                                </md-card>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    #expensefirst .hint {
+        /* Position the hint */
+        position: absolute;
+        left: 2px;
+        right: auto;
+        bottom: 7px;
+        /* Copy styles from ng-messages */
+        font-size: 12px;
+        line-height: 14px;
+        transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+        /* Set our own color */
+        color: grey;
+    }
+    #expensefirst .lmfalse{
+        color: red;
+        border-color: rgb(221,44,0);
+    }
+    #expensefirst .aafalse{
+        /*border: 0px;*/
+    }
+    #expensefirst .aatrue{
+        border: 1px red solid;
+    }
+    #expensefirst .aafalse1{
+        /*border: 0px;*/
+    }
+    #expensefirst .aatrue1{
+        border: 1px red solid;
+        border-right: 0px red solid;
+    }
+    #expensefirst .aafalse2{
+        /*border: 0px;*/
+    }
+    #expensefirst .aatrue2{
+        border: 1px red solid;
+        border-left: 0px red solid;
+    }
+    #expensefirst .active-Y{
+        background-color: green;
+        color: green;
+    }
+    #expensefirst .active-N{
+        background-color: red;
+        color: red;
+    }
+    md-chips input{
+        display: none;
+    }
+    md-chips md-chips-wrap{
+        box-shadow:none;
+    }
+    .md-button.md-default-theme[disabled], .md-button[disabled], .md-button.md-default-theme.md-raised[disabled], .md-button.md-raised[disabled], .md-button.md-default-theme.md-fab[disabled], .md-button.md-fab[disabled], .md-button.md-default-theme.md-accent[disabled], .md-button.md-accent[disabled], .md-button.md-default-theme.md-warn[disabled], .md-button.md-warn[disabled] {
+        color: rgba(0,0,0,0.38) !important;
+        cursor: default;
+    }
+</style>

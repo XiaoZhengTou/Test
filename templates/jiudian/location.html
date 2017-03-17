@@ -1,0 +1,46 @@
+<div ng-controller="jdCtrl" class="jiudian location" style="overflow:hidden;height:100%;">
+    <div layout="column" ng-controller="jdLocationCtrl" class="ml-fixed-head" style="overflow:hidden;height:100%;">
+        <!-- Header Bar Begin -->
+        <md-toolbar class="ml-headerbar ml-searchBar">
+            <div class="md-toolbar-tools">
+                <input type="text" value="" placeholder="搜索" ng-model="searchtext">
+    <span class="clear" ng-click="cityNameFilter.cityName=''" ng-show="cityNameFilter.cityName.length > 0">
+      清除
+    </span>
+            </div>
+        </md-toolbar>
+        <!-- Header Bar End -->
+        <!-- Filter Begin -->
+
+        <!-- Filter End -->
+        <md-content flex>
+            <md-tabs md-border-bottom md-dynamic-height md-stretch-tabs="always" md-swipe-content="true"
+                     class="selectTabs">
+                <md-tab label="国内城市">
+                    <jdlocationcn></jdlocationcn>
+                </md-tab>
+                <md-tab label="国际城市">
+                    <md-content class="md-padding">
+                        <md-card>
+                            <md-card-content class="removePadding">
+                                <section>
+                                    <md-subheader class="md-primary">热门城市</md-subheader>
+                                    <md-list>
+                                        <md-list-item ng-click="null" ng-repeat="x in city.wordHot">{{x}}</md-list-item>
+                                    </md-list>
+                                </section>
+                                <!--<section ng-repeat="x in city.chinaCity">-->
+                                <!--<md-subheader class="md-primary">{{x.name}}</md-subheader>-->
+                                <!--<md-list>-->
+                                <!--<md-list-item ng-click="null" ng-repeat="s in x.sub">{{s.name}}</md-list-item>-->
+                                <!--</md-list>-->
+                                <!--</section>-->
+                            </md-card-content>
+                        </md-card>
+                    </md-content>
+                </md-tab>
+            </md-tabs>
+        </md-content>
+        <!-- Tab End -->
+    </div>
+</div>

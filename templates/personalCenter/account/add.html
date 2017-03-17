@@ -1,0 +1,84 @@
+<div class="md-whiteframe-2dp" ng-controller="accountPayeeAddCtrl" style="background-color: #fff;">
+	<!--<md-tabs md-dynamic-height md-border-bottom md-selected="selectedIndex">
+		<md-tab label="个人账户">-->
+	<md-content class="md-padding">
+		<form name="pprojectForm">
+			<md-input-container class="md-block">
+				<label for="receiver">姓名</label>
+				<input name="receiver" ng-model="paccount.receiver" type="text" required>
+			</md-input-container>
+			<md-input-container>
+				<label>卡类型</label>
+				<md-select ng-model="paccount.card_type">
+					<md-option value="0">
+						银行卡
+					</md-option>
+					<md-option value="1">
+						商务卡
+					</md-option>
+					<md-option value="2">
+						第三方
+					</md-option>
+					<md-option value="3">
+						其它
+					</md-option>
+				</md-select>
+			</md-input-container>
+			<md-input-container class="md-block">
+				<label for="bankaccount">银行账号</label>
+				<input name="bankaccount" ng-model="paccount.bank_account" type="number" required>
+			</md-input-container>
+			<md-input-container class="md-block">
+				<label for="bankname">开户银行</label>
+				<input name="bankname" ng-model="paccount.bank_name" type="text" required>
+			</md-input-container>
+			<dr-Vendor ngrequired="vendorrequired" vendormodel="vendor" vendorname="vendorname" vendoraddress="vendoraddress" titlename="供应商">
+			</dr-Vendor>
+			<section layout="row" layout-align="center center" layout-wrap>
+				<md-button class="md-raised md-primary" ng-href="#/personalCenter/account">返回</md-button>
+				<md-button class="md-raised md-primary" ng-disabled="pprojectForm.$invalid" ng-click="addPayee()">确认</md-button>
+			</section>
+		</form>
+	</md-content>
+	<!--</md-tab>
+		<md-tab label="对公账户">-->
+	<md-content class="md-padding">
+		<form name="cprojectForm">
+			<md-input-container class="md-block">
+				<label for="creceiver">公司名称</label>
+				<input name="creceiver" ng-model="caccount.receiver" type="text" required>
+			</md-input-container>
+			<md-input-container>
+				<label>卡类型</label>
+				<md-select ng-model="caccount.card_type">
+					<md-option value="0">
+						银行卡
+					</md-option>
+					<md-option value="1">
+						商务卡
+					</md-option>
+					<md-option value="2">
+						第三方
+					</md-option>
+					<md-option value="3">
+						其它
+					</md-option>
+				</md-select>
+			</md-input-container>
+			<md-input-container class="md-block">
+				<label for="cbankaccount">银行账号</label>
+				<input name="cbankaccount" ng-model="caccount.bank_account" type="number" required>
+			</md-input-container>
+			<md-input-container class="md-block">
+				<label for="cbankname">开户银行</label>
+				<input name="cbankname" ng-model="caccount.bank_name" type="text" required>
+			</md-input-container>
+			<section layout="row" layout-align="center center" layout-wrap>
+				<md-button class="md-raised md-primary" ng-href="#/personalCenter/account">返回</md-button>
+				<md-button class="md-raised md-primary" ng-disabled="cprojectForm.$invalid" ng-click="addPayee()">确认</md-button>
+			</section>
+		</form>
+	</md-content>
+	<!--</md-tab>
+	</md-tabs>-->
+</div>

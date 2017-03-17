@@ -1,0 +1,64 @@
+<div ng-controller="taskManCtrl" class="task airfare">
+	<div ng-controller="ordersHomeCtrl">
+		<md-card>
+			<div class="md-toolbar-tools">
+		      	<h3>
+		       		<span>派单规则</span>
+		      	</h3> 
+		    </div>  
+		    <md-divider></md-divider>
+			<div layout='row' class="ml-marginT-20">
+				<md-input-container class="md-block ml-marginlr-10" flex="45">
+		            <label>规则名称或描述</label>
+		            <input>
+				</md-input-container>
+				<div layout="row">
+					<md-input-container class="md-block ml-marginlr-10" flex>
+			            <label>创建时间（开始）</label>
+			            <input ng-model="beginTime" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+					</md-input-container>
+					<span class="ml-lineheight-48 ml-marginlr-10">至</span>
+					<md-input-container class="md-block ml-marginlr-10" flex>
+			            <label>创建时间（结束）</label>
+			           <input ng-model="beginTime" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+					</md-input-container>
+				</div>
+				<md-input-container class="md-block ml-marginlr-10" flex="20">
+		            <label>状态</label>
+		            <md-select ng-model="state">
+						<md-option value="qiyong">启用</md-option>
+						<md-option value="weiqiyong">未启用</md-option>
+					</md-select>
+				</md-input-container>
+			</div>
+			<div class="ml-textalign-right ml-margintb-20">
+	        	<md-button class="md-raised md-primary">查询</md-button>
+	       </div>
+		</md-card>
+		<md-card>
+			<md-list layout="row" class="ml-bgcolor-blue ml-textalign-center md-whiteframe-2dp">
+				<span flex="10">优先级</span>
+				<span flex="15">规则名称</span>
+				<span flex="30">规则描述</span>
+				<span flex="15">规则状态</span>
+				<span flex="15">创建人</span>
+				<span flex="15">创建日期</span>
+			</md-list>
+			<md-list layout="row" class="ml-textalign-center" style="min-height: 200px">
+				<span flex="10">1</span>
+				<span flex="15">总部五项费用</span>
+				<span flex="30">集团总部五项费用单据</span>
+				<span flex="15">启用</span>
+				<span flex="15">张三</span>
+				<span flex="15">2015-5-5</span>
+			</md-list>
+			 <md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '总条数：'}" md-limit="viewData.data.pageSize" md-limit-options="[5, 10, 15]" md-page="viewData.data.pageNumber" md-total="{{viewData.data.totalRow}}" md-on-paginate="getData" md-page-select></md-table-pagination>
+		</md-card>
+		<md-button aria-label="menu" class="md-fab ml-bottom-fab" ng-click="onGoList()">
+	    	<md-tooltip md-direction="left">
+	          	新增单据
+	        </md-tooltip>
+	        <md-icon class="iconfont">&#xe631;</md-icon>
+	    </md-button>
+	</div>
+</div>

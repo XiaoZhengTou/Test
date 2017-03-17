@@ -1,0 +1,32 @@
+<div ng-controller="checkLogCtrl" ng-cloak class="md-inline-form">
+	<md-card>
+		<md-table-container>
+			<table md-table multiple ng-model="selected" md-progress="promise">
+				<thead md-head md-row-select class="ml-bgcolor-blue">
+					<tr md-row>
+						<th md-column>流程步骤</th>
+						<th md-column>内容</th>
+						<th md-column>标准意见</th>
+						<th md-column>操作人</th>
+						<th md-column>记录时间</th>
+					</tr>
+				</thead>
+				<tbody md-body>
+					<tr md-row ng-repeat="item in query.appdata">
+						<td md-cell><span>{{item.processSteps}}</span></td>
+						<td md-cell><span>{{item.content}}</span></td>
+						<td md-cell><span>{{item.suggestion}}</span></td>
+						<td md-cell><span>{{item.operator}}</span></td>
+						<td md-cell><span>{{item.recordingTime}}</span></td>
+						
+
+					</tr>
+				</tbody>
+			</table>
+		</md-table-container>
+		<!-- 表格导航开始 -->
+		<md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '，总条数：'}" md-limit="query.limit" md-limit-options="[5, 10, 15]" md-page="query.page_number" md-total="{{query.total}}" md-on-paginate="getData" md-page-select></md-table-pagination>
+		<!-- 表格导航结束 -->
+		<!-- 表格结束 -->
+	</md-card>
+	<div>

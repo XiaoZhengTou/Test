@@ -1,0 +1,53 @@
+<md-dialog aria-label="修改数据字典" ng-cloak style="min-width: 50%" id="dict-dialog2-detail">
+    <form name="adddict1" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 style="color: white">修改数据字典</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="padding-top: 0px;padding-bottom: 0px">
+
+                <div class="demo-tab" style="padding: 25px 25px 0 25px; text-align: center;">
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>代码</label>
+                        <input ng-model="dict.code" type="text" required>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>名称</label>
+                        <input ng-model="dict.name" type="text" required>
+                    </md-input-container>
+
+                </div>
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <!--<md-button class="md-primary md-raised" ng-click="delete1()"  style="background-color:red;color: white;float: right;margin-right: 3%;">删除</md-button>-->
+            <!--<md-button class="md-primary md-raised" ng-click="delete()"  style="background-color:red;color: white;float: right;margin-right: 3%;">失效</md-button>-->
+            <!--<span flex></span>-->
+            <md-button class="md-primary md-raised" ng-click="answer()"  style="color: white;float: right"
+                       ng-disabled="adddict1.$invalid" disabled="disabled">保存</md-button>
+
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+
+<style>
+    #dict-dialog2-detail .md-datepicker-input-container.md-datepicker-invalid {
+        border-bottom-color: rgb(224,224,224);
+    }
+    #dict-dialog2-detail .md-datepicker-input-container{
+        width: 93.9%;
+        margin-left: -2px;
+    }
+    #dict-dialog2-detail .md-datepicker-calendar-icon{
+        margin-bottom: -7px;
+    }
+</style>

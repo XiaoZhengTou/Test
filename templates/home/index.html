@@ -1,0 +1,245 @@
+<div layout="column" ng-controller="personalhomectrl" flex>
+	<section>
+		<div class="md-padding md-margin md-whiteframe-2dp" style="background-color:#fff;line-height: 1em;" layout="row">
+			<div layout="row" flex="90">
+				<i class="iconfont">&#xe696;</i>
+				<span style="margin-right: 20px;"></span>
+				<span ng-bind="msg.text"></span>
+				<span style="margin-right: 20px;"></span>
+				<span class="md-caption" style="color:#BDBDBD;" ng-bind="msg.createdate| date: 'yyyy-MM-dd HH:mm'"></span>
+			</div>
+			<div>
+				<a href="#" class="md-caption">查看全部</a>
+			</div>
+		</div>
+	</section>
+	<section>
+		<div class="md-padding md-margin md-whiteframe-2dp" style="background-color:#fff;" layout="row" layout-align="center center">
+			<div flex>
+				<div layout="column">
+					<div>
+						<img class="md-avatar" src="img/1.jpg" />
+					</div>
+					<md-card-header-text>
+						<p class="md-body ml-nomargin" ng-bind="user.user.userName">姓名</p>
+						<p class="md-caption ml-nomargin">信用积分：0</p>
+					</md-card-header-text>
+				</div>
+			</div>
+			<div flex>
+				<p class="ml-nopadding ml-nomargin md-caption">公司券：0</p>
+				<p class="ml-nopadding ml-nomargin md-caption">发票：0</p>
+				<p class="ml-nopadding ml-nomargin md-caption">消费记录：0</p>
+				<p class="ml-nopadding ml-nomargin md-caption">购物车：0</p>
+				<p class="ml-nopadding ml-nomargin md-caption">收藏：0</p>
+			</div>
+			<div flex style="text-align: center;">
+				<h1>0</h1>
+				<p>待处理</p>
+			</div>
+			<div flex style="text-align: center;">
+				<h1>0</h1>
+				<p>我的订单</p>
+			</div>
+			<div flex style="text-align: center;">
+				<h1>0</h1>
+				<p>我的单据</p>
+			</div>
+			<div flex style="text-align: center;">
+				<h1>0</h1>
+				<p>我的客服</p>
+			</div>
+		</div>
+	</section>
+	<!--<section>
+		<div layout="column" flex layout-gt-sm="row">
+			<div class="md-padding md-margin md-whiteframe-2dp" style="width:600px;height:200px;background:#fff;" layout="row" layout-align="center center">
+				<ks-swiper-container autoplay="2000" pagination-is-active="true" pagination-clickable="false">
+					<ks-swiper-slide class="swiper-slide" ng-repeat="s in [1,2,3,4]">
+						<img style="width:100%;" ng-src="img/home/ttt{{s}}.jpg">
+					</ks-swiper-slide>
+				</ks-swiper-container>
+			</div>
+			<div class="md-margin md-whiteframe-2dp" style="background:#fff;min-width: 150px;" flex>
+				<div layout="column" style="height:100%;" flex layout-align="start start">
+					<div class="md-padding">
+						<span>最近行程</span>
+						<span><a href="#" class="md-caption">查看全部</a></span>
+					</div>
+					<div style="width:100%;">
+						<md-divider></md-divider>
+					</div>
+					<div  class="md-padding">
+						<div>
+							<div class="md-caption">明天：09:00-10:00</div>
+							<div class="md-body-1">广州 飞往 北京</div>
+						</div>
+						<div>
+							<div class="md-caption">明天：09:00-10:00</div>
+							<div class="md-body-1">广州 飞往 上海</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>-->
+	<section>
+		<div class="md-margin">
+		<md-grid-list md-cols="9" md-cols-sm="6" md-gutter="1em" md-row-height="4:4">
+			<md-grid-tile class="md-whiteframe-2dp" style="background-color:#fff;" md-rowspan="2" md-colspan="6">
+
+					<!--<ks-swiper-container autoplay="2000" pagination-is-active="true" pagination-clickable="false">
+					<ks-swiper-slide class="swiper-slide" ng-repeat="s in [1,2,3,4]">
+						<img ng-src="img/home/ttt{{s}}.jpg">
+					</ks-swiper-slide>
+				</ks-swiper-container>-->
+				<ng-swiper-container show-nav-buttons="true" autoplay="2000" speed="1000" loop="true" looped-slides="10" show-pagination="true">
+					<ng-swiper-slide class="swiper-slide" ng-repeat="s in [1,2,3]">
+						<img ng-src="img/home/ttt{{s}}.jpg">
+					</ng-swiper-slide>
+				</ng-swiper-container>
+			</md-grid-tile>
+			<md-grid-tile class="md-whiteframe-2dp" style="background-color:#fff;" md-rowspan="2" md-colspan="3">
+				<div layout="column" style="height:100%;" flex layout-align="start start">
+					<div class="md-padding" style="width:100%;box-sizing: border-box;">
+						<span>最近行程</span><span flex></span>
+						<a ng-href="###" style="float:right;color:rgba(0, 0, 0, 0.45);text-decoration:none;">查看更多</a>
+					</div>
+					<div style="width:100%;">
+						<md-divider></md-divider>
+					</div>
+					<div  class="md-padding">
+						<div>
+							<div class="md-caption">明天：09:00-10:00</div>
+							<div class="md-body-1">广州 飞往 北京</div>
+						</div>
+						<div>
+							<div class="md-caption">明天：09:00-10:00</div>
+							<div class="md-body-1">广州 飞往 上海</div>
+						</div>
+					</div>
+				</div>
+			</md-grid-tile>
+			<md-grid-tile class="md-whiteframe-2dp" style="background-color:#fff;" md-rowspan="2" md-colspan="3">
+				<div layout="column" style="height:100%;" flex layout-align="start start">
+					<div class="md-padding">
+						<span>个人消费分析</span>
+					</div>
+					<div style="width:100%;">
+						<md-divider></md-divider>
+					</div>
+					<div style="display:block;width:100%;height: 100%;position: relative;">						<!--<canvas id="canvas1" width="100%" height="100%">
+				        Your web-browser does not support the HTML 5 canvas element.
+				    	</canvas>-->
+				    	<dr-Chart></dr-Chart>
+				    
+						<!--<img alt="" style="margin: auto; display: block;" src="img/home/test/beta001.png">-->
+					</div>
+				</div>
+			</md-grid-tile>
+			<md-grid-tile class="md-whiteframe-2dp" style="background-color:#fff;" md-rowspan="2" md-colspan="3">
+				<div layout="column" style="height:100%;" flex layout-align="start start">
+					<div class="md-padding">
+						<span>采购渠道分析</span>
+					</div>
+					<div style="width:100%;">
+						<md-divider></md-divider>
+					</div>
+					<div style="display:block;width:100%;height: 100%;position: relative;">						<!--<canvas id="canvas1" width="100%" height="100%">
+<!--						<img alt="" style="margin: auto; display: block;" src="img/home/test/beta002.png">
+-->					
+						<dr-Chartb></dr-Chartb>
+
+					</div>
+				</div>
+			</md-grid-tile>
+			<md-grid-tile class="md-whiteframe-2dp" style="background-color:#fff;" md-rowspan="2" md-colspan="3">
+				<div layout="column" style="height:100%;" flex layout-align="start start">
+					<div  class="md-padding">
+						<span>各供应商优惠分析</span>
+					</div>
+					<div style="width:100%;">
+						<md-divider></md-divider>
+					</div>
+					<div style="display:block;width:100%;height: 100%;position: relative;">						<!--<canvas id="canvas1" width="100%" height="100%">
+<!--						<img alt="" style="margin: auto; display: block;" src="img/home/test/beta003.png">
+-->							<dr-Chartc></dr-Chartc>
+
+					</div>
+				</div>
+			</md-grid-tile>
+			<md-grid-tile class="md-whiteframe-2dp" style="background-color:#fff;" md-rowspan="2" md-colspan="6">
+				<div layout="column" style="height:100%;overflow-y: auto;" flex layout-align="start start">
+					<div  class="md-padding" style="width:100%;box-sizing: border-box;">
+						<span>发现功略</span>
+						<a ng-href="###" style="float:right;color:rgba(0, 0, 0, 0.45);text-decoration:none;">查看更多</a>
+					</div>
+					<div style="width:100%;">
+						<md-divider></md-divider>
+						
+					</div>
+					<div layout="column" style="width:100%;color: rgba(0, 0, 0, 0.45);">
+						<!--<ul>
+							<li>五月商旅出行报告 <time>05-03</time></li>
+							<li>五月商旅出行报告 <time>05-03</time></li>
+							<li>五月商旅出行报告 <time>05-03</time></li>
+
+						</ul>-->
+						<md-list flex="100">
+						<md-list-item  ng-click="go()">
+							<p>五月商旅出行报告 <time style="float:right">05-03</time></p>
+						</md-list-item>
+						<md-list-item ng-click="go()">
+							<p>五月商旅出行报告 <time style="float:right">05-03</time></p>
+						</md-list-item>
+
+					</md-list>
+					</div>
+					
+					<!--<md-list>
+						<md-subheader>
+							<span>发现功略</span>
+							<a href="###">查看更多</a>
+						</md-subheader>
+						<md-list-item ng-click="">
+							<p>五月商旅出行报告</p>
+						</md-list-item>
+						<md-list-item ng-click="">
+							<p>五月商旅出行报告</p>
+						</md-list-item>
+						  <md-divider></md-divider>
+
+					</md-list>-->
+					
+				</div>
+			</md-grid-tile>
+			<md-grid-tile class="md-whiteframe-2dp" style="background-color:#fff;" md-rowspan="2" md-colspan="3">
+				<div layout="column" style="height:100%;overflow-y: auto;" flex layout-align="start start">
+					<div  class="md-padding">
+						<span>财务政策</span>
+					</div>
+					<div style="width:100%;">
+						<md-divider></md-divider>
+					</div>
+					<div layout="column" style="width:100%;color: rgba(0, 0, 0, 0.45);">
+			
+						<md-list flex="100">
+						<md-list-item  ng-click="go()">
+							<p><img style="display: inline-block; vertical-align: middle; width: 22px; position: relative; top: -2px; margin-right: 8px;" src="img/home/test/beta004.png">报销政策</p>
+						</md-list-item>
+						<md-list-item  ng-click="go()">
+							<p><img style="display: inline-block; vertical-align: middle; width: 22px; position: relative; top: -2px; margin-right: 8px;" src="img/home/test/beta004.png">贴票规范</p>
+						</md-list-item>
+						<md-list-item  ng-click="go()">
+							<p><img style="display: inline-block; vertical-align: middle; width: 22px; position: relative; top: -2px; margin-right: 8px;" src="img/home/test/beta004.png">报销政策</p>
+						</md-list-item>
+						
+
+					</md-list>
+					</div>
+				</div>
+			</md-grid-tile>
+		</md-grid-list>
+		</div>
+	</section>
+</div>

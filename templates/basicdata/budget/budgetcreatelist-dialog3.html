@@ -1,0 +1,176 @@
+<md-dialog aria-label="编辑预算模板" ng-cloak style="min-width: 95%" id="budgetlist-dialog3-detail">
+    <form name="addbudgetlist3" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 style="color: white">预算明细</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="padding-top: 1%;padding-bottom: 0px">
+
+                <table class="table ng-scope" style="margin-bottom: 0px" >
+                    <tr>
+                        <td style="word-break: break-all;white-space: nowrap;"><span style="float: right">预算模板名称：</span></td>
+                        <td>
+                            {{budgetcreatelist.budget_name}}
+                        </td>
+                        <td><span style="float: right">预算模板：</span></td>
+                        <td>
+                            {{budgetcreatelist.budget_templet_name}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border-top: 0px;word-break: break-all;white-space: nowrap;"><span style="float: right">预算区间：</span></td>
+                        <td style="border-top: 0px;">
+                            {{budgetcreatelist.interval_name}}
+                        </td>
+                        <td style="border-top: 0px;"><span style="float: right">预算科目：</span></td>
+                        <td style="border-top: 0px;">
+                            {{budgetcreatelist.fee_type_tree_name}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border-top: 0px;border-bottom: 1px solid #ddd;word-break: break-all;white-space: nowrap;"><span style="float: right">预算组织：</span></td>
+                        <td style="border-top: 0px;border-bottom: 1px solid #ddd;">
+                            {{budgetcreatelist.busi_org_name}}
+                        </td>
+                        <td style="border-top: 0px;border-bottom: 1px solid #ddd;"><span style="float: right">币种：</span></td>
+                        <td style="border-top: 0px;border-bottom: 1px solid #ddd;">
+                            {{budgetcreatelist.currency_name}}
+                        </td>
+                    </tr>
+                </table>
+
+                <div>
+                    <div class="md-toolbar-tools" layout="row">
+                        <span>预算模板明细</span>
+                        <span flex></span>
+                        <md-menu>
+                            <md-button aria-label="Open user menu" ng-click="$mdOpenMenu()" aria-label="side navigation">
+                                <md-icon md-svg-src="img/icons/three.svg"></md-icon>
+                            </md-button>
+                            <md-menu-content width="4">
+                                <md-menu-item>
+                                    <md-button aria-label="side navigation">
+                                        <md-icon md-svg-src="img/icons/excel_in.svg"></md-icon>
+                                        <span class="ng-scope">Excel导入</span>
+                                    </md-button>
+                                </md-menu-item>
+                                <md-menu-item>
+                                    <md-button aria-label="side navigation">
+                                        <md-icon md-svg-src="img/icons/excel_out.svg"></md-icon>
+                                        <span class="ng-scope">Excel导出</span>
+                                    </md-button>
+                                </md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
+                        <md-button class="md-primary" aria-label="批量删除" ng-click="deleterow()" ng-disabled="selected.length == 0">
+                            <md-icon md-svg-src="img/icons/delete.svg" style="margin-right: 3px"></md-icon>删除
+                        </md-button>
+                        <md-button class="md-primary" aria-label="添加" ng-click="addrow()" ng-disabled="appdata.length == (budgetlist.level_number)">
+                            <md-icon md-svg-src="img/icons/add.svg" style="margin-right: 3px"></md-icon>添加
+                        </md-button>
+                    </div>
+                </div>
+
+                <md-table-container style="width: 95%;padding-left: 2.5%;">
+                    <table data-md-table data-md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" data-ng-model="selected" md-progress="promise">
+                    <!--<table data-md-table data-ng-model="selected" md-progress="promise">-->
+                        <thead md-head data-md-order="query.order" md-on-reorder="getDesserts">
+                        <tr md-row>
+                            <th md-column ng-repeat="num in level_number">{{num.levelname}}</th>
+                            <th md-column>预算金额</th>
+                            <th md-column>预算科目</th>
+                            <th md-column>是否需要事前申请</th>
+                            <th md-column>金额控制</th>
+                            <th md-column>进度控制</th>
+                            <th md-column>状态</th>
+                            <th md-column>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody md-body>
+                        <tr md-row md-select="$index" md-select-id="budget_templet_id" ng-repeat="item in appdata" md-auto-select="options.autoSelect">
+                        <!--<tr md-row ng-repeat="item in appdata">-->
+                            <td md-cell ng-repeat="num in level_number">
+                                <!--<span ng-repeat="budget in num">1</span>-->
+                                <md-select ng-model="item.level_id[$index]" placeholder="{{num.levelname}}">
+                                    <md-option ng-repeat="budget in num.level" value="{{budget.id}}">{{budget.name}}</md-option>
+                                </md-select>
+                            </td>
+
+                            <td md-cell ng-click="edit_budget_amount($event, item)" ng-class="{'md-placeholder': !item.budget_amount}">
+                                {{item.budget_amount || ''}}
+                            </td>
+
+                            <td md-cell>
+                                <md-select ng-model="item.fee_type_id" placeholder="预算科目">
+                                    <md-option ng-repeat="type in fee_type" value="{{type.fee_type_id}}">{{type.fee_type_name}}</md-option>
+                                </md-select>
+                            </td>
+
+
+                            <td md-cell>
+                                <md-select ng-model="item.is_apply" placeholder="是否需要事前申请">
+                                    <md-option value="Y">是</md-option>
+                                    <md-option value="N">否</md-option>
+                                </md-select>
+                            </td>
+
+                            <td md-cell>
+                                <md-select ng-model="item.control_amount_type" placeholder="金额控制">
+                                    <md-option value="control">金额严控</md-option>
+                                    <md-option value="alarm">金额提醒</md-option>
+                                    <md-option value="notControl">金额不控</md-option>
+                                </md-select>
+                            </td>
+                            <td md-cell>
+                                <md-select ng-model="item.control_process_type" placeholder="进度控制">
+                                    <md-option value="control">进度严控</md-option>
+                                    <md-option value="alarm">进度提醒</md-option>
+                                    <md-option value="notControl">进度不控</md-option>
+                                </md-select>
+                            </td>
+                            <td md-cell>
+                                <md-select ng-model="item.enable_flag" placeholder="状态">
+                                    <md-option value="Y">生效</md-option>
+                                    <md-option value="N">失效</md-option>
+                                </md-select>
+                            </td>
+
+
+                            <td md-cell style="word-break: keep-all;white-space: nowrap;">
+                                <a ng-click="deleteone($index)" style="cursor: pointer;color: blue">删除</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </md-table-container>
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <span flex></span>
+            <md-button class="md-primary md-raised" ng-click="answer()"  style="color: white;float: right"
+                       ng-disabled="addbudgetlist3.$invalid" disabled="disabled">保存</md-button>
+
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+
+<style>
+    #budgetlist-dialog3-detail1 .md-datepicker-input-container.md-datepicker-invalid {
+        border-bottom-color: rgb(224,224,224);
+    }
+    #budgetlist-dialog3-detail1 .md-datepicker-input-container{
+        width: 93.9%;
+        margin-left: -2px;
+    }
+    #budgetlist-dialog3-detail1 .md-datepicker-calendar-icon{
+        margin-bottom: -7px;
+    }
+</style>

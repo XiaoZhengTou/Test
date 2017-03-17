@@ -1,0 +1,29 @@
+<div ng-show="true" layout="row"  layout-align="center start">
+	<md-button class="md-raised ml-button" ng-click="onOpenApprove($event)" ng-if="oplist.indexOf('handler_pass')>=0">
+		<span class="text-white">批准</span>
+	</md-button>
+	<md-button class="md-raised ml-button" ng-click="onRefuse()" ng-if="oplist.indexOf('handler_refuse')>=0">
+		<span class="text-white">驳回</span>
+	</md-button>
+	<md-button class="md-raised ml-button" ng-click="onOpenCommiss($event)" ng-if="oplist.indexOf('handler_commission')>=0">
+		<span class="text-white">转办</span>
+	</md-button>
+	<md-button class="md-raised ml-button" ng-click="onOpenCommunicate($event)" ng-if="oplist.indexOf('handler_communicate')>=0">
+		<span class="text-white">沟通</span>
+	</md-button>
+	<md-button class="md-raised ml-button" ng-click="onCelcommunicate()" ng-if="oplist.indexOf('handler_cancelCommunicate')>=0">
+		<span class="text-white">取消沟通</span>
+	</md-button>
+	<md-button class="md-raised ml-button" ng-click="onRecommunicate()" ng-if="oplist.indexOf('handler_returnCommunicate')>=0">
+		<span class="text-white">回复沟通</span>
+	</md-button>
+	<md-button class="md-raised ml-button" ng-click="onShowDrafterProcess()" ng-if="oplist.indexOf('drafter_return')>=0">
+		<span class="text-white">撤回</span>
+	</md-button>
+	<md-button class="md-raised ml-button" ng-click="onAbandonProcess()" ng-if="oplist.indexOf('drafter_abandon')>=0">
+		<span class="text-white">作废</span>
+	</md-button>
+	<md-button class="md-raised ml-button" ng-click="onShowPressProcess()" ng-if="oplist.indexOf('drafter_press')>=0">
+		<span class="text-white">催办</span>
+	</md-button>
+</div>

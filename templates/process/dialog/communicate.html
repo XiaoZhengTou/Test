@@ -1,0 +1,34 @@
+<md-bottom-sheet flex layout="column" ng-cloak>
+	<md-list-item>
+		<p><i class="iconfont" style="color:#42A5F5;">&#xe6ac;</i> 多级沟通</p>
+		<md-switch class="md-secondary" ng-model="isHiddenNote"></md-switch>
+	</md-list-item>
+	<md-list-item>
+		<!--<md-icon><i class="iconfont" style="color:#42A5F5;">&#xe61a;</i></md-icon>-->
+		<p><i class="iconfont" style="color:#42A5F5;">&#xe6ad;</i> 隐藏沟通意见</p>
+		<md-switch class="md-secondary" ng-model="isMutiCommunicate"></md-switch>
+	</md-list-item>
+	<md-divider flex></md-divider>
+	<md-list-item ng-click="">
+		<div layout="row" layout-align="start center" mideagroup ng-model="users">
+			<i class="iconfont" style="color:#42A5F5;">&#xe61a;</i>
+			<span class="md-padding">添加沟通人</span>
+		</div>
+	</md-list-item>
+	<md-chips ng-model="users" name="users" md-max-chips="2" readonly="true"  md-removable="true">
+		<md-chip-template>
+			<strong>{{$chip.user_full_name}}
+			</strong>
+		</md-chip-template>
+	</md-chips>
+	<div ng-messages="userForm.users.$error" ng-if="userForm.$dirty">
+		<div ng-message="md-max-chips">You reached the maximum amount of chips</div>
+	</div>
+	<textarea ng-model="approveauditNote" maxlength="100" placeholder="留言" name="approveauditNote" rows="4" style="border-radius: 3px;width: 100%;border: 1px #d0d0d0 solid;">
+	</textarea>
+	<div layout="row" flex layout-algin="center center">
+		<md-button class="md-raised md-primary" ng-click="onHideBottomSheet()" flex style="color:#fff;">取消</md-button>
+
+		<md-button class="md-raised md-primary" ng-click="onCommunicate($event)" style="color:#fff;" flex>提交沟通意见</md-button>
+	</div>
+</md-bottom-sheet>

@@ -1,0 +1,95 @@
+<md-dialog aria-label="新增标准明细" ng-cloak style="min-width: 50%" id="rnormdetail-dialog1-detail">
+    <form name="addrnormdetail" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 style="color: white">新增标准明细</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="padding-top: 0px;padding-bottom: 0px">
+
+                <div class="demo-tab" style="padding: 25px 25px 0 25px;">
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>标准类型 (必填)</label>
+                        <input ng-model="rnormdetail.standard_type_name" type="text" required>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>人员类型</label>
+                        <md-select ng-model="rnormdetail.emp_type_id">
+                            <md-option ng-repeat="rperson1 in rpersondata" value="{{rperson1.emssmemptypeh.emp_type_id}}">{{rperson1.emssmemptypeh.emp_type_name}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>地区类型</label>
+                        <md-select ng-model="rnormdetail.area_type_id">
+                            <md-option ng-repeat="rarea1 in rareadata" value="{{rarea1.emssmareatypeh.area_type_id}}">{{rarea1.emssmareatypeh.area_type_name}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <!--<md-input-container class="md-block" flex-gt-sm style="text-align: left;padding-top: 20px;padding-bottom: 20px;">-->
+                        <!--<label>币种</label>-->
+                        <!--<md-select ng-model="rnormdetail.currency_code">-->
+                            <!--<md-option value="Y">是</md-option>-->
+                            <!--<md-option value="N">否</md-option>-->
+                        <!--</md-select>-->
+                    <!--</md-input-container>-->
+
+                    <md-input-container class="md-block" flex-gt-sm style="text-align: left;padding-top: 20px;padding-bottom: 20px;">
+                        <label>币种</label>
+                        <md-select ng-model="rnormdetail.currency_code">
+                            <md-option ng-repeat="currency1 in currencydata" value="{{currency1.currency_code}}">{{currency1.currency_name}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>标准金额</label>
+                        <input ng-model="rnormdetail.amount" type="number">
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>扣减金额</label>
+                        <input ng-model="rnormdetail.deduct_amount" type="number">
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>浮动范围</label>
+                        <input ng-model="rnormdetail.control_tolerance" type="number">
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>备注</label>
+                        <input ng-model="rnormdetail.remark" type="text">
+                    </md-input-container>
+
+                </div>
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <span flex></span>
+            <md-button class="md-primary md-raised" ng-click="answer()"  style="color: white;float: right"
+                       ng-disabled="addrnormdetail.$invalid" disabled="disabled">确定</md-button>
+
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+
+<style>
+    #rnormdetail-dialog1-detail .md-datepicker-input-container.md-datepicker-invalid {
+        border-bottom-color: rgb(224,224,224);
+    }
+    #rnormdetail-dialog1-detail .md-datepicker-input-container{
+        width: 93.9%;
+        margin-left: -2px;
+    }
+    #rnormdetail-dialog1-detail .md-datepicker-calendar-icon{
+        margin-bottom: -7px;
+    }
+</style>

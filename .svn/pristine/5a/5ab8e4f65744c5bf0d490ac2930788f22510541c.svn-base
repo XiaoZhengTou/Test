@@ -1,0 +1,101 @@
+<div ng-controller="editQuestionCtrl">
+	<md-card class="md-padding" layout="column">
+		<br>
+		<div layout="row">
+			<md-input-container class="md-block ml-nomargin" flex-gt-sm>
+				<label>代码</label>
+				<input ng-model="name">
+			</md-input-container>
+			<md-input-container class="md-block ml-nomargin ml-marginlr-10" flex-gt-sm>
+				<label>问题范畴</label>
+				<md-select ng-model="state" class="ml-marginlr-10">
+					<md-option value="0">财务审单类</md-option>
+				</md-select>
+			</md-input-container>
+			<md-input-container class="md-block ml-nomargin" flex>
+				<label>状态</label>
+				<input ng-model="name">
+			</md-input-container>
+		</div>
+		<div layout="row">
+			<md-input-container class="md-block ml-nomargin ml-marginlr-10" flex="33">
+				<label>一级类型</label>
+				<md-select ng-model="state" class="ml-marginlr-10">
+					<md-option value="0">总账类单据</md-option>
+				</md-select>
+			</md-input-container>
+			<md-input-container class="md-block ml-nomargin ml-marginlr-10" flex>
+				<label>二级类型</label>
+				<md-select ng-model="state" class="ml-marginlr-10">
+					<md-option value="0">补助发票超过120天</md-option>
+				</md-select>
+			</md-input-container>
+		</div>
+		<br>
+		<div layout="row">
+			<md-input-container class="md-block ml-nomargin ml-marginlr-10" flex-gt-sm="33">
+				<label>处理类型</label>
+				<md-select ng-model="state" class="ml-marginlr-10">
+					<md-option value="0">沟通</md-option>
+				</md-select>
+			</md-input-container>
+			<md-input-container class="md-block ml-nomargin" flex>
+				<label>标准意见</label>
+				<input ng-model="name">
+			</md-input-container>
+		</div>
+		<div layout="row">
+			<md-input-container class="md-block ml-nomargin ml-marginlr-10" flex-gt-sm>
+				<label>整改负责人</label>
+				<md-select ng-model="state" class="ml-marginlr-10">
+					<md-option value="0">经办人</md-option>
+				</md-select>
+			</md-input-container>
+			<md-input-container class="md-block ml-nomargin ml-marginlr-10" flex-gt-sm>
+				<label>是否通报</label>
+				<md-select ng-model="state" class="ml-marginlr-10">
+					<md-option value="0">是</md-option>
+					<md-option value="1">否</md-option>
+				</md-select>
+			</md-input-container>
+			<md-input-container class="md-block ml-nomargin" flex>
+				<label>扣分值</label>
+				<input ng-model="name">
+			</md-input-container>
+		</div>
+		<div layout="row">
+			<md-input-container class="md-block ml-nomargin" flex>
+				<label>业务处理建议</label>
+				<input ng-model="name">
+			</md-input-container>
+		</div>
+		<div layout="row">
+			<md-input-container class="md-block ml-nomargin ml-marginlr-10" flex="33">
+				<label>创建人</label>
+				<md-select ng-model="state" class="ml-marginlr-10">
+					<md-option value="0">张三</md-option>
+					<md-option value="1">李四</md-option>
+				</md-select>
+			</md-input-container>
+			<md-input-container class="md-block ml-nomargin" flex>
+				<md-datepicker ng-model="createTime" md-placeholder="创建时间" ></md-datepicker>
+			</md-input-container>
+		</div>
+		<div layout="row">
+			<md-input-container class="md-block ml-nomargin ml-marginlr-10" flex="33">
+				<label>停用人</label>
+				<md-select ng-model="state" class="ml-marginlr-10">
+					<md-option value="0">张三</md-option>
+					<md-option value="1">李四</md-option>
+				</md-select>
+			</md-input-container>
+			<md-input-container class="md-block ml-nomargin" flex>
+				<md-datepicker ng-model="createTime" md-placeholder="停用时间" ></md-datepicker>
+			</md-input-container>
+		</div>
+		<div class="ml-textalign-right">
+			<md-button class="md-raised md-primary md-button ng-scope md-ink-ripple" ng-click="stopped()">停用</md-button>
+			<md-button class="md-raised md-primary md-button md-ink-ripple" ng-click="keep()">保存</md-button>
+		</div>
+	</md-card>
+</div>

@@ -1,0 +1,85 @@
+<md-dialog aria-label="修改预算主体" ng-cloak style="min-width: 50%" id="busiorg-dialog2-detail">
+    <form name="addbusiorg1" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 style="color: white">修改预算主体</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="padding-top: 0px;padding-bottom: 0px">
+
+                <div class="demo-tab" style="padding: 25px 25px 0 25px; text-align: center;">
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>业务组织编码 (必填)</label>
+                        <input ng-model="busiorg.busi_org_code" type="text" required>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>业务组织名称</label>
+                        <input ng-model="busiorg.busi_org_name" type="text" required>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm style="text-align: left;padding-bottom: 20px;">
+                        <label>预算主体层级</label>
+                        <md-select ng-model="busiorg.attribute1" required="">
+                            <md-option ng-repeat="att in attribute" value="{{att.itemValue}}">{{att.itemName}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>业务组织描述</label>
+                        <input ng-model="busiorg.busi_org_desc" type="text">
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm style="text-align: left;padding-top: 20px;padding-bottom: 20px;">
+                        <label>组织属性</label>
+                        <md-select ng-model="busiorg.org_attribute" required="">
+                            <md-option value="YF">研发</md-option>
+                            <md-option value="ZZ">制造</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <!--<md-input-container class="md-block" flex-gt-sm>-->
+                        <!--<label>父组织ID</label>-->
+                        <!--<input ng-model="busiorg.parent_org_id" type="text">-->
+                    <!--</md-input-container>-->
+
+                    <md-input-container class="md-block" flex-gt-sm style="text-align: left;padding-top: 20px;padding-bottom: 20px;">
+                        <label>状态</label>
+                        <md-select ng-model="busiorg.enable_flag" required="">
+                            <md-option value="Y">生效</md-option>
+                            <md-option value="N">不生效</md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <!--<md-button class="md-primary md-raised" ng-click="delete1()"  style="background-color:red;color: white;float: right;margin-right: 3%;">删除</md-button>-->
+            <!--<md-button class="md-primary md-raised" ng-click="delete()"  style="background-color:red;color: white;float: right;margin-right: 3%;">失效</md-button>-->
+            <!--<span flex></span>-->
+            <md-button class="md-primary md-raised" ng-click="answer()"  style="color: white;float: right"
+                       ng-disabled="addbusiorg1.$invalid" disabled="disabled">保存</md-button>
+
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+
+<style>
+    #busiorg-dialog2-detail .md-datepicker-input-container.md-datepicker-invalid {
+        border-bottom-color: rgb(224,224,224);
+    }
+    #busiorg-dialog2-detail .md-datepicker-input-container{
+        width: 93.9%;
+        margin-left: -2px;
+    }
+    #busiorg-dialog2-detail .md-datepicker-calendar-icon{
+        margin-bottom: -7px;
+    }
+</style>

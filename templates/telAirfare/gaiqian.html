@@ -1,0 +1,90 @@
+<div ng-controller="telAirfareCtrl" layout="column" ng-cloak class="telAirfare">
+	<div ng-controller="gaiqianCtrl" class="gaiqian">
+		<md-card class="ml-fontsize-13 ml-color-73">
+			<div class="ml-padding-20">
+				<div flex="40">
+					<md-input-container class="md-block">
+						<label>选择EA单据</label>
+						<input ng-model="danju" disabled>
+						<md-icon>
+							<md-button class="md-icon-button ml-color-73"><i class="iconfont">&#xe61f;</i></md-button>
+						</md-icon>
+					</md-input-container>
+					<md-input-container class="md-block">
+						<label>可用预算</label>
+						<input ng-model="yusuan" disabled>
+					</md-input-container>
+				</div>
+				<div class="ml-marginT-20 ml-fontsize-15 ml-color-21 blue-line"><span></span>选择改签原因</div>
+				<div layout="row" class="ml-marginT-20">
+					<div class="select-marginl" flex="30">
+						<md-select placeholder="请选择*" class="ml-nomargin" ng-model="reason">
+							<md-option ng-repeat="reason in reasons" ng-click="getReasons(reason)">
+								{{reason}}
+							</md-option>
+						</md-select>
+					</div>
+					<div class="ml-color-73 tuipiaoRe ml-fontsize-12">因航空公司原因改签，请选择"航班延误或取消，航班时刻变更"，否则将影响您的实际改签费用</div>
+				</div>
+				<div class="ml-fontsize-15 ml-color-21 ml-marginT-20 tuipiao-title blue-line"><span></span>选择乘机人</div>
+				<md-divider></md-divider>
+				<md-table-container>
+					<table md-table md-row-select multiple ng-model="selected" md-progress="promise" mdSelect="selected">
+						<thead md-head md-order="query.order" md-on-reorder="getDesserts">
+							<tr md-row>
+								<th md-column>乘机人姓名(证件号)</th>
+								<th md-column md-numeric>类型</th>
+								<th md-column md-numeric>票价</th>
+								<th md-column md-numeric>基建</th>
+								<th md-column md-numeric>燃油</th>
+							</tr>
+						</thead>
+						<tbody md-body>
+							<tr md-row md-select="airfareList" md-select-id="name" md-auto-select ng-repeat="airfareList in airfareLists" ng-dblclick="goAirfareDetail(airfareList)">
+								<td md-cell>
+									<div>{{airfareList.a}}</div>
+									<div>({{airfareList.a}})</div>
+								</td>
+								<td md-cell>{{airfareList.b}}</td>
+								<td md-cell>{{airfareList.c}}</td>
+								<td md-cell>{{airfareList.d}}</td>
+								<td md-cell>{{airfareList.e}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</md-table-container>
+				<md-divider></md-divider>
+				<div class="ml-marginT-20 ml-fontsize-15 ml-color-21 blue-line"><span></span>新航班</div>
+				<div flex="30" class="ml-padding-20">
+					<md-input-container class="md-block ml-nomargin">
+						<input ng-model="airfareList" name="airfareList" required flex placeholder="航班号">
+						<div ng-messages="messageUserForm.airfareList.$error" role="alert" multiple>
+							<div ng-message="required" class="my-message">请输入航班号</div>
+						</div>
+					</md-input-container>
+					<md-datepicker flex class="ml-border-e" ng-model="query.apply_date_before" md-placeholder="出发日期"></md-datepicker>
+					<!--<div class="ml-marginT-20">订单总额：<span class="ml-color-red">¥345</span></div>-->
+				</div>
+				<div class="ml-marginT-20 ml-fontsize-15 ml-color-21 blue-line"><span></span>联系人信息</div>
+				<div layout="row" class="ml-color-21">
+					<p flex="30">
+						<span>改签联系人</span>
+						<span class="tuipiao-marginl ml-color-73">1{{contact.contactName}}</span>
+					</p>
+					<p flex>
+						<span>手机</span>
+						<span class="tuipiao-marginl ml-color-73">2{{contact.mobile}}</span>
+					</p>
+				</div>
+				<div class="ml-marginT-20">
+					<p>改期将加收您的手续费，若改期的票价高于改期前的票价，您需要额外补齐差价，如有疑问请联系客服电话：23443</p>
+					<p>代理商需要30分钟处理改签，以代理商实际操作改签时间点改签费用为准</p>
+				</div>
+			</div>
+			<md-divider></md-divider>
+			<div class="ml-padding-20" layout="row" layout-align="center center" layout-wrap>
+				<md-button type="submit" ng-disabled="messageUserForm.$invalid" ng-click="addAirfareNext()" class="md-raised md-primary">下一步</md-button>
+			</div>
+		</md-card>
+	</div>
+</div>

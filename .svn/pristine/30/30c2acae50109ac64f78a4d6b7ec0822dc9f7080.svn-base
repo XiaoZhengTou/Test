@@ -1,0 +1,142 @@
+<div ng-controller="approvalProcessCtrl" ng-cloak class="md-inline-form">
+	<md-card>
+		<md-content>
+			<div layout="row" class="padding-left-right-16" style="margin-top: 22px;">
+				<div flex layout="row" class="padding-right">
+					<div flex class="padding-2 margin-top-bottom-18">开始节点</div>
+					<div flex class="padding-2 margin-top-bottom-18">
+						<md-checkbox ng-model="query.selectState1" style="margin:0;"> </md-checkbox>
+					</div>
+					<div flex>
+						<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom:0;">
+							<label>状态</label>
+							<input ng-model="query.num" type="text">
+						</md-input-container>
+					</div>
+
+				</div>
+				<div flex class="padding-right">
+					<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom:0;">
+						<label>起草人</label>
+						<input ng-model="query.num" type="text">
+					</md-input-container>
+				</div>
+				<div flex>
+					<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom:0;">
+						<label>审批结果</label>
+						<input ng-model="query.num" type="text">
+					</md-input-container>
+				</div>
+			</div>
+
+			<div layout="row" class="padding-left-right-16">
+				<div flex layout="row" class="padding-right">
+					<div flex class="padding-2 margin-top-bottom-18">业务审批</div>
+					<div flex class="padding-2 margin-top-bottom-18">
+						<md-checkbox ng-model="query.selectState2" style="margin:0;"> </md-checkbox>
+					</div>
+					<div flex>
+						<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom:0;">
+							<label>状态</label>
+							<input ng-model="query.num" type="text">
+						</md-input-container>
+					</div>
+
+				</div>
+				<div flex class="padding-right">
+					<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom:0;">
+						<label>起草人</label>
+						<input ng-model="query.num" type="text">
+					</md-input-container>
+				</div>
+				<div flex>
+					<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom:0;">
+						<label>审批结果</label>
+						<input ng-model="query.num" type="text">
+					</md-input-container>
+				</div>
+			</div>
+
+			<div layout="row" class="padding-left-right-16">
+				<div flex layout="row" class="padding-right">
+					<div flex class="padding-2 margin-top-bottom-18">财务审批</div>
+					<div flex class="padding-2 margin-top-bottom-18">
+						<md-checkbox ng-model="query.selectState3" style="margin:0;"> </md-checkbox>
+					</div>
+					<div flex>
+						<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom:0;">
+							<label>状态</label>
+							<input ng-model="query.num" type="text">
+						</md-input-container>
+					</div>
+
+				</div>
+				<div flex class="padding-right">
+					<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom:0;">
+						<label>起草人</label>
+						<input ng-model="query.num" type="text">
+					</md-input-container>
+				</div>
+				<div flex>
+					<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom:0;">
+						<label>审批结果</label>
+						<input ng-model="query.num" type="text">
+					</md-input-container>
+				</div>
+			</div>
+
+			<div layout="row" class="padding-left-right-16">
+				<div flex layout="row" class="padding-right">
+					<div flex class="padding-2 margin-top-bottom-18">出纳支付</div>
+					<div flex class="padding-2 margin-top-bottom-18">
+						<md-checkbox ng-model="query.selectState4" style="margin:0;"> </md-checkbox>
+					</div>
+					<div flex>
+						<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom:0;">
+							<label>状态</label>
+							<input ng-model="query.num" type="text">
+						</md-input-container>
+					</div>
+
+				</div>
+				<div flex class="padding-right">
+					<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom:0;">
+						<label>起草人</label>
+						<input ng-model="query.num" type="text">
+					</md-input-container>
+				</div>
+				<div flex>
+					<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom:0;">
+						<label>审批结果</label>
+						<input ng-model="query.num" type="text">
+					</md-input-container>
+				</div>
+			</div>
+
+			<div layout="row" class="padding-left-right-16">
+				<div flex layout="row" class="padding-right">
+					<div flex class="padding-2 margin-top-bottom-18">流程结束</div>
+					<div flex class="padding-2 margin-top-bottom-18">
+						<md-checkbox ng-model="query.selectState5" style="margin:0;"> </md-checkbox>
+					</div>
+					<div flex>
+						<md-input-container class="md-block md-cyan-theme md-input-invalid" style="margin-bottom:0;">
+							<label>状态</label>
+							<input ng-model="query.num" type="text">
+						</md-input-container>
+					</div>
+				</div>
+				<div flex class="padding-right"></div>
+				<div flex></div>
+			</div>
+
+		</md-content>
+	</md-card>
+	<md-card>
+		<md-content>
+			<div layout="row" layout-align="end">
+				<md-button class="md-raised md-primary" aria-label="审单处理" ng-click="taken()">审单处理</md-button>
+			</div>
+		</md-content>
+	</md-card>
+</div>

@@ -1,0 +1,124 @@
+<md-dialog aria-label="添加适用范围" ng-cloak style="min-width: 89%" id="budgetlist-dialog2-detail">
+    <form name="addbudgetlist" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 style="color: white">添加适用范围</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="padding-top: 1%;padding-bottom: 0px">
+
+                <table class="table ng-scope" style="margin-bottom: 0px">
+                    <tr>
+                        <td><span style="float: right">状态：</span></td>
+                        <td>
+                            <md-select ng-model="query.enable_flag" style="margin: 0px;">
+                                <md-option value="Y">生效</md-option>
+                                <md-option value="N">失效</md-option>
+                            </md-select>
+                        </td>
+                        <td><span style="float: right">层次：</span></td>
+                        <td>
+                            <md-select ng-model="query.n_level" style="margin: 0px;">
+                                <md-option value="">全部</md-option>
+                                <md-option ng-repeat="level in getn_level" value="{{level}}">{{level}}</md-option>
+                            </md-select>
+                        </td>
+                        <td>
+                            <md-button ng-click="search_budgeteditlistedit()">
+                                <md-icon md-svg-src="img/icons/search.svg"></md-icon>
+                            </md-button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border-top: 0px;border-bottom: 1px solid #ddd;"><span style="float: right">预算单元名称：</span></td>
+                        <td style="border-top: 0px;border-bottom: 1px solid #ddd;" colspan="3">
+                            <input ng-model="query.budget_node_name" type="text" style="width: 100%;margin: 0; ">
+                        </td>
+                        <!--<td style="border-top: 0px;border-bottom: 1px solid #ddd;"><span style="float: right">失效日期：</span></td>-->
+                        <!--<td style="border-top: 0px;border-bottom: 1px solid #ddd;">-->
+                        <!--<md-datepicker ng-model="query.invalid_date" md-placeholder="" style="width: 32%;margin-top: 1.5%;text-align: left;color: black;"></md-datepicker>-->
+                        <!--</td>-->
+                        <td style="border-top: 0px;border-bottom: 1px solid #ddd;">
+
+                        </td>
+                    </tr>
+                </table>
+
+                <md-table-container style="width: 95%;padding-left: 2.5%;">
+                    <table data-md-table data-md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" data-ng-model="selected" md-progress="promise">
+                        <!--<table data-md-table data-ng-model="selected" md-progress="promise">-->
+                        <thead md-head data-md-order="query.order" md-on-reorder="getDesserts">
+                        <tr md-row>
+                            <th md-column>序号</th>
+                            <th md-column>预算单元名称</th>
+                            <th md-column>预算部门</th>
+                            <th md-column>预算科目</th>
+                            <th md-column>金额控制方式</th>
+                            <th md-column>进度控制方式</th>
+                            <th md-column>是否滚动</th>
+                            <th md-column>状态</th>
+                            <th md-column>进度控制值</th>
+                        </tr>
+                        </thead>
+                        <tbody md-body>
+                        <tr md-row md-select="item" md-select-id="budget_node_id" ng-repeat="item in appdata" md-auto-select="options.autoSelect" ng-disabled="options.disabled">
+                            <!--<tr md-row ng-repeat="item in appdata">-->
+                            <td md-cell>{{item.n_level}}</td>
+                            <td md-cell>{{item.budget_node_name}}</td>
+                            <td md-cell>{{item.busi_org_name}}</td>
+                            <td md-cell>{{item.fee_type_name}}</td>
+                            <td md-cell>{{item.control_amount_type}}</td>
+                            <td md-cell>{{item.control_process_type}}</td>
+                            <td md-cell>{{item.roll_flag =='Y'?'是':'否'}}</td>
+                            <td md-cell>{{item.enable_flag =='Y'?'生效':'失效'}}</td>
+                            <td md-cell style="word-break: keep-all;white-space: nowrap;">
+                                <a ng-click="process($event,item)" style="cursor: pointer;color: blue">进度控制值</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </md-table-container>
+
+
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <span>已选预算单元：</span>
+            <md-chips ng-model="selected" md-max-chips="1">
+                <md-chip-template>
+                    <strong>{{$chip.budget_node_name}}</strong>
+                </md-chip-template>
+            </md-chips>
+            <span flex></span>
+            <md-button class="md-primary md-raised" ng-click="answer()"  style="color: white;float: right"
+                       ng-disabled="addbudgetlist.$invalid" disabled="disabled">确定</md-button>
+
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+
+<style>
+    md-chips input{
+        display: none;
+    }
+    md-chips md-chips-wrap{
+        box-shadow:none;
+    }
+    #budgetlist-dialog2-detail1 .md-datepicker-input-container.md-datepicker-invalid {
+        border-bottom-color: rgb(224,224,224);
+    }
+    #budgetlist-dialog2-detail1 .md-datepicker-input-container{
+        width: 93.9%;
+        margin-left: -2px;
+    }
+    #budgetlist-dialog2-detail1 .md-datepicker-calendar-icon{
+        margin-bottom: -7px;
+    }
+</style>

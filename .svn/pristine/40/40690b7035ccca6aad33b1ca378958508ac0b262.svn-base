@@ -1,0 +1,146 @@
+<link rel="stylesheet" href="css/bootstrap.min.css">
+
+
+<div ng-controller="expensesecondCtrl" id="expensesecond">
+
+    <div class="full-height ng-scope">
+        <div class="full-image-background layout-fill ng-scope layout-row" layout="row" layout-fill="">
+            <div class="animate-wrapper layout-row flex" flex="" layout="row">
+                <div id="ui-login" class="login-frame ng-scope layout-column flex" ui-view="" flex="" layout="column">
+                    <div layout="row" flex="" layout-padding="" layout-fill="" layout-align="center center" class="layout-fill ng-scope layout-align-center-center layout-row flex" style="padding: 0px">
+                        <div flex="40" flex-lg="50" flex-md="70" flex-xs="100" class="flex-xs-100 flex-md-70 flex-lg-50 flex-40" style="max-width: 100%;padding: 0px">
+
+                            <form name="addexpensesecond1" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+
+                                <md-card class="md-cyan-theme" style="max-width: 100%">
+                                    <md-content class=" md-cyan-theme" style="background-color: white;" style="margin-left: 3%">
+                                        <p>辛苦了，快到最后了！您本单报销金额为</p>
+                                        <p>稍等，再确认一下，您本次报销发票中是否有增值税专用发票？长这样</p>
+                                        <img class="viewer" viewer src="img/bg.jpg" style="width: 360px;height:200px;display: initial;"/>
+                                        <!--<a style="margin-left: 3%;color: blue;cursor: pointer;" ng-click="showpic($event)">点击查看大图</a>-->
+                                        <p>录一下发票信息吧，这是您为公司的【省钱大计】做出的突出贡献！</p>
+                                    </md-content>
+
+                                    <!--<p style="margin-left: 3%"><a style="color: blue">查看月结账单</a><span style="color: red;margin-left: 3%">合计：</span></p>-->
+                                </md-card>
+
+                                <md-card class="md-cyan-theme" style="max-width: 100%">
+
+                                    <md-toolbar class="md-table-toolbar md-default" style="background-color: white;">
+                                        <div class="md-toolbar-tools" >
+                                            <div style="background-color: #2196f3;width: 50%;">
+                                                <h2 class="md-title" style="color: black;font-size: 16px;margin-left: 4px;padding-left: 20px;background-color: white;">增值税发票录入</h2>
+                                            </div>
+                                            <div flex></div>
+                                            <!--<md-button style=" margin-right: 0px;" ng-click="addtrip1($event)" ng-disabled="flagshow">-->
+                                                <!--+添加-->
+                                            <!--</md-button>-->
+                                            <md-button class="md-primary" aria-label="添加" ng-click="addtrip1($event)" ng-disabled="flagshow" style="color: rgb(92,107,192);">
+                                                <i class="iconfont">&#xe68d; 添加</i>
+                                            </md-button>
+                                        </div>
+                                    </md-toolbar>
+
+                                    <div>
+                                        <p style="margin-left: 2.2%;font-size: 16px;margin-bottom: 0px;">是否有增值税发票：
+                                        <md-radio-group ng-model="query.flag" ng-change="changeflag()">
+                                            <md-radio-button value="Y" style="display: inherit;">是</md-radio-button>
+                                            <md-radio-button value="N" style="display: inherit;margin-left: 3%">否</md-radio-button>
+                                        </md-radio-group>
+                                        </p>
+                                    </div>
+
+                                    <md-content class=" md-cyan-theme" style="background-color: white;">
+
+                                        <md-table-container style="width: 95%;padding-left: 2.5%;">
+                                            <!--<table data-md-table data-md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" data-ng-model="selected" md-progress="promise">-->
+                                            <table data-md-table data-ng-model="selected" md-progress="promise">
+                                                <thead md-head data-md-order="query.order" md-on-reorder="getDesserts">
+                                                <tr md-row>
+                                                    <th md-column>税率类型</th>
+                                                    <th md-column style="text-align: center;">税票日期</th>
+                                                    <th md-column>开票方</th>
+                                                    <th md-column>税票号</th>
+                                                    <th md-column>税额</th>
+                                                    <th md-column>操作</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody md-body>
+                                                <!--<tr md-row md-select="item" md-select-id="budget_templet_id" ng-repeat="item in feeapplylist.data.datalist" md-auto-select="options.autoSelect">-->
+                                                <tr md-row ng-repeat="item in appdata">
+                                                    <td md-cell style="word-break: keep-all;white-space: nowrap;" ng-class="(item.bill_type_id_error? 'aatrue':'aafalse')">
+                                                        <md-select ng-model="item.bill_type_id" placeholder="税率类型" ng-click="item.bill_type_id_error = false">
+                                                            <md-option ng-repeat="type in query.invoice_type" value="{{type.bill_type_id}}">{{type.fee_type_name}}</md-option>
+                                                        </md-select>
+                                                    </td>
+                                                    <td md-cell style="word-break: keep-all;white-space: nowrap;" ng-click="item.invoice_date_error=false" ng-class="(item.invoice_date_error? 'aatrue':'aafalse')">
+                                                        <!--{{item.invoice_date || '税票日期'}}-->
+                                                        <md-datepicker ng-model="item.invoice_date" md-placeholder=""></md-datepicker>
+                                                    </td>
+                                                    <td md-cell ng-click="item.invoice_maker_error=false" ng-class="(item.invoice_maker_error? 'aatrue':'aafalse')">
+                                                        <!--{{item.invoice_maker || '开票方'}}-->
+                                                        <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                                                            <input ng-model="item.invoice_maker" type="text" required>
+                                                        </md-input-container>
+                                                    </td>
+                                                    <td md-cell ng-click="item.invoice_num_error=false" ng-class="(item.invoice_num_error? 'aatrue':'aafalse')">
+                                                        <!--{{item.invoice_num || '税票号'}}-->
+                                                        <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                                                            <input ng-model="item.invoice_num" type="text" required>
+                                                        </md-input-container>
+                                                    </td>
+                                                    <td md-cell ng-click="item.tax_amount_error=false" ng-class="(item.tax_amount_error? 'aatrue':'aafalse')">
+                                                        <!--{{item.tax_amount || '税额'}}-->
+                                                        <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                                                            <input ng-model="item.tax_amount" type="number" required ng-change="edit_tax_amount()">
+                                                        </md-input-container>
+                                                    </td>
+                                                    <td md-cell>
+                                                        <md-button  class="md-primary" ng-click="delete1(item,$index)" style="margin: 0;padding: 0;">
+                                                            删除
+                                                        </md-button>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </md-table-container>
+
+                                    </md-content>
+                                </md-card>
+
+                                <md-card class="md-cyan-theme" style="max-width: 100%">
+                                    <md-toolbar class="md-table-toolbar md-default" style="background-color: white;">
+                                        <div class="md-toolbar-tools" >
+                                            <div flex></div>
+                                            <h2 style="color: red">增值税税金总额：{{query.totaltax}}</h2>
+                                            <md-button class="md-primary md-raised" ng-click="next()"  style="color: white;margin-right: 1%;"
+                                                       ng-disabled="addexpensesecond1.$invalid" disabled="disabled">下一步</md-button>
+                                        </div>
+                                    </md-toolbar>
+                                </md-card>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    #expensesecond .aafalse{
+        /*border: 0px;*/
+    }
+    #expensesecond .aatrue{
+        border: 1px red solid;
+    }
+    #expensesecond .active-Y{
+        background-color: green;
+        color: green;
+    }
+    #expensesecond .active-N{
+        background-color: red;
+        color: red;
+    }
+</style>

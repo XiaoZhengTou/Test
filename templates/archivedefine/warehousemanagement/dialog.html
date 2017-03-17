@@ -1,0 +1,78 @@
+<md-dialog aria-label="新增/编辑" style="width:600px;">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2 ng-bind="title"></h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="关闭"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <md-input-container class="md-block ml-nomargin">
+	        <label>档案柜编号</label>
+	        <input ng-model="filingCabinet.code" disabled />
+	    </md-input-container>
+	    <md-input-container class="md-block ml-nomargin">
+          <label>档案室</label>
+          <input ng-model="filingCabinet.name" ng-blur="onBlur(0,filingCabinet.name)"/>
+        </md-input-container>
+        <md-input-container class="md-block ml-nomargin">
+          <label>列序号</label>
+          <input ng-model="filingCabinet.columnindex" ng-blur="onBlur(1,filingCabinet.columnindex)"/>
+        </md-input-container>
+        <md-input-container class="md-block ml-nomargin">
+          <label>层序号</label>
+          <input ng-model="filingCabinet.layerindex" ng-blur="onBlur(2,filingCabinet.layerindex)"/>
+        </md-input-container>
+        <md-input-container class="md-block ml-nomargin">
+          <label>面序号</label>
+          <md-select ng-model="filingCabinet.faceindex" ng-change="onBlur(3,filingCabinet.faceindex)">
+	          <md-option value="A">
+	            A
+	          </md-option>
+	          <md-option value="B">
+	            B
+	          </md-option>
+	       </md-select>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>存放上限</label>
+          <input ng-model="filingCabinet.storagelimit"/>
+        </md-input-container>
+        <md-input-container class="md-block ml-nomargin">
+          <label>备注</label>
+          <textarea ng-model="filingCabinet.remark" md-maxlength="30" rows="2" md-select-on-focus></textarea>
+        </md-input-container>
+      	
+      	<md-radio-group ng-model="filingCabinet.status" class="ml-nomargin">
+	        <div flex layout='row' layout-align="start center">
+	          <div style="width:80px">
+	          	状态
+	          </div>
+	          <md-radio-button
+	              ng-value="1"
+	              class="md-primary" style="margin-right:30px">
+	              	生效
+	          </md-radio-button>
+	          <md-radio-button
+	              ng-value="0"
+	              class="md-primary" >
+	              	失效
+	          </md-radio-button>
+	        </div>
+	    </md-radio-group>
+	    
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button ng-click="answer('not useful')" class="md-raised md-primary">
+       	确认
+      </md-button>
+      <md-button ng-click="cancel()" class="md-raised">
+                  取消
+      </md-button>
+    </md-dialog-actions>
+</md-dialog>

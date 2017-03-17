@@ -1,0 +1,119 @@
+<md-dialog aria-label="地区类别" ng-cloak style="min-width: 50%" id="rarea-dialog3-detail">
+
+    <form name="addrarea" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 style="color: white">地区类别选择</h2>
+                <span flex></span>
+                <!--<md-button class="md-icon-button" ng-click="cancel()">-->
+                    <!--<md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>-->
+                <!--</md-button>-->
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="padding-top: 0px;padding-bottom: 0px">
+
+                <table class="table ng-scope" style="font-size: 14px;width: 94%;margin: 3%;margin-top: 2%;text-align: center;"  border="0">
+                    <td style="border: 1px solid black;width: 7%;cursor: pointer" ng-click="search_rarea1(0);activeItem='1'" ng-class="{'active': '1' == activeItem}">大区</td>
+                    <td style="border: 1px solid black;width: 7%;cursor: pointer" ng-click="search_rarea1(1);activeItem='2'" ng-class="{'active': '2' == activeItem}">国家</td>
+                    <td style="border: 1px solid black;width: 7%;cursor: pointer" ng-click="search_rarea1(2);activeItem='3'" ng-class="{'active': '3' == activeItem}">省</td>
+                    <td style="border: 1px solid black;width: 7%;cursor: pointer" ng-click="search_rarea1(3);activeItem='4'" ng-class="{'active': '4' == activeItem}">市</td>
+                    <td style="border: 1px solid black;width: 7%;cursor: pointer" ng-click="search_rarea1(4);activeItem='5'" ng-class="{'active': '5' == activeItem}">县/区</td>
+                    <td></td>
+                    <td>
+                        <span style="float: right">名称：</span></td>
+                    <td>
+                        <input ng-model="search.area_name" type="text" style="width: 100%;margin: 0; ">
+                    </td>
+                    <td>
+                        <md-icon md-svg-src="img/icons/search.svg" ng-click="search_rarea1()" style="cursor: pointer"></md-icon>
+                    </td>
+                </table>
+
+
+
+                <table ng-table="tableParams" class="table table-condensed table-bordered table-striped" show-filter="true" style="font-size:14px;width: 94%;margin: 3%;margin-top: 0%;margin-bottom: 0%;">
+
+                    <tr ng-repeat="user in $data">
+
+                        <td>
+                            <md-checkbox ng-model="user.check1" ng-checked="exists(user, selected)"  ng-click="toggle(user, selected)" style="margin-bottom: 0px"></md-checkbox></td>
+
+                        <td title="'名称'" filter="{ area_name: 'text'}" sortable="'area_name'">
+                            {{user.area_name}}</td>
+                        <td title="'区域类型'" filter="{ region_type_code: 'text'}" sortable="'region_type_code'" style="word-wrap:break-word">
+                            {{user.region_type_code == '0'? '大区':(user.region_type_code == '1'? '国家':(user.region_type_code == '2'? '省':(user.region_type_code == '3'? '市':(user.region_type_code == '4'? '县/区':''))))}}</td>
+                        <td title="'编码'" filter="{ area_code: 'text'}" sortable="'area_code'" style="word-wrap:break-word">
+                            {{user.area_code}}</td>
+                        <td title="'拼音码'" filter="{ pin_yin: 'text'}" sortable="'pin_yin'" style="word-wrap:break-word">
+                            {{user.pin_yin}}</td>
+                        <td title="'上级区域'" filter="{ parent_area_name: 'text'}" sortable="'parent_area_name'" style="word-wrap:break-word">
+                            {{user.parent_area_name}}</td>
+                        <td title="'区域路径'" filter="{ full_path: 'text'}" sortable="'full_path'" style="word-wrap:break-word">
+                            {{user.full_path}}</td>
+                        <td title="'是否热门城市'" filter="{ hot_city_flag: 'text'}" sortable="'hot_city_flag'" style="word-wrap:break-word">
+                            {{user.hot_city_flag == '1'? '是':'否'}}</td>
+                        <td title="'是否出差可选'" filter="{ is_travel_city: 'text'}" sortable="'is_travel_city'" style="word-wrap:break-word">
+                            {{user.is_travel_city == 'Y'? '是':'否'}}</td>
+
+                    </tr>
+                </table>
+                <div style="margin-right: 3%;float: right" layout="row">
+
+                    <span style="margin: 25px 27px 26px 0;">Page:</span>
+                    <md-select ng-model="pageindex">
+                        <md-option ng-repeat="page in pages" value="{{page}}">{{page}}</md-option>
+                    </md-select>
+
+                    <span style="margin: 25px 27px 26px 0;">Rows per page:</span>
+                    <md-select ng-model="pagesize">
+                        <md-option value="2">2</md-option>
+                        <md-option value="5">5</md-option>
+                        <md-option value="10">10</md-option>
+                        <md-option value="20">20</md-option>
+                    </md-select>
+                    <span style="margin:27px 0 26px 18px;">{{page1}} - {{page2}} of {{total}}</span>
+                    <md-button class="md-primary" md-no-ink style="min-width: 1%" ng-click="lastpage()" ng-disabled="lastpaged">
+                        <span> < </span>
+                    </md-button>
+                    <md-button class="md-primary" md-no-ink style="min-width: 1%" ng-click="nextpage()" ng-disabled="nextpaged">
+                        <span> > </span>
+                    </md-button>
+
+
+                </div>
+
+
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <label>已选区域：</label>
+            <md-chips ng-model="selected" md-max-chips="1">
+                <md-chip-template>
+                    <strong>{{$chip.area_name}}</strong>
+                </md-chip-template>
+            </md-chips>
+            <span flex></span>
+            <md-button class="md-primary md-raised" ng-click="answer($event)"  style="color: white;float: right"
+                       ng-disabled="addrarea.$invalid" disabled="disabled">确定</md-button>
+
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+
+<style>
+    /*#rarea-dialog1-detail .md-datepicker-input-container.md-datepicker-invalid {*/
+        /*border-bottom-color: rgb(224,224,224);*/
+    /*}*/
+    #rarea-dialog3-detail .md-datepicker-input-container{
+        width: 93.9%;
+        margin-left: -2px;
+    }
+    #rarea-dialog3-detail .md-datepicker-calendar-icon{
+        margin-bottom: -7px;
+    }
+    #rarea-dialog3-detail .active{
+        color:blue;
+    }
+</style>

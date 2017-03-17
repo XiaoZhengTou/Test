@@ -1,0 +1,38 @@
+<md-dialog aria-label="新增明细">
+	<form ng-cloak>
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2>日常明细</h2>
+				<span flex></span>
+				<md-button class="md-icon-button" ng-click="cancel()">
+					<md-icon aria-label="Close dialog">
+						<i class="iconfont">&#xe634;</i>
+					</md-icon>
+				</md-button>
+			</div>
+		</md-toolbar>
+		<md-dialog-content>
+			<div class="md-dialog-content">
+				<div layout="column" style="width:400px;">
+					<md-input-container>
+						<label>事由</label>
+						<input ng-model="form.item.reason_desc" type="text">
+					</md-input-container>
+					<md-input-container>
+						<label>金额</label>
+						<input ng-model="form.item.apply_amount" type="number">
+					</md-input-container>
+					<div>
+						<dr-Budget remodel="form.budget" titlenamea="预算部门 (必填)" titlenameb="预算部科目(必填)" titlenamec="预算单元(必填)"></dr-Budget>		
+					</div>
+				</div>
+			</div>
+		</md-dialog-content>
+		<md-dialog-actions layout="row">
+			<span flex></span>
+			<md-button class="md-primary" ng-click="answer(form)">
+				确定
+			</md-button>
+		</md-dialog-actions>
+	</form>
+</md-dialog>

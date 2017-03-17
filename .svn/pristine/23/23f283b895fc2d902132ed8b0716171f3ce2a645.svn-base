@@ -1,0 +1,4 @@
+<div ng-controller="currencyCtrl" class="md-padding" ng-cloak>
+    <h2 class="md-title">currencyCtrl</h2>
+</div>
+

@@ -1,0 +1,97 @@
+<div ng-controller="yfkCtrl" class="jiehuankuan jiekuan view" ng-cloak>
+<div ng-controller="yfkViewCtrl">
+  <md-card>
+  	<md-card-content>
+  	  <h2>{{detail.loan_info_code}}</h2>
+	  <div class="info">
+	    <h3 class="title">借款单信息</h3>
+	    <p><span>关联EA：</span>EA单号 , 出差说明，出差金额，出发日期</p>
+	    <p><span>借款金额：</span>{{detail.amount}} ({{detail.currency_name}})</p>
+	    <p><span>入账单位：</span>OU0098 广东美的制冷设备有限公司-集团职能部</p>
+	    <p><span>借款说明：</span>{{detail.sensitive_info}}</p>
+	    <p><span>还款方式：</span>{{detail.is_instalments_pay=='Y' ? '分期还款' : '一次性还款'}}</p>
+	    <p><span>收款账户：</span>
+	    {{detail.receiver}}@{{detail.bank_name}}:{{detail.bank_account}}
+	    </p>
+	    <h3>还款计划（{{detail.is_instalments_pay=='Y' ? '分期还款' : '一次性还款'}}）</h3>
+	    <!-- 一次性借款开始 -->
+	    <p class="onetime" ng-if="detail.is_instalments_pay=='N'">
+	    	还款时间：{{detail.expected_repay_date}}，还款金额：{{detail.amount}}
+	    </p>
+	    <!-- 一次性借款结束 -->
+	    <md-table-container ng-if="detail.is_instalments_pay=='Y'">
+	    <md-divider></md-divider>
+	    <table md-table>
+	      <thead md-head>
+	      <tr md-row>
+	        <th md-column>
+	          还款期数
+	        </th>
+	        <th md-column>
+	          还款月份
+	        </th>
+	        <th md-column md-numeric>
+	          还款金额
+	        </th>
+	      </tr>
+	      </thead>
+	      <tbody md-body>
+	        <tr md-row ng-repeat="x in detail.emslmloanrepayplans">
+	          <td md-cell>第{{$index + 1}}期</td>
+	          <td md-cell>{{x.which_month}}</td>
+	          <td md-cell>{{x.amount}}</td>
+	        </tr>
+	      </tbody>
+	    </table>
+	    <md-divider></md-divider>
+	  </md-table-container>
+	  </div>
+	  <div class="action ml-margin-large-top">
+	  	<!-- 草稿单操作开始 -->
+	  	<div layout="row" layout-align="center center" ng-if="detail.status == 'CG'">
+        <div flex="60" class="ml-inlineblock ml-text-center">
+        	<md-button class="md-raised md-warn ml-button" aria-label="上传附件" ng-click="del($event,detail.loan_info_id)">删除</md-button>
+          	<md-button class="md-raised md-primary ml-button" aria-label="启动流程" ng-click="next()">启动流程</md-button>
+        </div>
+    	</div>
+    	<!-- 草稿单操作结束 -->
+    	<!-- 审核中页开始 -->
+    	<div layout="row" layout-align="center center" ng-if="detail.status == 'SPZ'">
+        <div flex="60" class="ml-inlineblock ml-text-center">
+        	<md-button class="md-raised md-warn ml-button" aria-label="上传附件" ng-click="null">撤回</md-button>
+        	<md-button class="md-raised md-warn ml-button" aria-label="上传附件" ng-click="null">催办</md-button>
+          	<md-button class="md-raised md-primary ml-button" aria-label="保存" ng-click="null">打印</md-button>
+          	<md-button class="md-raised md-primary ml-button" aria-label="保存" ng-click="goBack()">返回</md-button>
+        </div>
+    	</div>
+    	<!-- 审核中页结束 -->
+    	<!-- 待还款页开始 -->
+    	<div layout="row" layout-align="center center" ng-if="detail.status == 'DHK'">
+        <div flex="60" class="ml-inlineblock ml-text-center">
+        	<md-button class="md-raised md-warn ml-button" aria-label="上传附件" ng-click="null">去还款</md-button>
+          	<md-button class="md-raised md-primary ml-button" aria-label="保存" ng-click="null">打印</md-button>
+          	<md-button class="md-raised md-primary ml-button" aria-label="保存" ng-click="goBack()">返回</md-button>
+        </div>
+    	</div>
+    	<!-- 待还款页结束 -->
+    	<!-- 已还清页开始 -->
+    	<div layout="row" layout-align="center center" ng-if="detail.status == 'YHQ'">
+        <div flex="60" class="ml-inlineblock ml-text-center">
+        	<md-button class="md-raised md-warn ml-button" aria-label="上传附件" ng-click="null">打印</md-button>
+          	<md-button class="md-raised md-primary ml-button" aria-label="保存" ng-click="goBack()">返回</md-button>
+        </div>
+    	</div>
+    	<!-- 已还清页结束 -->
+    	<!-- 已作废页开始 -->
+    	<div layout="row" layout-align="center center" ng-if="detail.status == 'ZF'">
+        <div flex="60" class="ml-inlineblock ml-text-center">
+          	<md-button class="md-raised md-primary ml-button" aria-label="保存" ng-click="goBack()">返回</md-button>
+        </div>
+    	</div>
+    	<!-- 已作废页结束 -->
+	  </div>
+  	</md-card-content>
+  	<!-- {{detail | json}} -->
+  </md-card>
+</div>
+</div>

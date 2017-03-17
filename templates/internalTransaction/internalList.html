@@ -1,0 +1,46 @@
+<div ng-controller="internalListCtrl" ng-cloak class="md-inline-form">
+	<md-card>
+		<div layout="row" class="padding-left-right-16">
+			<div flex class="padding-right">
+				<md-input-container class="md-block md-cyan-theme md-input-invalid">
+					<label>入账单位</label>
+					<md-select ng-model="query.inspention" ng-change="inspentionChange()">
+						<md-option ng-repeat="x in query.filter.inspentionList" value="{{x.id}}">
+							{{x.name}}
+						</md-option>
+					</md-select>
+				</md-input-container>
+			</div>
+			
+			<div flex class="padding-right">
+				<md-input-container class="md-block md-cyan-theme md-input-invalid">
+					<label>入账单位</label>
+					<md-select ng-model="query.inspention" ng-change="inspentionChange()">
+						<md-option ng-repeat="x in query.filter.inspentionList" value="{{x.id}}">
+							{{x.name}}
+						</md-option>
+					</md-select>
+				</md-input-container>
+			</div>
+
+			<div flex>
+					<md-button class="md-raised md-primary" aria-label="查询" ng-click="find()">查询</md-button>
+			</div>
+		</div>
+
+	</md-card>
+	<md-card>
+		<md-content>
+			<md-tabs md-dynamic-height md-border-bottom>
+				<md-tab label="内部客户" md-on-select="getCurrent()">
+					<div flex ng-include="'templates/internalTransaction/customer.html'"></div>
+
+				</md-tab>
+				<md-tab label="内部供应商" md-on-select="getComplete()">
+					<div flex ng-include="'templates/internalTransaction/supplier.html'"></div>
+
+				</md-tab>
+			</md-tabs>
+		</md-content>
+	</md-card>
+</div>

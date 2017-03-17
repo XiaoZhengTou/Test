@@ -1,0 +1,88 @@
+<md-dialog aria-label="新增流程分支规则" ng-cloak style="min-width: 50%" id="processbrule1-dialog1-detail">
+    <form name="addprocessbrule1" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 style="color: white">新增流程分支规则</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="padding-top: 0px;padding-bottom: 0px">
+
+                <div class="demo-tab" style="padding: 25px 25px 0 25px; text-align: center;">
+
+                    <md-input-container class="md-block" flex-gt-sm style="text-align: left">
+                        <label>模块</label>
+                        <md-select ng-model="processbrule1.form_type" ng-change="getordertype(processbrule1.form_type)" required>
+                            <md-option ng-repeat="type in ctype" value="{{type.itemValue}}">{{type.itemName}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm style="text-align: left">
+                        <label>单据类型</label>
+                        <md-select ng-model="processbrule1.order_type" required>
+                            <md-option ng-repeat="type in ordertype" value="{{type.itemValue}}">{{type.itemName}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm style="text-align: left">
+                        <label>预算主体层级</label>
+                        <md-select ng-model="processbrule1.mainorg_layer" required>
+                            <md-option ng-repeat="att in attribute" value="{{att.itemValue}}">{{att.itemName}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm style="text-align: left">
+                        <label>基础科目</label>
+                        <md-select ng-model="processbrule1.fee_type_id" ng-required="processbrule1.form_type == 'EA' || processbrule1.form_type == 'EC'">
+                            <md-option ng-repeat="basic in basicdata" value="{{basic.fee_type_id}}">{{basic.fee_type_name}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm style="text-align: left">
+                        <label>流程分支</label>
+                        <md-select ng-model="processbrule1.branch_code" required>
+                            <md-option ng-repeat="att in rulesub" value="{{att.itemValue}}">{{att.itemName}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>金额>=</label>
+                        <input ng-model="processbrule1.start_amount" type="number">
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>金额<</label>
+                        <input ng-model="processbrule1.end_amount" type="number" min="{{processbrule1.start_amount}}">
+                    </md-input-container>
+
+
+                </div>
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <span flex></span>
+            <md-button class="md-primary md-raised" ng-click="answer()"  style="color: white;float: right"
+                       ng-disabled="addprocessbrule1.$invalid" disabled="disabled">确定</md-button>
+
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+
+<style>
+    /*#processbrule1-dialog1-detail .md-datepicker-input-container.md-datepicker-invalid {*/
+        /*border-bottom-color: rgb(224,224,224);*/
+    /*}*/
+    #processbrule1-dialog1-detail .md-datepicker-input-container{
+        width: 93.9%;
+        margin-left: -2px;
+    }
+    #processbrule1-dialog1-detail .md-datepicker-calendar-icon{
+        margin-bottom: -7px;
+    }
+</style>

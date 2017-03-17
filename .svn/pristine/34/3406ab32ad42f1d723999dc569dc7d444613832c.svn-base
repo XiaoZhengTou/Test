@@ -1,0 +1,129 @@
+<md-dialog aria-label="修改银行账户" ng-cloak style="min-width: 50%" id="company-dialog2-detail">
+    <form name="addpaybank2" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 style="color: white">修改银行账户</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="padding-top: 0px;padding-bottom: 0px">
+
+                <div class="demo-tab" style="padding: 25px 25px 0 25px; text-align: center;">
+
+
+                    <div layout-gt-sm="row">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>账户</label>
+                            <input ng-model="paybank.acc_num" type="text" required>
+                        </md-input-container>
+
+                        <md-input-container class="md-block" flex-gt-sm style="text-align: left;">
+                            <label>开户币种</label>
+                            <md-select ng-model="paybank.currency_code">
+                                <md-option ng-repeat="currency in currency1" value="{{currency.currency_code}}">{{currency.currency_code}}</md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+
+                    <div layout-gt-sm="row">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>中文开户名</label>
+                            <input ng-model="paybank.acc_name_cn" type="text">
+                        </md-input-container>
+
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>英文开户名</label>
+                            <input ng-model="paybank.acc_name_en" type="text">
+                        </md-input-container>
+                    </div>
+
+                    <div layout-gt-sm="row">
+                        <md-input-container class="md-block" flex-gt-sm style="text-align: left;">
+                            <label>开户行</label>
+                            <md-select ng-model="bank.bank2" required>
+                                <md-option ng-repeat="bank in bank1" value="{{bank}}">{{bank.bank_name}}</md-option>
+                            </md-select>
+                        </md-input-container>
+
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>联行号</label>
+                            <input ng-model="bank.bank_code" type="text" required>
+                        </md-input-container>
+                    </div>
+
+                    <div layout-gt-sm="row">
+                        <md-input-container class="md-block" flex-gt-sm style="text-align: left;">
+                            <label>账号性质</label>
+                            <md-select ng-model="paybank.acc_type" required>
+                                <md-option value="0">基本户</md-option>
+                                <md-option value="1">一般户</md-option>
+                                <md-option value="2">备用金户</md-option>
+                                <md-option value="3">第3方支付账户</md-option>
+                            </md-select>
+                        </md-input-container>
+
+                        <md-input-container class="md-block" flex-gt-sm style="text-align: left;">
+                            <label>所属核算单位</label>
+                            <md-select ng-model="paybank.company_id">
+                                <md-option  ng-repeat="company in company1" value="{{company.company_id}}">{{company.company_name}}</md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+
+                    <div layout-gt-sm="row">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>直连属性</label>
+                            <input ng-model="paybank.connect_attr" type="text" required>
+                        </md-input-container>
+
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>SWIFT CODE</label>
+                            <input ng-model="paybank.swift_code" type="text" required>
+                        </md-input-container>
+                    </div>
+
+                    <div layout-gt-sm="row">
+                        <md-input-container class="md-block" flex-gt-sm style="text-align: left;">
+                            <label>状态</label>
+                            <md-select ng-model="paybank.status" required>
+                                <md-option value="Y">启用</md-option>
+                                <md-option value="N">停用</md-option>
+                                <md-option value="D">草稿</md-option>
+                            </md-select>
+                        </md-input-container>
+
+                        <md-input-container class="md-block" flex-gt-sm>
+
+                        </md-input-container>
+                    </div>
+
+                </div>
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <md-button class="md-primary md-raised" ng-click="delete1()"  style="background-color:red;color: white;float: right;margin-right: 3%;">删除</md-button>
+            <!--<span flex></span>-->
+            <md-button class="md-primary md-raised" ng-click="answer()"  style="color: white;float: right"
+                       ng-disabled="addpaybank2.$invalid" disabled="disabled">确定</md-button>
+
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+
+<style>
+    #company-dialog2-detail .md-datepicker-input-container.md-datepicker-invalid {
+        border-bottom-color: rgb(224,224,224);
+    }
+    #company-dialog2-detail .md-datepicker-input-container{
+        width: 93.9%;
+        margin-left: -2px;
+    }
+    #company-dialog2-detail .md-datepicker-calendar-icon{
+        margin-bottom: -7px;
+    }
+</style>

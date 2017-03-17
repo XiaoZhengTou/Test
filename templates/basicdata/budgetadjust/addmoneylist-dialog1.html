@@ -1,0 +1,116 @@
+<md-dialog aria-label="预算追加申请查看页" ng-cloak style="min-width: 70%" id="addmoneylist-dialog1-detail">
+    <form name="addaddmoneylist" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 style="color: white">预算追加申请查看页</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="padding-top: 0px;padding-bottom: 0px">
+
+                <div class="demo-tab" style="padding: 25px 25px 0 25px; text-align: center;">
+                    <p><h3>预算金额追加申请 {{addmoneylist.adjust_apply_code}}</h3></p>
+                    <table class="table ng-scope" style="margin-bottom: 0px;text-align: initial;">
+                        <tr>
+                            <td><h3 style="float: right;margin: 0;">基本信息</h3></td>
+                            <td style="width: 83%;"></td>
+                        </tr>
+                        <tr>
+                            <td style="border-top: 0px;"><span style="float: right;">申请人：</span></td>
+                            <td style="border-top: 0px;">
+                                {{addmoneylist.apply_name}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border-top: 0px;"><span style="float: right;">部门：</span></td>
+                            <td style="border-top: 0px;">
+                                {{addmoneylist.org_name}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border-top: 0px;"><span style="float: right;">申请日期：</span></td>
+                            <td style="border-top: 0px;">
+                                {{addmoneylist.apply_date}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border-top: 0px;"><span style="float: right;">审批状态：</span></td>
+                            <td style="border-top: 0px;">
+                                {{addmoneylist.order_status == 'DRAFT' ? '草稿':addmoneylist.order_status == 'SUBMITED' ? '待审':addmoneylist.order_status == 'AUDITED' ? '已审':addmoneylist.order_status == 'DISABLED' ? '作废':addmoneylist.order_status == 'REJECTED' ? '拒绝':addmoneylist.order_status}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border-top: 0px;border-bottom: 1px solid #ddd;"><span style="float: right">调整事由：</span></td>
+                            <td style="border-top: 0px;border-bottom: 1px solid #ddd;">
+                                {{addmoneylist.adjust_desc}}
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div>
+                        <div class="md-toolbar-tools" layout="row">
+                            <span>调整明细</span>
+                            <span flex></span>
+                        </div>
+                    </div>
+
+
+                    <md-table-container style="width: 95%;padding-left: 2.5%;">
+                        <table data-md-table md-progress="promise">
+                            <!--<table data-md-table data-ng-model="selected" md-progress="promise">-->
+                            <thead md-head data-md-order="query.order" md-on-reorder="getDesserts">
+                            <tr md-row>
+                                <th md-column>序号</th>
+                                <th md-column>预算名称</th>
+                                <th md-column>预算单元</th>
+                                <!--<th md-column>预算金额</th>-->
+                                <!--<th md-column>已用金额</th>-->
+                                <!--<th md-column>剩余金额</th>-->
+                                <th md-column>调整金额</th>
+                            </tr>
+                            </thead>
+                            <tbody md-body>
+                            <tr md-row ng-repeat="item in appdata">
+                                <!--<tr md-row ng-repeat="item in appdata">-->
+                                <td md-cell>{{$index+1}}</td>
+                                <td md-cell>{{budget_name1}}</td>
+                                <td md-cell>{{item.budget_node_name}}</td>
+                                <!--<td md-cell>{{item.budget_amount}}</td>-->
+                                <!--<td md-cell>{{item.fee_amount}}</td>-->
+                                <!--<td md-cell>{{item.budget_amount-item.fee_amount}}</td>-->
+                                <td md-cell>{{item.adjust_amount}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </md-table-container>
+
+                </div>
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <span flex></span>
+            <md-button class="md-primary md-raised" ng-click="answer()"  style="color: white;float: right"
+                       ng-disabled="addaddmoneylist.$invalid" disabled="disabled">保存</md-button>
+
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+
+<style>
+    #addmoneylist-dialog1-detail .md-datepicker-input-container.md-datepicker-invalid {
+        border-bottom-color: rgb(224,224,224);
+    }
+    #addmoneylist-dialog1-detail .md-datepicker-input-container{
+        width: 93.9%;
+        margin-left: -2px;
+    }
+    #addmoneylist-dialog1-detail .md-datepicker-calendar-icon{
+        margin-bottom: -7px;
+    }
+</style>

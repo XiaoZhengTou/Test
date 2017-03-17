@@ -1,0 +1,69 @@
+<div ng-controller="yfkCtrl" class="jiehuankuan jiekuan shenpi" ng-cloak>
+<div ng-controller="yfkShenpiCtrl">
+<!-- 状态步骤条开始 -->
+<div class="ml-setupbar ml-margin-top ml-margin-large-bottom" layout="row" layout-align="center center">
+  <div flex="70" layout="row" class="container">
+    <div flex class="ml-text-center item">
+      <span>填写表单</span>
+    </div>
+    <div flex class="ml-text-center item active">
+      <span>选择审批人</span>
+    </div>
+    <div flex class="ml-text-center item">
+      <span>提交单据</span>
+    </div>
+  </div>
+</div>
+<!-- 状态步骤条结束 -->
+<md-card>
+<md-card-content>
+  <h2>借款审批人</h2>
+  <div class="info">
+    <h3 class="title">借款单信息</h3>
+    <p><span>关联EA：</span>EA单号 , 出差说明，出差金额，出发日期</p>
+    <p><span>借款金额：</span>2000人民币</p>
+    <p><span>入账单位：</span>OU0098 广东美的制冷设备有限公司-集团职能部</p>
+    <p><span>借款说明：</span>出差沈阳借款</p>
+    <p><span>还款方式：</span>分期还款</p>
+    <h3>还款计划</h3>
+    <md-table-container>
+    <md-divider></md-divider>
+    <table md-table>
+      <thead md-head>
+      <tr md-row>
+        <th md-column>
+          还款期数
+        </th>
+        <th md-column>
+          还款月份
+        </th>
+        <th md-column md-numeric>
+          还款金额
+        </th>
+      </tr>
+      </thead>
+      <tbody md-body>
+        <tr md-row>
+          <td md-cell>第1期</td>
+          <td md-cell>2016-07-15</td>
+          <td md-cell>3000</td>
+        </tr>
+        <tr md-row>
+          <td md-cell>第1期</td>
+          <td md-cell>2016-07-15</td>
+          <td md-cell>3000</td>
+        </tr>
+        <tr md-row>
+          <td md-cell>第1期</td>
+          <td md-cell>2016-07-15</td>
+          <td md-cell>3000</td>
+        </tr>
+      </tbody>
+    </table>
+    <md-divider></md-divider>
+  </md-table-container> 
+  </div>
+</md-card-content>
+</md-card>
+</div>
+</div>

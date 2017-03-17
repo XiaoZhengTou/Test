@@ -1,0 +1,122 @@
+<div ng-controller="taskManCtrl" class="task airfare">
+	<div ng-controller="taskSetListCtrl">
+		<md-card>
+			<div class="md-toolbar-tools">
+		      	<h3>
+		       		<span>任务组</span>
+		      	</h3> 
+		   </div> 
+			<div layout="row"  class="ml-marginT-20">
+				<md-input-container class="md-block ml-marginlr-10" flex>
+		            <label>任务池</label>
+		            <input>
+				</md-input-container>
+				<md-input-container class="md-block ml-marginlr-10" flex>
+		            <label>任务组</label>
+		            <input>
+				</md-input-container>
+				<md-input-container class="md-block ml-marginlr-10" flex>
+		            <label>组别</label>
+		            <md-select ng-model="priorty">
+						<md-option value="piao">票据组</md-option>
+						<md-option value="fu">复审组</md-option>
+						<md-option vlaue="chu">初审组</md-option>
+					</md-select>
+				</md-input-container>
+			</div>
+			<div layout="row">
+				<md-input-container class="md-block ml-marginlr-10" flex>
+		            <label>组员任务上限/天</label>
+		            <input>
+				</md-input-container>
+				<md-input-container class="md-block ml-marginlr-10" flex>
+		            <label>组长</label>
+		            <md-select ng-model="priorty">
+						<md-option value="Mip">MIP通讯录</md-option>
+					</md-select>
+				</md-input-container>
+				<md-input-container class="md-block ml-marginlr-10" flex>
+		            <label>状态</label>
+		            <md-select ng-model="priorty">
+						<md-option value='zhengchang'>正常</md-option>
+						<md-option value="zuofei">作废</md-option>
+					</md-select>
+				</md-input-container>
+			</div>
+			<div layout="row">
+				<md-input-container class="md-block ml-marginlr-10 ml-marginT-20" flex>
+		            <label>派工模式</label>
+		            <md-select ng-model="priorty">
+						<md-option value="zi">自动派工</md-option>
+						<md-option value="qiang">抢工模式</md-option>
+					</md-select>
+				</md-input-container>
+				<div layout="row" layout-align="start center" layout-padding flex>
+					<span>是否凭实物审单	</span>
+					<md-switch ng-model="physical" aria-label="physical" ></md-switch>
+				</div>
+				<div layout="row" layout-align="start center" layout-padding flex>
+				    <p>是否自动审批</p>
+				    <md-switch ng-model="autoSheet" aria-label="autoSheet" ></md-switch>
+				</div>
+			</div>
+			<md-input-container class="md-block ml-marginlr-10" flex>
+		            <label>说明</label>
+		            <input>
+			</md-input-container>
+		</md-card>
+		<md-card>
+		<div class="ml-textalign-right">
+        	<md-button class="md-raised md-primary">添加规则</md-button>
+        	<md-button class="md-raised md-primary">删除规则</md-button>
+        </div>
+	   	<md-content>
+		    <md-tabs md-dynamic-height md-border-bottom>
+		      <md-tab label="组员">
+		        <md-content class="md-padding">
+		         	<md-list layout="row" class="ml-text-center ml-bgcolor-blue">
+		         		<span flex>全选</span>
+		         		<span flex>姓名</span>
+		         		<span flex>账号</span>
+		         		<span flex>角色</span>
+		         		<span flex>在岗状态</span>
+		         	</md-list>
+		         	<md-list  layout="row" class="ml-text-center">
+		         		<span flex>
+		         			<md-checkbox>  </md-checkbox>
+		         		</span>
+		         		<span flex>李云龙</span>
+		         		<span flex>zhangs</span>
+		         		<span flex>组长</span>
+		         		<span flex>正常</span>
+		         	</md-list>
+		        </md-content>
+			      </md-tab>
+			      <md-tab label="派工规则">
+			        <md-content class="md-padding">
+			        	<md-list layout="row" class="ml-text-center ml-bgcolor-blue">
+			         		<span flex="10">全选</span>
+			         		<span flex="20">规则名称</span>
+			         		<span flex="25">规则描述</span>
+			         		<span flex="15">规则状态</span>
+			         		<span flex="15">创建人</span>
+			         		<span flex="15">创建日期</span>
+			         	</md-list>
+			         	<md-list  layout="row" class="ml-text-center">
+			         		<span flex="10">
+			         			<md-checkbox>  </md-checkbox>
+			         		</span>
+			         		<span flex="20">总部五项费用</span>
+			         		<span flex="25">集团总部五项费用单据</span>
+			         		<span flex="15">启用</span>
+			         		<span flex="15">张三</span>
+			         		<span flex="15">2015-5-5</span>
+			         	</md-list>
+			        </md-content>
+			      </md-tab>
+			     
+			    </md-tabs>
+			</md-content>
+		</md-card>	
+	</div>
+</div>

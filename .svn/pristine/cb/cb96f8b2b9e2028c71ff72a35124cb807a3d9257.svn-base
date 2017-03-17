@@ -1,0 +1,16 @@
+<div role="dialog" layout="column" layout-align="center center" style="min-width: 400px;">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>图片信息</h2>
+      <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <i class="iconfont">&#xe634;</i>
+        </md-button>
+    </div>
+  </md-toolbar>
+  <div class="demo-dialog-content" style="min-height:300px;">
+    <div layout="row">
+      <img flex src="http://10.16.30.77:8080/sdatt/encrypt/image/{{invoice.image_id}}">
+    </div>
+  </div>
+</div>

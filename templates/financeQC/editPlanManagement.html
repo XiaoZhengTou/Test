@@ -1,0 +1,363 @@
+<div ng-controller="editPlanManagementCtrl" class="airfare">
+	<md-card>
+		<div class="md-toolbar-tools">
+	      	<h3><span>基本信息</span></h3> 
+	    </div>  
+	    <md-divider></md-divider>
+			<div>				
+				<div layout="row" flex class="ml-marginT-20">
+					<md-input-container class="md-block ml-marginlr-10" flex>
+			            <label>质检计划编号</label>
+			            <input>
+			        </md-input-container>
+			        <md-input-container class="md-block ml-marginlr-10" flex>
+			            <label>质检计划名称</label>
+			            <input>
+			        </md-input-container>
+			        <md-input-container class="md-block ml-nomargin ml-marginlr-10" flex>
+						<label>质检内容</label>
+						<md-select ng-model="moneyType" class="ml-marginlr-10">
+							<md-option value="null">财务审单</md-option>
+							<md-option value="DRAFT">档案管理</md-option>
+							<md-option value="SUBMITED">对账管理</md-option>
+						</md-select>
+					</md-input-container>
+			        <!--<div flex layout="row">
+			        	<md-input-container class="md-block ml-marginlr-10">
+				            <label>金额（最小值）</label>
+				            <input>
+				        </md-input-container>
+				        <span class="ml-lineheight-48 ml-marginlr-10">至</span>
+				        <md-input-container class="md-block ml-marginlr-10">
+				            <label>金额（最大值）</label>
+				            <input>
+				        </md-input-container>
+			        </div>-->
+				</div>
+				<div layout="row">
+					<md-input-container class="md-block ml-nomargin ml-marginlr-10" flex>
+						<label>重复周期</label>
+						<md-select ng-model="moneyType" class="ml-marginlr-10">
+							<md-option value="null">仅本次</md-option>
+							<md-option value="DRAFT">月</md-option>
+							<md-option value="SUBMITED">年</md-option>
+						</md-select>
+					</md-input-container>
+					<md-input-container class="md-block ml-nomargin" flex-gt-sm>
+						<md-datepicker ng-model="createTime" md-placeholder="计划开始时间" ></md-datepicker>
+					</md-input-container>
+					<md-input-container class="md-block ml-nomargin" flex-gt-sm>
+						<md-datepicker ng-model="createTime" md-placeholder="要求完成时间" ></md-datepicker>
+					</md-input-container>
+				</div>
+				<div layout="row" flex>
+					<md-input-container class="md-block ml-nomargin ml-marginlr-10" flex>
+						<label>抽样类型</label>
+						<md-select ng-model="moneyType" class="ml-marginlr-10">
+							<md-option value="null">数量</md-option>
+							<md-option value="DRAFT">比例</md-option>
+						</md-select>
+					</md-input-container>
+					<md-input-container class="md-block ml-marginlr-10" flex>
+			            <label>抽样值</label>
+			            <input>
+			        </md-input-container>
+			        <md-input-container class="md-block ml-nomargin ml-marginlr-10" flex>
+						<label>计划状态</label>
+						<md-select ng-model="moneyType" class="ml-marginlr-10">
+							<md-option value="null">草稿</md-option>
+							<md-option value="DRAFT">已批准</md-option>
+						</md-select>
+					</md-input-container>
+				</div>
+				<div layout="row" flex>
+					<md-input-container class="md-block ml-nomargin ml-marginlr-10" flex>
+			            <label>质检负责人</label>
+			            <input>
+			        </md-input-container>
+			        <md-input-container class="md-block ml-nomargin" flex-gt-sm >
+						<md-datepicker ng-model="createTime" md-placeholder="制定日期" ></md-datepicker>
+					</md-input-container>
+					<md-input-container class="md-block ml-nomargin" flex-gt-sm>
+						<md-datepicker ng-model="createTime" md-placeholder="上次执行日期" ></md-datepicker>
+					</md-input-container>
+				</div>
+				<div layout="row" flex>
+					<md-input-container class="md-block ml-nomargin ml-marginlr-10" flex="33">
+						<label>批准人</label>
+						<md-select ng-model="moneyType" class="ml-marginlr-10">
+							<md-option value="null">xxx</md-option>
+							<md-option value="DRAFT">xxxxxx</md-option>
+						</md-select>
+					</md-input-container>
+			        <md-input-container class="md-block ml-nomargin" flex-gt-sm>
+						<md-datepicker ng-model="createTime" md-placeholder="批准日期" ></md-datepicker>
+					</md-input-container>
+				</div>
+			</div>
+		</md-card>
+		<md-card>
+		<div class="md-toolbar-tools">
+	      	<h3><span>抽样规则</span></h3> 
+	    </div>  
+	    <md-divider></md-divider>
+			<div style="display: none;">
+		        <!--<div flex layout="row">
+		        	<md-input-container class="md-block ml-marginlr-10">
+			            <label>金额（最小值）</label>
+			            <input>
+			        </md-input-container>
+			        <span class="ml-lineheight-48 ml-marginlr-10">至</span>
+			        <md-input-container class="md-block ml-marginlr-10">
+			            <label>金额（最大值）</label>
+			            <input>
+			        </md-input-container>
+		        </div>-->
+			    <div layout='row' class="ml-marginT-20">
+					<div layout="row" >
+						<md-input-container class="md-block ml-marginlr-10" flex>
+				            <label>报账时间（开始）</label>
+				            <input ng-model="beginTime" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+						</md-input-container>
+						<span class="ml-lineheight-48 ml-marginlr-10">至</span>
+						<md-input-container class="md-block ml-marginlr-10" flex>
+				            <label>报账时间（结束）</label>
+				           <input ng-model="beginTime" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+						</md-input-container>
+					</div>
+					<div layout="row" style="margin-left: 110px;">
+						<md-input-container class="md-block ml-marginlr-10" flex>
+				            <label>入池日期（开始）</label>
+				            <input ng-model="beginTime" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+						</md-input-container>
+						<span class="ml-lineheight-48 ml-marginlr-10">至</span>
+						<md-input-container class="md-block ml-marginlr-10" flex>
+				            <label>入池日期（结束）</label>
+				           <input ng-model="beginTime" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+						</md-input-container>
+					</div>
+					<div layout="row" style="margin-left: 110px;">
+						<md-input-container class="md-block ml-marginlr-10" flex>
+				            <label>完成日期（开始）</label>
+				            <input ng-model="beginTime" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+						</md-input-container>
+						<span class="ml-lineheight-48 ml-marginlr-10">至</span>
+						<md-input-container class="md-block ml-marginlr-10" flex>
+				            <label>完成日期（结束）</label>
+				           <input ng-model="beginTime" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+						</md-input-container>
+					</div>
+				</div>  
+				<div layout="row" flex>
+					<md-input-container class="md-block ml-marginlr-10" flex>
+			            <label>预算科目</label>
+			            <input>
+			        </md-input-container>
+					<md-input-container class="md-block ml-nomargin ml-marginlr-10" flex>
+						<label>基础科目</label>
+						<md-select ng-model="moneyType" class="ml-marginlr-10">
+							<md-option value="0">待分配</md-option>
+							<md-option value="1">待派工</md-option>
+							<md-option value="2">待处理</md-option>
+							<md-option value="3">已驳回</md-option>
+							<md-option value="4">等待</md-option>
+							<md-option value="5">已通过</md-option>
+						</md-select>
+					</md-input-container>
+			        <md-input-container class="md-block ml-nomargin ml-marginlr-10" flex>
+						<label>单据类型</label>
+						<md-select ng-model="moneyType" class="ml-marginlr-10">
+							<md-option value="0">EC</md-option>
+							<md-option value="1">EA</md-option>
+							<md-option value="2">LM</md-option>
+							<md-option value="3">PA</md-option>
+						</md-select>
+					</md-input-container>
+				</div>
+				<div layout="row" flex>
+					<md-input-container class="md-block ml-nomargin ml-marginlr-10" flex>
+						<label>任务池</label>
+						<md-select ng-model="moneyType" class="ml-marginlr-10">
+							<md-option value="0">财务工单池</md-option>
+							<md-option value="1">质检任务池</md-option>
+						</md-select>
+					</md-input-container>
+					<md-input-container class="md-block ml-nomargin ml-marginlr-10" flex>
+						<label>任务组</label>
+						<md-select ng-model="moneyType" class="ml-marginlr-10">
+							<md-option value="0">总部五项费用初审</md-option>
+							<md-option value="1">总部营运费用初审组</md-option>
+							<md-option value="2">总部大额支出初审组</md-option>
+							<md-option value="3">总部大额支出复审组</md-option>
+						</md-select>
+					</md-input-container>
+			        <md-input-container class="md-block ml-nomargin ml-marginlr-10" flex>
+						<label>组别</label>
+						<md-select ng-model="moneyType" class="ml-marginlr-10">
+							<md-option value="0">初审组</md-option>
+							<md-option value="1">复审组</md-option>
+						</md-select>
+					</md-input-container>
+				</div>
+				<div layout="row" class="ml-marginT-20" flex>
+					<md-input-container class="md-block ml-marginlr-10" flex>
+			            <label>来源系统</label>
+			            <input>
+			        </md-input-container>
+					<md-input-container class="md-block ml-nomargin ml-marginlr-10" flex>
+						<label>入账单位</label>
+						<md-select ng-model="moneyType" class="ml-marginlr-10">
+							<md-option value="0">xxxx</md-option>
+							<md-option value="1">xxxxx</md-option>
+						</md-select>
+					</md-input-container>
+			        <md-input-container class="md-block ml-nomargin ml-marginlr-10" flex>
+						<label>行政组织</label>
+						<md-select ng-model="moneyType" class="ml-marginlr-10">
+							<md-option value="0">行政组织</md-option>
+						</md-select>
+					</md-input-container>
+				</div>
+			</div>
+			<div style="display: none;">
+			    <div layout='row' class="ml-marginT-20">
+					<div layout="row" >
+						<md-input-container class="md-block ml-marginlr-10" flex>
+				            <label>报账时间（开始）</label>
+				            <input ng-model="beginTime" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+						</md-input-container>
+						<span class="ml-lineheight-48 ml-marginlr-10">至</span>
+						<md-input-container class="md-block ml-marginlr-10" flex>
+				            <label>报账时间（结束）</label>
+				           <input ng-model="beginTime" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+						</md-input-container>
+					</div>
+					<div layout="row" style="margin-left: 110px;">
+						<md-input-container class="md-block ml-marginlr-10" flex>
+				            <label>入池日期（开始）</label>
+				            <input ng-model="beginTime" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+						</md-input-container>
+						<span class="ml-lineheight-48 ml-marginlr-10">至</span>
+						<md-input-container class="md-block ml-marginlr-10" flex>
+				            <label>入池日期（结束）</label>
+				           <input ng-model="beginTime" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+						</md-input-container>
+					</div>
+					<div layout="row" style="margin-left: 110px;">
+						<md-input-container class="md-block ml-marginlr-10" flex>
+				            <label>完成日期（开始）</label>
+				            <input ng-model="beginTime" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+						</md-input-container>
+						<span class="ml-lineheight-48 ml-marginlr-10">至</span>
+						<md-input-container class="md-block ml-marginlr-10" flex>
+				            <label>完成日期（结束）</label>
+				           <input ng-model="beginTime" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+						</md-input-container>
+					</div>
+				</div>  
+				<div layout="row" flex>
+					<md-input-container class="md-block ml-nomargin ml-marginlr-10" flex>
+						<label>预算科目</label>
+						<md-select ng-model="moneyType" class="ml-marginlr-10">
+							<md-option value="0">会计凭证</md-option>
+							<md-option value="1">对账单</md-option>
+							<md-option value="2">会计报表</md-option>
+							<md-option value="3">其他</md-option>
+						</md-select>
+					</md-input-container>
+					<md-input-container class="md-block ml-marginlr-10" flex>
+			            <label>仓库</label>
+			            <input>
+			        </md-input-container>
+			        <md-input-container class="md-block ml-marginlr-10" flex>
+			            <label>货架</label>
+			            <input>
+			        </md-input-container>
+				</div>
+				<div layout="row" flex>
+					<md-input-container class="md-block ml-nomargin ml-marginlr-10" flex="33">
+			            <label>来源系统</label>
+			            <input>
+			        </md-input-container>
+			        <md-input-container class="md-block ml-nomargin ml-marginlr-10" flex="33">
+			            <label>入账单位</label>
+			            <input>
+			        </md-input-container>
+				</div>
+			</div>
+			<div >
+			    <div layout='row' class="ml-marginT-20">
+					<div layout="row" >
+						<md-input-container class="md-block ml-marginlr-10" flex>
+				            <label>对账日期（开始）</label>
+				            <input ng-model="beginTime" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+						</md-input-container>
+						<span class="ml-lineheight-48 ml-marginlr-10">至</span>
+						<md-input-container class="md-block ml-marginlr-10" flex>
+				            <label>对账日期（结束）</label>
+				           <input ng-model="beginTime" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+						</md-input-container>
+					</div>
+					<div layout="row" style="margin-left: 110px;">
+						<md-input-container class="md-block ml-marginlr-10" flex>
+				            <label>支付日期（开始）</label>
+				            <input ng-model="beginTime" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+						</md-input-container>
+						<span class="ml-lineheight-48 ml-marginlr-10">至</span>
+						<md-input-container class="md-block ml-marginlr-10" flex>
+				            <label>支付日期（结束）</label>
+				           <input ng-model="beginTime" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+						</md-input-container>
+					</div>
+					<div flex layout="row" style="margin-left: 110px;">
+			        	<md-input-container class="md-block ml-marginlr-10">
+				            <label>金额（最小值）</label>
+				            <input>
+				        </md-input-container>
+				        <span class="ml-lineheight-48 ml-marginlr-10">至</span>
+				        <md-input-container class="md-block ml-marginlr-10">
+				            <label>金额（最大值）</label>
+				            <input>
+				        </md-input-container>
+			        </div>
+				</div>  
+				<div layout="row" flex>
+					<md-input-container class="md-block ml-marginlr-10" flex>
+			            <label>支付机构</label>
+			            <input>
+			        </md-input-container>
+			        <md-input-container class="md-block ml-marginlr-10" flex>
+			            <label>银行账户</label>
+			            <input>
+			        </md-input-container>
+			        <md-input-container class="md-block ml-nomargin ml-marginlr-10" flex>
+						<label>币种</label>
+						<md-select ng-model="moneyType" class="ml-marginlr-10">
+							<md-option value="0">CNY</md-option>
+							<md-option value="1">USD</md-option>
+							<md-option value="2">HKD</md-option>
+							<md-option value="3">JPY</md-option>
+							<md-option value="4">EUR</md-option>
+							<md-option value="5">SGD</md-option>
+							<md-option value="6">MDP</md-option>
+						</md-select>
+					</md-input-container>
+				</div>
+				<div layout="row" flex>
+					<md-input-container class="md-block ml-nomargin ml-marginlr-10" flex="33">
+			            <label>来源系统</label>
+			            <input>
+			        </md-input-container>
+			        <md-input-container class="md-block ml-nomargin ml-marginlr-10" flex="33">
+			            <label>入账单位</label>
+			            <input>
+			        </md-input-container>
+				</div>
+			</div>
+			<section layout="row" layout-sm="column" layout-wrap layout-align="end" class="ml-margintb-20">
+			    <md-button class="md-raised md-primary">删除</md-button>
+			    <md-button class="md-raised md-primary" ng-click="go('/financeQC/analogSampled')">模拟抽样</md-button>
+			    <md-button class="md-raised md-primary">批准</md-button>
+		    </section>
+		</md-card>
+</div>

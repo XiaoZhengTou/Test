@@ -1,0 +1,89 @@
+<md-dialog aria-label="选择预算组织" ng-cloak style="min-width: 50%" id="processauthyewu-busiorg-detail">
+    <form name="addprocessauth" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+        <md-toolbar ng-show="!filter.show">
+            <div class="md-toolbar-tools white">
+                <h2 style="color: white">选择预算组织</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="filter.show = true">
+                    <md-icon class="iconfont bigicon">&#xe606;</md-icon>
+                </md-button>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-toolbar class="md-table-toolbar white" ng-show="filter.show">
+            <div class="md-toolbar-tools">
+                <md-icon class="iconfont bigicon ml-margin-right">&#xe606;</md-icon>
+                <div flex layout="row" class="filterSearch">
+
+                    <md-menu md-offset="0 -7">
+				          <span ng-click="$mdOpenMenu($event)">
+				            {{filter.value.name}}
+				            <i class="iconfont">&#xe60e;</i>
+				          </span>
+                        <md-menu-content width="4">
+                            <md-menu-item ng-repeat="x in filter.source">
+                                <md-button ng-click="filter.setFilter(x)"> <span md-menu-align-target>
+				              </span>{{x.name}}</md-button>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+
+                    <input type="text" ng-model="searchText" ng-model-options="filter.options" placeholder="关键字……" flex>
+
+                </div>
+                <md-button class="md-icon-button" ng-click="removeFilter()">
+                    <md-icon class="iconfont">&#xe634;</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+
+        <md-dialog-content>
+            <div class="md-dialog-content" style="padding-top: 0px;padding-bottom: 0px">
+
+                <md-table-container>
+                    <table md-table ng-model="selected" md-progress="promise" multiple="true"  md-row-select="true">
+                        <thead md-head>
+                        <tr md-row>
+                            <th md-column>预算部门名称</th>
+                            <th md-column>	预算部门编码</th>
+                            <th md-column>	描述</th>
+                        </tr>
+                        </thead>
+                        <tbody md-body>
+                        <tr md-row ng-repeat="x in appdata" class="selectRow" md-row md-select="x" md-select-id="busi_org_id" md-auto-select="true">
+                            <td md-cell>{{x.busi_org_name}}</td>
+                            <td md-cell>{{x.busi_org_code}}</td>
+                            <td md-cell>{{x.busi_org_desc}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </md-table-container>
+                <md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '总条数：'}"
+                                     md-limit="query.limit" md-limit-options="[5, 10, 15]" md-page="query.page"
+                                     md-total="{{query.total}}" md-on-paginate="getDesserts" md-page-select></md-table-pagination>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <span flex></span>
+            <md-button class="md-primary md-raised" ng-click="answer()"  style="color: white;float: right">确定</md-button>
+
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+
+<style>
+    /*#processauthyewu-busiorg-detail .md-datepicker-input-container.md-datepicker-invalid {*/
+        /*border-bottom-color: rgb(224,224,224);*/
+    /*}*/
+    #processauthyewu-busiorg-detail .md-datepicker-input-container{
+        width: 75%;
+        /*margin-left: -2px;*/
+    }
+    /*#processauthyewu-busiorg-detail .md-datepicker-calendar-icon{*/
+        /*margin-bottom: -7px;*/
+    /*}*/
+</style>

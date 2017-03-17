@@ -1,0 +1,62 @@
+<div ng-controller="relationListCtrl" ng-cloak class="md-inline-form">
+	<md-card>
+		<div layout="row" class="padding-left-right-16">
+			<div flex class="padding-right">
+				<md-input-container class="md-block md-cyan-theme md-input-invalid">
+					<label>入账单位</label>
+					<input ng-model="query.dec" type="text">
+				</md-input-container>
+
+			</div>
+			<div flex>
+				<md-input-container class="md-block md-cyan-theme md-input-invalid">
+					<label>ERP实例</label>
+					<input ng-model="query.dec" type="text">
+				</md-input-container>
+			</div>
+		</div>
+		<div class="padding-left-right-16">
+			<span style="margin-right:16px;">启用模块</span>
+			<md-checkbox ng-model="ctrl.simulateQuery" class="padding-right">GL</md-checkbox>
+			<md-checkbox ng-model="ctrl.noCache" class="padding-right">AP</md-checkbox>
+			<md-checkbox ng-model="ctrl.isDisabled">AR</md-checkbox>
+		</div>
+		<div layout="row" class="padding-left-right-16">
+			<md-switch ng-model="data.cb1" aria-label="Switch 1" flex>
+				是否设置产品线对应关系
+			</md-switch>
+			<md-switch ng-model="data.cb2" aria-label="Switch 1" flex>
+				是否设置备注段对应关系
+			</md-switch>
+			<md-switch ng-model="data.cb3" aria-label="Switch 1" flex>
+				是否设置应收款活动类型对应关系
+			</md-switch>
+		</div>
+	</md-card>
+
+	<md-content>
+		<div layout="row">
+			<div flex="25">
+				<md-card>
+
+					<md-list flex>
+						<md-list-item class="md-1-line" ng-repeat="item in cerificateList" ng-class="border[$index]" ng-click="isCurrent($index)">
+							<div class="md-list-item-text" layout="column">
+								<p>{{ item.name }}</p>
+							</div>
+							<md-divider></md-divider>
+						</md-list-item>
+					</md-list>
+
+				</md-card>
+			</div>
+
+			<div flex ng-if="state.one" ng-include="'templates/correspondingRelation/basicSubjects.html'"></div>
+			<div flex ng-if="state.two" ng-include="'templates/correspondingRelation/budgetDepartment.html'"></div>
+			<div flex ng-if="state.thr" ng-include="'templates/correspondingRelation/productLine.html'"></div>
+			<div flex ng-if="state.four" ng-include="'templates/correspondingRelation/remark.html'"></div>
+			<div flex ng-if="state.five" ng-include="'templates/correspondingRelation/receivables.html'"></div>
+		</div>
+	</md-content>
+
+</div>

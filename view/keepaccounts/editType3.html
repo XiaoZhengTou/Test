@@ -1,0 +1,29 @@
+<div layout="row">
+	  <div layout="row" flex="50">
+	  	<md-datepicker ng-model="editAccount.startstring" md-placeholder="开始时间" style="margin-top:15px;margin-bottom:0;">
+			</md-datepicker>
+	  </div>
+	  
+	  <div layout="row" flex="50">
+	    <md-datepicker ng-model="editAccount.endstring" md-placeholder="结束时间" style="margin-top:15px;margin-bottom:0;">
+			</md-datepicker>
+	  </div>
+</div>
+<div layout="row">
+	  <div layout="row" flex="50">
+	  	<md-input-container class="md-block" style="margin-bottom:0;" flex="90">
+					<label>发生地点</label>
+					<!--<md-icon class="name"><i class="iconfont">&#xe667;</i></md-icon>-->
+					<input ng-model="editAccount.happenAddress" type="text">
+			</md-input-container>
+	  </div>
+	  
+	  <div layout="row" flex="50">
+		    <md-input-container class="md-block" style="margin-bottom:0;" flex="90">
+					<label>住宿人</label>
+					<!--<md-icon class="name"><i class="iconfont">&#xe65c;</i></md-icon>-->
+					<input ng-model="editAccount.travelPersonIds" type="text">
+				</md-input-container>
+	  </div>
+</div>
+					

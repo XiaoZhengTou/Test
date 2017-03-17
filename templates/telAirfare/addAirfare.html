@@ -1,0 +1,101 @@
+<div ng-controller="telAirfareCtrl" layout="column" ng-cloak class="telAirfare">
+	<div ng-controller="addAirfareCtrl" class="addAirfare">
+		<md-card>
+			<form ng-cloak name="messageUserForm" novalidate="novalidate">
+				<div layout class="ml-fontsize-13">
+					<div flex="70" class="ml-padding-20 addAirfare-main-left">
+						<div flex="50">
+							<md-input-container class="md-block">
+								<label>选择EA单据</label>
+								<input ng-model="danju" disabled>
+								<md-icon>
+									<md-button class="md-icon-button ml-color-73"><i class="iconfont">&#xe61f;</i></md-button>
+								</md-icon>
+							</md-input-container>
+							<md-input-container class="md-block">
+								<label>可用预算</label>
+								<input ng-model="yusuan" disabled>
+							</md-input-container>
+						</div>
+						<div>
+							<div class="ml-fontsize-15 blue-line"><span></span>乘机人</div>
+							<div class="ml-marginT-20">
+								<md-chips ng-model="passengers" md-on-remove="removePassenger(passengers)" md-on-select="getPassenger($chip)">
+									<md-chip-template>{{$chip.cnName}}</md-chip-template>
+								</md-chips>
+								<div ng-if="passengers[0].cnName" class="ml-lineheight-36">
+									<div flex="50">
+										{{selected.cnName?selected.cnName:passengers[0].cnName}}
+										<md-divider></md-divider>
+									</div>
+									<div layout="row" flex="50">
+										<div flex="30">
+											{{selected.certType?selected.certType:passengers[0].certType | getCertType}}
+											<md-divider></md-divider>
+										</div>
+										<div flex-offset="10" flex="60">
+											{{selected.certNumber?selected.certNumber:passengers[0].certNumber}}
+											<md-divider></md-divider>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="addPerson ml-marginT-20">
+								<md-button drchoosepassengers="{'model':'passengers'}" class="md-raised md-primary ml-paddinglr20 ml-nomargin">添加乘机人</md-button>
+								<em>剩余{{fightListDetail.seatNum | getSeatNum}}张成人票</em>
+							</div>
+						</div>
+						<div class="lianxiren" flex="50">
+							<div class=" ml-fontsize-15 blue-line"><span></span>联系人</div>
+							<md-input-container class="md-block">
+								<input ng-model="PassengersCnName" name="cnName" required flex placeholder="联系人姓名">
+								<div ng-messages="messageUserForm.cnName.$error" role="alert" multiple>
+									<div ng-message="required" class="my-message">请输入联系人姓名</div>
+								</div>
+							</md-input-container>
+							<md-input-container class="md-block">
+								<input ng-model="PassengersMobile" name="mobile" ng-length="11" ng-pattern="/^1[34578]\d{9}$/" required flex placeholder="联系人手机号">
+								<div ng-messages="messageUserForm.mobile.$error" role="alert" multiple>
+									<div ng-message="required" class="my-message">请输入联系人手机号</div>
+									<div ng-message="pattern" class="my-message">请输入正确的手机号</div>
+								</div>
+							</md-input-container>
+						</div>
+						<div class="ml-marginT-20">
+							<div class="ml-fontsize-15 blue-line"><span></span>报销</div>
+							<div class="ml-marginT-20">
+								<md-checkbox class="ml-nomargin ml-marginT-20" ng-model="selectedInvoice" aria-label="invoice">
+									需要报销凭证
+								</md-checkbox>
+							</div>
+							<div ng-if="selectedInvoice">
+								<div ng-if="invoice" flex="50" class="ml-lineheight-36 ml-marginT-20">
+									{{invoice}}
+									<md-divider></md-divider>
+								</div>
+								<div class="ml-marginT-20">
+									<md-button class="md-raised md-primary rmbtn ml-paddinglr20" ng-click="invoiceShow($event)">添加发票抬头</md-button>
+								</div>
+							</div>
+							<div class="ml-marginT-20 ml-color-73">说明：发票抬头实际就是法人</div>
+						</div>
+					</div>
+					<div flex="30" class="ml-padding-20">
+						<md-input-container class="md-block ml-nomargin">
+							<input ng-model="airfareList" name="airfareList" required flex placeholder="航班号">
+							<div ng-messages="messageUserForm.airfareList.$error" role="alert" multiple>
+								<div ng-message="required" class="my-message">请输入航班号</div>
+							</div>
+						</md-input-container>
+						<md-datepicker flex class="ml-border-e" ng-model="query.apply_date_before" md-placeholder="出发日期"></md-datepicker>
+						<div class="ml-marginT-20">订单总额：<span class="ml-color-red">¥345</span></div>
+					</div>
+				</div>
+			</form>
+			<md-divider></md-divider>
+			<div class="ml-padding-20" layout="row" layout-align="center center" layout-wrap>
+				<md-button type="submit" ng-disabled="messageUserForm.$invalid" ng-click="addAirfareNext()" class="md-raised md-primary">下一步</md-button>
+			</div>
+		</md-card>
+	</div>
+</div>

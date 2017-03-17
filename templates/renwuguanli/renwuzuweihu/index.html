@@ -1,0 +1,80 @@
+<div ng-controller="taskManCtrl" class="task airfare">
+	<div ng-controller="taskSetCtrl">
+		<md-card>
+			<div class="md-toolbar-tools">
+		      	<h3>
+		       		<span>任务组</span>
+		      	</h3> 
+		   </div> 
+			<div layout="row"  class="ml-marginT-20">
+				<md-input-container class="md-block ml-marginlr-10" flex="50">
+		            <label>任务组名称</label>
+		            <input>
+				</md-input-container>
+				<md-input-container class="md-block ml-marginlr-10" flex="25">
+		            <label>组别</label>
+		            <md-select ng-model="priorty">
+						<md-option value="piao">票据组</md-option>
+						<md-option value="fu">复审组</md-option>
+						<md-option value="chu">初审组</md-option>
+					</md-select>
+				</md-input-container>
+				<md-input-container class="md-block ml-marginlr-10" flex="25">
+		            <label>状态</label>
+		            <md-select ng-model="priorty">
+						<md-option value='qiyong'>启用</md-option>
+						<md-option value="weiqiyong">未启用</md-option>	
+					</md-select>
+				</md-input-container>
+			</div>
+			<div layout="row">
+				<md-input-container class="md-block ml-marginlr-10" flex="50">
+		            <label>任务池</label>
+		            <md-select ng-model="priorty">
+						<md-option value="zijian">质检任务池</md-option>
+						<md-option value="caiwu">财务工单池</md-option>	
+					</md-select>
+				</md-input-container>
+				<md-input-container class="md-block ml-marginlr-10" flex="25">
+		            <label>更多</label>
+		            <md-select ng-model="priorty">
+						<md-option value="gengduo">更多</md-option>	
+					</md-select>
+				</md-input-container>
+				<div flex="25">
+					<md-button class="md-raised md-primary">查询</md-button>
+				</div>
+			</div>
+		</md-card>
+		<md-card>
+			<md-list class="ml-text-center ml-bgcolor-blue" layout="row">
+				<span flex>组名</span>
+				<span flex>类别</span>
+				<span flex>组长</span>
+				<span flex>任务池</span>
+				<span flex>组员上限/天</span>
+				<span flex>自动审批</span>
+				<span flex>自动派工</span>
+				<span flex>是否实物审单</span>
+				<span flex>状态 </span>
+			</md-list>
+			<md-list layout="row" class="ml-text-center" style="min-height: 300px">
+				<span flex>组</span>
+				<span flex>初审组</span>
+				<span flex>李云龙</span>
+				<span flex>财务工单池</span>
+				<span flex>50</span>
+				<span flex>否</span>
+				<span flex>否</span>
+				<span flex>否</span>
+				<span flex>正常</span>
+			</md-list>
+			<md-button aria-label="menu" class="md-fab ml-bottom-fab" ng-click="onGoList()">
+		    	<md-tooltip md-direction="left">
+		          	表单详情
+		        </md-tooltip>
+		        <md-icon class="iconfont">&#xe631;</md-icon>
+		   </md-button>
+		</md-card>	
+	</div>
+</div>

@@ -1,0 +1,191 @@
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<div ng-controller="areaCtrl" id="area">
+
+    <script type="text/ng-template" id="areaCheckbox.html">
+        <div ng-controller="areaCtrl1">
+            <md-checkbox ng-click="addtoggle2()" ng-model="draftSelectcheck" style="margin-bottom: 0px"></md-checkbox>
+        </div>
+    </script>
+
+    <div class="full-height ng-scope">
+        <div class="full-image-background layout-fill ng-scope layout-row" layout="row" layout-fill="">
+            <div class="animate-wrapper layout-row flex" flex="" layout="row">
+                <div id="ui-login" class="login-frame ng-scope layout-column flex" ui-view="" flex="" layout="column">
+                    <div layout="row" flex="" layout-padding="" layout-fill="" layout-align="center center" class="layout-fill ng-scope layout-align-center-center layout-row flex" style="padding: 0px">
+                        <div flex="40" flex-lg="50" flex-md="70" flex-xs="100" class="flex-xs-100 flex-md-70 flex-lg-50 flex-40" style="max-width: 100%;padding: 0px">
+
+                            <md-card class="ml-padding-pc">
+                                <div class="basefilter">
+                                    <div layout="row">
+                                        <div flex class="ml-padding-right">
+                                            <md-input-container class="md-block md-cyan-theme md-input-invalid">
+                                                <label>名称</label>
+                                                <input ng-model="search.area_name" type="text">
+                                            </md-input-container>
+                                        </div>
+                                        <div flex class="ml-padding-right">
+                                            <md-input-container class="md-block md-cyan-theme md-input-invalid">
+                                                <label>拼音码</label>
+                                                <input ng-model="search.pin_yin" type="text">
+                                            </md-input-container>
+                                        </div>
+                                        <div flex class="ml-padding-right">
+                                            <md-input-container class="md-block md-cyan-theme md-input-invalid">
+                                                <label>热闹城市</label>
+                                                <md-select ng-model="search.hot_city_flag">
+                                                    <md-option value="1">是</md-option>
+                                                    <md-option value="0">否</md-option>
+                                                </md-select>
+                                            </md-input-container>
+                                        </div>
+                                        <div flex class="ml-padding-right">
+                                            <md-input-container class="md-block md-cyan-theme md-input-invalid">
+                                                <label>状态</label>
+                                                <md-select ng-model="search.status">
+                                                    <md-option value="Y">有效</md-option>
+                                                    <md-option value="N">失效</md-option>
+                                                    <md-option value="ALL">全部</md-option>
+                                                </md-select>
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                    <div layout="row">
+                                        <div flex class="ml-padding-right">
+                                            <md-input-container class="md-block md-cyan-theme md-input-invalid">
+                                                <label>上级区域</label>
+                                                <input ng-model="search.parent_area_name" type="text">
+                                            </md-input-container>
+                                        </div>
+                                        <div flex class="ml-padding-right">
+                                            <md-input-container class="md-block md-cyan-theme md-input-invalid">
+                                                <label>区域路径</label>
+                                                <input ng-model="search.full_path" type="text">
+                                            </md-input-container>
+                                        </div>
+
+                                        <div flex STYLE="text-align: center;margin-top: 2%">
+                                            <md-button class="md-raised md-primary ml-nomargin ml-button" aria-label="立即搜索" ng-click="search_area()">立即搜索</md-button>
+                                            <md-button class="md-raised ml-nomargin ml-button" aria-label="立即搜索" ng-click="clearFilter()">清空条件</md-button>
+                                            <md-menu>
+                                                <md-button class="md-icon-button" aria-label="Open user menu" ng-click="$mdOpenMenu()" aria-label="side navigation">
+                                                    <md-icon md-svg-src="img/icons/three.svg"></md-icon>
+                                                </md-button>
+                                                <md-menu-content width="4">
+                                                    <md-menu-item>
+                                                        <md-button aria-label="side navigation">
+                                                            <md-icon md-svg-src="img/icons/excel_in.svg"></md-icon>
+                                                            <span class="ng-scope">Excel导入</span>
+                                                        </md-button>
+                                                    </md-menu-item>
+                                                    <!--<md-menu-divider></md-menu-divider>-->
+                                                    <md-menu-item>
+                                                        <md-button aria-label="side navigation">
+                                                            <md-icon md-svg-src="img/icons/excel_out.svg"></md-icon>
+                                                            <span class="ng-scope">Excel导出</span>
+                                                        </md-button>
+                                                    </md-menu-item>
+                                                    <md-menu-item>
+                                                        <md-button aria-label="side navigation" ng-disabled="selected1.length == 0" ng-click="batch_failure()">
+                                                            <md-icon md-svg-src="img/icons/piliang.svg"></md-icon>
+                                                            <span class="ng-scope">批量失效</span>
+                                                        </md-button>
+                                                    </md-menu-item>
+                                                </md-menu-content>
+                                            </md-menu>
+                                        </div>
+                                        <div flex></div>
+                                    </div>
+                                </div>
+                            </md-card>
+
+                            <md-card class="md-cyan-theme" style="max-width: 100%">
+                                <md-toolbar ng-hide="selected.length || filter.show" class="md-table-toolbar md-default" style="background-color: white;">
+                                    <div class="md-toolbar-tools" >
+                                        <!--<div style="background-color: #2196f3;">-->
+                                            <!--<h2 class="md-title" style="color: black;font-size: 16px;margin-left: 4px;padding-left: 20px;background-color: white;">区域</h2>-->
+                                        <!--</div>-->
+                                        <span>区域</span>
+                                        <div flex></div>
+                                        <!--<md-button class="md-icon-button" ng-click="filter.show = true">-->
+                                            <!--<md-icon md-svg-src="img/icons/find.svg"></md-icon>-->
+                                        <!--</md-button>-->
+                                    </div>
+                                </md-toolbar>
+
+                                <md-content class=" md-cyan-theme" style="background-color: white;">
+
+                                    <md-table-container style="width: 95%;padding-left: 2.5%;">
+                                        <table data-md-table data-md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" data-ng-model="selected1" md-progress="promise">
+                                            <thead md-head data-md-order="query.order" md-on-reorder="getDesserts">
+                                            <tr md-row>
+                                                <th md-column>名称</th>
+                                                <th md-column>区域类型</th>
+                                                <th md-column>编码</th>
+                                                <th md-column>拼音码</th>
+                                                <th md-column>上级区域</th>
+                                                <th md-column>区域路径</th>
+                                                <th md-column>是否热门城市</th>
+                                                <th md-column>是否出差可选</th>
+                                                <th md-column>生效状态</th>
+                                                <th md-column>操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody md-body>
+                                            <tr md-row md-select="item.area_id" md-select-id="area_id" ng-repeat="item in appdata" md-auto-select="options.autoSelect">
+                                                <td md-cell style="word-break: keep-all;white-space: nowrap;">{{item.area_name}}</td>
+                                                <td md-cell style="word-break: keep-all;white-space: nowrap;">
+                                                    {{item.region_type_code == '0'? '大区':(item.region_type_code == '1'? '国家':(item.region_type_code == '2'? '省':(item.region_type_code == '3'? '市':(item.region_type_code == '4'? '县/区':''))))}}
+                                                </td>
+                                                <td md-cell style="word-break: keep-all;white-space: nowrap;">{{item.area_code}}</td>
+                                                <td md-cell style="word-break: keep-all;white-space: nowrap;">{{item.pin_yin}}</td>
+                                                <td md-cell style="word-break: keep-all;white-space: nowrap;">{{item.parent_area_name}}</td>
+                                                <td md-cell style="word-break: keep-all;white-space: nowrap;">{{item.full_path}}</td>
+                                                <td md-cell style="word-break: keep-all;white-space: nowrap;">{{item.hot_city_flag == '1'? '是':'否'}}</td>
+                                                <td md-cell style="word-break: keep-all;white-space: nowrap;">{{item.is_travel_city == 'Y'? '是':'否'}}</td>
+                                                <td md-cell style="word-break: keep-all;white-space: nowrap;">
+                                                    <md-checkbox ng-click="editstatus(item,item.active_flag)" ng-checked="item.active_flag == 'Y'">
+
+                                                        <span>{{item.active_flag == 'Y' ? '有效':'失效'}}</span>
+                                                    </md-checkbox>
+                                                </td>
+                                                <td md-cell style="word-break: keep-all;white-space: nowrap;">
+                                                    <md-button  class="md-primary" ng-click="edit($event,item)">
+                                                        <md-icon md-svg-src="img/icons/edit.svg"></md-icon>
+                                                    </md-button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="11">
+                                                    <md-button class="md-fab md-accent md-hue-1" style="float: right;" ng-click="add($event)">
+                                                        <h1 style="margin-top: 0px;font-size: 36px;color: white">+</h1>
+                                                    </md-button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </md-table-container>
+                                    <md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '总条数：'}"
+                                                         md-limit="query.limit" md-limit-options="[5, 10, 15]" md-page="query.page"
+                                                         md-total="{{query.total}}" md-on-paginate="getDesserts" md-page-select></md-table-pagination>
+
+                                </md-content>
+                            </md-card>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    #area .active-Y{
+        background-color: green;
+        color: green;
+    }
+    #area .active-N{
+        background-color: red;
+        color: red;
+    }
+</style>

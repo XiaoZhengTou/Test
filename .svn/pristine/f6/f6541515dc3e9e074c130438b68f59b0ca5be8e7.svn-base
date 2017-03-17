@@ -1,0 +1,78 @@
+<div ng-controller="fsCtrl" class="jiehuankuan fukuan add" ng-cloak>
+	<div ng-controller="fsAddNextCtrl" class="ml-width-bottom-bar">
+		<!-- 状态步骤条开始 -->
+		<div class="ml-setupbar ml-margin-top ml-margin-large-bottom" layout="row" layout-align="center center">
+		  <div flex="70" layout="row" class="container">
+		    <div flex class="ml-text-center active item">
+		      <span>填写单据信息</span>
+		    </div>
+		    <div flex class="ml-text-center active item">
+		      <span>流程及附件</span>
+		    </div>
+		    <div flex class="ml-text-center  item">
+		      <span>提交成功</span>
+		    </div>
+		  </div>
+		</div>
+		<!-- 状态步骤条结束 -->
+		
+		<!--流程审批-->
+		<md-card class="ml-margin-top ">
+			<!-- 表格开始 -->
+			<md-toolbar class="md-table-toolbar md-default ">
+				<div class="md-toolbar-tools ">
+					<span>流程审批</span>
+				</div>
+			</md-toolbar>
+			<md-table-container>
+				<table md-table md-progress="promise ">
+					<thead md-head md-order="">
+						<tr md-row>
+							<th md-column md-numeric>
+								审核节点
+							</th>
+							<th md-column md-numeric>
+								审核角色
+							</th>
+							<th md-column md-numeric>
+								默认审核人
+							</th>
+							<th md-column md-numeric >
+								流转方式
+							</th>
+							<th md-column md-numeric>
+								节点状态
+							</th>
+						</tr>
+					</thead>
+					<tbody md-body>
+						<tr md-row ng-repeat="x in approvers | orderBy: id ">
+							<td md-cell>{{x.node}}</td>
+							<td md-cell>{{x.role}}</td>
+							<td md-cell>
+								<md-input-container>
+									<input style="text-align: right;" ng-model="!!orgs.user_full_name ? orgs.user_full_name : x.approver" readonly type="text" drorganization="{'model':'orgs'}">
+									<!--<input type="text" ng-model="aa" ng-value="orgs.user_full_name" />-->
+								</md-input-container>
+							</td>
+							<td md-cell>{{x.ways}}</td>
+							<td md-cell>{{x.node_statu}}</td>
+						</tr>
+					</tbody>
+					
+				</table>
+			</md-table-container>
+
+			<!--账务明细 end-->
+		</md-card>
+	   
+	   <!--流程审批-->
+		<!-- 底部操作区开始 -->
+		<div class="ml-bottom-bar slideInUp animated" layout="row" style="z-index: 999">
+			<md-button class="md-raised md-primary ml-button ml-noshadow" aria-label="保存" ng-click="save()">保存</md-button>
+			<span flex></span>
+			<md-button class="md-raised md-primary ml-button ml-noshadow" aria-label="下一步" ng-click="go('/feeSharing/add_next','')">下一步</md-button>
+		</div>
+		<!-- 底部操作区结束 -->
+	</div>
+	</div>

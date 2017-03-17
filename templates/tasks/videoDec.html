@@ -1,0 +1,75 @@
+<div ng-controller="videoDecCtrl" ng-cloak class="md-inline-form">
+
+	<md-card>
+		<div>
+			<md-button class="md-raised ml-button md-primary" aria-label="查看历史版本" ng-click="go('/videoHistoryVersion/videoHistoryVersion','查看历史版本')">查看历史版本</md-button>
+		</div>
+		<md-toolbar class="md-table-toolbar md-default">
+			<div class="md-toolbar-tools">
+				<span style="padding-right: 20px">当前版本:v1.0.3</span>
+				<span style="padding-right: 20px">更新时间:2016-05-22 16:41</span>
+				<span>更新人:肖楚意</span>
+			</div>
+		</md-toolbar>
+	</md-card>
+	<md-card>
+		<md-table-container>
+			<table md-table multiple ng-model="selected" md-progress="promise" class="ml-text-nowrap">
+				<thead md-head md-row-select>
+					<tr md-row>
+						<th md-column>
+							文件名
+						</th>
+						<th md-column>
+							分类&nbsp;
+						</th>
+						<th md-column>
+							文件预览
+						</th>
+					</tr>
+				</thead>
+				<tbody md-body>
+					<tr md-row ng-repeat="item in query.appdata">
+						<td md-cell><span>{{item.name}}</span></td>
+						<td md-cell><span>{{item.type}}</span></td>
+						<td md-cell>
+							<div style="margin-top:10px;"><img ng-src="{{item.src}}"></div>
+							<div layout="row">
+								<div flex>
+									<md-button class="md-raised ml-button" aria-label="左转" ng-click="findHistoryVersion()">左转</md-button>
+								</div>
+								<div flex>
+									<md-button class="md-raised ml-button" aria-label="右转" ng-click="findHistoryVersion()">右转</md-button>
+								</div>
+								<div flex>
+									<md-button class="md-raised ml-button" aria-label="缩小" ng-click="findHistoryVersion()">缩小</md-button>
+								</div>
+								<div flex>
+									<md-button class="md-raised ml-button" aria-label="放大" ng-click="findHistoryVersion()">放大</md-button>
+								</div>
+								<div flex>
+									<md-button class="md-raised ml-button" aria-label="上一张" ng-click="findHistoryVersion()">上一张</md-button>
+								</div>
+								<div flex>
+									<md-button class="md-raised ml-button" aria-label="下一张" ng-click="findHistoryVersion()">下一张</md-button>
+								</div>
+							</div>
+
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</md-table-container>
+		<!-- 表格导航开始 -->
+		<md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '，总条数：'}" md-limit="query.limit" md-limit-options="[5, 10, 15]" md-page="query.page_number" md-total="{{query.total}}" md-on-paginate="getData" md-page-select></md-table-pagination>
+		<!-- 表格导航结束 -->
+		<!-- 表格结束 -->
+	</md-card>
+	<md-card>
+		<md-content>
+			<div layout="row" layout-align="end">
+				<md-button class="md-raised md-primary" aria-label="审单处理" ng-click="taken()">审单处理</md-button>
+			</div>
+		</md-content>
+	</md-card>
+</div>

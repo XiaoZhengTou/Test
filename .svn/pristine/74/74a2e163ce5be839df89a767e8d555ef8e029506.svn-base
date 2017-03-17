@@ -1,0 +1,222 @@
+<div ng-controller="airfareCtrl" class="airfare">
+<md-content layout="column" ng-controller="airfareLocationCtrl"  class="location">
+<!-- Header Bar Begin -->
+<md-toolbar class="headerbar searchBar">
+  <div class="md-toolbar-tools">
+    <input type="text" value="" placeholder="搜索" ng-model="cityNameFilter.cityName">
+    <span class="clear" ng-click="cityNameFilter.cityName=''" ng-show="cityNameFilter.cityName.length > 0">
+      清除
+    </span>
+  </div>
+</md-toolbar>
+<!-- Header Bar End -->
+<!-- Filter Begin -->
+<ul class="filter">
+  <li class="item">
+    <a ng-disabled="filteredA < 1">A</a>
+    <a ng-disabled="filteredB < 1">B</a>
+    <a ng-disabled="filteredC < 1">C</a>
+    <a ng-disabled="filteredD < 1">D</a>
+    <a ng-disabled="filteredE < 1">E</a>
+    <a ng-disabled="filteredF < 1">F</a>
+    <a ng-disabled="filteredG < 1">G</a>
+    <a ng-disabled="filteredH < 1">H</a>
+    <a ng-disabled="filteredJ < 1">J</a>
+    <a ng-disabled="filteredK < 1">K</a>
+    <a ng-disabled="filteredL < 1">L</a>
+    <a ng-disabled="filteredM < 1">M</a>
+    <a ng-disabled="filteredN < 1">N</a>
+    <a ng-disabled="filteredP < 1">P</a>
+    <a ng-disabled="filteredQ < 1">Q</a>
+    <a ng-disabled="filteredR < 1">R</a>
+    <a ng-disabled="filteredS < 1">S</a>
+    <a ng-disabled="filteredT < 1">T</a>
+    <a ng-disabled="filteredW < 1">W</a>
+    <a ng-disabled="filteredX < 1">X</a>
+    <a ng-disabled="filteredY < 1">Y</a>
+    <a ng-disabled="filteredZ < 1">Z</a>
+  </li>
+</ul>
+<!-- Filter End -->
+<md-tabs md-border-bottom md-dynamic-height md-stretch-tabs="always" md-swipe-content="true" class="selectTabs">
+      <md-tab label="国内城市">
+        <md-content>
+        <md-card>
+        <md-card-content class="removePadding">
+        <section ng-hide="cityNameFilter.cityName.length > 0">
+		  <md-subheader class="md-primary">当前城市</md-subheader>
+		    <md-list class="removePadding">
+		      <md-list-item>{{city.current}}</md-list-item>
+		    </md-list>
+		</section>
+		<!-- Currenty City End -->
+		<!-- Hot City Begin -->
+		<section class="hot" ng-hide="cityNameFilter.cityName.length > 0">
+		  <md-subheader class="md-primary">热门城市</md-subheader>
+		  <md-list class="removePadding" layout layout-wrap>
+		    <md-list-item ng-repeat="x in city.chinaHot" flex="25" ng-click="setCity(x);back()" aria-label="{{x.cnName}}">{{x.cnName}}</md-list-item>
+		  </md-list>
+		</section>
+		<!-- Hot City End -->
+		<!-- cityList Begin -->
+		<section class="repeated-item" ng-hide="filteredA < 1">
+		  <md-subheader class="md-primary">A</md-subheader>
+		  <md-list class="removePadding">
+		    <md-list-item ng-repeat="x in city.chinaCity.A | filter:cityNameFilter as filteredA" aria-label="{{x.cnName}}" ng-click="setCity(x);back()">{{x.cnName}}</md-list-item>
+		  </md-list>
+		</section>
+		<section class="repeated-item"  ng-hide="filteredB < 1">
+		  <md-subheader class="md-primary">B</md-subheader>
+		  <md-list class="removePadding">
+		    <md-list-item ng-repeat="x in city.chinaCity.B | filter:cityNameFilter as filteredB" aria-label="{{x.cnName}}" ng-click="setCity(x);back()">{{x.cnName}}</md-list-item>
+		  </md-list>
+		</section>
+		<section class="repeated-item"  ng-hide="filteredC < 1">
+		  <md-subheader class="md-primary">C</md-subheader>
+		  <md-list class="removePadding">
+		    <md-list-item ng-repeat="x in city.chinaCity.C | filter:cityNameFilter as filteredC" aria-label="{{x.cnName}}" ng-click="setCity(x);back()">{{x.cnName}}</md-list-item>
+		  </md-list>
+		</section>
+		<section class="repeated-item"  ng-hide="filteredD < 1">
+		  <md-subheader class="md-primary">D</md-subheader>
+		  <md-list class="removePadding">
+		    <md-list-item ng-repeat="x in city.chinaCity.D | filter:cityNameFilter as filteredD" aria-label="{{x.cnName}}" ng-click="setCity(x);back()">{{x.cnName}}</md-list-item>
+		  </md-list>
+		</section>
+		<section class="repeated-item" ng-hide="filteredE < 1">
+		  <md-subheader class="md-primary">E</md-subheader>
+		  <md-list class="removePadding">
+		    <md-list-item ng-repeat="x in city.chinaCity.E | filter:cityNameFilter as filteredE" aria-label="{{x.cnName}}" ng-click="setCity(x);back()">{{x.cnName}}</md-list-item>
+		  </md-list>
+		</section>
+		<section class="repeated-item" ng-hide="filteredF < 1">
+		  <md-subheader class="md-primary">F</md-subheader>
+		  <md-list class="removePadding">
+		    <md-list-item ng-repeat="x in city.chinaCity.F | filter:cityNameFilter as filteredF" aria-label="{{x.cnName}}" ng-click="setCity(x);back()">{{x.cnName}}</md-list-item>
+		  </md-list>
+		</section>
+		<section class="repeated-item" ng-hide="filteredG < 1">
+		  <md-subheader class="md-primary">G</md-subheader>
+		  <md-list class="removePadding">
+		    <md-list-item ng-repeat="x in city.chinaCity.G | filter:cityNameFilter as filteredG" aria-label="{{x.cnName}}" ng-click="setCity(x);back()">{{x.cnName}}</md-list-item>
+		  </md-list>
+		</section>
+		<section class="repeated-item" ng-hide="filteredH < 1">
+		  <md-subheader class="md-primary">H</md-subheader>
+		  <md-list class="removePadding">
+		    <md-list-item ng-repeat="x in city.chinaCity.H | filter:cityNameFilter as filteredH" aria-label="{{x.cnName}}" ng-click="setCity(x);back()">{{x.cnName}}</md-list-item>
+		  </md-list>
+		</section>
+		<section class="repeated-item" ng-hide="filteredJ < 1">
+		  <md-subheader class="md-primary">J</md-subheader>
+		  <md-list class="removePadding">
+		    <md-list-item ng-repeat="x in city.chinaCity.J | filter:cityNameFilter as filteredJ" aria-label="{{x.cnName}}" ng-click="setCity(x);back()">{{x.cnName}}</md-list-item>
+		  </md-list>
+		</section>
+		<section class="repeated-item" ng-hide="filteredK < 1">
+		  <md-subheader class="md-primary">K</md-subheader>
+		  <md-list class="removePadding">
+		    <md-list-item ng-repeat="x in city.chinaCity.K | filter:cityNameFilter as filteredK" aria-label="{{x.cnName}}" ng-click="setCity(x);back()">{{x.cnName}}</md-list-item>
+		  </md-list>
+		</section>
+		<section class="repeated-item" ng-hide="filteredL < 1">
+		  <md-subheader class="md-primary">L</md-subheader>
+		  <md-list class="removePadding">
+		    <md-list-item ng-repeat="x in city.chinaCity.L | filter:cityNameFilter as filteredL" aria-label="{{x.cnName}}" ng-click="setCity(x);back()">{{x.cnName}}</md-list-item>
+		  </md-list>
+		</section>
+		<section class="repeated-item" ng-hide="filteredM < 1">
+		  <md-subheader class="md-primary">M</md-subheader>
+		  <md-list class="removePadding">
+		    <md-list-item ng-repeat="x in city.chinaCity.M | filter:cityNameFilter as filteredM" aria-label="{{x.cnName}}" ng-click="setCity(x);back()">{{x.cnName}}</md-list-item>
+		  </md-list>
+		</section>
+		<section class="repeated-item" ng-hide="filteredN < 1">
+		  <md-subheader class="md-primary">N</md-subheader>
+		  <md-list class="removePadding">
+		    <md-list-item ng-repeat="x in city.chinaCity.N | filter:cityNameFilter as filteredN" aria-label="{{x.cnName}}" ng-click="setCity(x);back()">{{x.cnName}}</md-list-item>
+		  </md-list>
+		</section>
+		<section class="repeated-item" ng-hide="filteredP < 1">
+		  <md-subheader class="md-primary">P</md-subheader>
+		  <md-list class="removePadding">
+		    <md-list-item ng-repeat="x in city.chinaCity.P | filter:cityNameFilter as filteredP" aria-label="{{x.cnName}}" ng-click="setCity(x);back()">{{x.cnName}}</md-list-item>
+		  </md-list>
+		</section>
+		<section class="repeated-item" ng-hide="filteredQ < 1">
+		  <md-subheader class="md-primary">Q</md-subheader>
+		  <md-list class="removePadding">
+		    <md-list-item ng-repeat="x in city.chinaCity.Q | filter:cityNameFilter as filteredQ" aria-label="{{x.cnName}}" ng-click="setCity(x);back()">{{x.cnName}}</md-list-item>
+		  </md-list>
+		</section>
+		<section class="repeated-item" ng-hide="filteredR < 1">
+		  <md-subheader class="md-primary">R</md-subheader>
+		  <md-list class="removePadding">
+		    <md-list-item ng-repeat="x in city.chinaCity.R | filter:cityNameFilter as filteredR" aria-label="{{x.cnName}}" ng-click="setCity(x);back()">{{x.cnName}}</md-list-item>
+		  </md-list>
+		</section>
+		<section class="repeated-item" ng-hide="filteredS < 1">
+		  <md-subheader class="md-primary">S</md-subheader>
+		  <md-list class="removePadding">
+		    <md-list-item ng-repeat="x in city.chinaCity.S | filter:cityNameFilter as filteredS" aria-label="{{x.cnName}}" ng-click="setCity(x);back()">{{x.cnName}}</md-list-item>
+		  </md-list>
+		</section>
+		<section class="repeated-item" ng-hide="filteredT < 1">
+		  <md-subheader class="md-primary">T</md-subheader>
+		  <md-list class="removePadding">
+		    <md-list-item ng-repeat="x in city.chinaCity.T | filter:cityNameFilter as filteredT" aria-label="{{x.cnName}}" ng-click="setCity(x);back()">{{x.cnName}}</md-list-item>
+		  </md-list>
+		</section>
+		<section class="repeated-item" ng-hide="filteredW < 1">
+		  <md-subheader class="md-primary">W</md-subheader>
+		  <md-list class="removePadding">
+		    <md-list-item ng-repeat="x in city.chinaCity.W | filter:cityNameFilter as filteredW" aria-label="{{x.cnName}}" ng-click="setCity(x);back()">{{x.cnName}}</md-list-item>
+		  </md-list>
+		</section>
+		<section class="repeated-item" ng-hide="filteredX < 1">
+		  <md-subheader class="md-primary">X</md-subheader>
+		  <md-list class="removePadding">
+		    <md-list-item ng-repeat="x in city.chinaCity.X | filter:cityNameFilter as filteredX" aria-label="{{x.cnName}}" ng-click="setCity(x);back()">{{x.cnName}}</md-list-item>
+		  </md-list>
+		</section>
+		<section class="repeated-item" ng-hide="filteredY < 1">
+		  <md-subheader class="md-primary">Y</md-subheader>
+		  <md-list class="removePadding">
+		    <md-list-item ng-repeat="x in city.chinaCity.Y | filter:cityNameFilter as filteredY" aria-label="{{x.cnName}}" ng-click="setCity(x);back()">{{x.cnName}}</md-list-item>
+		  </md-list>
+		</section>
+		<section class="repeated-item" ng-hide="filteredZ < 1">
+		  <md-subheader class="md-primary">Z</md-subheader>
+		  <md-list class="removePadding">
+		    <md-list-item ng-repeat="x in city.chinaCity.Z | filter:cityNameFilter as filteredZ" aria-label="{{x.cnName}}" ng-click="setCity(x);back()">{{x.cnName}}</md-list-item>
+		  </md-list>
+		</section>
+	<!-- City List End -->
+        </md-card-content>
+        </md-card>
+        </md-content>
+      </md-tab>
+      <md-tab label="国际城市">
+        <md-content class="md-padding" style="height: 600px;">
+        <md-card>
+        <md-card-content class="removePadding">
+        <section>
+      	<md-subheader class="md-primary">热门城市</md-subheader>
+      	<md-list>
+        	<md-list-item ng-click="null" ng-repeat="x in city.wordHot">{{x}}</md-list-item>
+      	</md-list>
+    	</section>
+        <section ng-repeat="x in city.chinaCity">
+      	<md-subheader class="md-primary">{{x.cnName}}</md-subheader>
+      	<md-list>
+        	<md-list-item ng-click="null" ng-repeat="s in x.sub">{{s.cnName}}</md-list-item>
+      	</md-list>
+    	</section>
+      </md-card-content>
+      </md-card>
+        </md-content>
+      </md-tab>
+    </md-tabs>
+<!-- Tab End -->
+</md-content>
+</div>

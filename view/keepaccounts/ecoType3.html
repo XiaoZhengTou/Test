@@ -1,0 +1,27 @@
+<div layout="row">
+	  <div layout="row" flex="50">
+	  	<md-datepicker ng-model="account.startstring" md-placeholder="开始时间" style="margin-top:15px;">
+			</md-datepicker>
+	  </div>
+	  
+	  <div layout="row" flex="50">
+	    <md-datepicker ng-model="account.endstring" md-placeholder="结束时间" style="margin-top:15px;">
+			</md-datepicker>
+	  </div>
+</div>
+<div layout="row">
+	  <div layout="row" flex="50">
+	  	<md-input-container class="md-block" style="margin-bottom:0;" flex="90">
+					<label>发生地点</label>
+					<input ng-model="account.happenAddress" type="text">
+			</md-input-container>
+	  </div>
+	  
+	  <div layout="row" flex="50">
+		    <md-input-container class="md-block" style="margin-bottom:0;" flex="90">
+					<label>住宿人</label>
+					<input ng-model="account.travelPersonIds" type="text">
+				</md-input-container>
+	  </div>
+</div>
+					

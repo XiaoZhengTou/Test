@@ -1,0 +1,130 @@
+<div ng-controller="trainCrl" class="airfare train">
+	<div ng-controller="trainListCrl">
+		<md-card>
+			<!--表头-->
+			<md-card-title>
+				{{city1.text}}&nbsp;>&nbsp;{{city2.text}}
+			</md-card-title>
+
+			<!-- 搜索 -->
+			<div layout="row">
+				<div flex="33" class="ml-marginlr-10">出发地</div>
+				<div flex="33" class="ml-marginlr-10">目的地</div>
+				<div flex="33" class="ml-marginlr-10">日期</div>
+			</div>
+			<div layout="row">
+				<md-list-item aria-label="city1" flex="33" class="ml-marginlr-10" ng-click="null" drchoosestationsletter stationlist='city1'>
+					<span class="ml-color-21" ng-bind="city1.text"></span>
+					<md-divider></md-divider>
+				</md-list-item>
+				<md-list-item flex="33" aria-label="city2" class="ml-marginlr-10" ng-click="null" drchoosestationsletter stationlist='city2'>
+					<span class="ml-color-21" ng-bind="city2.text"></span>
+					<md-divider></md-divider>
+				</md-list-item>
+				<md-list-item flex="33" aria-label="checkInDate" class="ml-marginlr-10">
+					<md-datepicker ng-model="checkInDate" md-min-date="checkInMinDate" md-max-date="checkInMaxDate"></md-datepicker>
+					<i><span class="ml-fontsize-12 ml-right-50">{{checkInDate | amDateFormat:'ddd'}}</span></i>
+				</md-list-item>
+			</div>
+			<!-- 搜索条件 -->
+			<!--<div layout="row" class="ml-marginT-20 ml-lineheight-48 ml-text-center">
+					<div class="bgcolor" flex="5"><i class="iconfont">&#xe66e;</i></div>
+					<div  layout="row"  flex="90">
+						<div class="bgcolor" flex="13" style="background-color: #fff">08-11周四</div>
+						<div class="bgcolor" flex="13">08-12周五</div>
+						<div class="bgcolor" flex="13">08-13周五</div>
+						<div class="bgcolor" flex="13">08-14周五</div>
+						<div class="bgcolor" flex="13">08-15周五</div>
+						<div class="bgcolor" flex="13">08-16周五</div>
+						<div class="bgcolor" flex="13">08-17周五</div>
+					</div>
+					<div class="bgcolor"  flex="5"><i class="iconfont">&#xe673;</i></div>
+				</div>-->
+			<div>
+				<div layout="row" class="ml-textalign-center ml-marginT-20">
+					<div style="margin-right: 10px;">
+						<span class="ml-paddinglr20 ">出发时间</span>
+						<span class="ml-paddinglr-10 cursor" ng-click="selected.clearTime()" ng-class="{'active' : (arrTime.length < 1)}">不限</span>
+					</div>
+					<md-checkbox aria-label="Disabled checked checkbox" ng-click="selected.toggerChange(x , arrTime)" ng-checked="selected.existChange(x , arrTime)" ng-repeat="x in trainTimes">
+						{{x.name}}
+					</md-checkbox>
+				</div>
+				<div layout="row" class="ml-textalign-center ml-marginT-20">
+					<div style="margin-right: 10px;">
+						<span class="ml-paddinglr20">坐席选择</span>
+						<span class="ml-paddinglr-10 cursor" ng-click="selected.clearSeat()" ng-class="{'active' : (arrSeat.length < 1)}">不限</span>
+					</div>
+					<md-checkbox aria-label="Disabled checked checkbox" ng-click="selected.toggerChange(x.name , arrSeat)" ng-checked="selected.existChange(x.name , arrSeat)" ng-repeat="x in trainSeats">
+						{{x.name}}
+					</md-checkbox>
+				</div>
+				<div layout="row" class="ml-textalign-center ml-marginT-20">
+					<div style="margin-right: 10px;">
+						<span class="ml-paddinglr20">车次类型</span>
+						<span class="ml-paddinglr-10 cursor" ng-click="selected.clearType()" ng-class="{'active' : (arrType.length < 1)}">不限</span>
+					</div>
+					<md-checkbox aria-label="Disabled checked traintypes" ng-click="selected.toggerChange(x.id , arrType)" ng-checked="selected.existChange(x.id , arrType)" ng-repeat="x in trainTypes">
+						{{x.name}}
+					</md-checkbox>
+				</div>
+			</div>
+			<div class="ml-textalign-center ml-marginT-20">
+				<md-button class="md-raised md-primary ml-paddinglr-20" ng-click="trainSerch()">立即搜索</md-button>
+			</div>
+		</md-card>
+		<!-- 搜索结果 -->
+		<md-card>
+			<div layout="row" class="ml-textalign-center ml-lineheight-48 bgcolor" style="border:1px solid #ccc;" flex>
+				<div flex>车次/类型</div>
+				<div flex>发站/到站</div>
+				<div flex>发/到时间</div>
+				<!--<div flex>运行时间</div>-->
+				<div flex>参考票价</div>
+				<!--<div flex>剩余票量</div>-->
+				<div flex></div>
+			</div>
+			<div ng-if="listShow==false" layout="row" layout-sm="column" layout-align="space-around">
+				<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+			</div>
+			<div style="line-height: 50px;text-align: center;" ng-if="$scope.trainLists == ''">{{noTrainList}}</div>
+			<div layout="row" data="trainLists" ng-repeat="trainList in trainLists  | trainlistFilter: currentPage*itemsPerPage | limitTo: itemsPerPage | trainTypeFilter|trainSeatFilter|trainTimeFilter" class="ml-textalign-center ml-paddingtb-10" style="border:1px solid #ccc; border-top: 0;">
+				<div flex>
+					<p>{{trainList.trainNumber}}</p>
+				</div>
+				<div flex>
+					<p>{{trainList.fromStationName}}</p>
+					<p>{{trainList.toStationName}}</p>
+				</div>
+				<div flex>
+					<p>{{trainList.departureDate }}
+					</p>
+					<p>{{trainList.arrivalDate}}</p>
+				</div>
+				<!--<div flex>
+					<p>{{trainList.usedTime}}</p>
+				</div>-->
+				<div flex>
+					<p>{{trainList.seatCode}}<span class="ml-color-red">￥{{trainList.seatPrice}}</span></p>
+				</div>
+				<!--<div flex>
+					<p>654张</p>
+				</div>-->
+				<div flex>
+					<md-button ng-click="onGoBuy(trainList)" class="md-raised md-primary" style="margin: 3px 10px">购买</md-button>
+				</div>
+			</div>
+			
+			<!--<md-divider></md-divider>-->
+				<div class="fenye ml-textalign-right">
+					<md-button aria-label="page" ng-click="firstPage()">首页</md-button>
+					<md-button aria-label="page" ng-disabled="prevPageDisabled()" ng-click="prevPage()">上一页</md-button>
+					<md-button aria-label="page" ng-disabled="nextPageDisabled()" ng-click="nextPage()">下一页</md-button>
+					<md-button aria-label="page" ng-click="lastPage()">末页</md-button>
+					<span class="gotoPage">到 <input type="text" ng-model="a" /> 页</span>
+					<md-button aria-label="page" ng-click="goPage(a)">确定</md-button>
+					<span>共 {{pageCount}} 页</span>
+				</div>
+		</md-card>
+	</div>
+</div>

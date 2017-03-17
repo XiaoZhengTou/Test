@@ -1,0 +1,120 @@
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<div ng-controller="menudefineCtrl" id="menudefine">
+    <div class="full-height ng-scope">
+        <div class="full-image-background layout-fill ng-scope layout-row" layout="row" layout-fill="">
+            <div class="animate-wrapper layout-row flex" flex="" layout="row">
+                <div id="ui-login" class="login-frame ng-scope layout-column flex" ui-view="" flex="" layout="column">
+                    <div layout="row" flex="" layout-padding="" layout-fill="" layout-align="center center" class="layout-fill ng-scope layout-align-center-center layout-row flex" style="padding: 0px">
+                        <div flex="40" flex-lg="50" flex-md="70" flex-xs="100" class="flex-xs-100 flex-md-70 flex-lg-50 flex-40" style="max-width: 100%;padding: 0px">
+                            <md-card class="md-cyan-theme" style="max-width: 100%" layout="row">
+
+                                <div flex="30" style="max-height: 500px" class="md-dialog-content">
+                                    <ul tree2 id="tree11" class="ztree" ng-model="$parent.selectNode" style="overflow: auto;max-height: 500px;width: 88%;margin: 2%;"></ul>
+                                    <!--<md-button class="md-fab md-accent md-hue-1" style="float: right;" ng-click="add($event,tarmenu)">-->
+                                        <!--<h1 style="margin-top: 0px;font-size: 36px;color: white">+</h1>-->
+                                    <!--</md-button>-->
+                                </div>
+
+                                <div id="rMenu">
+                                    <ul>
+                                        <li id="m_add" ng-click="add($event,tarmenu,'1')">增加节点</li>
+                                        <li id="m_add1" ng-click="add($event,tarmenu,'2')">增加节点</li>
+                                        <!--<li id="m_edit" ng-click="editTreeNode()">编辑节点</li>-->
+                                        <!--<li id="m_del" ng-click="removeTreeNode()">删除节点</li>-->
+                                    </ul>
+                                </div>
+
+                                <div flex="4" class="md-dialog-content"></div>
+                                <div flex="66" class="md-dialog-content">
+                                    <md-button class="md-primary md-raised" ng-click="delete(tarmenu)" ng-disabled="deleteshow">
+                                        删除
+                                    </md-button>
+                                    <md-button class="md-primary md-raised" ng-click="edit($event,tarmenu)" ng-disabled="editshow">
+                                        编辑
+                                    </md-button>
+                                    <p>菜单ID：{{tarmenu.id}}</p>
+                                    <p>上级菜单：{{tarmenu.parentName}}</p>
+                                    <p>菜单名称：{{tarmenu.name}}</p>
+                                    <p>描述：{{tarmenu.description}}</p>
+                                    <p>页面路径：{{tarmenu.url}}</p>
+                                    <p>是否显示：
+                                        <md-radio-group ng-model="visible">
+                                            <md-radio-button value="0" style="display: inherit;margin-left: 20px;" disabled>是</md-radio-button>
+                                            <md-radio-button value="1" style="display: inherit;margin-left: 20px;" disabled>否</md-radio-button>
+                                        </md-radio-group>
+                                    </p>
+                                    <p>包含功能:</p>
+
+                                    <md-table-container style="width: 95%;padding-left: 2.5%;">
+                                        <!--<table data-md-table data-md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" data-ng-model="selected" md-progress="promise">-->
+                                        <table data-md-table data-ng-model="selected" md-progress="promise">
+                                            <thead md-head data-md-order="query.order" md-on-reorder="getDesserts">
+                                            <tr md-row>
+                                                <th md-column>功能名称</th>
+                                                <th md-column>资源地址</th>
+                                                <th md-column>描述</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody md-body>
+                                            <!--<tr md-row md-select="item" md-select-id="budget_templet_id" ng-repeat="item in feeapplylist.data.datalist" md-auto-select="options.autoSelect">-->
+                                            <tr md-row ng-repeat="item in appdata">
+                                                <td md-cell>{{item.rest_name}}</td>
+                                                <td md-cell>{{item.rest_url}}</td>
+                                                <td md-cell>{{item.note}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="5">
+                                                    <md-button class="md-fab md-accent md-hue-1" style="float: right;" ng-click="addresource($event,tarmenu)" ng-disabled="addresourceshow">
+                                                        <h1 style="margin-top: 0px;font-size: 36px;color: white">+</h1>
+                                                    </md-button>
+                                                </th>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </md-table-container>
+                                    <!--<table ng-table="tableParams" class="table table-condensed table-bordered table-striped" show-filter="true" style="width: 94%;margin: 3%;margin-top: 0%;">-->
+
+                                        <!--<tr ng-repeat="user in $data">-->
+
+                                            <!--<td title="'功能名称'" filter="{ rest_name: 'text'}" sortable="'rest_name'" style="word-wrap:break-word">-->
+                                                <!--{{user.rest_name}}</td>-->
+                                            <!--<td title="'资源地址'" filter="{ rest_url: 'text'}" sortable="'rest_url'" style="word-wrap:break-word">-->
+                                                <!--{{user.rest_url}}</td>-->
+                                            <!--<td title="'描述'" filter="{ rest_note: 'text'}" sortable="'rest_note'" style="word-wrap:break-word">-->
+                                                <!--{{user.note}}</td>-->
+                                            <!--&lt;!&ndash;<td title="'操作'" style="max-width: 10%;white-space: nowrap;">&ndash;&gt;-->
+                                                <!--&lt;!&ndash;<md-button class="md-primary" ng-click="edit($event,user,$index)" style="margin: 0px;">&ndash;&gt;-->
+                                                    <!--&lt;!&ndash;<md-icon md-svg-src="img/icons/edit.svg"></md-icon>&ndash;&gt;-->
+                                                    <!--&lt;!&ndash;编辑&ndash;&gt;-->
+                                                <!--&lt;!&ndash;</md-button>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;</td>&ndash;&gt;-->
+                                        <!--</tr>-->
+                                        <!--<tr>-->
+                                            <!--<th colspan="5">-->
+                                                <!--<md-button class="md-fab md-accent md-hue-1" style="float: right;" ng-click="addresource($event,tarmenu)" ng-disabled="addresourceshow">-->
+                                                    <!--<h1 style="margin-top: 0px;font-size: 36px;color: white">+</h1>-->
+                                                <!--</md-button>-->
+                                            <!--</th>-->
+                                        <!--</tr>-->
+                                    <!--</table>-->
+                                </div>
+                            </md-card>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    #menudefine .active-Y{
+        background-color: green;
+        color: green;
+    }
+    #menudefine .active-N{
+        background-color: red;
+        color: red;
+    }
+</style>

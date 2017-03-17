@@ -1,0 +1,48 @@
+<div ng-controller="loginCtrl" class="ml-full-height" ng-cloak layout="row" layout-padding layout-fill layout-align="center center">
+	<div flex="70" layout="row" layout-xs="column" class="md-whiteframe-2dp" style="background-color: #FFFFFF;max-width: 600px;">
+		<div class=" md-cyan-theme" style="text-align: center;" flex>
+			<img src="img/loginlogo.jpg" />
+		</div>
+		<div class="md-cyan-theme" flex>
+			<div class="padding-20 _md">
+				<div layout="row" layout-align="center center" class="layout-align-center-center layout-row">
+					<h1 class="md-headline ng-scope" translate="">用户登录</h1>
+				</div>
+			</div>
+			
+				<form name="login" class="ng-pristine ng-invalid ng-invalid-required">
+					<md-input-container class="md-block md-cyan-theme md-input-invalid">
+						<label for="username" translate="" class="ng-scope md-required">登录名</label>
+						<input id="username" label="username" name="username" type="text" ng-model="user.username" required class="ng-pristine md-input ng-empty  ng-invalid ng-invalid-required ng-touched" aria-invalid="true" ng-disabled="user.disabled">
+						<div class="md-errors-spacer"></div>
+						<div ng-messages="login.username.$error" ng-show="login.username.$touched" class="md-input-messages-animation ng-active" aria-live="assertive" aria-hidden="false">
+							<div ng-message="" when="required" class="md-input-message-animation ng-scope"><span translate="" class="ng-scope">请输入你的登录名</span></div>
+						</div>
+					</md-input-container>
+					<md-input-container class="md-block md-cyan-theme md-input-invalid">
+						<label for="password" translate="" class="ng-scope md-required">密码</label>
+						<input id="password" label="password" name="password" type="password" ng-model="user.password" required="" class="ng-pristine md-input ng-empty ng-invalid ng-invalid-required ng-touched" aria-invalid="true" ng-disabled="user.disabled">
+						<div class="md-errors-spacer"></div>
+						<div ng-messages="" for="login.password.$error" md-auto-hide="false" ng-show="login.password.$touched" class="md-input-messages-animation ng-active" aria-live="assertive" aria-hidden="false">
+							<div ng-message="" when="required" class="md-input-message-animation ng-scope" style="opacity: 1; margin-top: 0px;"><span translate="" class="ng-scope">请输入你的密码</span></div>
+						</div>
+					</md-input-container>
+					<md-input-container class="md-block md-cyan-theme" ng-if="user.tenants.length > 1">
+						<label>选择租户</label>
+						<md-select ng-model="user.select">
+							<md-optgroup label="租户">
+								<md-option ng-value="y" ng-repeat="y in user.tenants" ng-selected="$first">{{y.tenant_name ? y.tenant_name : y.id}}</md-option>
+							</md-optgroup>
+						</md-select>
+					</md-input-container>
+					<md-input-container class="md-block md-cyan-theme">
+						<md-checkbox ng-model="user.rememberMe" aria-label="记住我" ng-if="!(user.tenants.length > 1)">
+							记住我（公共电脑上慎用）
+						</md-checkbox>
+					</md-input-container>
+					<md-button class="md-raised md-primary" ng-click="userLogin()" ng-disabled="login.$invalid" aria-label="登录" disabled="disabled">{{user.text}}</md-button>
+				</form>
+			
+		</div>
+	</div>
+</div>

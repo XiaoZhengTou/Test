@@ -1,0 +1,361 @@
+{
+"resultFlag": 1,
+"resultMsg": "成功",
+"data": [
+{
+"commitId": "456565456556",
+"commitTitle": "不错的酒店，值得推荐",
+"star": "5",
+"author": "王志文",
+"commitDate": "429004198809030035",
+"content": "房间环境不错，周边就一般，星级酒店，停车场很多，但是不好停，层式停车位很容易撞到，房间也算大，隔离就购物超市，购物方便，佛山市这家希尔顿酒店比东南亚美国的同品牌档次要高，大堂很舒服，电梯很快，总之，还是一次比较满意的居住体验吧！",
+"zan" : "45",
+"pictureList": [
+        {
+        "imageName": "http://images4.c-ctrip.com/target/hotel/79000/78114/e60f9147ac094110aac26fd07d89fdec_300_225.jpg",
+        "url": "http://images4.c-ctrip.com/target/hotel/79000/78114/e60f9147ac094110aac26fd07d89fdec_300_225.jpg",
+        "description": "外观"
+        },
+        {
+        "hotelCode": "419903",
+        "imageName": "http://images4.c-ctrip.com/target/hotel/79000/78114/cfa01d38a3d742cdb678cfda3f26aaf5_300_225.jpg",
+        "isMain": "1",
+        "url": "http://images4.c-ctrip.com/target/hotel/79000/78114/cfa01d38a3d742cdb678cfda3f26aaf5_300_225.jpg",
+        "description": "外观"
+        },
+        {
+        "hotelCode": "419903",
+        "imageName": "http://images4.c-ctrip.com/target/hotel/79000/78114/37473987506845e7b175a4ae50aaf28a_300_225.jpg",
+        "isMain": "1",
+        "url": "http://images4.c-ctrip.com/target/hotel/79000/78114/37473987506845e7b175a4ae50aaf28a_300_225.jpg",
+        "description": "外观"
+        },
+        {
+        "hotelCode": "419903",
+        "imageName": "http://images4.c-ctrip.com/target/fd/hotel/g1/M00/8A/5F/CghzfVVSCO6AY-ruAADrSH7HmyM767_300_225.jpg",
+        "isMain": "1",
+        "url": "http://images4.c-ctrip.com/target/fd/hotel/g1/M00/8A/5F/CghzfVVSCO6AY-ruAADrSH7HmyM767_300_225.jpg",
+        "description": "酒店外观"
+        },
+        {
+        "hotelCode": "419903",
+        "imageName": "http://images4.c-ctrip.com/target/fd/hotel/g2/M02/29/FF/CghzgFWs0JWAUzbeAAEb2BWFoD4321_300_225.jpg",
+        "isMain": "1",
+        "url": "http://images4.c-ctrip.com/target/fd/hotel/g2/M02/29/FF/CghzgFWs0JWAUzbeAAEb2BWFoD4321_300_225.jpg",
+        "description": ""
+        }
+    ],
+"commitList": [
+        {
+        "name" : "李咏",
+       	"content":"卧槽，床很漂亮啊",
+       	"data":"2016-1-21"
+        },
+        {
+        "name" : "李咏",
+       	"content":"卧槽，床很漂亮啊",
+       	"data":"2016-1-21"
+        },
+        {
+        "name" : "李咏",
+       	"content":"卧槽，床很漂亮啊",
+       	"data":"2016-1-21"
+        },
+        {
+        "name" : "李咏",
+       	"content":"卧槽，床很漂亮啊",
+       	"data":"2016-1-21"
+        },
+        {
+        "name" : "李咏",
+       	"content":"卧槽，床很漂亮啊",
+       	"data":"2016-1-21"
+        }
+    ]
+},
+{
+"commitId": "456565456556",
+"commitTitle": "不错的酒店，值得推荐",
+"star": "4",
+"author": "王志文",
+"commitDate": "429004198809030035",
+"content": "房间环境不错，周边就一般，星级酒店，停车场很多，但是不好停，层式停车位很容易撞到，房间也算大，隔离就购物超市，购物方便，佛山市这家希尔顿酒店比东南亚美国的同品牌档次要高，大堂很舒服，电梯很快，总之，还是一次比较满意的居住体验吧！",
+"zan" : "45",
+"pictureList": [
+        {
+        "imageName": "http://images4.c-ctrip.com/target/hotel/79000/78114/e60f9147ac094110aac26fd07d89fdec_300_225.jpg",
+        "url": "http://images4.c-ctrip.com/target/hotel/79000/78114/e60f9147ac094110aac26fd07d89fdec_300_225.jpg",
+        "description": "外观"
+        },
+        {
+        "hotelCode": "419903",
+        "imageName": "http://images4.c-ctrip.com/target/hotel/79000/78114/cfa01d38a3d742cdb678cfda3f26aaf5_300_225.jpg",
+        "isMain": "1",
+        "url": "http://images4.c-ctrip.com/target/hotel/79000/78114/cfa01d38a3d742cdb678cfda3f26aaf5_300_225.jpg",
+        "description": "外观"
+        },
+        {
+        "hotelCode": "419903",
+        "imageName": "http://images4.c-ctrip.com/target/hotel/79000/78114/37473987506845e7b175a4ae50aaf28a_300_225.jpg",
+        "isMain": "1",
+        "url": "http://images4.c-ctrip.com/target/hotel/79000/78114/37473987506845e7b175a4ae50aaf28a_300_225.jpg",
+        "description": "外观"
+        },
+        {
+        "hotelCode": "419903",
+        "imageName": "http://images4.c-ctrip.com/target/fd/hotel/g1/M00/8A/5F/CghzfVVSCO6AY-ruAADrSH7HmyM767_300_225.jpg",
+        "isMain": "1",
+        "url": "http://images4.c-ctrip.com/target/fd/hotel/g1/M00/8A/5F/CghzfVVSCO6AY-ruAADrSH7HmyM767_300_225.jpg",
+        "description": "酒店外观"
+        },
+        {
+        "hotelCode": "419903",
+        "imageName": "http://images4.c-ctrip.com/target/fd/hotel/g2/M02/29/FF/CghzgFWs0JWAUzbeAAEb2BWFoD4321_300_225.jpg",
+        "isMain": "1",
+        "url": "http://images4.c-ctrip.com/target/fd/hotel/g2/M02/29/FF/CghzgFWs0JWAUzbeAAEb2BWFoD4321_300_225.jpg",
+        "description": ""
+        }
+    ],
+"commitList": [
+        {
+        "name" : "李咏",
+       	"content":"卧槽，床很漂亮啊",
+       	"data":"2016-1-21"
+        },
+        {
+        "name" : "李咏",
+       	"content":"卧槽，床很漂亮啊",
+       	"data":"2016-1-21"
+        },
+        {
+        "name" : "李咏",
+       	"content":"卧槽，床很漂亮啊",
+       	"data":"2016-1-21"
+        },
+        {
+        "name" : "李咏",
+       	"content":"卧槽，床很漂亮啊",
+       	"data":"2016-1-21"
+        },
+        {
+        "name" : "李咏",
+       	"content":"卧槽，床很漂亮啊",
+       	"data":"2016-1-21"
+        }
+    ]
+},
+{
+"commitId": "456565456556",
+"commitTitle": "不错的酒店，值得推荐",
+"star": "1",
+"author": "王志文",
+"commitDate": "429004198809030035",
+"content": "房间环境不错，周边就一般，星级酒店，停车场很多，但是不好停，层式停车位很容易撞到，房间也算大，隔离就购物超市，购物方便，佛山市这家希尔顿酒店比东南亚美国的同品牌档次要高，大堂很舒服，电梯很快，总之，还是一次比较满意的居住体验吧！",
+"zan" : "45",
+"pictureList": [
+        {
+        "imageName": "http://images4.c-ctrip.com/target/hotel/79000/78114/e60f9147ac094110aac26fd07d89fdec_300_225.jpg",
+        "url": "http://images4.c-ctrip.com/target/hotel/79000/78114/e60f9147ac094110aac26fd07d89fdec_300_225.jpg",
+        "description": "外观"
+        },
+        {
+        "hotelCode": "419903",
+        "imageName": "http://images4.c-ctrip.com/target/hotel/79000/78114/cfa01d38a3d742cdb678cfda3f26aaf5_300_225.jpg",
+        "isMain": "1",
+        "url": "http://images4.c-ctrip.com/target/hotel/79000/78114/cfa01d38a3d742cdb678cfda3f26aaf5_300_225.jpg",
+        "description": "外观"
+        },
+        {
+        "hotelCode": "419903",
+        "imageName": "http://images4.c-ctrip.com/target/hotel/79000/78114/37473987506845e7b175a4ae50aaf28a_300_225.jpg",
+        "isMain": "1",
+        "url": "http://images4.c-ctrip.com/target/hotel/79000/78114/37473987506845e7b175a4ae50aaf28a_300_225.jpg",
+        "description": "外观"
+        },
+        {
+        "hotelCode": "419903",
+        "imageName": "http://images4.c-ctrip.com/target/fd/hotel/g1/M00/8A/5F/CghzfVVSCO6AY-ruAADrSH7HmyM767_300_225.jpg",
+        "isMain": "1",
+        "url": "http://images4.c-ctrip.com/target/fd/hotel/g1/M00/8A/5F/CghzfVVSCO6AY-ruAADrSH7HmyM767_300_225.jpg",
+        "description": "酒店外观"
+        },
+        {
+        "hotelCode": "419903",
+        "imageName": "http://images4.c-ctrip.com/target/fd/hotel/g2/M02/29/FF/CghzgFWs0JWAUzbeAAEb2BWFoD4321_300_225.jpg",
+        "isMain": "1",
+        "url": "http://images4.c-ctrip.com/target/fd/hotel/g2/M02/29/FF/CghzgFWs0JWAUzbeAAEb2BWFoD4321_300_225.jpg",
+        "description": ""
+        }
+    ],
+"commitList": [
+        {
+        "name" : "李咏",
+       	"content":"卧槽，床很漂亮啊",
+       	"data":"2016-1-21"
+        },
+        {
+        "name" : "李咏",
+       	"content":"卧槽，床很漂亮啊",
+       	"data":"2016-1-21"
+        },
+        {
+        "name" : "李咏",
+       	"content":"卧槽，床很漂亮啊",
+       	"data":"2016-1-21"
+        },
+        {
+        "name" : "李咏",
+       	"content":"卧槽，床很漂亮啊",
+       	"data":"2016-1-21"
+        },
+        {
+        "name" : "李咏",
+       	"content":"卧槽，床很漂亮啊",
+       	"data":"2016-1-21"
+        }
+    ]
+},
+{
+"commitId": "456565456556",
+"commitTitle": "不错的酒店，值得推荐",
+"star": "2",
+"author": "王志文",
+"commitDate": "429004198809030035",
+"content": "房间环境不错，周边就一般，星级酒店，停车场很多，但是不好停，层式停车位很容易撞到，房间也算大，隔离就购物超市，购物方便，佛山市这家希尔顿酒店比东南亚美国的同品牌档次要高，大堂很舒服，电梯很快，总之，还是一次比较满意的居住体验吧！",
+"zan" : "45",
+"pictureList": [
+        {
+        "imageName": "http://images4.c-ctrip.com/target/hotel/79000/78114/e60f9147ac094110aac26fd07d89fdec_300_225.jpg",
+        "url": "http://images4.c-ctrip.com/target/hotel/79000/78114/e60f9147ac094110aac26fd07d89fdec_300_225.jpg",
+        "description": "外观"
+        },
+        {
+        "hotelCode": "419903",
+        "imageName": "http://images4.c-ctrip.com/target/hotel/79000/78114/cfa01d38a3d742cdb678cfda3f26aaf5_300_225.jpg",
+        "isMain": "1",
+        "url": "http://images4.c-ctrip.com/target/hotel/79000/78114/cfa01d38a3d742cdb678cfda3f26aaf5_300_225.jpg",
+        "description": "外观"
+        },
+        {
+        "hotelCode": "419903",
+        "imageName": "http://images4.c-ctrip.com/target/hotel/79000/78114/37473987506845e7b175a4ae50aaf28a_300_225.jpg",
+        "isMain": "1",
+        "url": "http://images4.c-ctrip.com/target/hotel/79000/78114/37473987506845e7b175a4ae50aaf28a_300_225.jpg",
+        "description": "外观"
+        },
+        {
+        "hotelCode": "419903",
+        "imageName": "http://images4.c-ctrip.com/target/fd/hotel/g1/M00/8A/5F/CghzfVVSCO6AY-ruAADrSH7HmyM767_300_225.jpg",
+        "isMain": "1",
+        "url": "http://images4.c-ctrip.com/target/fd/hotel/g1/M00/8A/5F/CghzfVVSCO6AY-ruAADrSH7HmyM767_300_225.jpg",
+        "description": "酒店外观"
+        },
+        {
+        "hotelCode": "419903",
+        "imageName": "http://images4.c-ctrip.com/target/fd/hotel/g2/M02/29/FF/CghzgFWs0JWAUzbeAAEb2BWFoD4321_300_225.jpg",
+        "isMain": "1",
+        "url": "http://images4.c-ctrip.com/target/fd/hotel/g2/M02/29/FF/CghzgFWs0JWAUzbeAAEb2BWFoD4321_300_225.jpg",
+        "description": ""
+        }
+    ],
+"commitList": [
+        {
+        "name" : "李咏",
+       	"content":"卧槽，床很漂亮啊",
+       	"data":"2016-1-21"
+        },
+        {
+        "name" : "李咏",
+       	"content":"卧槽，床很漂亮啊",
+       	"data":"2016-1-21"
+        },
+        {
+        "name" : "李咏",
+       	"content":"卧槽，床很漂亮啊",
+       	"data":"2016-1-21"
+        },
+        {
+        "name" : "李咏",
+       	"content":"卧槽，床很漂亮啊",
+       	"data":"2016-1-21"
+        },
+        {
+        "name" : "李咏",
+       	"content":"卧槽，床很漂亮啊",
+       	"data":"2016-1-21"
+        }
+    ]
+},
+{
+"commitId": "456565456556",
+"commitTitle": "不错的酒店，值得推荐",
+"star": "5",
+"author": "王志文",
+"commitDate": "429004198809030035",
+"content": "房间环境不错，周边就一般，星级酒店，停车场很多，但是不好停，层式停车位很容易撞到，房间也算大，隔离就购物超市，购物方便，佛山市这家希尔顿酒店比东南亚美国的同品牌档次要高，大堂很舒服，电梯很快，总之，还是一次比较满意的居住体验吧！",
+"zan" : "45",
+"pictureList": [
+        {
+        "imageName": "http://images4.c-ctrip.com/target/hotel/79000/78114/e60f9147ac094110aac26fd07d89fdec_300_225.jpg",
+        "url": "http://images4.c-ctrip.com/target/hotel/79000/78114/e60f9147ac094110aac26fd07d89fdec_300_225.jpg",
+        "description": "外观"
+        },
+        {
+        "hotelCode": "419903",
+        "imageName": "http://images4.c-ctrip.com/target/hotel/79000/78114/cfa01d38a3d742cdb678cfda3f26aaf5_300_225.jpg",
+        "isMain": "1",
+        "url": "http://images4.c-ctrip.com/target/hotel/79000/78114/cfa01d38a3d742cdb678cfda3f26aaf5_300_225.jpg",
+        "description": "外观"
+        },
+        {
+        "hotelCode": "419903",
+        "imageName": "http://images4.c-ctrip.com/target/hotel/79000/78114/37473987506845e7b175a4ae50aaf28a_300_225.jpg",
+        "isMain": "1",
+        "url": "http://images4.c-ctrip.com/target/hotel/79000/78114/37473987506845e7b175a4ae50aaf28a_300_225.jpg",
+        "description": "外观"
+        },
+        {
+        "hotelCode": "419903",
+        "imageName": "http://images4.c-ctrip.com/target/fd/hotel/g1/M00/8A/5F/CghzfVVSCO6AY-ruAADrSH7HmyM767_300_225.jpg",
+        "isMain": "1",
+        "url": "http://images4.c-ctrip.com/target/fd/hotel/g1/M00/8A/5F/CghzfVVSCO6AY-ruAADrSH7HmyM767_300_225.jpg",
+        "description": "酒店外观"
+        },
+        {
+        "hotelCode": "419903",
+        "imageName": "http://images4.c-ctrip.com/target/fd/hotel/g2/M02/29/FF/CghzgFWs0JWAUzbeAAEb2BWFoD4321_300_225.jpg",
+        "isMain": "1",
+        "url": "http://images4.c-ctrip.com/target/fd/hotel/g2/M02/29/FF/CghzgFWs0JWAUzbeAAEb2BWFoD4321_300_225.jpg",
+        "description": ""
+        }
+    ],
+"commitList": [
+        {
+        "name" : "李咏",
+       	"content":"卧槽，床很漂亮啊",
+       	"data":"2016-1-21"
+        },
+        {
+        "name" : "李咏",
+       	"content":"卧槽，床很漂亮啊",
+       	"data":"2016-1-21"
+        },
+        {
+        "name" : "李咏",
+       	"content":"卧槽，床很漂亮啊",
+       	"data":"2016-1-21"
+        },
+        {
+        "name" : "李咏",
+       	"content":"卧槽，床很漂亮啊",
+       	"data":"2016-1-21"
+        },
+        {
+        "name" : "李咏",
+       	"content":"卧槽，床很漂亮啊",
+       	"data":"2016-1-21"
+        }
+    ]
+}
+]
+}

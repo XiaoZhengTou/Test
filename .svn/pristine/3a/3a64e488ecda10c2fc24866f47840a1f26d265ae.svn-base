@@ -1,0 +1,28 @@
+<div layout="row" flex>
+  <div layout="row" flex="50">
+  		<md-input-container class="md-block" style="margin-top:15px;margin-bottom:0;" flex="90" >
+			<label>起始地点</label>
+			<!--<md-icon><i class="iconfont">&#xe667;</i></md-icon>-->
+			<input ng-model="editAccount.fromAreaName" type="text">
+		</md-input-container>
+  </div>
+  
+  <div layout="row" flex="50">
+     <md-input-container class="md-block" style="margin-top:15px;margin-bottom:0;" flex="90">
+			<label>目地地点</label>
+			<!--<md-icon><i class="iconfont">&#xe62b;</i></md-icon>-->
+			<input ng-model="editAccount.toAreaName" type="text">
+		</md-input-container>
+  </div>
+</div>
+
+
+<div layout="row" flex>
+  <div layout="row" flex="50">
+  	<md-datepicker ng-model="editAccount.datestring" style="margin-top:0px;margin-bottom:0;" md-placeholder="发生日期">
+		</md-datepicker>
+  </div>
+  
+  <div layout="row" flex="50">
+  </div>
+</div>

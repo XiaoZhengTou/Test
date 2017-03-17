@@ -1,0 +1,37 @@
+<md-content ng-repeat="x in processlsit" flex layout="column" layout-align="center start">
+	<div layout="column" ng-switch on="$index">
+		<div layout="row" layout-align="start center">
+			<div layout="row" layout-align="start center">
+				<span>
+        			<p class="iconfont ml-nomargin" style="color:#128b33;" class="ml-nomargin" ng-switch-when="0">&#xe627;</p>
+        			<p class="iconfont ml-nomargin" style="color:#128b33;" class="ml-nomargin" ng-switch-when="3">&#xe629;</p>
+        			<p class="iconfont ml-nomargin" style="color:#128b33;" class="ml-nomargin" ng-switch-default>&#xe628;</p>
+    			</span>
+			</div>
+			<div layout="row" layout-align="start center" ng-switch-default drorganization="{'model':'x.prosenlist'}" ng-model="x.prosenlist">
+				<span class="md-padding" ng-bind="x.fdNodeName"></span>
+				<i class="iconfont" style="color:#42A5F5;">&#xe61a;</i>
+			</div>
+			<div layout="row" layout-align="start center" ng-switch-when="0">
+				<span class="md-padding" ng-bind="x.fdNodeName"></span>
+			</div>
+		</div>
+		<div style="margin-left: 20px;">
+			<div layout="row" ng-if="!(x.fdProessType.indexOf('起草')>=0)" layout-sm="column" class="chipnoinput" layout-align="start center" layout-wrap>
+				<md-chips ng-model="x.prosenlist" style="margin-top: 3px" md-max-chips="1">
+					<md-chip-template>
+						<strong ng-bind="$chip.user_full_name"></strong>
+					</md-chip-template>
+				</md-chips>
+			</div>
+			<div layout="row" ng-if="(x.fdProessType.indexOf('起草')>=0)" layout-sm="column" class="chipnoinput" layout-align="start center" layout-wrap>
+				<md-chips ng-repeat="users in x.prosenlist" style="margin-top: 3px">
+					<md-chip>
+						<strong ng-bind="users.user_full_name"></strong>
+					</md-chip>
+				</md-chips>
+			</div>
+		</div>
+	</div>
+	<md-divider></md-divider>
+</md-content>

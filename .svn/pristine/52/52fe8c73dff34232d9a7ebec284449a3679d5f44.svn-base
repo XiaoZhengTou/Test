@@ -1,0 +1,167 @@
+<div ng-controller="wsCtrl" class="jiehuankuan fukuan add" ng-cloak>
+	<div ng-controller="wsAddCtrl" class="ml-width-bottom-bar">
+		<!-- 新增单据开始 -->
+		<md-card>
+			<md-card-content>
+				<div layout="row">
+					<div flex class="ml-padding-right">
+						<md-input-container class="md-block md-cyan-theme md-input-invalid">
+							<label>工单类型</label>
+							<md-select ng-model="saveData.ssmanualfeeinvoiceh.order_type">
+				              <md-option value="AP" selected>
+				                	AP应付发票
+				              </md-option>
+				           </md-select>
+						</md-input-container>
+					</div>
+					<div flex class="ml-padding-right">
+						<md-input-container class="md-block md-cyan-theme md-input-invalid">
+							<label>入账单位</label>
+							<input ng-model="ruzhangdanwei.company_name" type="text" drruzhangdanwei="{'model':'ruzhangdanwei'}">
+						</md-input-container>
+					</div>
+				</div>
+				<div layout="row">
+					<div flex class="ml-padding-right">
+						<!--<md-input-container class="md-block md-cyan-theme md-input-invalid">
+							<label>供应商名称</label>
+							<input type="text" />
+						</md-input-container>-->
+						<dr-Vendor ngrequired="true" vendormodel="vendor" vendorname="" vendoraddress="" titlename="供应商名称"></dr-Vendor>
+
+					</div>
+					<div flex class="ml-padding-right">
+						<md-input-container class="md-block md-cyan-theme md-input-invalid">
+							<label>供应商地址</label>
+							<input ng-value="vendor.vendor_site_name" type="text">
+						</md-input-container>
+					</div>
+				</div>
+
+				<div layout="row">
+					<div flex class="ml-padding-right">
+						<md-input-container class="md-block md-cyan-theme md-input-invalid">
+							<label>经办人</label>
+							<input ng-model="orgs.user_full_name" type="text" drorganization="{'model':'orgs'}">
+						</md-input-container>
+					</div>
+					<div flex class="ml-padding-right">
+						<md-input-container class="md-block md-cyan-theme md-input-invalid">
+							<label>部门</label>
+							<input ng-model="saveData.ssmanualfeeinvoiceh.org_name" ng-value="orgs.org_name" type="text">
+						</md-input-container>
+					</div>
+				</div>
+				<div layout="row">
+					<div flex class="ml-padding-right">
+						<md-input-container class="md-block md-cyan-theme md-input-invalid">
+							<label>凭证日期</label>
+							<input ng-model="saveData.ssmanualfeeinvoiceh.apply_date" type="text" date-time-picker-input display-mode="date" display-format="yyyy-MM-dd">
+						</md-input-container>
+					</div>
+					<div flex class="ml-padding-right">
+						<dr-Currency  ngrequired="true" oldcurrencycode=""  currencycodemodel="saveData.ssmanualfeeinvoiceh.currency_code" currencynamemodel="saveData.ssmanualfeeinvoiceh.currency_name" currencymodel=""  titlename="货币类型"></dr-Currency>
+					</div>
+				</div>
+				<div layout='row'>
+					<div flex class="ml-padding-right">
+						<md-input-container class="md-block">
+							<label>业务描述</label>
+							<textarea ng-model="saveData.ssmanualfeeinvoiceh.description" md-maxlength="280" maxlength="280" rows="2" md-select-on-focus></textarea>
+						</md-input-container>
+					</div>
+				</div>
+			</md-card-content>
+		</md-card>
+		<!-- 新增单据结束 -->
+		<!--明细-->
+		<md-card class="ml-margin-top ">
+			<md-toolbar class="md-table-toolbar md-default " style="background-color: white;border-bottom: 1px rgba(0,0,0,0.12) solid;">
+				<div class="md-toolbar-tools " style="padding: 0">
+					<div style="background-color: #2196f3;">
+						<h2 class="md-title" style="color: black;font-size: 16px;margin-left: 4px;padding-left: 20px;background-color: white;">明细</h2>
+					</div>
+					
+					<md-button aria-label="menu " class="md-add-btn" ng-click="addDetail($event)">
+						<md-tooltip md-direction="left ">
+							添加一条数据
+						</md-tooltip>
+						<md-icon class="iconfont ">&#xe631;</md-icon>
+					</md-button>
+				</div>
+			</md-toolbar>
+			<md-table-container style="margin-bottom:32px;">
+				<table md-table>
+					<thead md-head>
+						<tr md-row>
+							<th md-column >
+								摘要
+							</th>
+							<th md-column>
+								科目组合
+							</th>
+							<th md-column>
+								借/贷 款金额
+							</th>
+							<th md-column>
+								操作
+							</th>
+						</tr>
+					</thead>
+					<tbody md-body>
+						<tr md-row ng-repeat="item in saveData.ssmanualfeeinvoiceh.ssmanualfeeinvoicels">
+							<td md-cell>
+								<md-input-container>
+									<label>摘要</label>
+									<input ng-model="item.reason_desc" type="text"/>
+								</md-input-container>
+							</td>
+							<td  md-cell ng-init="subject=saveData.ssmanualfeeinvoiceh.ssmanualfeeinvoicels[$index]" >
+								<md-input-container class="md-block" ng-show="subject.segment1!=null">
+									<label>科目组合</label>
+									<input  ng-value="subject.segment1_name+'->'+
+										subject.segment2_name+'->'+
+										subject.segment3_name+'->'+
+										subject.segment4_name+'->'+
+										subject.segment5_name+'->'+
+										subject.segment6_name+'->'+
+										subject.segment7_name" ng-click="chooseSubjectComposition($index)" type="text" readonly/>
+								</md-input-container>
+								
+								<md-input-container ng-show="subject.segment1==null">
+									<label>科目组合</label>
+									<input  type="text" ng-click="chooseSubjectComposition($index)" readonly/>
+								</md-input-container>
+							</td>
+							<td md-cell>
+								<md-input-container>
+									<label>借/贷 款金额</label>
+									<input ng-model="item.approve_reim_amount" ng-change="onCountmoney()" type="number"/>
+								</md-input-container>
+							</td>
+							<td md-cell>
+								<a ng-click="delDetail($event,$index)" style="cursor: pointer;color: blue" >删除</a>
+							</td>
+						</tr>
+					</tbody>
+					<tfoot md-foot>
+						<tr md-row>
+							<td md-cell>合计：</td>
+							<td md-cell></td>
+							<td md-cell>{{saveData.ssmanualfeeinvoiceh.invoice_amount}}</td>
+							<td md-cell></td>
+						</tr>
+					</tfoot>
+				</table>
+			</md-table-container>
+
+			<!--账务明细 end-->
+			<!-- 底部操作区开始 -->
+			<div class="ml-bottom-bar slideInUp animated" layout="row" style="z-index: 9">
+				<md-button type="submit" class="md-raised md-primary ml-button ml-noshadow" aria-label="保存" ng-click="save()">保存</md-button>
+			</div>
+			<!-- 底部操作区结束 -->
+		</md-card>
+	
+	</div>
+</div>

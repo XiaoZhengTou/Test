@@ -1,0 +1,153 @@
+<div ng-controller="trainCrl" ng-cloak class="airfare train">
+	<div ng-controller="trainBuyCrl">
+		<md-card>
+			<md-card-content>
+				<p class="z-index-9">车次信息<span class="ml-color-blue"  ng-click="onGoList()">[返回修改车次信息]</span></p>
+				<md-list-item layout="row" class="bgcolor md-whiteframe-2dp" style="border: 0;">
+					<div flex="20">
+						<h3>{{selectedtrain.trainNumber}}</h3>
+						<p>{{selectedtrain.seatCode}} ￥{{selectedtrain.seatPrice}}</p>
+					</div>
+					<div flex="20"class="ml-text-center">
+						<h3>{{selectedtrain.fromStationName}} <span>{{selectedtrain.departureDate}}</span></h3>
+						<p>{{startDate | date:'MM-dd'}} {{startDate | amDateFormat:'ddd'}}</p>
+					</div>
+					<div flex="20" class="ml-text-center">
+						<p class=".ml-position-relative"><i class="iconfont ml-fontsize-48 ml-color-blue">&#xe6b2;</i></p>
+						<p>{{usedTime}}</p>
+					</div>
+					<div flex="20" class="ml-text-center">
+						<h3>{{selectedtrain.toStationName}} <span>{{selectedtrain.arrivalDate}}</span></h3>
+						<p>{{endDate| date:'MM-dd'}} {{endDate|amDateFormat:'ddd'}}</p>
+					</div>
+				</md-list-item>
+				<!--<div class="ml-padding-20">
+					<span>备选坐席</span>
+					<md-checkbox  aria-label="Disabled checked checkbox">
+	        			商务座&nbsp;&nbsp;<span>￥1233</span>
+	      			</md-checkbox>
+	      			<md-checkbox  aria-label="Disabled checked checkbox">
+	        			一等座&nbsp;&nbsp;<span>￥866</span>
+	      			</md-checkbox>
+				</div>-->
+				<form name="userForm">
+					<p>填写信息</p>
+					<div class="bgcolor ml-fontsize-12 ml-padding-20 md-whiteframe-2dp" style="border: 0;">
+						<!--<div layout="row">
+							<md-input-container class="md-block" flex="33">
+					            <label>乘车人</label>
+					            <input ng-model="cnName">
+					        </md-input-container>
+						</div>
+						<div layout="row">
+							<md-input-container class="md-block" flex="25">
+					            <label>联系方式</label>
+					            <input required ng-model="mobile" name="mobile" ng-pattern="/^1[34578]\d{9}$/">
+					            <div ng-messages="userForm.mobile.$error" role="alert" multiple>
+						          	<div ng-message-exp="['required','pattern']">
+						                请输入正确的联系方式
+						          	</div>
+						        </div>
+					        </md-input-container>
+					        <md-input-container flex="20">
+						        <label>证件种类</label>
+						        <md-select  ng-model="selectedType">
+						          <md-option ng-repeat="x in papersType" value="{{x.certType}}">{{x.name}}</md-option>
+						        </md-select>
+						    </md-input-container>
+							<md-input-container class="md-block" flex="30">
+					            <label>证件号码</label>
+					            <input required ng-model="certNumber" name="certNumber" ng-pattern="/^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/">
+					            <div ng-messages="userForm.certNumber.$error" role="alert" multiple>
+						          	<div ng-message-exp="['required','pattern']">
+						                请输入正确的身份证号码
+						          	</div>
+						        </div>
+					        </md-input-container>
+							<div flex="25" class="ml-marginlr-10">
+								<p class="ml-lineheight-48">票种：成人票<span class="ml-color-blue ml-marginlr-10" ng-click="certTypeFun()">添加同行儿童票</span></p>
+							</div>
+						</div>-->
+						<div >
+							<!--<md-button class="md-raised md-primary" ng-click="addPaper()">+乘客</md-button>-->
+							<md-button drchoosepassengers="{'model':'passengers'}" class="md-raised md-primary ml-paddinglr20 ml-nomargin">添加常用乘客</md-button>
+						</div>
+						<div class="ml-marginT-20">
+							<md-chips ng-model="passengers" md-on-remove="removePassenger(passengers)" md-on-select="getPassenger($chip)">
+								<md-chip-template>{{$chip.cnName}}</md-chip-template>
+							</md-chips>
+							<div ng-if="passengers[0].cnName" class="ml-lineheight-36">
+								<div flex="50">
+									{{selected.cnName?selected.cnName:passengers[0].cnName}}
+									<md-divider></md-divider>
+								</div>
+								<div layout="row" flex="50">
+									<div flex="30">
+										{{selected.certType?papersType[selected.certType-1].name:papersType[passengers[0].certType-1].name}}
+										
+										<md-divider></md-divider>
+									</div>
+									<div flex-offset="10" flex="60">
+										{{selected.certNumber?selected.certNumber:passengers[0].certNumber}}
+										<md-divider></md-divider>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+				<p>取票方式</p>
+				<form ng-cloak name="messageUserForm" novalidate="novalidate">
+						<div class="blue-line ml-fontsize-15"><span></span>联系人</div>
+						<md-input-container class="md-block">
+							<input ng-model="PassengersCnName" name="cnName" required flex placeholder="联系人姓名">
+							<div ng-messages="messageUserForm.cnName.$error" role="alert" multiple>
+								<div ng-message="required" class="my-message">请输入联系人姓名</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block">
+							<input ng-model="PassengersMobile" name="mobile" ng-length="11" ng-pattern="/^1[34578]\d{9}$/" required flex placeholder="联系人手机号">
+							<div ng-messages="messageUserForm.mobile.$error" role="alert" multiple>
+								<div ng-message="required" class="my-message">请输入联系人手机号</div>
+								<div ng-message="pattern" class="my-message">请输入正确的手机号</div>
+							</div>
+						</md-input-container>
+					</form>
+				<!--<md-list-item layout="row" class="bgcolor ml-fontsize-12 md-whiteframe-2dp" style="border: 0;">
+					<md-input-container class="md-block" flex="33">
+			            <label>姓名</label>
+			            <input ng-model="PassengersCnName">
+			        </md-input-container>
+			        <md-input-container class="md-block" flex="33">
+			            <label>联系方式</label>
+			            <input ng-model="PassengersMobile" ng-pattern="/^1[34578]\d{9}$/">
+			        </md-input-container>
+				</md-list-item>-->
+				<p>报销凭证</p>
+				<div class="bgcolor ml-fontsize-12 ml-padding-20 md-whiteframe-2dp" style="border: 0;">
+					<md-checkbox  aria-label="Disabled checked checkbox">
+	        			报销凭证（将在火车发车后第二天由承保的保险公司用平信免费邮寄基础）
+	      			</md-checkbox>
+	      		</div>
+	      		<div class="ml-fontsize-12 ml-padding-20">
+	      			<md-checkbox  aria-label="Disabled checked checkbox">
+		        		我已阅读并同意
+		      		</md-checkbox>
+		      		<span class="ml-color-blue cursor" ng-click="null">
+		        		《网络福平台用户协议看》
+		      		</span>及
+		      		<span class="ml-color-blue cursor" ng-click="null">
+		        		《火车票委托预定协议》
+		      		</span>
+	      		</div>
+	      		<div class="bgcolor ml-fontsize-12 ml-textalign-center ml-padding-20 md-whiteframe-2dp" style="border: 0;">
+	      			订单总额：<span class="ml-color-red ml-fontsize-14">￥{{(selectedtrain.seatPrice+selectedtrain.servicePrice)*passengers.length}}</span>共{{passengers.length}}人（车票价格：<span class="ml-color-red">￥{{selectedtrain.seatPrice*passengers.length}}</span>，服务费：<span class="ml-color-red">￥{{selectedtrain.servicePrice*passengers.length}}</span>）
+	      		</div>
+	      		<div class="ml-textalign-center ml-marginT-20">
+					<md-button class="md-raised md-primary" ng-disabled="messageUserForm.$invalid||passengers.length == 0" ng-click="onGoResult()">提交订单</md-button>
+					<!--<div class="ml-color-red" ng-if="flag">请填写乘客信息及联系方式!</div>-->
+				</div>
+			</md-card-content>
+		</md-card>
+	</div>
+</div>

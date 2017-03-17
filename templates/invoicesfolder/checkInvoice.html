@@ -1,0 +1,48 @@
+<div ng-controller="checkInvoiceCtrl" layout="column" ng-cloak style="padding-bottom:60px;">
+	
+	<md-card>
+		<md-card-title style="border-bottom:1px solid #eee;padding:5px 16px">
+          <md-card-title-text>
+            <span class="md-headline" style="font-size:16px;color:#777;">发票信息</span>
+          </md-card-title-text>
+       </md-card-title>
+       
+       <md-card-content layout-padding>
+       	  <div class="input-field-list">
+			
+			<div ng-repeat="d in fields">
+				<md-input-container flex class="md-block ml-nomargin" flex>
+		        	<label ng-bind="d.label"></label>
+		        	<!--<input ng-model="obj[$index]" />-->
+		        	<input ng-model="obj[d.field]" />
+			   </md-input-container>
+			</div>
+			
+			
+			<img  src = "{{codeImage}}" style="width:60px; height:30px;float:left;margin-left:-80px;"/>
+       	  </div>
+          
+          <div layout="row" layout-align="center center">
+          	
+          	<md-button class="md-raised md-primary" ng-click="search()">查询</md-button>
+          </div>
+        </md-card-content>
+	</md-card>
+	
+	<md-card>
+		<md-card-title style="border-bottom:1px solid #eee;padding:5px 16px">
+          <md-card-title-text>
+            <span class="md-headline" style="font-size:16px;color:#777;">查验结果</span>
+          </md-card-title-text>
+       </md-card-title>
+       
+       <md-card-content layout-padding>
+          <p style="min-height:56px;" ng-bind="result">
+          </p>
+        </md-card-content>
+	</md-card>
+
+	<div class="ml-bottom-bar slideInUp animated" layout="row" layout-sm="column" layout-align="end center" layout-wrap>
+  	<md-button class="md-raised md-primary" ng-click="go('/invoicesfolder/add')">确认并返回</md-button>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<md-bottom-sheet layout="column" ng-cloak>
+	<textarea ng-model="approveauditNote" maxlength="100" placeholder="留言" name="approveauditNote" rows="4" style="border-radius: 3px;width: 100%;border: 1px #d0d0d0 solid;">
+	</textarea>
+	<div layout="row" flex layout-algin="center center">
+		<md-button class="md-raised md-primary" ng-click="onHideBottomSheet()" flex style="color:#fff;">取消</md-button>
+
+		<md-button class="md-raised md-primary" ng-click="onApprove($event)" flex style="color:#fff;">批准</md-button>
+	</div>
+</md-bottom-sheet>

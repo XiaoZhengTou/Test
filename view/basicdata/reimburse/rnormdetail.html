@@ -1,0 +1,321 @@
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<div ng-controller="rnormdetailCtrl" id="rnormdetail">
+
+    <script type="text/ng-template" id="rnormdetailCheckbox.html">
+        <div ng-controller="rnormdetailCtrl1">
+            <md-checkbox ng-click="addtoggle2()" ng-model="draftSelectcheck" style="margin-bottom: 0px"></md-checkbox>
+        </div>
+    </script>
+
+    <div class="full-height ng-scope">
+        <div class="full-image-background layout-fill ng-scope layout-row" layout="row" layout-fill="">
+            <div class="animate-wrapper layout-row flex" flex="" layout="row">
+                <div id="ui-login" class="login-frame ng-scope layout-column flex" ui-view="" flex="" layout="column">
+                    <div layout="row" flex="" layout-padding="" layout-fill="" layout-align="center center" class="layout-fill ng-scope layout-align-center-center layout-row flex" style="padding: 0px">
+                        <div flex="40" flex-lg="50" flex-md="70" flex-xs="100" class="flex-xs-100 flex-md-70 flex-lg-50 flex-40" style="max-width: 100%;padding: 0px">
+                            <form name="addrnormdetail" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+                                <md-card class="md-cyan-theme" style="max-width: 100%">
+                                    <md-toolbar ng-hide="selected.length || filter.show" class="md-table-toolbar md-default" style="background-color: white;">
+                                        <div class="md-toolbar-tools" >
+                                            <!--<div style="background-color: #2196f3;">-->
+                                                <!--<h2 class="md-title" style="color: black;font-size: 16px;margin-left: 4px;padding-left: 20px;background-color: white;">标准信息</h2>-->
+                                            <!--</div>-->
+                                            <span>标准信息</span>
+                                            <div flex></div>
+                                            <!--<md-button class="md-icon-button" ng-click="filter.show = true">-->
+                                            <!--<md-icon md-svg-src="img/icons/find.svg"></md-icon>-->
+                                            <!--</md-button>-->
+                                            <md-menu>
+                                                <md-button aria-label="Open user menu" ng-click="$mdOpenMenu()" aria-label="side navigation" style="margin: 0px">
+                                                    <md-icon md-svg-src="img/icons/three.svg"></md-icon>
+                                                </md-button>
+                                                <md-menu-content width="4">
+                                                    <md-menu-item>
+                                                        <md-button aria-label="side navigation">
+                                                            <md-icon md-svg-src="img/icons/excel_in.svg"></md-icon>
+                                                            <span class="ng-scope">Excel导入</span>
+                                                        </md-button>
+                                                    </md-menu-item>
+                                                    <!--<md-menu-divider></md-menu-divider>-->
+                                                    <md-menu-item>
+                                                        <md-button aria-label="side navigation">
+                                                            <md-icon md-svg-src="img/icons/excel_out.svg"></md-icon>
+                                                            <span class="ng-scope">Excel导出</span>
+                                                        </md-button>
+                                                    </md-menu-item>
+                                                </md-menu-content>
+                                            </md-menu>
+                                            <md-button class="md-icon-button" ng-click="back()" style=" margin-right: 0px;">
+                                                <md-icon md-svg-src="img/icons/back.svg"></md-icon>
+                                            </md-button>
+                                        </div>
+                                    </md-toolbar>
+                                    <table class="table ng-scope" style="margin-bottom: 0px">
+                                        <tr>
+                                            <td style="border-top: 0px;"><span style="float: right;white-space: nowrap;">标准名称：</span></td>
+                                            <td style="border-top: 0px;">
+                                                <input ng-model="rnorm.expense_std_code" type="text" style="width: 100%;margin: 0; " ng-disabled=" !(status == 1 || status == 2 || status == 3)" required>
+                                            </td>
+                                            <td style="border-top: 0px;"><span style="float: right;white-space: nowrap;">适用组织：</span></td>
+                                            <td style="border-top: 0px;">
+                                                <input ng-model="rnorm.org_name" type="text" style="width: 100%;margin: 0;"
+                                                       ng-click="addarea1($event)" ng-disabled=" !(status == 1 || status == 2 || status == 3)" required>
+                                            </td>
+                                            <td style="border-top: 0px;"><span style="float: right;white-space: nowrap;">是否严控：</span></td>
+                                            <td style="border-top: 0px;">
+                                                <md-select ng-model="rnorm.control_flag" style="margin: 0px;margin-top: -7px;" ng-disabled=" !(status == 1 || status == 2 || status == 3)" required="">
+                                                    <md-option value="Y">是</md-option>
+                                                    <md-option value="N">否</md-option>
+                                                </md-select>
+                                            </td>
+                                            <td style="border-top: 0px;"><span style="float: right;white-space: nowrap;">状态：</span></td>
+                                            <td style="border-top: 0px;">
+                                                <md-select ng-model="rnorm.confirm_status" style="margin: 0px;margin-top: -7px;" disabled required="">
+                                                    <md-option value="DRAFT">草稿</md-option>
+                                                    <md-option value="AUDITED">生效</md-option>
+                                                    <md-option value="DISABLED">作废</md-option>
+                                                </md-select>
+                                            </td>
+                                            <td style="border-top: 0px;"></td>
+                                        </tr>
+                                        <!--<tr>-->
+                                        <!--<td colspan="9"><h3>标准明细</h3></td>-->
+                                        <!--</tr>-->
+                                        <!--<tr>-->
+                                        <!--<td style="border-top: 0px;"><span style="float: right;white-space: nowrap;">标准类型：</span></td>-->
+                                        <!--<td style="border-top: 0px;">-->
+                                        <!--<input ng-model="search.standard_type_name" type="text" style="width: 100%;margin: 0; ">-->
+                                        <!--</td>-->
+                                        <!--<td style="border-top: 0px;"><span style="float: right;white-space: nowrap;">人员类别：</span></td>-->
+                                        <!--<td style="border-top: 0px;">-->
+                                        <!--<input ng-model="search.emp_type_name" type="text" style="width: 100%;margin: 0;">-->
+                                        <!--</td>-->
+                                        <!--<td style="border-top: 0px;"><span style="float: right;white-space: nowrap;">地区类别：</span></td>-->
+                                        <!--<td style="border-top: 0px;">-->
+                                        <!--<input ng-model="search.area_type_name" type="text" style="width: 100%;margin: 0;">-->
+                                        <!--</td>-->
+                                        <!--<td style="border-top: 0px;">-->
+                                        <!--<md-button ng-click="search_rnormdetail()" style="margin: 0px">-->
+                                        <!--<md-icon md-svg-src="img/icons/search.svg"></md-icon>-->
+                                        <!--</md-button>-->
+                                        <!--</td>-->
+                                        <!--<td style="border-top: 0px;">-->
+                                        <!--<md-menu>-->
+                                        <!--<md-button aria-label="Open user menu" ng-click="$mdOpenMenu()" aria-label="side navigation" style="margin: 0px">-->
+                                        <!--<md-icon md-svg-src="img/icons/three.svg"></md-icon>-->
+                                        <!--</md-button>-->
+                                        <!--<md-menu-content width="4">-->
+                                        <!--<md-menu-item>-->
+                                        <!--<md-button aria-label="side navigation">-->
+                                        <!--<md-icon md-svg-src="img/icons/excel_in.svg"></md-icon>-->
+                                        <!--<span class="ng-scope">Excel导入</span>-->
+                                        <!--</md-button>-->
+                                        <!--</md-menu-item>-->
+                                        <!--&lt;!&ndash;<md-menu-divider></md-menu-divider>&ndash;&gt;-->
+                                        <!--<md-menu-item>-->
+                                        <!--<md-button aria-label="side navigation">-->
+                                        <!--<md-icon md-svg-src="img/icons/excel_out.svg"></md-icon>-->
+                                        <!--<span class="ng-scope">Excel导出</span>-->
+                                        <!--</md-button>-->
+                                        <!--</md-menu-item>-->
+                                        <!--<md-menu-item ng-if=" (status == 1 || status == 2 || status == 3)">-->
+                                        <!--<md-button aria-label="side navigation" ng-disabled="!addtablealldelete" ng-click="batch_failure()">-->
+                                        <!--<md-icon md-svg-src="img/icons/piliang.svg"></md-icon>-->
+                                        <!--<span class="ng-scope">批量删除</span>-->
+                                        <!--</md-button>-->
+                                        <!--</md-menu-item>-->
+                                        <!--</md-menu-content>-->
+                                        <!--</md-menu>-->
+                                        <!--</td>-->
+                                        <!--<td></td>-->
+                                        <!--</tr>-->
+                                    </table>
+                                </md-card>
+
+                                <md-card class="md-cyan-theme" style="max-width: 100%">
+
+                                    <md-toolbar ng-hide="selected.length || filter.show" class="md-table-toolbar md-default" style="background-color: white;">
+                                        <div class="md-toolbar-tools" >
+                                            <!--<div style="background-color: #2196f3;">-->
+                                                <!--<h2 class="md-title" style="color: black;font-size: 16px;margin-left: 4px;padding-left: 20px;background-color: white;">标准维护</h2>-->
+                                            <!--</div>-->
+                                            <span>标准维护</span>
+                                            <div flex></div>
+                                            <!--<md-button class="md-icon-button" ng-click="filter.show = true">-->
+                                            <!--<md-icon md-svg-src="img/icons/find.svg"></md-icon>-->
+                                            <!--</md-button>-->
+                                            <md-button class="md-primary" ng-disabled="selected1.length == 0" ng-click="batch_failure()" ng-if=" (status == 1 || status == 2 || status == 3)" style=" margin-right: 0px;">
+                                                <md-icon md-svg-src="img/icons/piliang.svg" style="margin-right: 3px"></md-icon>批量删除
+                                            </md-button>
+                                        </div>
+                                    </md-toolbar>
+
+                                    <md-content class=" md-cyan-theme" style="background-color: white;">
+
+                                        <md-table-container style="width: 95%;padding-left: 2.5%;">
+                                            <table data-md-table data-md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" data-ng-model="selected1" md-progress="promise">
+                                                <!--<table data-md-table data-ng-model="selected" md-progress="promise">-->
+                                                <thead md-head data-md-order="query.order" md-on-reorder="getDesserts">
+                                                <tr md-row>
+                                                    <th md-column>标准类型</th>
+                                                    <th md-column>人员类型</th>
+                                                    <th md-column>地区类别</th>
+                                                    <th md-column>标准金额</th>
+                                                    <th md-column>扣减标准</th>
+                                                    <th md-column>浮动范围</th>
+                                                    <th md-column>币种</th>
+                                                    <th md-column>备注</th>
+                                                    <th md-column>操作</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody md-body>
+                                                <tr md-row md-select="$index" md-select-id="budget_templet_id" ng-repeat="item in appdata" md-auto-select="options.autoSelect">
+                                                    <!--<tr md-row ng-repeat="item in appdata">-->
+                                                    <td md-cell>{{item.standard_type_name}}</td>
+                                                    <td md-cell>{{item.emp_type_name}}</td>
+                                                    <td md-cell>{{item.area_type_name}}</td>
+                                                    <td md-cell>{{item.amount}}</td>
+                                                    <td md-cell>{{item.deduct_amount}}</td>
+                                                    <td md-cell>{{item.control_tolerance}}</td>
+                                                    <td md-cell>{{item.currency_code}}</td>
+                                                    <td md-cell>{{item.remark}}</td>
+                                                    <td md-cell style="word-break: keep-all;white-space: nowrap;">
+                                                        <md-button class="md-primary" ng-click="edit($event,item,$index)" style="margin: 0px;">
+                                                            <md-icon md-svg-src="img/icons/edit.svg"></md-icon>
+                                                            编辑
+                                                        </md-button>
+                                                        <md-button class="md-primary" ng-click="delete($event,item,$index)" style="margin: 0px;">
+                                                            <md-icon md-svg-src="img/icons/edit.svg"></md-icon>
+                                                            删除
+                                                        </md-button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="10">
+                                                        <md-button class="md-primary md-raised" ng-click="draft($event)" ng-if="status == 1 || status==2||status==3" ng-disabled="addrnormdetail.$invalid">
+                                                            暂存
+                                                        </md-button>
+                                                        <md-button class="md-primary md-raised" ng-click="audited($event)" ng-if="status == 1 || status == 2" ng-disabled="addrnormdetail.$invalid">
+                                                            生效
+                                                        </md-button>
+                                                        <md-button class="md-primary md-raised" ng-click="disabled($event)" ng-if="status == 2 || status == 3">
+                                                            作废
+                                                        </md-button>
+                                                        <md-button class="md-fab md-accent md-hue-1" style="float: right;" ng-click="add($event)" ng-if="status==1||status==2||status==3">
+                                                            <h1 style="margin-top: 0px;font-size: 36px;color: white">+</h1>
+                                                        </md-button>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </md-table-container>
+
+                                        <!--<table ng-table="tableParams" class="table table-condensed table-bordered table-striped" show-filter="true" style="width: 94%;margin: 3%;margin-top: 0%;">-->
+                                        <!--<tr ng-repeat="user in $data">-->
+                                        <!--<td header="'rnormdetailCheckbox.html'">-->
+                                        <!--<md-checkbox ng-checked="addexists1($index, selected1)"  ng-click="addtoggle1($index, selected1)" style="margin-bottom: 0px"></md-checkbox></td>-->
+
+
+                                        <!--<td title="'标准类型'" filter="{ standard_type_name: 'text'}" sortable="'standard_type_name'">-->
+                                        <!--{{user.standard_type_name}}</td>-->
+
+                                        <!--<td title="'人员类型'" filter="{ emp_type_name: 'text'}" sortable="'emp_type_name'" style="word-wrap:break-word">-->
+                                        <!--{{user.emp_type_name}}</td>-->
+                                        <!--<td title="'地区类别'" filter="{ area_type_name: 'text'}" sortable="'area_type_name'" style="word-wrap:break-word">-->
+                                        <!--{{user.area_type_name}}</td>-->
+                                        <!--<td title="'标准金额'" filter="{ amount: 'text'}" sortable="'amount'" style="word-wrap:break-word">-->
+                                        <!--{{user.amount}}</td>-->
+                                        <!--<td title="'扣减标准'" filter="{ deduct_amount: 'text'}" sortable="'deduct_amount'" style="word-wrap:break-word">-->
+                                        <!--{{user.deduct_amount}}</td>-->
+                                        <!--<td title="'浮动范围'" filter="{ control_tolerance: 'text'}" sortable="'control_tolerance'" style="word-wrap:break-word">-->
+                                        <!--{{user.control_tolerance}}</td>-->
+                                        <!--<td title="'币种'" filter="{ currency_code: 'text'}" sortable="'currency_code'" style="word-wrap:break-word">-->
+                                        <!--{{user.currency_code}}</td>-->
+                                        <!--<td title="'备注'" filter="{ remark: 'text'}" sortable="'remark'" style="word-wrap:break-word">-->
+                                        <!--{{user.remark}}</td>-->
+
+                                        <!--<td title="'操作'" style="max-width: 10%;white-space: nowrap;" ng-if="status==1||status==2||status==3">-->
+                                        <!--<md-button class="md-primary" ng-click="edit($event,user,$index)" style="margin: 0px;">-->
+                                        <!--<md-icon md-svg-src="img/icons/edit.svg"></md-icon>-->
+                                        <!--编辑-->
+                                        <!--</md-button>-->
+                                        <!--<md-button class="md-primary" ng-click="delete($event,user,$index)" style="margin: 0px;">-->
+                                        <!--<md-icon md-svg-src="img/icons/edit.svg"></md-icon>-->
+                                        <!--删除-->
+                                        <!--</md-button>-->
+                                        <!--</td>-->
+                                        <!--</tr>-->
+                                        <!--<tr>-->
+                                        <!--<td colspan="10">-->
+                                        <!--<md-button class="md-primary md-raised" ng-click="draft($event)" ng-if="status == 1 || status==2||status==3">-->
+                                        <!--暂存-->
+                                        <!--</md-button>-->
+                                        <!--<md-button class="md-primary md-raised" ng-click="audited($event)" ng-if="status == 1 || status == 2">-->
+                                        <!--生效-->
+                                        <!--</md-button>-->
+                                        <!--<md-button class="md-primary md-raised" ng-click="disabled($event)" ng-if="status == 2 || status == 3">-->
+                                        <!--作废-->
+                                        <!--</md-button>-->
+                                        <!--<md-button class="md-fab md-accent md-hue-1" style="float: right;" ng-click="add($event)" ng-if="status==1||status==2||status==3">-->
+                                        <!--<h1 style="margin-top: 0px;font-size: 36px;color: white">+</h1>-->
+                                        <!--</md-button>-->
+                                        <!--</td>-->
+                                        <!--</tr>-->
+                                        <!--</table>-->
+                                        <!--<div style="margin-right: 3%;float: right;" layout="row">-->
+                                        <!--<span style="margin: 25px 27px 26px 0;">Page:</span>-->
+                                        <!--<md-select ng-model="pageindex">-->
+                                        <!--<md-option ng-repeat="page in pages" value="{{page}}">{{page}}</md-option>-->
+                                        <!--</md-select>-->
+
+                                        <!--<span style="margin: 25px 27px 26px 0;">Rows per page:</span>-->
+                                        <!--<md-select ng-model="pagesize">-->
+                                        <!--<md-option value="5">5</md-option>-->
+                                        <!--<md-option value="10">10</md-option>-->
+                                        <!--<md-option value="20">20</md-option>-->
+                                        <!--</md-select>-->
+
+                                        <!--&lt;!&ndash;<span style="margin:27px 0 26px 18px;">1 - 5 of 10</span>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<md-button class="md-primary" md-no-ink style="min-width: 1%">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<span> < </span>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;</md-button>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<md-button class="md-primary" md-no-ink style="min-width: 1%">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<span> > </span>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;</md-button>&ndash;&gt;-->
+
+                                        <!--<span style="margin:27px 0 26px 18px;">{{page1}} - {{page2}} of {{total}}</span>-->
+                                        <!--<md-button class="md-primary" md-no-ink style="min-width: 1%" ng-click="lastpage()" ng-disabled="lastpaged">-->
+                                        <!--<span> < </span>-->
+                                        <!--</md-button>-->
+                                        <!--<md-button class="md-primary" md-no-ink style="min-width: 1%" ng-click="nextpage()" ng-disabled="nextpaged">-->
+                                        <!--<span> > </span>-->
+                                        <!--</md-button>-->
+
+
+                                        <!--&lt;!&ndash;<a ng-repeat="x in pages" ng-class="{'pactive': x == activepage}" ng-click="goodspage(x)" style="margin-top: 20px;height: 20px;cursor: pointer;text-decoration: none;border: 1px solid black;padding: 4px;margin-left: 1%;">{{x}}</a>&ndash;&gt;-->
+
+                                        <!--</div>-->
+                                        <!--</fieldset>-->
+
+                                    </md-content>
+                                </md-card>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    #rnormdetail .active-Y{
+        background-color: green;
+        color: green;
+    }
+    #rnormdetail .active-N{
+        background-color: red;
+        color: red;
+    }
+</style>

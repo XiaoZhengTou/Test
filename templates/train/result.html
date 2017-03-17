@@ -1,0 +1,62 @@
+<div ng-controller="trainCrl" ng-cloak class="airfare train">
+	<div ng-controller="trainResultCrl">
+		<md-card class="ml-padding-20 ml-color-73 detail-main-top">
+			<div>订单号 <em>{{baseInfo.orderNo}}</em></div>
+			<div class="ml-color-blue ml-fontsize-18 success">{{baseInfo.orderStatus | getOrderStatus}}</div>
+			<div flex class="zonge ml-fontsize-14">订单总额: <em class="ml-color-red">¥{{baseInfo.totalPrice}}</em></div>
+			<div class="detail-top-btn">
+				<md-button class="md-raised rmbtn" ng-click="orderQuxiao()">取消</md-button>
+				<md-button class="md-raised md-primary ml-nomargin" ng-click="orderQueren()">确认</md-button>
+			</div>
+		</md-card>
+		<md-card class="ml-padding-20 detail-main-mid ml-textalign-center">
+			<div layout="row" class="ml-color-73 detail-main-mid-top ml-lineheight-36 ml-fontsize-14">
+				<div flex>行程(单程)</div>
+				<div flex>车次</div>
+				<div flex>发站时间/车站</div>
+				<div flex>到站时间/车站</div>
+				<div flex>坐席</div>
+				<div flex>耗时</div>
+				<div flex>票价</div>
+			</div>
+			<div layout="row" class="ml-marginT-20 ml-fontsize-13">
+				<div flex>{{city1.text}} > {{city2.text}}</div>
+				<div flex>{{baseInfo.trainNumber}}</div>
+				<div flex>
+					<div flex>{{fromStationTime| date:'MM-dd HH:mm'}}</div>
+					<div flex>{{baseInfo.fromStationName}}</div>
+				</div>
+				<div flex>
+					<div flex>{{toStationTime| date:'MM-dd HH:mm'}}</div>
+					<div flex>{{baseInfo.toStationName}}</div>
+				</div>
+				<div flex>
+					{{ticketLists[0].seatCode}}
+				</div>
+				<div flex>{{orderHours}}小时{{orderMinute}}分</div>
+				<div flex class="ml-color-red">
+					¥{{baseInfo.totalPrice}}
+				</div>
+			</div>
+		</md-card>
+		<md-card class="ml-padding-20 detail-main-bot">
+			<div class="userMessage ">
+				<div class="blue-line ml-color-73"><span></span>乘客信息</div>
+				<div class="ml-margintb-20 ml-fontsize-13" layout="row" ng-repeat="x in orderInfo">
+					<div flex="5" class="ml-textalign-center"><i class="ml-border-radius50">{{$index+1}}</i></div>
+					<div flex="15">成人<em>{{x.passengerName}}</em></div>
+					<div flex>身份证<em>{{x.certNumber}}</em></div>
+					<div flex>手机号<em>{{x.mobile}}</em></div>
+				</div>
+			</div>
+			<md-divider></md-divider>
+			<div class="userMessage ml-marginT-10">
+				<div class="blue-line ml-fontsize-15 ml-color-73"><span></span>联系人信息</div>
+				<div class="ml-marginT-20 ml-fontsize-13" layout="row">
+					<div flex="15" flex-offset="5" ng-bind="contact.contactName"></div>
+					<div flex>手机号<em ng-bind="contact.mobile"></em></div>
+				</div>
+			</div>
+		</md-card>
+	</div>	
+</div>

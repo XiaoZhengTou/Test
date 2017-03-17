@@ -1,0 +1,139 @@
+<div ng-controller="wsCtrl" class="jiehuankuan fukuan home" ng-cloak >
+<div ng-controller="wsHomeCtrl ">
+	<!-- 筛选面板开始 -->
+		<md-card class="ml-padding-pc">
+			<div class="basefilter">
+				<div layout="row">
+					<div flex class="ml-padding-right">
+						<md-input-container class="md-block md-cyan-theme md-input-invalid ">
+			        		<label>工单号</label>
+			        		<input ng-model="query.query_param.order_code" type="text ">
+			      		</md-input-container>
+					</div>
+					<div flex class="ml-padding-right">
+						<md-input-container class="md-block md-cyan-theme md-input-invalid ">
+							<label>选择入账单位</label>
+							<input ng-model="ruzhangdanwei.company_name" type="text" drruzhangdanwei="{'model':'ruzhangdanwei'}">
+						</md-input-container>
+					</div>
+					<div flex class="ml-padding-right">
+						<md-input-container class="md-block">
+							<label>工单类型</label>
+							<md-select ng-model="query.query_param.order_type">
+				              <md-option ng-repeat="x in ordertype" ng-value="x.id">
+				                	{{x.name}}
+				              </md-option>
+				            </md-select>
+						</md-input-container>
+					</div>
+				</div>
+				<div layout="row ">
+	       <div flex class="ml-padding-right" layout="row">
+	          <md-input-container class="md-block md-cyan-theme md-input-invalid " flex>
+		        <label>金额范围（最小值）</label>
+		        <input ng-model="query.query_param.amount_btm" type="number">
+		     </md-input-container>
+		   </div>
+		   <div flex class="ml-padding-right" layout="row">
+	          <md-input-container class="md-block md-cyan-theme md-input-invalid " flex>
+		        <label>金额范围（最大值）</label>
+		        <input ng-model="query.query_param.amount_top" type="number">
+		      </md-input-container>
+	      </div>
+	      <div flex class="ml-padding-right ml-padding-top" ng-style="{'margin-top':'16px'}">
+		        <md-datepicker ng-model="query.query_param.apply_date" md-placeholder="创建时间"></md-datepicker>
+	      </div>
+	      <div flex>
+	      		<md-button class="md-raised md-primary ml-nomargin ml-button " aria-label="立即搜索 " ng-click="getData() ">立即搜索</md-button>
+	        	<md-button class="md-raised ml-nomargin ml-button " aria-label="立即搜索 " ng-click="clearFilter() ">清空条件</md-button>
+	      </div>
+	    </div>
+			</div>
+		</md-card>
+	<!-- 筛选面板结束 -->
+	
+	<!--表格-->
+	<md-card class="ml-margin-top">
+		<md-toolbar class="md-table-toolbar md-default " style="background-color: white;border-bottom: 1px rgba(0,0,0,0.12) solid;">
+		<div class="md-toolbar-tools " style="padding: 0">
+			<div style="background-color: #2196f3;">
+                <h2 class="md-title" style="color: black;font-size: 16px;margin-left: 4px;padding-left: 20px;background-color: white;">账务工单</h2>
+            </div>
+		</div>
+		</md-toolbar>
+		<md-table-container>
+			<table md-table>
+				<thead md-head>
+					<tr md-row>
+						<th md-column>单号</th>
+						<th md-column>入账单位 </th>
+						<th md-column>业务描述</th>
+						<th md-column>金额</th>
+						<th md-column>币种</th>
+						<th md-column>状态</th>
+						<th md-column>创建时间</th>
+						<th md-column>工单类型</th>
+						<th md-column>操作</th>
+					</tr>
+				</thead>
+				<tbody md-body>
+					<tr md-row ng-repeat="item in data | orderBy:item.creation_date">
+						<td md-cell style="cursor:pointer;text-decoration: none;color:#4f4ff2" ng-click="go('/tasks/worksheet/see/'+item.manual_order_id,'查看详情')">{{item.order_code}}</td>
+						<td md-cell>{{item.org_name}}</td>
+						<td md-cell>{{item.description}}</td>
+						<td md-cell>{{item.amount}}</td>
+						<td md-cell>{{item.currency_name}}</td>
+						<td md-cell ng-bind-html="item.order_status|order_status"></td>
+						<td md-cell>{{item.apply_date | to_date | date:"yy-MM-dd"}}</td>
+						<td md-cell><span ng-repeat="x in ordertype" ng-if="x.id==item.order_type">{{x.name}}</span></td>
+						<td md-cell>
+							<!--<a href="javascript:;">修改</a>-->
+							<a href="javascript:;" style="cursor:pointer;text-decoration: none;" ng-click="del($event,item.manual_order_id)">删除</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</md-table-container>
+		<!-- 表格导航开始 -->
+	<md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '，总条数：'} " md-limit="query.page_size " md-limit-options="[5, 10, 15] " md-page="query.page_number " md-total="{{total}} " md-on-paginate="getData" md-page-select></md-table-pagination>
+	<!-- 表格导航结束 -->
+	</md-card>
+	<!--表格-->
+	
+	<!--新增开始-->
+	<md-fab-speed-dial md-open="add.isOpen" md-direction="up" style="width:101px" class="md-fab md-fling ml-bottom-fab">
+        <md-fab-trigger>
+          <md-button aria-label="menu" class="md-fab md-warn">
+            <md-icon class="iconfont ">&#xe631;</md-icon>
+          </md-button>
+        </md-fab-trigger>
+
+        <md-fab-actions ng-show="add.isOpen">
+          <md-button class="md-raised" aria-label="新增AP应付发票" ng-click="go('/tasks/worksheet/add_ap', '新增AP应付发票')">
+           	 新增AP应付发票
+          </md-button>
+          
+          <md-button class="md-raised" aria-label="新增AR应付发票" ng-click="go('/tasks/worksheet/add_ar', '新增AR应付发票')">
+           	 新增AR应收发票
+          </md-button>
+          
+          <md-button class="md-raised" aria-label="新增AR应收收款" ng-click="go('/tasks/worksheet/add_ars', '新增AR应收收款')">
+           	 新增AR应收收款
+          </md-button>
+          
+          <md-button class="md-raised" aria-label="新增GL日志票" ng-click="go('/tasks/worksheet/add_gl', '新增GL日志票')">
+           	 新增   GL 日志票
+          </md-button>
+          <md-button class="md-raised" aria-label="新增综合工单" ng-click="go('/tasks/worksheet/add_all', '新增综合工单')">
+           	 新 增 综 合 工 单
+          </md-button>
+          
+        </md-fab-actions>
+      </md-fab-speed-dial>
+	<!--新增结束-->
+	
+	
+	
+
+</div>
+</div>

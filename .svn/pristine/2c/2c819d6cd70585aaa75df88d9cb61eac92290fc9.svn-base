@@ -1,0 +1,130 @@
+
+<div ng-controller="shoukuandan" ng-cloak>
+    <div>
+        <!--搜索面板开始-->
+        <md-card class="ml-padding-pc">
+            <div class="basefilter">
+            <div layout="row ">
+                <div flex class="ml-padding-right ">
+                    <md-input-container class="md-block md-cyan-theme md-input-invalid ">
+                        <label>收款单编号</label>
+                        <input ng-model="number" type="text ">
+                    </md-input-container>
+                </div>
+                <div flex class="ml-padding-right" layout="row">
+                    <md-input-container class="md-block md-cyan-theme md-input-invalid " flex>
+                        <label>合同总额（最小值）</label>
+                        <input ng-model="min" type="number">
+                    </md-input-container>
+                </div>
+                <div flex class="ml-padding-right" layout="row">
+                    <md-input-container class="md-block md-cyan-theme md-input-invalid " flex>
+                        <label>合同总额（最大值）</label>
+                        <input ng-model="max" type="number">
+                    </md-input-container>
+                </div>
+                <div flex class="ml-padding-right ">
+                    <md-input-container class="md-block md-cyan-theme md-input-invalid ">
+                        <label>类型名称</label>
+                        <input ng-model="type" type="text ">
+                    </md-input-container>
+                </div>
+            </div>
+            <div layout="row ">
+                <div flex class="ml-text-left">
+                    <md-button class="md-raised md-primary ml-nomargin ml-button " aria-label="立即搜索 " ng-click="getData()">立即搜索</md-button>
+                    <md-button class="md-raised ml-nomargin ml-button " aria-label="清空 " ng-click="clear_condition()">清空条件</md-button>
+                </div>
+            </div>
+            </div>
+        </md-card>
+        <md-card class="ml-margin-top ">
+            <!-- 表格开始 -->
+            <md-toolbar class="md-table-toolbar md-default ">
+                <div class="md-toolbar-tools ">
+                    <span>我的收款单</span>
+                </div>
+            </md-toolbar>
+            <md-table-container>
+                <table md-table md-progress="promise ">
+                    <thead md-head md-order="query.order_by " md-on-reorder="getData ">
+                    <tr md-row>
+                        <th md-column md-order-by="loan_info_code ">
+                            收款单状态
+                        </th>
+                        <th md-column md-numeric md-order-by="amount">
+                            收款单来源
+                        </th>
+                        <th md-column md-numeric>
+                            金额
+                        </th>
+                        <th md-column md-numeric md-order-by="apply_date">
+                            币种
+                        </th>
+                        <th md-column md-numeric md-order-by="apply_date">
+                            类型名称
+                        </th>
+                        <th md-column md-numeric >
+                            收款人名称
+                        </th>
+                        <th md-column md-numeric >
+                            收款人账号
+                        </th>
+                        <th md-column md-numeric >
+                            付款人名称
+                        </th>
+                        <th md-column md-numeric >
+                            付款人账号
+                        </th>
+                        <th md-column md-numeric >
+                            收款单编号
+                        </th>
+                        <th md-column md-numeric >
+                            经营单位名称
+                        </th>
+                        <th md-column md-numeric >
+                            供应商
+                        </th>
+                        <th md-column md-numeric >
+                            业务日期
+                        <th md-column md-numeric >
+                            备注
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody md-body>
+                    <tr md-row ng-repeat="x in data">
+                        <td md-cell></td>
+                        <td md-cell></td>
+                        <td md-cell></td>
+                        <td md-cell></td>
+                        <td md-cell></td>
+                        <td md-cell></td>
+                        <td md-cell></td>
+                        <td md-cell></td>
+                        <td md-cell></td>
+                        <td md-cell></td>
+                        <td md-cell></td>
+                        <td md-cell></td>
+                        <td md-cell></td>
+                        <td md-cell>
+                            <div layout="row" class="ml-color-blue">
+                                <md-button class="md-icon-button ml-nomargin" ng-click="">
+                                    <i class="iconfont ml-margin-auto">&#xe633;</i>
+                                </md-button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </md-table-container>
+            <md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '，总条数：'} " md-limit="query.page_size " md-limit-options="[5, 10, 15] " md-page="query.page_number " md-total="{{total}} " md-on-paginate="getData " md-page-select></md-table-pagination>
+        </md-card>
+        <md-button aria-label="menu " class="md-fab ml-bottom-fab " ng-click="go( '/fenqifukuanjihua/add', '单据申请') ">
+            <md-tooltip md-direction="left ">单据申请</md-tooltip>
+            <md-icon class="iconfont ">&#xe631;</md-icon>
+        </md-button>
+    </div>
+
+</div>
+</div>

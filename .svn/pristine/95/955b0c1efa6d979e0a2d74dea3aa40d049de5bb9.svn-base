@@ -1,0 +1,101 @@
+<md-input-container>
+	<label>城市</label>
+	<input ng-model="citys.text" type="text" drchoosecitys="{'model':'citys','data':'air','alldata':'all'}">
+</md-input-container>
+<div>
+	<md-input-container>
+		<label>组织机构</label>
+		<input ng-model="orgs.user_full_name" type="text" drorganization="{'model':'orgs'}">
+	</md-input-container>
+</div>
+<div>
+	<h5>组织机构<a href="" dr-Organizationext userlist="orgslist">[添加]</a> [修改测试版]<h5>
+		<md-chips ng-model="orgslist" placeholder="出发地" readonly="true" md-removable="true">
+		        <md-chip-template>
+          <strong>{{$chip.user_full_name}}({{$chip.user_account}})</strong>
+        </md-chip-template>
+	    </md-chips>
+</div>
+<md-input-container>
+	<label>银行账户</label>
+	<input ng-model="banks.bank_account" type="text" drbankaccount="{'model':'banks'}">
+</md-input-container>
+<md-input-container>
+	<label>选择常用联系人</label>
+	<input ng-model="passengers" type="text" drchoosepassengers="{'model':'passengers'}">
+	<span ng-repeat="item in passengers">{{item.cnName}},</span>
+</md-input-container>
+<md-input-container>
+	<label>EA单</label>
+	<input ng-model="ea" type="text" dreachoose="{'model':'ea'}">
+	<span ng-repeat="item in ea">{{item.reason_desc}},</span>
+</md-input-container>
+<md-input-container>
+	<label>EA单(NEW)</label>
+	<input ng-model="ea2.fee_apply_code" type="text" drfeeapplyv2="{'model':'ea2'}">
+</md-input-container>
+<md-input-container>
+	<label>选择收款方</label>
+	<input ng-model="receving.receiver" type="text" drreceving="{'model':'receving'}">
+</md-input-container>
+<md-input-container>
+	<label>选择入账单位</label>
+	<input ng-model="ruzhangdanwei.company_name" type="text" drruzhangdanwei="{'model':'ruzhangdanwei'}">
+</md-input-container>
+
+<md-input-container>
+	<label>选择贷款单号</label>
+	<input ng-model="tt.borrowing.loan_info_code" type="text" drborrowing="{'model':'tt.borrowing'}">
+</md-input-container>
+
+<!-- <md-input-container>
+	<label>选择发票抬头</label>
+	<input ng-model="receving" type="text" drreceving="{'model':'receving'}">
+	<span ng-repeat="item in receving">{{item}}</span>
+	</md-input-container>
+	<md-input-container>
+		<label>选择组织机构</label>
+		<input ng-model="receving" type="text" drreceving="{'model':'receving'}">
+		<span ng-repeat="item in receving">{{item}}</span>
+	</md-input-container> -->
+
+	<!--
+	作者：123303841@qq.com
+	时间：2016-08-24
+	描述：字典 C_ALL_PAYMENT_METHOD 付款方式,VENDOR_TYPE 供应商类型,C_LM_ORDER_TYPE借款单据类型
+-->
+  <div layout="row" layout-align="center center" ng-init="itemdiccode='C_LM_ORDER_TYPE'" ng-init="itemdiclist=null">
+    <md-select dr-Dictitemext="" diccode="itemdiccode" diclist="itemdiclist" placeholder="借款类型" ng-model="user" style="min-width: 200px;">
+      <md-option ng-value="dic.itemValue" ng-repeat="dic in itemdiclist.data">{{dic.itemName}}</md-option>
+    </md-select>
+  </div>
+	<!--<dr-Dictitem ngrequired="isuser" itemvalue="" redisabled="false" dictmodel="" itemnamemodel="itemName" itemvaluemodel="itemValue" ng-init="titlename=借款类型;lmcode=C_LM_ORDER_TYPE;" titlename="titlename" code="lmcode"></dr-Dictitem>
+	<dr-Dictitem ngrequired="isuser" itemvalue="" redisabled="false" dictmodel="" itemnamemodel="itemName" itemvaluemodel="itemValue" titlename="付款方式" code="C_ALL_PAYMENT_METHOD"></dr-Dictitem>
+	<dr-Dictitem ngrequired="isuser" itemvalue="" redisabled="false" dictmodel="" itemnamemodel="itemName" itemvaluemodel="itemValue" titlename="供应商类型" code="VENDOR_TYPE"></dr-Dictitem>-->
+<!--	<dr-Currency ngrequired="true" oldcurrencycode="" currencycodemodel="emslmloan.order_type4" currencynamemodel="emslmloan.order_type5" currencymodel="" titlename="货币类型"></dr-Currency>-->
+	
+	  <div layout="row" layout-align="center center" ng-init="currencys=null">
+    <md-select dr-Currencyext="" currencylist="currencys" placeholder="货币类型" ng-model="emslmloan.order_type4" style="min-width: 200px;">
+      <md-option ng-value="item.itemValue" ng-repeat="item in currencys.data">{{item.currency_name}}({{item.currency_code}})</md-option>
+    </md-select>
+  </div>
+  <!--
+  	作者：123303841@qq.com
+  	时间：2016-09-10
+  	描述：供应商下拉列表选择
+  -->
+	<!--<dr-Vendor ngrequired="isuser" vendormodel="" vendorname="vendorname" vendoraddress="vendoraddress" titlename=""></dr-Vendor>-->
+	<div layout="row" layout-align="center center" ng-init="vendors=null">
+    <md-select dr-Vendorext vendorlist="vendors" placeholder="选择供应商" ng-model="vendor">
+      <md-option ng-value="item" ng-repeat="item in vendors.data.info">{{item.vendor_name}}({{item.vendor_code}})</md-option>
+    </md-select>
+    </div>
+    
+	<!--预算树-->
+	<!--<dr-Budget remodel="budget" titlenamea="预算部门 (必填)" titlenameb="预算部科目(必填)" titlenamec="预算单元(必填)"></dr-Budget>		-->
+	<!--预算树添加一个预算树-->
+	<dr-Budgets remodel="budgets" titlename="预算树 (必填)" titlenamea="预算部门 (必填)" titlenameb="预算部科目(必填)" titlenamec="预算单元(必填)"></dr-Budgets>
+
+	<dr-Budgetorg remodel="busiorg" titlename="预算部门 (必填)"></dr-Budgetorg>
+	<dr-Budgetnode remodel="feenode" busiorgid="busiorg.busi_org_id" titlename="预算部科目 (必填)"></dr-Budgetnode>
+	<dr-Budgetunit remodel="budget3" busiorgid="busiorg.busi_org_id" feetypeid="feenode.fee_type_id" titlename="预算单元 (必填)"></dr-Budgetunit>

@@ -1,0 +1,98 @@
+<md-dialog aria-label="关联借款单" ng-cloak style="min-width: 50%" id="expensefirst-dialog2-detail">
+    <form name="addexpensefirst111" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 style="color: white">关联借款单</h2>
+                <span flex></span>
+                <!--<md-button class="md-icon-button" ng-click="cancel()">-->
+                    <!--<md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>-->
+                <!--</md-button>-->
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="padding-top: 0px;padding-bottom: 0px">
+
+                <div class="demo-tab" style=" text-align: center;">
+
+                    <md-table-container style="width: 95%;padding-left: 2.5%;">
+                        <table data-md-table data-md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" data-ng-model="selected11" md-progress="promise">
+                        <!--<table data-md-table data-ng-model="selected" md-progress="promise">-->
+                            <thead md-head data-md-order="query.order" md-on-reorder="getDesserts">
+                            <tr md-row>
+                                <th md-column>借款单号</th>
+                                <th md-column>事由</th>
+                                <th md-column>借款日期</th>
+                                <th md-column>借款金额</th>
+                                <th md-column>借款币种</th>
+                                <th md-column>借款状态</th>
+                                <th md-column>计划还清日期</th>
+                            </tr>
+                            </thead>
+                            <tbody md-body>
+                            <tr md-row md-select="x" md-select-id="loan_info_id" ng-repeat="x in appdata" md-auto-select="options.autoSelect">
+                                <td md-cell><span>{{x.loan_info_code}}</span></td>
+                                <td md-cell><span>{{x.reason_desc}}</span></td>
+                                <td md-cell><span>{{x.apply_date}}</span></td>
+                                <td md-cell ng-switch="x.currency_code">
+                                    <i ng-switch-when="CNY">¥</i>
+                                    <i ng-switch-when="USD">$</i>
+                                    <span>{{x.amount}}</span></td>
+                                <td md-cell><span>{{x.currency_name}}</span></td>
+                                <td md-cell ng-switch="x.status">
+                                    <span ng-switch-when="AUDITED">已审核</span>
+                                    <span ng-switch-when="SPZ">审核中</span>
+	      		<span ng-switch-when="DHK">待还款，已还:
+	      		<span ng-switch="x.currency_code">
+	      			<i ng-switch-when="CNY">¥</i>
+	      			<i ng-switch-when="USD">$</i>
+	      		</span>
+	      		<b>
+                    {{x.already_repay_amount ? x.already_repay_amount : '0'}}
+                </b>
+	      		</span>
+                                    <span ng-switch-when="YHQ">已还清</span>
+                                    <span ng-switch-when="CG">草稿</span>
+                                    <span ng-switch-when="ZF">已作废</span>
+                                </td>
+                                <td md-cell><span>{{x.expected_repay_date }}</span></td>
+                                <td md-cell style="display: none"><span>{{x.repay_amount }}</span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </md-table-container>
+                    <md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '总条数：'}"
+                                         md-limit="query.limit" md-limit-options="[5, 10, 15]" md-page="query.page"
+                                         md-total="{{query.total}}" md-on-paginate="getDesserts" md-page-select></md-table-pagination>
+
+                </div>
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <span flex></span>
+            <md-button class="md-primary md-raised" ng-click="answer()"  style="color: white;float: right"
+                       ng-disabled="addexpensefirst.$invalid" disabled="disabled">确定</md-button>
+
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+
+<style>
+    /*#expensefirst-dialog2-detail .md-datepicker-input-container.md-datepicker-invalid {*/
+        /*border-bottom-color: rgb(224,224,224);*/
+    /*}*/
+    #expensefirst-dialog2-detail .md-datepicker-input-container{
+        width: 93.9%;
+        margin-left: -2px;
+    }
+    #expensefirst-dialog2-detail .md-datepicker-calendar-icon{
+        margin-bottom: -7px;
+    }
+    md-chips input{
+        display: none;
+    }
+    md-chips md-chips-wrap{
+        box-shadow:none;
+    }
+</style>

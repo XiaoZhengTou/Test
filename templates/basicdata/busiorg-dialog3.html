@@ -1,0 +1,43 @@
+<md-dialog aria-label="预算组织详情" ng-cloak style="min-width: 50%" id="busiorg-dialog3-detail">
+    <form name="addbusiorg3" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 style="color: white">预算组织详情</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="padding-top: 0px;padding-bottom: 0px">
+
+                <table ng-table="tableParams" class="table table-condensed table-bordered table-striped" show-filter="true" style="width: 94%;margin: 3%;margin-top: 0%;">
+                    <tr ng-repeat="user in $data">
+
+                        <td title="'预算主体'" filter="{ busi_org_name: 'text'}" sortable="'预算主体'">
+                            {{user.busi_org_name}}</td>
+
+                        <td title="'主体编码'" filter="{ busi_org_code: 'text'}" sortable="'主体编码'" style="word-wrap:break-word">
+                            {{user.busi_org_code}}</td>
+
+                        <td title="'部门属性'" filter="{ org_attribute: 'text'}" sortable="'部门属性'" style="word-wrap:break-word">
+                            {{user.org_attribute}}</td>
+
+                        <td title="'组织描述'" filter="{ busi_org_desc: 'text'}" sortable="'组织描述'" style="word-wrap:break-word">
+                            {{user.busi_org_desc}}</td>
+
+                        <td title="'是否生效'" sortable="'是否生效'" style="word-wrap:break-word">
+                            <md-checkbox ng-click="editstatus1(user,user.enable_flag)" ng-checked="user.enable_flag == 'Y'">
+
+                                <span>{{user.enable_flag == 'Y' ? '生效':'失效'}}</span>
+                            </md-checkbox>
+                        </td>
+
+                    </tr>
+                </table>
+
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>

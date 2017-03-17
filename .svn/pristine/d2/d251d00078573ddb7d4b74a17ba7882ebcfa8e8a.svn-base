@@ -1,0 +1,92 @@
+<div ng-controller="imageCtrl as ctrl" layout="column" ng-cloak style="padding-bottom:60px;">
+	
+	<md-card>
+		<md-card-title style="border-bottom:1px solid #eee;padding:20px 16px 16px">
+          <md-card-title-text>
+            <span class="md-headline" style="font-size:16px;color:#777;">图片预览</span>
+          </md-card-title-text>
+       </md-card-title>
+       <myupload></myupload>
+   </md-card>    
+       
+       <md-card-content style="padding:0;">
+       		<div layout="row">
+       			<div layout="column" style="min-width:300px;">
+				  <md-toolbar style="background-color: rgb(255,255,255);color: #666;">
+				    <div class="md-toolbar-tools">
+				      	<table width="100%" class="left-sidebar-table">
+	       					<tr>
+	       						<td>操作</td>
+		       					<td>文件名</td>
+		       					<td>分类</td>
+	       					</tr>
+       					</table>
+				    </div>
+				  </md-toolbar>
+				  <md-content flex style="height:410px;border-right:1px solid #ccc;">
+				  	<table width="100%" id="table-container" class="left-sidebar-table-content">
+				  		<tbody data-ng-model="itemsList.items"  as-sortable>
+				  			<tr ng-click="selectedRow($event, d)" ng-repeat="d in itemsList.items" as-sortable-item>
+			  					<td as-sortable-item-handle>
+			  						<table width="100%" cellspacing="0">
+			  							<tr>
+			  								<td><a ng-href="javascript:void(0)" ng-click="remove($event,d.id)">{{d.options}}</a></td>
+					       					<td>{{d.name}}</td>
+					       					<td>
+					       							<md-menu>
+												      <md-button ng-click="ctrl.openMenu($mdOpenMenu, $event)">
+												        {{d.type}}
+												      </md-button>
+												      <md-menu-content width="4">
+												        <md-menu-item ng-repeat="item in menuItems">
+												          <md-button ng-click="ctrl.checkType($event,d,item)" ng-bind="item.text">
+												          </md-button>
+												        </md-menu-item>
+												      </md-menu-content>
+												    </md-menu>
+					       					</td>
+			  							</tr>
+			  						</table>
+			  					</td>
+	       						
+	       					</tr>
+				  		</tbody>
+       				</table>
+				  </md-content>
+				</div>
+				
+       			<div layout="column" flex>
+       			  <md-toolbar style="background-color: rgb(255,255,255);color: #666;">
+				    <div class="md-toolbar-tools" layout-align="center center">
+				    	文件预览
+				    </div>
+				  </md-toolbar>
+				  <md-content flex>
+				  	<div style="height:410px;overflow:hidden;" layout="column" layout-align="center center">
+				    	<image-cropper image-url="imageUrl"
+				          width="480"
+				          height="300"
+				          show-controls="{{showControls}}"
+				          fit-on-init="false"
+				          center-on-init="true"
+				          api="cropperApi"
+				          crop-callback="updateResultImage"
+				          action-labels="myButtonLabels">
+					    </image-cropper>
+				    </div>
+				  </md-content>
+       				
+       			</div>
+       			
+       			
+       		</div>
+        </md-card-content>
+	
+	
+	
+	<div class="ml-bottom-bar slideInUp animated" layout="row" layout-sm="column" layout-align="start center" layout-wrap>
+	  	  <md-button class="md-raised md-primary" ng-click="upload()">本地上传</md-button>
+	  	  <md-button class="md-raised md-primary" ng-click="onIntroduced()">从票夹引入</md-button>
+		  <md-button class="md-raised md-primary" ng-click="confirm($event)">确认</md-button>
+	</div>
+</div>

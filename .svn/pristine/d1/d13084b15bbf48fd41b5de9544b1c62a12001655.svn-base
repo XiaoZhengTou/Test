@@ -1,0 +1,114 @@
+<md-dialog aria-label="新增记一笔" style="width:650px;"  ng-cloak>
+  <form name="form" novalidate="novalidate" ng-submit="addItem(form.$valid)" ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>新增记一笔</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+        	<i class="iconfont" style="color:#fff;font-size:20px;">&#xe634;</i>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+      	
+      	<div layout="row">
+				    	<div layout="row" flex="50">
+					    		<md-button class="md-raised md-primary" ng-click="imgUpload()" style="height:36px;"><i class="iconfont">&#xe665;</i> 影像上传</md-button>
+					    		
+					    		<input type="file" id="uploader" style="display:none;" nv-file-select="" uploader="uploader" multiple />
+				      </div>
+				      <div layout="row" flex="50">
+					      	 <div layout="row" flex>
+					            <md-checkbox ng-model="account.ifNeedReim" ng-true-value="true" ng-false-value="false" flex style="margin-top:15px;">
+					              		是否报销
+							          </md-checkbox>
+					          </div>
+				      </div>
+					</div>
+					<div class="clearfix">
+						<div ng-repeat="item in uploader.queue" style="margin:10px 0;">
+									<div class="img-container">
+											<button  class="md-primary custom-btn-close" ng-click="removeImg($event,$index)"><md-icon md-svg-icon="md-close"></md-icon></button>
+											<div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 ,index: $index }"></div>
+									</div>
+						</div>
+					</div>
+					
+      		
+      		<div layout="row">
+				    	<div layout="row" flex>
+					      	<md-input-container class="md-block ml-nomargin" flex="90">
+					    		<label>金额</label>
+					    		<input name="amount" min="0" ng-pattern="/^[0-9]*$/"  ng-model="account.amount" required/>
+							    	<div ng-show="form.amount.$error.required && !form.amount.$pristine" class="md-input-messages-animation ng-active">
+					              	报销金额不能为空
+					        	</div>
+			            <!--<div ng-messages="form.amount.$error" ng-show="form.amount.$dirty" class="md-input-messages-animation ng-active" aria-live="assertive" aria-hidden="true">
+			              <div ng-message="required" class="md-input-message-animation ng-scope"><span translate="" class="ng-scope">报销金额不能为空</span></div>
+			              
+			              <div ng-message="pattern" class="md-input-message-animation ng-scope"><span translate="" class="ng-scope">报销金额必须是数字</span></div>
+			            </div>-->
+			            <div ng-show="form.amount.$error.min">报销金额必须大于0</div>
+			            <div ng-show="form.amount.$error.pattern" class="md-input-messages-animation ng-active">
+			              	报销金额必须是数字
+			            </div>
+			            
+					    	</md-input-container>
+				      </div>
+				      <div layout="row" flex>
+					      	<md-input-container class="md-block ml-nomargin" flex="90">
+					    		<label>币种</label>
+					    		<md-select ng-init="currency='CNY'" ng-model="currency">
+					    			<md-option ng-value="d" ng-repeat="d in currencys">{{d}}</md-option>
+					        </md-select>
+					    	</md-input-container>
+				      </div>
+					</div>
+      		
+      		<div layout="row">
+				    	<div layout="row" flex>
+					      	<md-input-container class="md-block ml-nomargin" flex>
+						    		<label>说明</label>
+						    		<textarea ng-model="account.billingDesc" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+						    	</md-input-container>
+				     </div>
+					</div>
+					
+					<div layout="row">
+				      <div layout="row" flex = "50">
+					      	<md-input-container class="md-block ml-nomargin" flex="90">
+					    		<label>报销类型</label>
+					    		<md-select ng-model="account.feeCategoryCode">
+					    			<md-option ng-value="d.id" ng-repeat="d in categorys">{{d.node}}</md-option>
+					        </md-select>
+					    	</md-input-container>
+				      </div>
+				      
+				      <div layout="row" flex = "50">
+					      	<md-input-container class="md-block ml-nomargin" flex="90">
+					      		<label>报销类型子项</label>
+						    		<md-select ng-model="account.ecoTypeId">
+						    			<md-option ng-value="$index" ng-repeat="a in categorys[account.feeCategoryCode - 1].child">{{a}}</md-option>
+						        </md-select>
+						    	</md-input-container>
+				      </div>
+					</div>
+
+					<tongyong ng-show="(account.feeCategoryCode!=3)&&(account.feeCategoryCode!=2)"></tongyong>
+        	<jiaotong ng-show="account.feeCategoryCode==3"></jiaotong>
+        	<zhusu ng-show="account.feeCategoryCode==2"></zhusu>
+
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button type="submit" class="md-raised md-primary" ng-disabled="form.$invalid">
+       		确定
+      </md-button>
+      <md-button ng-click="cancel()">
+        	取消
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

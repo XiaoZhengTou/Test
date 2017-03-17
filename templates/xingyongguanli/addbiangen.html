@@ -1,0 +1,37 @@
+<div ng-controller="biangenctrl">
+<table md-table  multiple ng-model="selected" md-progress="promise">
+    <thead md-head md-order="query.order" md-on-reorder="getDesserts">
+    <tr md-row>
+        <th md-column >员工名称</th>
+        <th md-column >增减分值</th>
+        <!--<th md-column md-numeric>币种</th>-->
+        <th md-column >原因</th>
+        <th md-column >剩余分值</th>
+        <th md-column >发布人</th>
+        <th md-column >来源</th>
+        <th md-column>更新时间</th>
+    </tr>
+    </thead>
+    <tbody md-body>
+    <tr md-row md-select="item" md-select-id="fee_apply_id" md-auto-select ng-repeat="item in xingyong.data">
+        <!--<td md-cell>{{item.fee_apply_id}}</td>-->
+        <td md-cell>{{item.created_name}}</td>
+        <td md-cell>{{item.change_credit_value}}</span></td>
+        <!--<td md-cell>{{item.currency_name}}</td>-->
+        <td md-cell>{{item.remark}}</td>
+        <td md-cell>{{item.current_credit_value}}</td>
+        <!--<td md-cell>{{item.order_status|order_status}}</td>
+        <td md-cell>{{item.order_type|applytype}}</td>-->
+        <td md-cell>{{item.created_name}}</td>
+        <td md-cell>{{item.source_system}}</td>
+        <td md-cell>{{item.creation_date}}</td>
+        <!--td md-cell>
+            <md-button  class="md-primary"  ng-href="#/xingyongguanli/add">
+                编辑
+            </md-button>
+        </td-->
+    </tr>
+
+    </tbody>
+</table>
+    </div>

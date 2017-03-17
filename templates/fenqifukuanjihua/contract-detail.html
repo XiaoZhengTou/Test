@@ -1,0 +1,145 @@
+<style type="text/css">
+    table.md-table th.md-column,table.md-table td.md-cell{
+        text-align: center;
+    }
+</style>
+<div ng-controller="fqfkCtrl" class="jiehuankuan fukuan add" ng-cloak>
+    <div ng-controller="adddanju" class="ml-width-bottom-bar">
+        <!-- 新增单据开始 -->
+        <md-card class="ml-padding-pc">
+            <div class='basefilter'>
+                <div layout="row">
+                    <div flex class="ml-padding-right">
+                        <md-input-container class="md-block md-cyan-theme md-input-invalid">
+                            <label>合同编号</label>
+                            <input ng-model="saveData.contract_no" type="text" required disabled>
+                        </md-input-container>
+                    </div>
+                    <div flex class="ml-padding-right">
+                        <md-input-container class="md-block md-cyan-theme md-input-invalid">
+                            <label>合同名称 </label>
+                            <input ng-model="saveData.contract_name" type="text" disabled>
+                        </md-input-container>
+                    </div>
+                    <div flex class="ml-padding-right">
+                        <md-input-container class="md-block md-cyan-theme md-input-invalid">
+                            <label>合同总额</label>
+                            <input ng-model="saveData.total_amount" type="text" disabled>
+                        </md-input-container>
+                    </div>
+                    <div flex class="ml-padding-right">
+                        <dr-Currency  oldcurrencycode="{{saveData.currency_code}}"currencycodemodel="" currencynamemodel="" currencymodel="currency"  titlename="" redisabled="true"></dr-Currency>
+                    </div>
+                </div>
+                <div layout='row'>
+                    <div flex class="ml-padding-right">
+                        <md-input-container class="md-block md-cyan-theme md-input-invalid">
+                            <label>项目经理</label>
+                            <input disabled ng-model="saveData.project_mng_name" type="text" drorganization="{'model':'orgs'}" name="user_full_name" required>
+                        </md-input-container>
+                    </div>
+                    <div flex class="ml-padding-right">
+                        <md-input-container class="md-block md-cyan-theme md-input-invalid">
+                            <label>入账单位</label>
+                            <input disabled ng-model="saveData.party_a" name="companyName" type="text" drruzhangdanwei="{'model':'ruzhangdanwei'}" required>
+                        </md-input-container>
+                    </div>
+                    <div flex class='ml-padding-right'>
+                        <md-input-container class="md-block ml-cyan-theme md-input-invalid" >
+                            <label>供应商</label>
+                            <input ng-model="saveData.vendor_name" type="text" disabled>
+                        </md-input-container>
+                    </div>
+                    <div flex class='ml-padding-right'>
+                        <md-input-container class="md-block">
+                            <label>供应商联系人</label>
+                            <textarea disabled ng-model="saveData. party_b_contact"   md-select-on-focus></textarea>
+                        </md-input-container>
+                    </div>
+                </div>
+                <div layout="row">
+                    <div flex class='ml-padding-right'>
+                        <md-input-container class="md-block">
+                            <label>联系人手机号码</label>
+                            <textarea ng-model="saveData.party_b_contact_phone" disabled></textarea>
+                        </md-input-container>
+                    </div>
+                    <div flex class='ml-padding-right'>
+                            <dr-Dictitem itemvalue="{{saveData.emsHtContractLs[0].payment_method}}" redisabled="true" dictmodel="" itemnamemodel="itemName" itemvaluemodel="itemValue" titlename="付款方式" code="C_ALL_PAYMENT_METHOD"></dr-Dictitem>
+                    </div>
+                    <div flex class='ml-padding-right'>
+                        <md-input-container class="md-block">
+                            <label>付款账号</label>
+                            <textarea ng-model="saveData.bank_account" disabled></textarea>
+                        </md-input-container>
+                    </div>
+                </div>
+                <div layout="row">
+                    <div flex class='ml-padding-right'>
+                        <md-input-container class="md-block">
+                            <label>业务描述</label>
+                            <textarea disabled ng-model="saveData.contract_desc"   md-select-on-focus></textarea>
+                        </md-input-container>
+                    </div>
+                </div>
+            </div>
+        </md-card>
+        <!--账务明细-->
+        <md-card>
+            <div>
+                <div class="md-toolbar-tools" layout="row">
+                    <span>付款计划明细</span>
+                    <md-menu>
+                        <md-button aria-label="Open user menu" ng-click="$mdOpenMenu()" aria-label="side navigation">
+                            <md-icon md-svg-src="img/icons/three.svg"></md-icon>
+                        </md-button>
+                        <md-menu-content width="4">
+                            <md-menu-item>
+                                <md-button aria-label="side navigation">
+                                    <md-icon md-svg-src="img/icons/excel_out.svg"></md-icon>
+                                    <span class="ng-scope">Excel导入</span>
+                                </md-button>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                </div>
+            </div>
+            <md-divider></md-divider>
+            <div>
+                <md-table-container>
+                    <table md-table multiple ng-model="selected" md-progress="promise" class="feeapplytable">
+                        <thead md-head md-order="query.order" md-on-reorder="getDesserts">
+                        <tr md-row>
+                            <th md-column>付款批次</th>
+                            <th md-column>付款日期</th>
+                            <th md-column>付款金额</th>
+                            <th md-column>付款币种</th>
+                            <th md-column>付款比例%</th>
+                            <th md-column>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody md-body>
+                        <tr md-row ng-repeat="item in saveData.emsHtContractLs">
+                            <td md-cell>{{item.pay_period}}</td>
+                            <td md-cell>{{item.pay_time }}</td>
+                            <td md-cell>{{item.schedule_amount | currency:''}}</td>
+                            <td md-cell>{{saveData.currency_name}}</td>
+                            <td md-cell>{{item.pay_percent}}</td>
+                            <td md-cell>
+                                <div layout="row" class="ml-color-blue">
+                                    <md-button style="margin-left: auto" class="md-icon-button" ng-click="add_detial($event,$index)" disabled>
+                                        <i class="iconfont ml-margin-auto">&#xe61f;</i>
+                                    </md-button>
+                                    <md-button class="md-icon-button ml-nomargin" ng-click="del_detial($event,$index)" disabled>
+                                        <i class="iconfont ml-margin-auto">&#xe633;</i>
+                                    </md-button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </md-table-container>
+            </div>
+        </md-card>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+.com-pl-0{
+	padding-left: 0;
+}
+
+.com-pt-26{
+    padding-top: 26px;
+}
+.com-pt-17{
+    padding-top: 17px;
+}
+.display-block{
+  display: block;
+}
+.com-margin-0{
+    margin: 0;
+}

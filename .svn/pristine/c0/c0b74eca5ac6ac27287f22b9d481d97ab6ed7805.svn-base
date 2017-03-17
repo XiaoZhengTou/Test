@@ -1,0 +1,53 @@
+<div ng-controller="airfareCtrl" layout="column" ng-cloak class="airfare" >
+	<div ng-controller="ticketCtrl" class="search">
+		<md-card class="ml-color-73 ml-textalign-center search-main">
+			<div class="ml-paddinglr-15 search-main-top">
+				<div class="search-main-header">国内机票</div>
+				<md-divider></md-divider>
+				<!--<md-radio-group ng-model="searchType" layout="row" class="ml-marginT-20 ml-textalign-left">
+					<md-radio-button value="searchType1" flex="15" class="md-primary">单程</md-radio-button>
+					<md-radio-button value="searchType2" flex="15" class="md-primary">往返</md-radio-button>
+				</md-radio-group>-->
+				<md-list class="ml-marginT-20 ml-textalign-left ml-nopadding" layout="row">
+					<div flex="40" layout="row">
+						<span flex="20" class="ml-lineheight-48">出发</span>
+						<md-list-item flex="70" ng-click="null" drchoosecitys="{'model':'city1','data':'air','alldata':'all'}">
+							<span class="ml-color-21" ng-bind="city1.text"></span>
+							<md-divider></md-divider>
+						</md-list-item>
+					</div>
+					<md-list-item flex="10" ng-click="changeCity()">
+						<i class="iconfont">&#xe66c;</i>
+					</md-list-item>
+					<div flex="40" flex-offset="5" layout="row">
+						<span flex="20" class="ml-lineheight-48">到达</span>
+						<md-list-item flex="70" ng-click="null" drchoosecitys="{'model':'city2','data':'air','alldata':'all'}">
+							<span class="ml-color-21" ng-bind="city2.text"></span>
+							<md-divider></md-divider>
+						</md-list-item>
+					</div>
+				</md-list>
+				<div class="ml-marginT-20 dateSelect ml-textalign-left" layout="row">
+					<span flex="10">日期</span>
+					<div class="datepicker" flex="40" layout="row" layout="row">
+						<md-datepicker ng-model="checkInDate" md-min-date="checkInMinDate" md-max-date="checkInMaxDate">
+						</md-datepicker>
+						<i><span class="ml-fontsize-12">{{checkInDate | amDateFormat:'ddd'}}</span></i>
+					</div>
+					<!--<div flex="10" class="ml-text-center">
+							<span>{{checkOutDate | amDifference : checkInDate : 'days' }}天</span>
+						</div>
+						<div class="datepicker" flex="40" layout="row" >
+							<md-datepicker ng-model="checkOutDate"
+								md-min-date="checkOutMinDate" md-max-date="checkOutMaxDate">
+							</md-datepicker>
+							<i ><span class="ml-fontsize-12">{{checkOutDate | amDateFormat:'ddd'}}</span></i>
+						</div>-->
+				</div>
+			</div>
+			<div class="ml-marginT-20 ml-textalign-right bgcolor">
+				<md-button class="md-raised md-primary" ng-click="onGolist()">搜 索</md-button>
+			</div>
+		</md-card>
+	</div>
+</div>

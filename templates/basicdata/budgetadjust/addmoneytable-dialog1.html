@@ -1,0 +1,76 @@
+<md-dialog aria-label="添加预算单元" ng-cloak style="min-width: 70%" id="addmoneytable-dialog1-detail">
+    <form name="addaddmoneytable" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 style="color: white">添加预算单元</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="padding-top: 0px;padding-bottom: 0px" layout="row">
+
+                <!--<div flex="25" style="border: 1px solid black;max-height: 510px;padding: 0;margin-top: 4%;" class="md-dialog-content">-->
+                    <!--<md-list-item class="md-3-line" ng-repeat="item in budgetlist" ng-click="getbudgetnodes(item.budget_headers_id,item.budget_name)">-->
+                        <!--<div class="md-list-item-text" layout="column">-->
+                            <!--&lt;!&ndash;<h3>{{ item.who }}</h3>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<h4>{{ item.what }}</h4>&ndash;&gt;-->
+                            <!--<p>{{ item.budget_name }}</p>-->
+                        <!--</div>-->
+                    <!--</md-list-item>-->
+                <!--</div>-->
+                <div flex="25" style="border: 1px solid black;max-height: 510px;padding: 0;margin-top: 4%;margin-left: 1%;overflow: auto;" class="md-dialog-content">
+                    <md-list-item class="md-3-line" ng-repeat="item in budgetnodes" >
+                        <div class="md-list-item-text" layout="column">
+
+                            <p><md-checkbox ng-model="item.check1" ng-disabled="item.disabled1" ng-checked="exists(item, selected)"  ng-click="toggle(item, selected)" style="margin-bottom: 0px">{{ item.budget_node_name }}</md-checkbox></p>
+                            <p><md-checkbox ng-model="item.check1" style="display: none"></md-checkbox></p>
+                        </div>
+                    </md-list-item>
+                </div>
+
+                <!--<div flex="4" class="md-dialog-content"></div>-->
+                <div flex="75" class="md-dialog-content">
+                    <p>已选预算单元：</p>
+                    <md-chips ng-model="selected" md-max-chips="1" required="">
+                        <md-chip-template>
+                            <strong>{{$chip.budget_node_name}}</strong>
+                        </md-chip-template>
+                    </md-chips>
+                    <p></p>
+                    <p>调整金额：</p>
+                    <input ng-model="adjust_amount" type="text" style="width: 100%;margin: 0;" required>
+
+                    <md-button class="md-primary md-raised" ng-click="answer(selected,adjust_amount)"  style="color: white;float: right"
+                               ng-disabled="addaddmoneytable.$invalid || selected.length==0" disabled="disabled">确定</md-button>
+                </div>
+
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>
+
+<style>
+    /*#addmoneytable-dialog1-detail .md-datepicker-input-container.md-datepicker-invalid {*/
+        /*border-bottom-color: rgb(224,224,224);*/
+    /*}*/
+    md-list-item.md-3-line, md-list-item.md-3-line > .md-no-style {
+        height: auto;
+         min-height: 45px;
+    }
+    md-chips input{
+        display: none;
+    }
+    md-chips md-chips-wrap{
+        box-shadow:none;
+    }
+    #addmoneytable-dialog1-detail .md-datepicker-input-container{
+        width: 93.9%;
+        margin-left: -2px;
+    }
+    #addmoneytable-dialog1-detail .md-datepicker-calendar-icon{
+        margin-bottom: -7px;
+    }
+</style>

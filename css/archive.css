@@ -1,0 +1,31 @@
+ul.ztree {
+    background: #f0f6e4;
+    width: 220px;
+    height: 460px;
+    overflow-y: auto;
+    overflow-x: auto;
+    border-radius: 2px;
+}
+#archive-container{
+	padding-left:250px;
+}
+#archive-container .ztree{
+	margin-left:-250px;
+}
+div#rMenu {position:absolute; visibility:hidden; top:0; background-color: #555;text-align: left;padding: 2px;}
+div#rMenu ul{
+	padding:0;
+	margin:0;
+}
+div#rMenu ul li{
+	margin: 1px 0;
+	padding: 5px;
+	cursor: pointer;
+	list-style: none outside none;
+	background-color: #DFDFDF;
+}
+.archive-detail label{
+	width:80px;
+	display: inline-block;
+	text-align: right;
+}

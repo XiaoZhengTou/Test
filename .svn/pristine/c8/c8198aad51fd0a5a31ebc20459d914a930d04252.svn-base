@@ -1,0 +1,92 @@
+<md-dialog aria-label="新增角色" ng-cloak style="min-width: 50%" id="rperson-dialog3-detail">
+
+    <form name="addrperson" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 style="color: white">新增角色</h2>
+                <span flex></span>
+                <!--<md-button class="md-icon-button" ng-click="cancel()">-->
+                    <!--<md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>-->
+                <!--</md-button>-->
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="padding-top: 0px;padding-bottom: 0px">
+
+                <table class="table ng-scope" style="margin-bottom: 0px">
+                    <tr>
+                        <td style="padding-top: 21px;"><span style="float: right">角色：</span></td>
+                        <td style="padding-top: 21px;">
+                            <input ng-model="search.name" type="text" style="width: 100%;margin: 0; ">
+                        </td>
+                        <td>
+                            <md-button ng-click="search_pedefine()">
+                                <md-icon md-svg-src="img/icons/search.svg"></md-icon>
+                            </md-button>
+                        </td>
+                    </tr>
+                </table>
+
+                <md-table-container style="width: 95%;padding-left: 2.5%;">
+                    <table data-md-table data-md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" data-ng-model="selected" md-progress="promise2">
+                    <!--<table data-md-table data-ng-model="selected" md-progress="promise">-->
+                        <thead md-head data-md-order="query2.order" md-on-reorder="getDesserts2">
+                        <tr md-row>
+                            <th md-column>角色</th>
+                            <th md-column>角色类型</th>
+                            <th md-column>描述</th>
+                        </tr>
+                        </thead>
+                        <tbody md-body>
+                        <tr md-row md-select="item" md-select-id="id" ng-repeat="item in appdata2" md-auto-select="options.autoSelect">
+                        <!--<tr md-row ng-repeat="item in appdata">-->
+                            <td md-cell>{{item.name}}</td>
+                            <td md-cell>{{item.type == '1'?'功能角色':(item.type == '2'?'数据角色':'')}}</td>
+                            <td md-cell>{{item.description}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </md-table-container>
+                <md-table-pagination md-label="{page: '页码导航：', rowsPerPage: '每页数据：', of: '总条数：'}"
+                                     md-limit="query2.limit" md-limit-options="[5, 10, 15]" md-page="query2.page"
+                                     md-total="{{query2.total}}" md-on-paginate="getDesserts2" md-page-select></md-table-pagination>
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <label>已选：</label>
+            <md-chips ng-model="selected" md-max-chips="1">
+                <md-chip-template>
+                    <strong>{{$chip.name}}</strong>
+                </md-chip-template>
+            </md-chips>
+            <span flex></span>
+            <md-button class="md-primary md-raised" ng-click="answer($event)"  style="color: white;float: right"
+                       ng-disabled="addrperson.$invalid" disabled="disabled">确定</md-button>
+
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+
+<style>
+    /*#rperson-dialog1-detail .md-datepicker-input-container.md-datepicker-invalid {*/
+        /*border-bottom-color: rgb(224,224,224);*/
+    /*}*/
+    md-chips input{
+        display: none;
+    }
+    md-chips md-chips-wrap{
+        box-shadow:none;
+    }
+    #rperson-dialog3-detail .md-datepicker-input-container{
+        width: 93.9%;
+        margin-left: -2px;
+    }
+    #rperson-dialog3-detail .md-datepicker-calendar-icon{
+        margin-bottom: -7px;
+    }
+    #rperson-dialog3-detail .active{
+        color:blue;
+    }
+</style>

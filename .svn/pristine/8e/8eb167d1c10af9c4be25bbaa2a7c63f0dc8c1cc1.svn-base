@@ -1,0 +1,60 @@
+{
+	"code": "0000",
+	"data": {
+		"datalist": [
+			{
+				"fee_sharing_code": "CA1608170154",
+				"fee_sharing_id": "0000000000001",
+				"currency_name": "人民币",
+				"sharing_date": "2016-08-17 00:00:00",
+				"reason_desc": "业务说明",
+				"sharing_amount": 32,
+				"order_status": "DRAFT",
+				"order_type": "TY",
+				"sharing_status": "审批中",
+				"sharing_type": "费用分摊"
+			},
+			{
+				"fee_sharing_code": "CA1608170154",
+				"fee_sharing_id": "0000000000001",
+				"currency_name": "人民币",
+				"sharing_date": "2016-08-17 00:00:00",
+				"reason_desc": "业务说明",
+				"sharing_amount": 32,
+				"order_status": "DRAFT",
+				"order_type": "TY",
+				"sharing_status": "审批中",
+				"sharing_type": "费用分摊"
+			},
+			{
+				"fee_sharing_code": "CA1608170154",
+				"fee_sharing_id": "0000000000001",
+				"currency_name": "人民币",
+				"sharing_date": "2016-08-17 00:00:00",
+				"reason_desc": "业务说明",
+				"sharing_amount": 32,
+				"order_status": "DRAFT",
+				"order_type": "TY",
+				"sharing_status": "审批中",
+				"sharing_type": "费用分摊"
+			},
+			{
+				"fee_sharing_code": "CA1608170154",
+				"fee_sharing_id": "0000000000001",
+				"currency_name": "人民币",
+				"sharing_date": "2016-08-17 00:00:00",
+				"reason_desc": "业务说明",
+				"sharing_amount": 32,
+				"order_status": "DRAFT",
+				"order_type": "TY",
+				"sharing_status": "审批中",
+				"sharing_type": "费用分摊"
+			}
+		],
+		"pageNumber": 1,
+		"pageSize": 10,
+		"totalPage": 5,
+		"totalRow": 46
+	},
+	"msg": "请求成功"
+}
